@@ -1,0 +1,62 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Characters/Viruses/Bacteriophage/walking.tres" type="Animation" id=1]
+[ext_resource path="res://Characters/Viruses/Bacteriophage/Bacteriophage.glb" type="PackedScene" id=2]
+[ext_resource path="res://Scripts/Bugs and Viruses/Bacteriophage.gd" type="Script" id=3]
+[ext_resource path="res://Scripts/Bugs and Viruses/BacteriophageKinematic.gd" type="Script" id=4]
+
+[sub_resource type="CapsuleShape" id=1]
+
+[sub_resource type="CylinderShape" id=2]
+radius = 1.51437
+
+[node name="Pivot" type="Spatial"]
+script = ExtResource( 3 )
+
+[node name="Bacteriophage" type="KinematicBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -15.5615, 0 )
+collision_layer = 2
+collision_mask = 5
+script = ExtResource( 4 )
+
+[node name="Bacteriophage" parent="Bacteriophage" instance=ExtResource( 2 )]
+
+[node name="Walking" type="AnimationPlayer" parent="Bacteriophage/Bacteriophage"]
+autoplay = "walking"
+anims/walking = ExtResource( 1 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Bacteriophage"]
+transform = Transform( 1.2, 0, 0, 0, 0.0390536, 1.49921, 0, -1.19936, 0.048817, 0.0157537, 2.41243, 0.0526596 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="Bacteriophage"]
+transform = Transform( 1.94305, -0.0472987, -0.0642506, -0.0152976, 0.959992, -0.0192703, 0.926648, 0.115027, 0.134407, 3.58791, 0.897545, 1.76774 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape3" type="CollisionShape" parent="Bacteriophage"]
+transform = Transform( 0.397719, 0, -0.145608, 0, 1.37419, 0, 1.56852, 0, 0.0369207, 0.919775, 1.46265, 2.8766 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape4" type="CollisionShape" parent="Bacteriophage"]
+transform = Transform( -0.38306, -0.264325, -0.141818, -0.0603613, 0.935138, -0.040754, 2.01813, -0.0222018, -0.0281372, -0.600381, 1.23354, 3.69115 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape5" type="CollisionShape" parent="Bacteriophage"]
+transform = Transform( -1.12529, -0.168632, -0.0856078, -0.194311, 1.46661, 0.000433973, 0.779766, 0.122112, -0.123433, -2.56221, 1.89592, 1.56337 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape6" type="CollisionShape" parent="Bacteriophage"]
+transform = Transform( 1.97287, 0.0916674, -0.0638126, 0.00768475, 0.986717, 0.0324362, 0.951403, -0.198056, 0.132063, -3.2683, 1.35196, -1.96352 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape7" type="CollisionShape" parent="Bacteriophage"]
+transform = Transform( 0.271313, -0.0411974, -0.148049, 0.273455, 1.41409, -4.23709e-05, 1.58059, -0.237577, 0.0254204, -0.68146, 1.66312, -3.14486 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape8" type="CollisionShape" parent="Bacteriophage"]
+transform = Transform( -0.157855, -0.0145737, -0.149782, 0.237741, 0.725494, -0.00420495, 2.1356, -0.0818413, -0.0106032, 0.626069, 1.31941, -3.97784 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape9" type="CollisionShape" parent="Bacteriophage"]
+transform = Transform( 0.768826, 0.377126, 0.117477, 0.0892504, 1.50826, -0.0499315, -1.0843, 0.39155, 0.0791878, 2.14038, 2.24137, -1.87969 )
+shape = SubResource( 2 )

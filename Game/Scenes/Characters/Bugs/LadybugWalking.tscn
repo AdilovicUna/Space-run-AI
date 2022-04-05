@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Characters/Bugs/Ladybug/LadybugWalking.glb" type="PackedScene" id=1]
+[ext_resource path="res://Characters/Bugs/Ladybug/LadybugWalking.tres" type="Animation" id=2]
+[ext_resource path="res://Scripts/Bugs and Viruses/LadybugWalking.gd" type="Script" id=3]
+[ext_resource path="res://Scripts/Bugs and Viruses/LadybugWalkingKinematic.gd" type="Script" id=4]
+
+[sub_resource type="CapsuleShape" id=1]
+
+[sub_resource type="CapsuleShape" id=2]
+
+[node name="Pivot" type="Spatial"]
+script = ExtResource( 3 )
+
+[node name="LadybugWalking" type="KinematicBody" parent="."]
+transform = Transform( -4.88762e-07, 0, -3, 0, 3, 0, 3, 0, -4.88762e-07, 0, -21, 0 )
+collision_layer = 2
+collision_mask = 5
+script = ExtResource( 4 )
+
+[node name="LadybugWalking" parent="LadybugWalking" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, -2.84217e-14, 0, 1, 0, 2.84217e-14, 0, 1, 0, 0, 0 )
+
+[node name="Walking" type="AnimationPlayer" parent="LadybugWalking/LadybugWalking"]
+autoplay = "LadybugWalking"
+anims/LadybugWalking = ExtResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="LadybugWalking"]
+transform = Transform( 1.79495, 0, 1.67617e-07, 0, 1.57997, 0, 2.51785e-07, 0, 2.22377, -2.55293e-09, 1.4487, -0.359961 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="LadybugWalking"]
+transform = Transform( 0.365476, 0.277212, 1.03377e-07, -0.136695, 0.712358, 2.22706e-08, 1.03377e-07, -4.51636e-08, 1, -1.97095, 0.337351, -0.424267 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape3" type="CollisionShape" parent="LadybugWalking"]
+transform = Transform( 0.352801, -0.31741, 1.05442e-07, 0.166702, 0.695379, -2.71594e-08, 1.05442e-07, 5.17127e-08, 1, 1.87891, 0.3586, -0.424268 )
+shape = SubResource( 2 )
