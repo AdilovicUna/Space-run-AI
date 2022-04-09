@@ -4,6 +4,8 @@
 [ext_resource path="res://Textures/level3/Tiles107_4K_AmbientOcclusion.jpg" type="Texture" id=3]
 [ext_resource path="res://Textures/level3/Tiles107_4K_Color.jpg" type="Texture" id=4]
 
+
+
 [resource]
 albedo_texture = ExtResource( 4 )
 normal_enabled = true

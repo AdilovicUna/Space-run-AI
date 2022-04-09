@@ -4,6 +4,8 @@
 [ext_resource path="res://Scripts/Bugs and Viruses/Rotavirus.gd" type="Script" id=2]
 [ext_resource path="res://Scripts/Bugs and Viruses/RotavirusKinematic.gd" type="Script" id=3]
 
+
+
 [sub_resource type="Animation" id=1]
 resource_name = "Moving"
 length = 1.2

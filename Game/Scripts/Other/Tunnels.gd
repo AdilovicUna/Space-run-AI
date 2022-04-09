@@ -2,6 +2,7 @@ extends Spatial
 
 onready var hans = get_node_or_null("../Hans")
 onready var battery = get_node_or_null("../UI/Battery")
+onready var main = get_parent()
 
 # load traps
 var trap_scenes = []
@@ -14,15 +15,7 @@ var deviation = 0.01
 var obstacle_number = 0
 
 func _physics_process(_delta):
-    #rotates all children of "traps"
-    if Input.is_action_pressed("right"):
-        var tunnel = get_child(hans.get_current_tunnel())
-        tunnel.rotate_object_local(Vector3.RIGHT,-PI/90)
-    if Input.is_action_pressed("left"):
-        var tunnel = get_child(hans.get_current_tunnel())
-        tunnel.rotate_object_local(Vector3.LEFT,-PI/90)
-    if not hans == null: # if it is not instanced we can't call the function       
-        hans.switch_animation()
+    main.agent.move()
 
 func create_first_level_traps():
     rand.randomize()

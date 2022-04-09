@@ -5,6 +5,8 @@
 [ext_resource path="res://Scripts/Bugs and Viruses/LadybugFlying.gd" type="Script" id=3]
 [ext_resource path="res://Scripts/Bugs and Viruses/LadybugKinematic.gd" type="Script" id=4]
 
+
+
 [sub_resource type="CapsuleShape" id=1]
 
 [sub_resource type="CapsuleShape" id=2]

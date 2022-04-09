@@ -12,11 +12,14 @@ onready var timer = get_node("UI/Battery/DropTimer")
 onready var pause = get_node("PauseAndResume/Pause")
 onready var pause_popup = get_node("PauseAndResume/Pause_popup")
 
+var agent = preload("res://Agents/Random.gd").new(self)
+
 var curr_layer = 0
 
 func _ready():
     disable_sound_loops()
-    _show_first_help_layer()
+    #_show_first_help_layer()
+    _start()
 
 func disable_sound_loops():
     $PauseAndResume/Pause_popup/Resume/clickSound.stream.loop = false
