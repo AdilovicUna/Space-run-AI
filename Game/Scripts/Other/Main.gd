@@ -12,7 +12,7 @@ onready var timer = get_node("UI/Battery/DropTimer")
 onready var pause = get_node("PauseAndResume/Pause")
 onready var pause_popup = get_node("PauseAndResume/Pause_popup")
 
-var agent = preload("res://Agents/Random.gd").new(self)
+var agent
 
 var curr_layer = 0
 
@@ -20,6 +20,7 @@ func _ready():
     disable_sound_loops()
     #_show_first_help_layer()
     _start()
+    agent = Random.new(self)
 
 func disable_sound_loops():
     $PauseAndResume/Pause_popup/Resume/clickSound.stream.loop = false
@@ -87,17 +88,20 @@ func _game_over():
     battery.hide()
     timer.stop()
     score._display_Final_Score()
-    var end_children = end.get_children()
-
+    #var end_children = end.get_children()
+    yield(get_tree().create_timer(2), "timeout")	
+    get_tree().quit()
+    
+    """
     # a little animation for the end of the game
     end_children[0].show()
     yield(get_tree().create_timer(1.2), "timeout")	
     end_children[0].hide()
     end_children[1].show()
     yield(get_tree().create_timer(1.2), "timeout")
+    
     end_children[2].show()
-
-
+    """
 func _on_Resume_pressed():
     $Sounds/menuBackgroundSound.stop()
     $Sounds/gameBackgroundSound.stream_paused = false
