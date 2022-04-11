@@ -20,7 +20,12 @@ func _ready():
     disable_sound_loops()
     #_show_first_help_layer()
     _start()
-    agent = Random.new(self)
+    
+    match (AutoLoad.getAgent()):
+        "Static":
+            agent = Static.new(self)
+        "Random":
+            agent = Random.new(self)
 
 func disable_sound_loops():
     $PauseAndResume/Pause_popup/Resume/clickSound.stream.loop = false
@@ -87,10 +92,15 @@ func _game_over():
     end.show()
     battery.hide()
     timer.stop()
-    score._display_Final_Score()
+    #score._display_Final_Score()
     #var end_children = end.get_children()
-    yield(get_tree().create_timer(2), "timeout")	
-    get_tree().quit()
+    #yield(get_tree().create_timer(2), "timeout")	
+    
+    # add score
+    AutoLoad.addScore(score.getScore())
+    
+    # go back to the Top scene
+    get_tree().change_scene("res://Scenes/Other/Top.tscn")
     
     """
     # a little animation for the end of the game

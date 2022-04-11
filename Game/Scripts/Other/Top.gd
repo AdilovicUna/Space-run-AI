@@ -7,17 +7,12 @@ argument options:
     - help : displays help
 """
 
-var all_agents = ["Static", "Random"]
-
-var n = 100
-var agent = "Static"
-
 func _ready():
     # get args
     var unparsed_args = OS.get_cmdline_args()
     
     # show options
-    if unparsed_args[0] == "--options":
+    if unparsed_args.size() == 1 and unparsed_args[0] == "--options":
         display_options()
     
     # parse agrs
@@ -27,17 +22,20 @@ func _ready():
             var key_value = arg.split("=")
             args[key_value[0].lstrip("--")] = key_value[1]
     
-    # modify options based on args
-    for key in args.keys():
-        if key == "n":
-            n = args[key]
-        if key== "agent":
-            agent = args[key]
+    # set param, if something went wrong, show options
+    if AutoLoad.setParam(args) == false:
+        display_options()
     
-    # check if everything is valid
-    if n < 0 or not agent in all_agents:
-        display_options()        
+    var n = AutoLoad.getN()
+        
+    if n > 0:
+        n = AutoLoad.decrementN()
+        get_tree().change_scene("res://Scenes/Other/Main.tscn")   
+    else:
+        get_tree().quit()        
+        var avg = "Average score: %.1f" % AutoLoad.getAvgScore()
+        print(avg) 
     
 func display_options():
-    print(options)
     get_tree().quit() 
+    print(options)
