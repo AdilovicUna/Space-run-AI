@@ -29,12 +29,14 @@ func _ready():
     var n = AutoLoad.get_n()
         
     if n > 0:
+        if AutoLoad.get_scores_count() > 0:
+            print("Game %d score: %.1f" % [AutoLoad.get_scores_count(),AutoLoad.get_last_score()])
         n = AutoLoad.decrement_n()
         var _change = get_tree().change_scene("res://Scenes/Other/Main.tscn")   
     else:
         get_tree().quit()        
-        var avg = "Average score: %.1f" % AutoLoad.get_avg_score()
-        print(avg) 
+        print("Game %d score: %.1f" % [AutoLoad.get_scores_count(),AutoLoad.get_last_score()])    
+        print("Average score: %.1f" % AutoLoad.get_avg_score())
     
 func display_options():
     get_tree().quit() 

@@ -18,14 +18,18 @@ var curr_layer = 0
 
 func _ready():
     disable_sound_loops()
-    #_show_first_help_layer()
-    _start()
-    
+     
     match (AutoLoad.get_agent()):
         "Static":
-            agent = Static.new(self)
+            agent = Static.new()
         "Random":
-            agent = Random.new(self)
+            agent = Random.new()
+            
+    if AutoLoad.agent == "None":
+        _show_first_help_layer()
+    else:
+        _start()
+
 
 func disable_sound_loops():
     $PauseAndResume/Pause_popup/Resume/clickSound.stream.loop = false
@@ -92,26 +96,30 @@ func _game_over():
     end.show()
     battery.hide()
     timer.stop()
-    #score._display_Final_Score()
-    #var end_children = end.get_children()
-    #yield(get_tree().create_timer(2), "timeout")	
-    
+    if not AutoLoad.agent == "None":
+        _agent_game_over()
+    else:
+        score._display_Final_Score()
+        var end_children = end.get_children()
+        yield(get_tree().create_timer(2), "timeout")	
+        
+        
+        # a little animation for the end of the game
+        end_children[0].show()
+        yield(get_tree().create_timer(1.2), "timeout")	
+        end_children[0].hide()
+        end_children[1].show()
+        yield(get_tree().create_timer(1.2), "timeout")
+        
+        end_children[2].show()
+ 
+func _agent_game_over():
     # add score
     AutoLoad.add_score(score.get_score())
     
     # go back to the Top scene
     var _change = get_tree().change_scene("res://Scenes/Other/Top.tscn")
-    
-    """
-    # a little animation for the end of the game
-    end_children[0].show()
-    yield(get_tree().create_timer(1.2), "timeout")	
-    end_children[0].hide()
-    end_children[1].show()
-    yield(get_tree().create_timer(1.2), "timeout")
-    
-    end_children[2].show()
-    """
+       
 func _on_Resume_pressed():
     $Sounds/menuBackgroundSound.stop()
     $Sounds/gameBackgroundSound.stream_paused = false

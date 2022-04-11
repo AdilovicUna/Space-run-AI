@@ -20,8 +20,22 @@ var obstacle_number = 0
 # - second element decides if Hans should shoot : 1 - yes, 0 - no
 
 func _physics_process(_delta):
+    if not AutoLoad.agent == "None":
+        agent_physics_process()
+    else:
+       #rotates all children of "traps"
+        if Input.is_action_pressed("right"):
+            var tunnel = get_child(hans.get_current_tunnel())
+            tunnel.rotate_object_local(Vector3.RIGHT,-PI/90)
+        if Input.is_action_pressed("left"):
+            var tunnel = get_child(hans.get_current_tunnel())
+            tunnel.rotate_object_local(Vector3.LEFT,-PI/90)
+        if not hans == null: # if it is not instanced we can't call the function       
+            hans.switch_animation()
+
+func agent_physics_process():
     var move = main.agent.move()
-     #rotates all children of "traps"
+    #rotates all children of "traps"
     if move[0] == 1:
         var tunnel = get_child(hans.get_current_tunnel())
         tunnel.rotate_object_local(Vector3.RIGHT,-PI/90)
