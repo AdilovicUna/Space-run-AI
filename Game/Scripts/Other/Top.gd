@@ -30,7 +30,7 @@ func _ready():
         
     if n > 0:
         n = AutoLoad.decrementN()
-        get_tree().change_scene("res://Scenes/Other/Main.tscn")   
+        var _change = get_tree().change_scene("res://Scenes/Other/Main.tscn")   
     else:
         get_tree().quit()        
         var avg = "Average score: %.1f" % AutoLoad.getAvgScore()

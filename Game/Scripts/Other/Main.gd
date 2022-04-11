@@ -100,7 +100,7 @@ func _game_over():
     AutoLoad.addScore(score.getScore())
     
     # go back to the Top scene
-    get_tree().change_scene("res://Scenes/Other/Top.tscn")
+    var _change = get_tree().change_scene("res://Scenes/Other/Top.tscn")
     
     """
     # a little animation for the end of the game
