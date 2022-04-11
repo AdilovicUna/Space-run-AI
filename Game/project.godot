@@ -13,15 +13,21 @@ _global_script_classes=[ {
 "class": "Random",
 "language": "GDScript",
 "path": "res://Agents/Random.gd"
+}, {
+"base": "Reference",
+"class": "Static",
+"language": "GDScript",
+"path": "res://Agents/Static.gd"
 } ]
 _global_script_class_icons={
-"Random": ""
+"Random": "",
+"Static": ""
 }
 
 [application]
 
 config/name="Space-run"
-run/main_scene="res://Scenes/Other/Main.tscn"
+run/main_scene="res://Scenes/Other/Top.tscn"
 config/icon="res://Other/icon.png"
 
 [editor_plugins]
