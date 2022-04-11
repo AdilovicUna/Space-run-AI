@@ -23,17 +23,17 @@ func _ready():
             args[key_value[0].lstrip("--")] = key_value[1]
     
     # set param, if something went wrong, show options
-    if AutoLoad.setParam(args) == false:
+    if AutoLoad.set_param(args) == false:
         display_options()
     
-    var n = AutoLoad.getN()
+    var n = AutoLoad.get_n()
         
     if n > 0:
-        n = AutoLoad.decrementN()
+        n = AutoLoad.decrement_n()
         var _change = get_tree().change_scene("res://Scenes/Other/Main.tscn")   
     else:
         get_tree().quit()        
-        var avg = "Average score: %.1f" % AutoLoad.getAvgScore()
+        var avg = "Average score: %.1f" % AutoLoad.get_avg_score()
         print(avg) 
     
 func display_options():

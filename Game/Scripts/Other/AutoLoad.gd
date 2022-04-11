@@ -8,7 +8,7 @@ var scores = []
 
 var paramSet = false
 
-func setParam(param):
+func set_param(param):
     if not paramSet:
         paramSet = true
         # modify options based on args
@@ -22,20 +22,20 @@ func setParam(param):
         if n < 0 or not agent in all_agents:
             return false   
     
-func getN():
+func get_n():
     return n
 
-func decrementN():
+func decrement_n():
     n -= 1
     return n
 
-func getAgent():
+func get_agent():
     return agent
 
-func addScore(score):
+func add_score(score):
     scores.append(score)
 
-func getAvgScore():
+func get_avg_score():
     var sum = 0.0
     for score in scores:
          sum += score

@@ -19,5 +19,5 @@ func _display_Final_Score():
     set_align(ALIGN_CENTER)
     rect_position = Vector2(32,120)
 
-func getScore():
+func get_score():
     return score

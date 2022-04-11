@@ -21,7 +21,7 @@ func _ready():
     #_show_first_help_layer()
     _start()
     
-    match (AutoLoad.getAgent()):
+    match (AutoLoad.get_agent()):
         "Static":
             agent = Static.new(self)
         "Random":
@@ -97,7 +97,7 @@ func _game_over():
     #yield(get_tree().create_timer(2), "timeout")	
     
     # add score
-    AutoLoad.addScore(score.getScore())
+    AutoLoad.add_score(score.get_score())
     
     # go back to the Top scene
     var _change = get_tree().change_scene("res://Scenes/Other/Top.tscn")
