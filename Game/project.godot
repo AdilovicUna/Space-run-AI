@@ -30,10 +30,6 @@ config/name="Space-run"
 run/main_scene="res://Scenes/Other/Top.tscn"
 config/icon="res://Other/icon.png"
 
-[autoload]
-
-AutoLoad="*res://Scripts/Other/AutoLoad.gd"
-
 [editor_plugins]
 
 enabled=PoolStringArray( "CSGExporter" )

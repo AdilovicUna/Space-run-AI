@@ -1,5 +1,7 @@
 extends Node
 
+onready var top = get_parent()
+
 onready var hans = get_node("Hans") 
 onready var tunnels = get_node("Tunnels")
 onready var score = get_node("UI/Score")
@@ -19,13 +21,13 @@ var curr_layer = 0
 func _ready():
     disable_sound_loops()
      
-    match (AutoLoad.get_agent()):
+    match (top.agent):
         "Static":
             agent = Static.new()
         "Random":
             agent = Random.new()
             
-    if AutoLoad.agent == "None":
+    if top.agent_set == false:
         _show_first_help_layer()
     else:
         _start()
@@ -96,8 +98,9 @@ func _game_over():
     end.show()
     battery.hide()
     timer.stop()
-    if not AutoLoad.agent == "None":
-        _agent_game_over()
+    if top.agent_set == true:
+        top.add_score(score.get_score())
+        queue_free()
     else:
         score._display_Final_Score()
         var end_children = end.get_children()
@@ -112,13 +115,6 @@ func _game_over():
         yield(get_tree().create_timer(1.2), "timeout")
         
         end_children[2].show()
- 
-func _agent_game_over():
-    # add score
-    AutoLoad.add_score(score.get_score())
-    
-    # go back to the Top scene
-    var _change = get_tree().change_scene("res://Scenes/Other/Top.tscn")
        
 func _on_Resume_pressed():
     $Sounds/menuBackgroundSound.stop()

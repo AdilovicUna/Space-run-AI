@@ -1,5 +1,7 @@
 extends Spatial
 
+onready var top = get_parent().get_parent()
+
 onready var hans = get_node_or_null("../Hans")
 onready var battery = get_node_or_null("../UI/Battery")
 onready var main = get_parent()
@@ -20,7 +22,7 @@ var obstacle_number = 0
 # - second element decides if Hans should shoot : 1 - yes, 0 - no
 
 func _physics_process(_delta):
-    if not AutoLoad.agent == "None":
+    if top.agent_set == true:
         agent_physics_process()
     else:
        #rotates all children of "traps"
