@@ -13,23 +13,24 @@ var rand = RandomNumberGenerator.new()
 var angle = 0	
 var deviation = 0.01
 var obstacle_number = 0
+var rotate_speed = 2
 
 # IMPORTANT!
 # agent returns a list of 2 elements:
 # - first element indicates the movement : -1 - left, 0 - just go forward, 1 - right
 # - second element decides if Hans should shoot : 1 - yes, 0 - no
 
-func _physics_process(_delta):
+func _physics_process(delta):
     if game.agent_set:
         agent_physics_process()
     else:
        #rotates all children of "traps"
         if Input.is_action_pressed("right"):
             var tunnel = get_child(hans.get_current_tunnel())
-            tunnel.rotate_object_local(Vector3.RIGHT,-PI/90)
+            tunnel.rotate_object_local(Vector3.RIGHT, -1 * delta * rotate_speed)
         if Input.is_action_pressed("left"):
             var tunnel = get_child(hans.get_current_tunnel())
-            tunnel.rotate_object_local(Vector3.LEFT,-PI/90)
+            tunnel.rotate_object_local(Vector3.LEFT, -1 * delta * rotate_speed)
         if not hans == null: # if it is not instanced we can't call the function       
             hans.switch_animation()
 
@@ -113,7 +114,7 @@ func delete_obstacle_until_x(level,x):
             else:
                 return;
                 
-func bug_virus_movement(curr_tunnel):
+func bug_virus_movement(delta, curr_tunnel):
     var tunnels = get_children()
     for obstacle in tunnels[curr_tunnel].get_children():
         # we only move bugs
@@ -134,6 +135,6 @@ func bug_virus_movement(curr_tunnel):
             # speed for every instance is generated randomly
             # so obstacles of the same species will do not necessarily have the same speed
             if dec > inc:
-                obstacle.rotate_x(obstacle.speed)
+                obstacle.rotate_x(obstacle.speed * delta)
             else:
-                obstacle.rotate_x(-obstacle.speed)      
+                obstacle.rotate_x(-obstacle.speed * delta)      

@@ -41,12 +41,13 @@ func _ready():
         display_options()
     else:
         play_game()
-    
+
 func play_game():     
     if n > 0:
         n -= 1
         game = game_scene.instance()
         game.set_agent(agent)
+        game.hide_csg_shapes()
         add_child(game)
     else:
         print_avg_score()

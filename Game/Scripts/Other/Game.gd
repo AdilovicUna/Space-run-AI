@@ -28,6 +28,10 @@ func _ready():
     else:
         _start()
 
+func hide_csg_shapes():
+    if not VisualServer.render_loop_enabled:
+        print("here")
+
 func set_agent(a):
     if a != "None":
         agent_set = true
