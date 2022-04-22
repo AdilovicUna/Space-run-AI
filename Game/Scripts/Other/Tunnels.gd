@@ -135,6 +135,6 @@ func bug_virus_movement(delta, curr_tunnel):
             # speed for every instance is generated randomly
             # so obstacles of the same species will do not necessarily have the same speed
             if dec > inc:
-                obstacle.rotate_x(obstacle.speed * delta)
+                obstacle.rotate_x(obstacle.speed * delta * 75)
             else:
-                obstacle.rotate_x(-obstacle.speed * delta)      
+                obstacle.rotate_x(-obstacle.speed * delta * 75)      
