@@ -2,8 +2,6 @@
 
 [ext_resource path="res://Scripts/Bullets/BulletZero.gd" type="Script" id=1]
 
-
-
 [sub_resource type="SpatialMaterial" id=1]
 albedo_color = Color( 0.176471, 0.882353, 0.188235, 1 )
 
@@ -20,7 +18,6 @@ script = ExtResource( 1 )
 
 [node name="CSGCylinder" type="CSGCylinder" parent="CSGCombiner"]
 transform = Transform( -6.11959e-08, -0.25, 0, 1.4, -1.09278e-08, 0, 0, 0, 1, 0, 0, 0 )
-operation = 2
 sides = 50
 material = SubResource( 1 )
 
@@ -35,4 +32,5 @@ material = SubResource( 2 )
 [node name="CollisionShape" type="CollisionShape" parent="Area"]
 transform = Transform( 0.374135, 0, 0, 0, 1.47496, 0, 0, 0, 1.11587, 0, -0.0129077, 0 )
 shape = SubResource( 3 )
+
 [connection signal="body_entered" from="Area" to="." method="_on_Area_body_entered"]

@@ -1,0 +1,1269 @@
+[gd_scene load_steps=54 format=2]
+
+[ext_resource path="res://Scenes/Characters/Hans/Hans.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Tunnels/level2.tres" type="Material" id=2]
+[ext_resource path="res://Tunnels/level1.tres" type="Material" id=3]
+[ext_resource path="res://Tunnels/level3.tres" type="Material" id=4]
+[ext_resource path="res://Other/fonts/BASKVILL.TTF" type="DynamicFontData" id=5]
+[ext_resource path="res://Other/fonts/Montserrat-Medium.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://Other/ui_theme.tres" type="Theme" id=7]
+[ext_resource path="res://Scripts/Other/Tunnels.gd" type="Script" id=8]
+[ext_resource path="res://Scripts/Other/Level.gd" type="Script" id=9]
+[ext_resource path="res://Scripts/Other/Score.gd" type="Script" id=10]
+[ext_resource path="res://Scripts/Other/End.gd" type="Script" id=11]
+[ext_resource path="res://Scripts/Other/BatteryProgress.gd" type="Script" id=12]
+[ext_resource path="res://Scripts/Other/Game.gd" type="Script" id=13]
+[ext_resource path="res://Textures/energyBar/under.png" type="Texture" id=14]
+[ext_resource path="res://Textures/energyBar/border.png" type="Texture" id=15]
+[ext_resource path="res://Textures/help/Hans.png" type="Texture" id=16]
+[ext_resource path="res://Sounds/game_over.wav" type="AudioStream" id=17]
+[ext_resource path="res://Textures/help/space.jpg" type="Texture" id=18]
+[ext_resource path="res://Textures/help/pointing_arrow.png" type="Texture" id=19]
+[ext_resource path="res://Sounds/click.ogg" type="AudioStream" id=20]
+[ext_resource path="res://Textures/help/flyingLadybug.png" type="Texture" id=21]
+[ext_resource path="res://Textures/help/bacteriophage.png" type="Texture" id=22]
+[ext_resource path="res://Textures/help/token.png" type="Texture" id=23]
+[ext_resource path="res://Sounds/background.ogg" type="AudioStream" id=24]
+[ext_resource path="res://Textures/help/worm.png" type="Texture" id=25]
+[ext_resource path="res://Textures/help/sick.png" type="Texture" id=26]
+[ext_resource path="res://Textures/help/walkingLadybug.png" type="Texture" id=27]
+[ext_resource path="res://Textures/help/movement.png" type="Texture" id=28]
+[ext_resource path="res://Sounds/menu_music.ogg" type="AudioStream" id=29]
+[ext_resource path="res://Textures/help/rotavirus.png" type="Texture" id=30]
+
+[sub_resource type="SpatialMaterial" id=1]
+
+[sub_resource type="DynamicFont" id=2]
+size = 70
+outline_size = 4
+font_data = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 40
+outline_size = 1
+use_filter = true
+font_data = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 75
+outline_size = 2
+outline_color = Color( 0.0823529, 0.560784, 0.74902, 1 )
+use_filter = true
+font_data = ExtResource( 6 )
+
+[sub_resource type="Theme" id=5]
+default_font = SubResource( 4 )
+
+[sub_resource type="DynamicFont" id=6]
+size = 25
+outline_color = Color( 0, 0, 0, 1 )
+use_filter = true
+font_data = ExtResource( 5 )
+
+[sub_resource type="Theme" id=7]
+default_font = SubResource( 6 )
+
+[sub_resource type="DynamicFont" id=8]
+size = 35
+outline_color = Color( 0.945098, 0.988235, 1, 1 )
+use_filter = true
+font_data = ExtResource( 6 )
+
+[sub_resource type="Theme" id=9]
+default_font = SubResource( 8 )
+
+[sub_resource type="StyleBoxFlat" id=10]
+bg_color = Color( 0.411765, 0.764706, 0.941176, 0.666667 )
+
+[sub_resource type="StyleBoxFlat" id=11]
+bg_color = Color( 0.411765, 0.764706, 0.941176, 0.666667 )
+
+[sub_resource type="StyleBoxFlat" id=12]
+bg_color = Color( 0.411765, 0.764706, 0.941176, 0.439216 )
+
+[sub_resource type="DynamicFont" id=13]
+size = 30
+use_filter = true
+font_data = ExtResource( 6 )
+
+[sub_resource type="Theme" id=14]
+default_font = SubResource( 13 )
+
+[sub_resource type="DynamicFont" id=15]
+size = 30
+use_filter = true
+font_data = ExtResource( 6 )
+
+[sub_resource type="Theme" id=16]
+default_font = SubResource( 15 )
+
+[sub_resource type="DynamicFont" id=17]
+size = 40
+font_data = ExtResource( 6 )
+
+[sub_resource type="Theme" id=18]
+default_font = SubResource( 17 )
+
+[sub_resource type="DynamicFont" id=19]
+font_data = ExtResource( 6 )
+
+[sub_resource type="Theme" id=20]
+default_font = SubResource( 19 )
+
+[sub_resource type="StyleBoxFlat" id=21]
+bg_color = Color( 0.411765, 0.764706, 0.941176, 0.466667 )
+
+[sub_resource type="StyleBoxFlat" id=22]
+bg_color = Color( 0.411765, 0.764706, 0.941176, 0.666667 )
+
+[sub_resource type="StyleBoxFlat" id=23]
+bg_color = Color( 0.411765, 0.764706, 0.941176, 0.278431 )
+
+[node name="Game" type="Node"]
+script = ExtResource( 13 )
+
+[node name="Ground" type="CSGBox" parent="."]
+transform = Transform( 5000, 0, 0, 0, 1, 0, 0, 0, 100, 0, -32, 0 )
+use_collision = true
+collision_layer = 4
+material = SubResource( 1 )
+
+[node name="Hans" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3750, -32, 0 )
+collision_mask = 6
+
+[node name="CameraPivot" type="Spatial" parent="Hans"]
+transform = Transform( -8.14603e-08, -0.0376112, 0.498583, 0, 0.498583, 0.0376112, -0.5, 6.12764e-09, -8.12295e-08, 19.0264, 15.4876, 0.0523834 )
+
+[node name="Camera" type="Camera" parent="Hans/CameraPivot"]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0 )
+far = 500.0
+
+[node name="Tunnels" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, 0 )
+script = ExtResource( 8 )
+
+[node name="level1" type="Spatial" parent="Tunnels"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2500, 0, 0 )
+
+[node name="torus1" type="CSGTorus" parent="Tunnels/level1"]
+transform = Transform( -1.95505e-06, 2800, -5.24537e-07, 0, -0.000122392, -12, -12, -0.000456178, 8.54579e-14, 0, 0, 0 )
+use_collision = true
+collision_layer = 2147483653
+collision_mask = 0
+sides = 6
+smooth_faces = false
+material = ExtResource( 3 )
+
+[node name="lights" type="Spatial" parent="Tunnels/level1/torus1"]
+
+[node name="light1" type="OmniLight" parent="Tunnels/level1/torus1/lights"]
+transform = Transform( -7.27325e-10, -5.91752e-16, -0.0833333, 0.000357143, -8.36312e-13, -3.11714e-12, -1.95141e-10, -0.0833333, 5.93456e-16, -3.63798e-12, 0.39, 0 )
+omni_range = 500.0
+
+[node name="light2" type="OmniLight" parent="Tunnels/level1/torus1/lights"]
+transform = Transform( -7.27325e-10, -5.91753e-16, -0.0833333, 0.000357143, -8.36321e-13, -3.11714e-12, -1.95143e-10, -0.0833333, 5.93457e-16, 0, 0.26, 0 )
+omni_range = 500.0
+
+[node name="light3" type="OmniLight" parent="Tunnels/level1/torus1/lights"]
+transform = Transform( -7.27326e-10, -5.95511e-16, -0.0833333, 0.000357143, -8.36312e-13, -3.11715e-12, -1.95141e-10, -0.0833333, 5.97215e-16, 2.38419e-07, 0.13, 0 )
+omni_range = 500.0
+
+[node name="light4" type="OmniLight" parent="Tunnels/level1/torus1/lights"]
+transform = Transform( -7.27325e-10, -5.95511e-16, -0.0833333, 0.000357143, -8.36312e-13, -3.11714e-12, -1.95141e-10, -0.0833333, 5.97215e-16, 0, 0, 0 )
+omni_range = 500.0
+
+[node name="light5" type="OmniLight" parent="Tunnels/level1/torus1/lights"]
+transform = Transform( -1.85326e-06, -1.50782e-12, -0.0833333, 0.000357143, -8.36312e-13, -7.94254e-09, -1.95141e-10, -0.0833333, 1.51216e-12, 0, -0.13, 0 )
+omni_range = 500.0
+
+[node name="light6" type="OmniLight" parent="Tunnels/level1/torus1/lights"]
+transform = Transform( -0.000195129, 0.000325794, -0.0833325, 0.000357142, -5.99725e-13, -8.36273e-07, -7.63008e-07, -0.0833327, -0.000325793, 0, -0.26, 0 )
+omni_range = 500.0
+
+[node name="light7" type="OmniLight" parent="Tunnels/level1/torus1/lights"]
+transform = Transform( -0.00019513, -3.5373e-10, -0.0833331, 0.000357142, -8.38364e-13, -8.36271e-07, -1.94791e-10, -0.0833333, 3.54187e-10, 0, -0.39, 2.98023e-08 )
+omni_range = 500.0
+
+[node name="level2" type="Spatial" parent="Tunnels"]
+
+[node name="torus2" type="CSGTorus" parent="Tunnels/level2"]
+transform = Transform( -1.95505e-06, 2800, -5.24537e-07, 0, -0.000122392, -12, -12, -0.000456178, 8.54579e-14, 0, 0, 0 )
+use_collision = true
+collision_layer = 4
+sides = 6
+smooth_faces = false
+material = ExtResource( 2 )
+
+[node name="lights" type="Spatial" parent="Tunnels/level2/torus2"]
+
+[node name="light8" type="OmniLight" parent="Tunnels/level2/torus2/lights"]
+transform = Transform( -7.27325e-10, -5.91752e-16, -0.0833333, 0.000357143, -8.36317e-13, -3.11714e-12, -1.95142e-10, -0.0833333, 5.93456e-16, -1.71791e-06, 0.435191, -4.76837e-07 )
+omni_range = 600.0
+
+[node name="light9" type="OmniLight" parent="Tunnels/level2/torus2/lights"]
+transform = Transform( -7.27325e-10, -5.91753e-16, -0.0833333, 0.000357143, -8.36329e-13, -3.11714e-12, -1.95145e-10, -0.0833333, 5.93457e-16, -2.62571e-06, 0.329071, -7.45058e-07 )
+omni_range = 600.0
+
+[node name="light10" type="OmniLight" parent="Tunnels/level2/torus2/lights"]
+transform = Transform( -7.27325e-10, -5.95511e-16, -0.0833333, 0.000357143, -8.36317e-13, -3.11714e-12, -1.95142e-10, -0.0833333, 5.97215e-16, -2.3146e-06, 0.190887, -6.25849e-07 )
+omni_range = 600.0
+
+[node name="light11" type="OmniLight" parent="Tunnels/level2/torus2/lights"]
+transform = Transform( -7.27325e-10, -5.95511e-16, -0.0833333, 0.000357143, -8.36317e-13, -3.11714e-12, -1.95142e-10, -0.0833333, 5.97215e-16, -3.04557e-06, 0.0801153, -8.04663e-07 )
+omni_range = 600.0
+
+[node name="light12" type="OmniLight" parent="Tunnels/level2/torus2/lights"]
+transform = Transform( -1.85325e-06, -1.50782e-12, -0.0833333, 0.000357143, -8.36317e-13, -7.9425e-09, -1.95142e-10, -0.0833333, 1.51216e-12, 2.76291e-07, -0.137268, 5.96046e-08 )
+omni_range = 600.0
+
+[node name="light13" type="OmniLight" parent="Tunnels/level2/torus2/lights"]
+transform = Transform( -0.000195128, 0.000325794, -0.0833325, 0.000357142, -6.12392e-13, -8.36269e-07, -7.63007e-07, -0.0833327, -0.000325793, -1.91715e-06, -0.209568, -5.06639e-07 )
+omni_range = 600.0
+
+[node name="light14" type="OmniLight" parent="Tunnels/level2/torus2/lights"]
+transform = Transform( -0.00019513, -3.5373e-10, -0.0833331, 0.000357142, -8.38373e-13, -8.36271e-07, -1.94793e-10, -0.0833333, 3.54187e-10, -2.94329e-06, -0.312575, -7.7486e-07 )
+omni_range = 600.0
+
+[node name="light15" type="OmniLight" parent="Tunnels/level2/torus2/lights"]
+transform = Transform( -0.00019513, -3.5373e-10, -0.0833331, 0.000357142, -8.38373e-13, -8.36271e-07, -1.94793e-10, -0.0833333, 3.54187e-10, -7.53321e-06, -0.191834, -1.99676e-06 )
+omni_range = 600.0
+
+[node name="level3" type="Spatial" parent="Tunnels"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2500, 0, 0 )
+
+[node name="torus3" type="CSGTorus" parent="Tunnels/level3"]
+transform = Transform( -1.95505e-06, 2800, -5.24537e-07, 0, -0.000122392, -12, -12, -0.000456178, 8.54579e-14, 0, 0, 0 )
+use_collision = true
+collision_layer = 4
+sides = 6
+smooth_faces = false
+material = ExtResource( 4 )
+
+[node name="lights" type="Spatial" parent="Tunnels/level3/torus3"]
+transform = Transform( 1, -3.63798e-12, 0, 0, 1, -2.77556e-17, 0, -2.70723e-19, 1, 0, 0, 0 )
+
+[node name="light16" type="OmniLight" parent="Tunnels/level3/torus3/lights"]
+transform = Transform( -7.27352e-10, -5.91754e-16, -0.0833333, 0.000357143, -8.36343e-13, -3.11727e-12, -1.95148e-10, -0.0833333, 5.93458e-16, 1.68088e-06, 0.435784, 3.8743e-07 )
+light_energy = 0.5
+omni_range = 600.0
+
+[node name="light17" type="OmniLight" parent="Tunnels/level3/torus3/lights"]
+transform = Transform( -7.27351e-10, -5.91755e-16, -0.0833333, 0.000357143, -8.36336e-13, -3.11727e-12, -1.95146e-10, -0.0833333, 5.93459e-16, 1.94028e-06, 0.33496, 4.76837e-07 )
+light_energy = 0.5
+light_indirect_energy = 0.0
+omni_range = 600.0
+
+[node name="light18" type="OmniLight" parent="Tunnels/level3/torus3/lights"]
+transform = Transform( -7.27351e-10, -5.91755e-16, -0.0833333, 0.000357143, -8.36336e-13, -3.11727e-12, -1.95146e-10, -0.0833333, 5.93459e-16, -1.51731e-06, 0.236913, -4.47035e-07 )
+light_energy = 0.5
+light_indirect_energy = 0.0
+omni_range = 600.0
+
+[node name="light19" type="OmniLight" parent="Tunnels/level3/torus3/lights"]
+transform = Transform( -7.27351e-10, -5.91755e-16, -0.0833333, 0.000357143, -8.36336e-13, -3.11727e-12, -1.95146e-10, -0.0833333, 5.93459e-16, -1.62826e-06, 0.125832, -4.47035e-07 )
+light_energy = 0.5
+light_indirect_energy = 0.0
+omni_range = 600.0
+
+[node name="light20" type="OmniLight" parent="Tunnels/level3/torus3/lights"]
+transform = Transform( -7.27351e-10, -5.91755e-16, -0.0833333, 0.000357143, -8.36336e-13, -3.11727e-12, -1.95146e-10, -0.0833333, 5.93459e-16, 1.01464e-06, -0.0576907, 2.08616e-07 )
+light_energy = 0.5
+light_indirect_energy = 0.0
+omni_range = 600.0
+
+[node name="light21" type="OmniLight" parent="Tunnels/level3/torus3/lights"]
+transform = Transform( -7.27351e-10, -5.91755e-16, -0.0833333, 0.000357143, -8.36336e-13, -3.11727e-12, -1.95146e-10, -0.0833333, 5.93459e-16, 1.46822e-06, -0.183622, 3.57628e-07 )
+light_energy = 0.5
+light_indirect_energy = 0.0
+omni_range = 600.0
+
+[node name="light22" type="OmniLight" parent="Tunnels/level3/torus3/lights"]
+transform = Transform( -7.27351e-10, -5.91755e-16, -0.0833333, 0.000357143, -8.36336e-13, -3.11727e-12, -1.95146e-10, -0.0833333, 5.93459e-16, 1.00148e-06, -0.285345, 2.38419e-07 )
+light_energy = 0.5
+light_indirect_energy = 0.0
+omni_range = 600.0
+
+[node name="light23" type="OmniLight" parent="Tunnels/level3/torus3/lights"]
+transform = Transform( -7.27351e-10, -5.91755e-16, -0.0833333, 0.000357143, -8.36336e-13, -3.11727e-12, -1.95146e-10, -0.0833333, 5.93459e-16, 2.0719e-07, -0.37845, 5.96046e-08 )
+light_energy = 0.5
+light_indirect_energy = 0.0
+omni_range = 600.0
+
+[node name="light24" type="OmniLight" parent="Tunnels/level3/torus3/lights"]
+transform = Transform( -7.27351e-10, -5.91755e-16, -0.0833333, 0.000357143, -8.36336e-13, -3.11727e-12, -1.95146e-10, -0.0833333, 5.93459e-16, -1.59569e-06, -0.445025, -4.47035e-07 )
+light_energy = 0.5
+light_indirect_energy = 0.0
+omni_range = 600.0
+
+[node name="UI" type="Control" parent="."]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="End" type="ColorRect" parent="UI"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.737255, 0.807843, 0.878431, 0.541176 )
+script = ExtResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GameOver" type="Label" parent="UI/End"]
+visible = false
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = -52.0
+margin_bottom = 19.0
+custom_colors/font_color = Color( 0.411765, 0.764706, 0.941176, 0.909804 )
+custom_colors/font_outline_modulate = Color( 0.137255, 0.223529, 0.427451, 1 )
+custom_fonts/font = SubResource( 2 )
+text = "Game over"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GoodJob" type="Label" parent="UI/End"]
+visible = false
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = -52.0
+margin_bottom = 19.0
+custom_colors/font_color = Color( 0.411765, 0.764706, 0.941176, 0.909804 )
+custom_colors/font_outline_modulate = Color( 0.137255, 0.223529, 0.427451, 1 )
+custom_fonts/font = SubResource( 2 )
+text = "Good Job!"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TryAgain" type="Label" parent="UI/End"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.817
+anchor_right = 0.5
+anchor_bottom = 0.817
+margin_left = -512.0
+margin_top = 5.80002
+margin_right = 512.0
+margin_bottom = 45.8
+custom_colors/font_color = Color( 0.411765, 0.764706, 0.941176, 0.909804 )
+custom_colors/font_outline_modulate = Color( 0.137255, 0.223529, 0.427451, 1 )
+custom_fonts/font = SubResource( 3 )
+text = "Press enter to try again"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Score" type="Label" parent="UI"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -488.0
+margin_top = 14.0
+margin_right = 488.0
+margin_bottom = 61.0
+custom_colors/font_color = Color( 0.411765, 0.764706, 0.941176, 0.909804 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+text = "Score: 0.0"
+script = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Level" type="Label" parent="UI"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -383.0
+margin_top = -61.5
+margin_right = 383.0
+margin_bottom = 61.5
+theme = SubResource( 5 )
+custom_colors/font_color = Color( 0.780392, 0.913725, 0.937255, 1 )
+custom_colors/font_outline_modulate = Color( 0.160784, 0.0509804, 0.729412, 1 )
+text = "Level 0"
+align = 1
+valign = 1
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Battery" type="TextureProgress" parent="UI"]
+anchor_top = 0.17
+anchor_right = 0.909
+anchor_bottom = 0.68
+margin_left = 930.0
+margin_top = 128.0
+margin_right = 74.184
+margin_bottom = -28.0
+value = 100.0
+texture_under = ExtResource( 14 )
+texture_over = ExtResource( 15 )
+texture_progress = ExtResource( 14 )
+fill_mode = 3
+tint_under = Color( 0.478431, 0.709804, 0.94902, 0.0980392 )
+tint_over = Color( 0.027451, 0.0313726, 0.294118, 1 )
+tint_progress = Color( 0.0627451, 0.27451, 0.607843, 0.423529 )
+script = ExtResource( 12 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Percentage" type="Label" parent="UI/Battery"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -33.5
+margin_top = -41.0
+margin_right = 33.5
+margin_bottom = -5.0
+theme = SubResource( 7 )
+custom_colors/font_color = Color( 0.0156863, 0.0156863, 0.2, 1 )
+text = "100%"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DropTimer" type="Timer" parent="UI/Battery"]
+wait_time = 0.5
+autostart = true
+
+[node name="Help" type="ColorRect" parent="UI"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.745098, 0.882353, 1, 0.996078 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="layer1" type="Control" parent="UI/Help"]
+visible = false
+light_mask = 3
+margin_bottom = 14.0
+rect_pivot_offset = Vector2( -454.404, 319 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="UI/Help/layer1"]
+modulate = Color( 1, 1, 1, 0.94902 )
+margin_right = 366.0
+margin_bottom = 600.0
+texture = ExtResource( 16 )
+
+[node name="Text1" type="Label" parent="UI/Help/layer1"]
+modulate = Color( 0.027451, 0.219608, 0.376471, 0.866667 )
+anchor_left = 0.357
+anchor_top = 0.377
+anchor_right = 0.843
+anchor_bottom = 0.602
+margin_left = 249.0
+margin_top = 183.722
+margin_right = 941.0
+margin_bottom = 403.572
+theme = SubResource( 9 )
+text = "Hi! I'm Hans!
+I am here to give you a quick guide to this game..."
+align = 1
+valign = 1
+autowrap = true
+
+[node name="Skip" type="Button" parent="UI/Help/layer1"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = 672.0
+margin_top = 522.0
+margin_right = 840.0
+margin_bottom = 581.0
+custom_colors/font_color = Color( 0.980392, 0.980392, 0.980392, 1 )
+custom_colors/font_color_hover = Color( 0.784314, 0.831373, 0.980392, 1 )
+custom_colors/font_color_pressed = Color( 0.321569, 0.388235, 0.733333, 1 )
+custom_styles/hover = SubResource( 10 )
+custom_styles/pressed = SubResource( 11 )
+custom_styles/normal = SubResource( 12 )
+text = "Skip"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="clickSound" type="AudioStreamPlayer" parent="UI/Help/layer1/Skip"]
+stream = ExtResource( 20 )
+
+[node name="layer2" type="Control" parent="UI/Help"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -1024.0
+margin_bottom = -600.0
+rect_pivot_offset = Vector2( -454.404, 319 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="UI/Help/layer2"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 206.0
+margin_top = 225.0
+margin_right = 824.0
+margin_bottom = 476.0
+texture = ExtResource( 28 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Text2" type="Label" parent="UI/Help/layer2"]
+modulate = Color( 0.027451, 0.219608, 0.376471, 0.866667 )
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = 206.0
+margin_top = 80.0
+margin_right = 820.0
+margin_bottom = 200.0
+theme = SubResource( 14 )
+text = "To move arround and avoid the traps, press left and right arrow keys, or A and D, whichever you prefer..."
+align = 1
+autowrap = true
+
+[node name="layer3" type="Control" parent="UI/Help"]
+visible = false
+margin_bottom = 16.0
+rect_pivot_offset = Vector2( -454.404, 319 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="UI/Help/layer3"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 206.0
+margin_top = 217.0
+margin_right = 824.0
+margin_bottom = 476.0
+texture = ExtResource( 18 )
+
+[node name="Text3" type="Label" parent="UI/Help/layer3"]
+modulate = Color( 0.027451, 0.219608, 0.376471, 0.866667 )
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = 208.5
+margin_top = 80.0
+margin_right = 808.5
+margin_bottom = 159.0
+theme = SubResource( 16 )
+text = "In case you wanna shoot some stuff, press space:"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="layer4" type="Control" parent="UI/Help"]
+visible = false
+rect_pivot_offset = Vector2( -454.404, 319 )
+
+[node name="Text3" type="Label" parent="UI/Help/layer4"]
+modulate = Color( 0.027451, 0.219608, 0.376471, 0.866667 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 203.0
+margin_top = 230.0
+margin_right = 810.0
+margin_bottom = 372.0
+theme = SubResource( 16 )
+text = "I guess you noticed I am part computer, so my battery life will go down as I run..."
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Battery" type="TextureProgress" parent="UI/Help/layer4"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 930.0
+margin_top = 225.0
+margin_right = 1005.0
+margin_bottom = 375.0
+value = 75.0
+texture_under = ExtResource( 14 )
+texture_over = ExtResource( 15 )
+texture_progress = ExtResource( 14 )
+fill_mode = 3
+tint_under = Color( 0.478431, 0.709804, 0.94902, 0.0980392 )
+tint_over = Color( 0.027451, 0.0313726, 0.294118, 1 )
+tint_progress = Color( 0.0627451, 0.27451, 0.607843, 0.423529 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Percentage" type="Label" parent="UI/Help/layer4/Battery"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -33.5
+margin_top = -41.0
+margin_right = 33.5
+margin_bottom = -5.0
+theme = SubResource( 7 )
+custom_colors/font_color = Color( 0.0156863, 0.0156863, 0.2, 1 )
+text = "75%"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="UI/Help/layer4"]
+modulate = Color( 1, 1, 1, 0.835294 )
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 831.0
+margin_top = 254.5
+margin_right = 931.0
+margin_bottom = 354.5
+texture = ExtResource( 19 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="layer5" type="Control" parent="UI/Help"]
+visible = false
+anchor_right = 0.012
+anchor_bottom = 0.027
+margin_right = 11.712
+margin_bottom = -0.200001
+rect_pivot_offset = Vector2( -454.404, 319 )
+
+[node name="Text3" type="Label" parent="UI/Help/layer5"]
+modulate = Color( 0.027451, 0.219608, 0.376471, 0.866667 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 149.278
+margin_top = 266.234
+margin_right = 847.278
+margin_bottom = 321.234
+theme = SubResource( 16 )
+text = "I also need some extra energy to shoot."
+align = 1
+valign = 1
+autowrap = true
+
+[node name="Battery" type="TextureProgress" parent="UI/Help/layer5"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 906.0
+margin_top = 217.0
+margin_right = 981.0
+margin_bottom = 367.0
+value = 75.0
+texture_under = ExtResource( 14 )
+texture_over = ExtResource( 15 )
+texture_progress = ExtResource( 14 )
+fill_mode = 3
+tint_under = Color( 0.478431, 0.709804, 0.94902, 0.0980392 )
+tint_over = Color( 0.027451, 0.0313726, 0.294118, 1 )
+tint_progress = Color( 0.0627451, 0.27451, 0.607843, 0.423529 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Percentage" type="Label" parent="UI/Help/layer5/Battery"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -33.5
+margin_top = -41.0
+margin_right = 33.5
+margin_bottom = -5.0
+theme = SubResource( 7 )
+custom_colors/font_color = Color( 0.0156863, 0.0156863, 0.2, 1 )
+text = "75%"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="layer6" type="Control" parent="UI/Help"]
+visible = false
+rect_pivot_offset = Vector2( -454.404, 319 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Text3" type="Label" parent="UI/Help/layer6"]
+modulate = Color( 0.027451, 0.219608, 0.376471, 0.866667 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 224.0
+margin_top = 248.0
+margin_right = 772.0
+margin_bottom = 339.0
+theme = SubResource( 16 )
+text = "To increase my battery life, pick up  energy tokens along the way."
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Battery" type="TextureProgress" parent="UI/Help/layer6"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 930.0
+margin_top = 225.0
+margin_right = 1005.0
+margin_bottom = 375.0
+value = 100.0
+texture_under = ExtResource( 14 )
+texture_over = ExtResource( 15 )
+texture_progress = ExtResource( 14 )
+fill_mode = 3
+tint_under = Color( 0.478431, 0.709804, 0.94902, 0.0980392 )
+tint_over = Color( 0.027451, 0.0313726, 0.294118, 1 )
+tint_progress = Color( 0.0627451, 0.27451, 0.607843, 0.423529 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Percentage" type="Label" parent="UI/Help/layer6/Battery"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -33.5
+margin_top = -41.0
+margin_right = 33.5
+margin_bottom = -5.0
+theme = SubResource( 7 )
+custom_colors/font_color = Color( 0.0156863, 0.0156863, 0.2, 1 )
+text = "100%"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="pointing_arrow" type="TextureRect" parent="UI/Help/layer6"]
+margin_left = 334.579
+margin_top = 519.104
+margin_right = 434.579
+margin_bottom = 619.104
+rect_rotation = 180.0
+texture = ExtResource( 19 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="pointing_arrow2" type="TextureRect" parent="UI/Help/layer6"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 831.0
+margin_top = 254.5
+margin_right = 931.0
+margin_bottom = 354.5
+texture = ExtResource( 19 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="token" type="TextureRect" parent="UI/Help/layer6"]
+margin_left = 24.0
+margin_top = 371.0
+margin_right = 224.0
+margin_bottom = 571.0
+texture = ExtResource( 23 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="layer7" type="Control" parent="UI/Help"]
+visible = false
+rect_pivot_offset = Vector2( -454.404, 319 )
+
+[node name="TextureRect" type="TextureRect" parent="UI/Help/layer7"]
+margin_left = 40.0
+margin_top = 159.0
+margin_right = 140.0
+margin_bottom = 259.0
+rect_rotation = -90.0
+texture = ExtResource( 19 )
+
+[node name="Text3" type="Label" parent="UI/Help/layer7"]
+modulate = Color( 0.027451, 0.219608, 0.376471, 0.866667 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 68.0
+margin_top = 179.0
+margin_right = 968.0
+margin_bottom = 426.0
+theme = SubResource( 16 )
+text = "To increase the score, keep me alive for as long as possible!
+
+Shooting some bugs and viruses will also help with the score.
+(personally, I'm a pacifist, but the choice is yours)"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="Score" type="Label" parent="UI/Help/layer7"]
+anchor_right = 1.0
+margin_left = 24.0
+margin_top = 14.0
+margin_right = -24.0
+margin_bottom = 50.0
+custom_colors/font_color = Color( 0.411765, 0.764706, 0.941176, 0.909804 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+text = "Score: 3.14"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="layer8" type="Control" parent="UI/Help"]
+visible = false
+anchor_right = 0.012
+anchor_bottom = 0.055
+margin_right = 11.712
+margin_bottom = -3.8147e-06
+rect_pivot_offset = Vector2( -454.404, 319 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Text3" type="Label" parent="UI/Help/layer8"]
+modulate = Color( 0.027451, 0.219608, 0.376471, 0.866667 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 160.0
+margin_top = 238.5
+margin_right = 883.0
+margin_bottom = 362.5
+theme = SubResource( 16 )
+text = "Dealing with bugs decreases my battery life, so try to avoid touching them, would you?"
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="worm" type="TextureRect" parent="UI/Help/layer8"]
+margin_left = 366.0
+margin_top = 178.5
+margin_right = 644.0
+margin_bottom = 314.5
+rect_scale = Vector2( 0.8, 0.8 )
+texture = ExtResource( 25 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="worm2" type="TextureRect" parent="UI/Help/layer8"]
+margin_left = 755.0
+margin_top = 368.0
+margin_right = 1033.0
+margin_bottom = 508.0
+rect_scale = Vector2( 1.2, 1.2 )
+texture = ExtResource( 25 )
+flip_h = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="walkingLadybug" type="TextureRect" parent="UI/Help/layer8"]
+margin_left = 24.0
+margin_top = 448.0
+margin_right = 274.0
+margin_bottom = 625.0
+rect_scale = Vector2( 0.9, 0.9 )
+texture = ExtResource( 27 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="flyingLadybug" type="TextureRect" parent="UI/Help/layer8"]
+margin_left = 786.0
+margin_top = 48.0
+margin_right = 986.0
+margin_bottom = 189.0
+texture = ExtResource( 21 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="layer9" type="Control" parent="UI/Help"]
+visible = false
+anchor_right = 0.023
+anchor_bottom = 0.04
+margin_right = -23.552
+margin_bottom = 24.0
+rect_pivot_offset = Vector2( -454.404, 319 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="UI/Help/layer9"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 413.26
+margin_top = 9.0
+margin_right = 608.26
+margin_bottom = 159.0
+texture = ExtResource( 26 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Text3" type="Label" parent="UI/Help/layer9"]
+modulate = Color( 0.027451, 0.219608, 0.376471, 0.866667 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 168.0
+margin_top = 165.0
+margin_right = 860.0
+margin_bottom = 367.0
+theme = SubResource( 16 )
+text = "And please, be careful, some viruses will make me sick for a while :(
+
+If I run into the same virus again while sick, I will not make it..."
+align = 1
+valign = 1
+autowrap = true
+
+[node name="rotavirus" type="TextureRect" parent="UI/Help/layer9"]
+margin_left = 42.0
+margin_top = 368.0
+margin_right = 345.0
+margin_bottom = 588.0
+texture = ExtResource( 30 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="layer10" type="Control" parent="UI/Help"]
+visible = false
+anchor_right = 0.012
+margin_right = 11.712
+margin_bottom = 16.0
+rect_pivot_offset = Vector2( -454.404, 319 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Text3" type="Label" parent="UI/Help/layer10"]
+modulate = Color( 0.027451, 0.219608, 0.376471, 0.866667 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 55.5
+margin_top = 240.0
+margin_right = 936.5
+margin_bottom = 360.0
+theme = SubResource( 16 )
+text = "Oh, one more thing, spider-like viruses immediately end the game."
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="bacteriophage" type="TextureRect" parent="UI/Help/layer10"]
+margin_left = 85.4797
+margin_top = 230.0
+margin_right = 485.48
+margin_bottom = 387.0
+rect_rotation = 44.9999
+texture = ExtResource( 22 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="bacteriophage2" type="TextureRect" parent="UI/Help/layer10"]
+margin_left = 986.0
+margin_top = 136.525
+margin_right = 1386.0
+margin_bottom = 293.525
+rect_rotation = 177.0
+texture = ExtResource( 22 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="layer11" type="Control" parent="UI/Help"]
+visible = false
+anchor_right = 0.021
+anchor_bottom = 0.08
+margin_right = 20.496
+margin_bottom = 2.0
+rect_pivot_offset = Vector2( -454.404, 319 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect2" type="TextureRect" parent="UI/Help/layer11"]
+margin_right = 366.0
+margin_bottom = 600.0
+texture = ExtResource( 16 )
+
+[node name="Text3" type="Label" parent="UI/Help/layer11"]
+modulate = Color( 0.027451, 0.219608, 0.376471, 0.866667 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 345.0
+margin_top = 175.0
+margin_right = 760.0
+margin_bottom = 299.0
+theme = SubResource( 16 )
+text = "Okay, that is all from me.
+Have fun playing!"
+align = 1
+valign = 1
+
+[node name="Start" type="Button" parent="UI/Help/layer11"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = 413.78
+margin_top = 279.234
+margin_right = 670.78
+margin_bottom = 357.234
+custom_colors/font_color = Color( 0.980392, 0.980392, 0.980392, 1 )
+custom_colors/font_color_hover = Color( 0.784314, 0.831373, 0.980392, 1 )
+custom_colors/font_color_pressed = Color( 0.321569, 0.388235, 0.733333, 1 )
+custom_styles/hover = SubResource( 10 )
+custom_styles/pressed = SubResource( 11 )
+custom_styles/normal = SubResource( 12 )
+text = "Start"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="clickSound" type="AudioStreamPlayer" parent="UI/Help/layer11/Start"]
+stream = ExtResource( 20 )
+
+[node name="Continue" type="Button" parent="UI/Help"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = 333.5
+margin_top = -64.0
+margin_right = 505.5
+margin_bottom = -4.0
+custom_colors/font_color = Color( 0.980392, 0.980392, 0.980392, 1 )
+custom_colors/font_color_hover = Color( 0.784314, 0.831373, 0.980392, 1 )
+custom_colors/font_color_pressed = Color( 0.321569, 0.388235, 0.733333, 1 )
+custom_styles/hover = SubResource( 10 )
+custom_styles/pressed = SubResource( 11 )
+custom_styles/normal = SubResource( 12 )
+text = "Continue"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="clickSound" type="AudioStreamPlayer" parent="UI/Help/Continue"]
+stream = ExtResource( 20 )
+
+[node name="Previous" type="Button" parent="UI/Help"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = 160.0
+margin_top = -64.0
+margin_right = 332.0
+margin_bottom = -4.0
+custom_colors/font_color = Color( 0.980392, 0.980392, 0.980392, 1 )
+custom_colors/font_color_hover = Color( 0.784314, 0.831373, 0.980392, 1 )
+custom_colors/font_color_pressed = Color( 0.321569, 0.388235, 0.733333, 1 )
+custom_styles/hover = SubResource( 10 )
+custom_styles/pressed = SubResource( 11 )
+custom_styles/normal = SubResource( 12 )
+text = "Previous"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="clickSound" type="AudioStreamPlayer" parent="UI/Help/Previous"]
+stream = ExtResource( 20 )
+
+[node name="Sick" type="TextureRect" parent="UI"]
+visible = false
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -62.182
+margin_right = 132.818
+margin_bottom = 150.0
+rect_scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 26 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PauseAndResume" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -1000.0
+margin_bottom = -567.0
+theme = SubResource( 18 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Pause_popup" type="Popup" parent="PauseAndResume"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="PauseAndResume/Pause_popup"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.737255, 0.807843, 0.878431, 0.541176 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Paused" type="Label" parent="PauseAndResume/Pause_popup/ColorRect"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -100.0
+margin_top = -51.5
+margin_right = 100.0
+margin_bottom = 51.5
+custom_colors/font_color = Color( 0.980392, 0.980392, 0.980392, 1 )
+custom_colors/font_outline_modulate = Color( 0.0784314, 0.188235, 0.454902, 1 )
+text = "Game Paused"
+align = 1
+valign = 1
+autowrap = true
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Resume" type="Button" parent="PauseAndResume/Pause_popup"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -160.0
+margin_top = -216.0
+margin_right = 160.0
+margin_bottom = -152.0
+custom_colors/font_color = Color( 0.980392, 0.980392, 0.980392, 1 )
+custom_colors/font_color_hover = Color( 0.784314, 0.831373, 0.980392, 1 )
+custom_colors/font_color_pressed = Color( 0.321569, 0.388235, 0.733333, 1 )
+custom_styles/hover = SubResource( 10 )
+custom_styles/pressed = SubResource( 11 )
+custom_styles/normal = SubResource( 12 )
+text = "Resume"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="clickSound" type="AudioStreamPlayer" parent="PauseAndResume/Pause_popup/Resume"]
+stream = ExtResource( 20 )
+
+[node name="Pause" type="Button" parent="PauseAndResume"]
+margin_left = 968.0
+margin_top = 16.0
+margin_right = 1000.0
+margin_bottom = 48.0
+theme = SubResource( 20 )
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 0.980392, 0.980392, 0.980392, 1 )
+custom_colors/font_color_hover = Color( 0.784314, 0.831373, 0.980392, 1 )
+custom_colors/font_color_pressed = Color( 0.321569, 0.388235, 0.733333, 1 )
+custom_styles/hover = SubResource( 21 )
+custom_styles/pressed = SubResource( 22 )
+custom_styles/normal = SubResource( 23 )
+text = "||"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="clickSound" type="AudioStreamPlayer" parent="PauseAndResume/Pause"]
+stream = ExtResource( 20 )
+
+[node name="Sounds" type="Spatial" parent="."]
+
+[node name="gameOverSound" type="AudioStreamPlayer" parent="Sounds"]
+pause_mode = 2
+stream = ExtResource( 17 )
+
+[node name="gameBackgroundSound" type="AudioStreamPlayer" parent="Sounds"]
+pause_mode = 2
+stream = ExtResource( 24 )
+
+[node name="menuBackgroundSound" type="AudioStreamPlayer" parent="Sounds"]
+pause_mode = 2
+stream = ExtResource( 29 )
+
+[connection signal="timeout" from="UI/Battery/DropTimer" to="UI/Battery" method="_on_DropTimer_timeout"]
+[connection signal="pressed" from="UI/Help/layer1/Skip" to="." method="_on_Skip_pressed"]
+[connection signal="pressed" from="UI/Help/layer11/Start" to="." method="_on_Start_pressed"]
+[connection signal="pressed" from="UI/Help/Continue" to="." method="_on_Continue_pressed"]
+[connection signal="pressed" from="UI/Help/Previous" to="." method="_on_Previous_pressed"]
+[connection signal="pressed" from="PauseAndResume/Pause_popup/Resume" to="." method="_on_Resume_pressed"]
+[connection signal="pressed" from="PauseAndResume/Pause" to="." method="_on_Pause_pressed"]

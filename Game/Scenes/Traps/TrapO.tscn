@@ -32,7 +32,6 @@ collision_layer = 2
 
 [node name="CSGCylinder" type="CSGCylinder" parent="trap"]
 transform = Transform( 1, -1.33227e-15, 0, 9.09495e-13, 1, 4.54747e-13, 1.69407e-21, -5.27383e-23, 1, 0, 0, 0 )
-operation = 2
 use_collision = true
 collision_layer = 2
 sides = 30

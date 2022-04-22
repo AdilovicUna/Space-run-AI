@@ -1,6 +1,6 @@
 extends TextureProgress
 
-onready var main = get_parent().get_parent()
+onready var game = get_parent().get_parent()
 
 func _on_DropTimer_timeout():
     decrease_value()
@@ -10,7 +10,7 @@ func decrease_value():
     get_child(0).text = String(value) + "%"
     
     if value == 0:
-        main._game_over()
+        game._game_over()
         return
         
 func update_timer():

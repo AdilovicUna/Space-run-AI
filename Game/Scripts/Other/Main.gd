@@ -1,165 +1,89 @@
 extends Node
 
-onready var top = get_parent()
 
-onready var hans = get_node("Hans") 
-onready var tunnels = get_node("Tunnels")
-onready var score = get_node("UI/Score")
-onready var end = get_node("UI/End")
-onready var help = get_node("UI/Help")
-onready var cont = get_node("UI/Help/Continue")
-onready var prev = get_node("UI/Help/Previous")
-onready var battery = get_node("UI/Battery")
-onready var timer = get_node("UI/Battery/DropTimer")
-onready var pause = get_node("PauseAndResume/Pause")
-onready var pause_popup = get_node("PauseAndResume/Pause_popup")
+var options = """
+argument options:
+    - n=int : number of games
+    - agent=string : name of the agent [Static, Random]
+    - options : displays options
+"""
 
-var agent
+var game_scene = preload("res://Scenes/Other/Game.tscn")
+var game
 
-var curr_layer = 0
+var all_agents = ["None", "Static", "Random"]
+
+var n = 100
+var agent = "None"
+var scores_sum = 0.0
+var scores_count = 0
+var last_score = 0.0
+
+var paramSet = false
 
 func _ready():
-    disable_sound_loops()
-     
-    match (top.agent):
-        "Static":
-            agent = Static.new()
-        "Random":
-            agent = Random.new()
-            
-    if top.agent_set == false:
-        _show_first_help_layer()
-    else:
-        _start()
-
-
-func disable_sound_loops():
-    $PauseAndResume/Pause_popup/Resume/clickSound.stream.loop = false
-    $PauseAndResume/Pause/clickSound.stream.loop = false
-    $UI/Help/Continue/clickSound.stream.loop = false
-    $UI/Help/layer1/Skip/clickSound.stream.loop = false
-    $UI/Help/layer11/Start/clickSound.stream.loop = false
-    $UI/Help/Previous/clickSound.stream.loop = false
-    hans.get_node("Sounds/shootSound").stream.loop = false
-
-func _start():
-    $Sounds/menuBackgroundSound.stop()    
-    help.hide() 
-    score.show()
-    pause.show()
-    battery.show()
-    timer.start()
-    get_tree().paused = false 
+    # get args
+    var unparsed_args = OS.get_cmdline_args()
     
-    for name in ["TrapI","TrapO", "TrapMovingI", "TrapX", "TrapWalls", "TrapHex", 
-                    "TrapHexO", "TrapBalls", "TrapTriangles", "TrapHalfHex"]:
-        tunnels.trap_scenes.append(load("res://Scenes/Traps/" + name + ".tscn"))
-        
-    for name in ["Worm", "LadybugFlying", "LadybugWalking"]:
-        tunnels.bug_scenes.append(load("res://Scenes/Characters/Bugs/" + name + ".tscn"))
-        
-    for name in ["Rotavirus", "Bacteriophage"]:
-        tunnels.virus_scenes.append(load("res://Scenes/Characters/Viruses/" + name + ".tscn"))
-        
-    tunnels.token_scenes.append(load("res://Scenes/Tokens/EnergyToken.tscn"))
+    # show options
+    if unparsed_args.size() == 1 and unparsed_args[0] == "--options":
+        display_options()
     
-    tunnels.create_first_level_traps()
-    $Sounds/gameBackgroundSound.play()
-
-func _show_first_help_layer():    
-    $Sounds/gameBackgroundSound.stop()
-    get_tree().paused = true        
-    score.hide()
-    pause.hide()
-    battery.hide()
-    timer.stop()
-    help.show()
-    prev.hide()
+    # parse agrs
+    var args = {}
+    for arg in unparsed_args:
+        if arg.find("=") > 0:
+            var key_value = arg.split("=")
+            args[key_value[0].lstrip("--")] = key_value[1]
     
-    var layer = help.get_child(curr_layer)
-    layer.show()
-    $Sounds/menuBackgroundSound.play()
-
-func _show_help_layer():
-    if curr_layer == 10:
-        cont.hide()
+    # set param, if something went wrong, show options
+    if set_param(args) == false:
+        display_options()
     else:
-        cont.show()
-        
-    prev.show()    
-        
-    var layer = help.get_child(curr_layer)
-    layer.show()
-        
-func _game_over():
-    $Sounds/gameBackgroundSound.stop()
-    $Sounds/gameOverSound.play()	
-    get_tree().paused = true    
-    end.show()
-    battery.hide()
-    timer.stop()
-    if top.agent_set == true:
-        top.add_score(score.get_score())
-        queue_free()
+        play_game()
+    
+func play_game():     
+    if n > 0:
+        n -= 1
+        game = game_scene.instance()
+        game.set_agent(agent)
+        add_child(game)
     else:
-        score._display_Final_Score()
-        var end_children = end.get_children()
-        yield(get_tree().create_timer(2), "timeout")	
+        print_avg_score()
+        get_tree().quit()        
         
+
+func display_options():
+    get_tree().quit() 
+    print(options)
+
+func set_param(param):
+    if not paramSet:
+        paramSet = true
+        # modify options based on args
+        for key in param:
+            if key == "n":
+                n = int(param[key])
+            if key== "agent":
+                agent = param[key]
+    
+        #check if everything is valid
+        if n < 0 or not agent in all_agents:
+            return false   
+
+func add_score(score):
+    scores_count += 1
+    last_score = score
+    scores_sum += score
+
+func print_score(score):
+    print("Game %d score: %.1f" % [scores_count,last_score])   
+
+func print_avg_score():
+    print("Average score: %.1f" % [scores_sum / scores_count])
         
-        # a little animation for the end of the game
-        end_children[0].show()
-        yield(get_tree().create_timer(1.2), "timeout")	
-        end_children[0].hide()
-        end_children[1].show()
-        yield(get_tree().create_timer(1.2), "timeout")
-        
-        end_children[2].show()
-       
-func _on_Resume_pressed():
-    $Sounds/menuBackgroundSound.stop()
-    $Sounds/gameBackgroundSound.stream_paused = false
-    $PauseAndResume/Pause_popup/Resume/clickSound.play()
-    pause.show()
-    score.show()
-    battery.show()
-    timer.start()    
-    pause_popup.hide()
-    get_tree().paused = false
-
-func _on_Pause_pressed():
-    $Sounds/gameBackgroundSound.stream_paused = true
-    $Sounds/menuBackgroundSound.play()    
-    $PauseAndResume/Pause/clickSound.play()
-    pause_popup.show()
-    pause.hide()
-    score.hide()
-    battery.hide()
-    timer.stop()    
-    get_tree().paused = true
-
-func _on_Continue_pressed():
-    $UI/Help/Continue/clickSound.play()
-    help.get_child(curr_layer).hide()
-    curr_layer += 1
-    _show_help_layer()
-
-
-func _on_Skip_pressed():
-    $UI/Help/layer1/Skip/clickSound.play()
-    _start()
-
-
-func _on_Start_pressed():
-    $UI/Help/layer11/Start/clickSound.play()
-    _start()
-
-
-func _on_Previous_pressed():
-    $UI/Help/Previous/clickSound.play()
-    help.get_child(curr_layer).hide()
-    curr_layer -= 1
-    if curr_layer == 0:
-        _show_first_help_layer()
-    else:
-        _show_help_layer()
+func on_game_finished(score):
+    add_score(score)
+    print_score(score)
+    play_game()
+    

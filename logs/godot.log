@@ -1,0 +1,17 @@
+Godot Engine v3.2.3.stable.official - https://godotengine.org
+OpenGL ES 3.0 Renderer: AMD Radeon(TM) RX Vega 10 Graphics
+ 
+Project is missing: C:/Users/Una/Desktop/ISP/First project/project.godot
+Project is missing: C:/Users/Una/Desktop/ISP/instancing/project.godot
+Project is missing: C:/Users/Una/Desktop/ISP/Scripting/project.godot
+Project is missing: C:/Users/Una/Desktop/ISP/Dodge the Creeps/project.godot
+Project is missing: C:/Users/Una/Desktop/ISP/Godot practice/ui_main_menu_design/start/project.godot
+Project is missing: C:/Users/Una/Desktop/ISP/Godot practice/First project/project.godot
+Project is missing: C:/Users/Una/Desktop/ISP/Godot practice/Book/Chapter3/project.godot
+Project is missing: C:/Users/Una/Desktop/ISP/Tunnel-Rush-programmers-addition/Game/project.godot
+Project is missing: C:/Users/Una/Desktop/ISP/Godot practice/3D Game/project.godot
+Project is missing: C:/Users/Una/Desktop/ISP/Godot practice/3D Game/squash_the_creeps_start_1.1.0/project.godot
+Project is missing: C:/Users/Una/Desktop/Tunnel-Rush-programmers-addition/Game/project.godot
+Project is missing: C:/Users/Una/Desktop/ISP/Space-run/Game/project.godot
+**ERROR**: Condition "default_certs != __null" is true.
+   At: modules/mbedtls/crypto_mbedtls.cpp:201:load_default_certificates() - Condition "default_certs != __null" is true.
