@@ -25,10 +25,6 @@ func _ready():
     else:
         _start()
 
-func hide_csg_shapes():
-    if not VisualServer.render_loop_enabled:
-        print("here")
-
 func set_agent(a):
     if a != "Keyboard":
         self_playing_agent = true
@@ -75,6 +71,15 @@ func _start():
     tunnels.create_first_level_traps()
     if not self_playing_agent:
         $Sounds/gameBackgroundSound.play()
+
+func hide_csg_shapes(node):
+    if node is CSGShape:
+        node.hide()
+    var children = node.get_children()
+    if children.size() == 0:
+        return
+    for child in children:
+        hide_csg_shapes(child)
 
 func _show_first_help_layer():    
     $Sounds/gameBackgroundSound.stop()

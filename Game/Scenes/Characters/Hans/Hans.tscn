@@ -190,7 +190,11 @@ func shoot():
             new_bullet = BulletZero.instance()
         else:
             new_bullet = BulletOne.instance()
-        
+            
+        # hide all csg shapes when the window isn't visible
+        if not VisualServer.render_loop_enabled:
+            game.hide_csg_shapes(new_bullet)
+            
         tunnels_children[curr_tunnel].add_child(new_bullet)
         new_bullet.global_transform = $Pivot/Hans/Muzzle.global_transform
         

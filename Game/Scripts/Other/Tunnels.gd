@@ -62,6 +62,10 @@ func create_one_obstacle(level,x):
     var obstacle = scene[i].instance()
     obstacle.translation.x = x
     
+    # hide all csg shapes when the window isn't visible
+    if not VisualServer.render_loop_enabled:
+        game.hide_csg_shapes(obstacle)
+        
     tunnel.add_child(obstacle)
     rotate_obstacle(obstacle)
 

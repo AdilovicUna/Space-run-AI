@@ -52,7 +52,6 @@ func play_game():
         game = game_scene.instance()
         game.set_agent(agent)
         game.connect("game_finished", self, "on_game_finished")
-        game.hide_csg_shapes()
         add_child(game)
     else:
         print_avg_score()
