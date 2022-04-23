@@ -94,17 +94,17 @@ func check_collisions():
         if collision.collider is KinematicBody:
             # increase battery in Hans picks up an energy token
             if \"Token\" in collision.collider.name:
-                if not game.agent_set:
+                if not game.self_playing_agent:
                     $Sounds/pickUpTokenSound.play()
                 battery.value = 100
             # decrease battery if Hans touches a bug
             elif curr_tunnel == lvl.TWO and not \"Trap\" in collision.collider.name:
-                if not game.agent_set:
+                if not game.self_playing_agent:
                     $Sounds/bugSqishSound.play()
                 battery.value -= 25
             # make Hans sick if he touches rotavirus
             elif \"Rotavirus\" in collision.collider.name and not sick.visible:
-                if not game.agent_set:
+                if not game.self_playing_agent:
                     $Sounds/coughingSound.play()
                 sick.show()
                 $Sick_timer.start()
@@ -166,9 +166,9 @@ func translate_tunnel_and_groud():
 func get_current_tunnel():
     return curr_tunnel
   
-func switch_animation():
+func switch_animation(move):
     # toggle between Hans shooting and just running
-    if Input.is_action_pressed(\"shoot\"):
+    if move:
         isShootingButtonPressed = true
         get_node(\"Pivot/Hans/Movement\").play(\"HansShooting\")
     else:
@@ -180,7 +180,7 @@ func shoot():
     if bullets_in_air < max_bullets_per_button_press and can_shoot:
         
         # play shooting sound
-        if not game.agent_set:
+        if not game.self_playing_agent:
             $Sounds/shootSound.play()
         
         # create bullet instance

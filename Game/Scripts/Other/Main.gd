@@ -11,10 +11,10 @@ argument options:
 var game_scene = preload("res://Scenes/Other/Game.tscn")
 var game
 
-var all_agents = ["None", "Static", "Random"]
+var all_agents = ["Keyboard", "Static", "Random"]
 
 var n = 100
-var agent = "None"
+var agent = "Keyboard"
 var scores_sum = 0.0
 var scores_count = 0
 var last_score = 0.0
@@ -43,17 +43,22 @@ func _ready():
         play_game()
 
 func play_game():     
-    if n > 0:
+    if agent == "Keyboard": # play a regular game
+        game = game_scene.instance()
+        game.set_agent(agent)
+        add_child(game)
+        
+    elif n > 0:
         n -= 1
         game = game_scene.instance()
         game.set_agent(agent)
+        game.connect("game_finished", self, "on_game_finished")
         game.hide_csg_shapes()
         add_child(game)
     else:
         print_avg_score()
         get_tree().quit()        
         
-
 func display_options():
     get_tree().quit() 
     print(options)

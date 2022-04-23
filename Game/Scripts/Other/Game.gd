@@ -15,14 +15,11 @@ onready var pause = get_node("PauseAndResume/Pause")
 onready var pause_popup = get_node("PauseAndResume/Pause_popup")
 
 var agent = ""
-var agent_set = false
+var self_playing_agent = false
 var curr_layer = 0
 
 func _ready():
-    if agent_set:
-        var _connect = connect("game_finished", get_parent(), "on_game_finished")
-        
-    if not agent_set:
+    if not self_playing_agent:
         disable_sound_loops()
         _show_first_help_layer()
     else:
@@ -33,10 +30,12 @@ func hide_csg_shapes():
         print("here")
 
 func set_agent(a):
-    if a != "None":
-        agent_set = true
+    if a != "Keyboard":
+        self_playing_agent = true
         
     match (a):
+        "Keyboard":
+            agent = Keyboard.new()            
         "Static":
             agent = Static.new()
         "Random":
@@ -74,7 +73,7 @@ func _start():
     tunnels.token_scenes.append(load("res://Scenes/Tokens/EnergyToken.tscn"))
     
     tunnels.create_first_level_traps()
-    if not agent_set:
+    if not self_playing_agent:
         $Sounds/gameBackgroundSound.play()
 
 func _show_first_help_layer():    
@@ -89,7 +88,7 @@ func _show_first_help_layer():
     
     var layer = help.get_child(curr_layer)
     layer.show()
-    if not agent_set:
+    if not self_playing_agent:
         $Sounds/menuBackgroundSound.play()
 
 func _show_help_layer():
@@ -104,7 +103,7 @@ func _show_help_layer():
     layer.show()
         
 func _game_over():
-    if not agent_set:    
+    if not self_playing_agent:    
         $Sounds/gameBackgroundSound.stop()
         $Sounds/gameOverSound.play()	
         
@@ -112,7 +111,7 @@ func _game_over():
     end.show()
     battery.hide()
     timer.stop()
-    if agent_set:
+    if self_playing_agent:
         emit_signal("game_finished", score.get_score())
         queue_free()
     else:
@@ -131,7 +130,7 @@ func _game_over():
         end_children[2].show()
        
 func _on_Resume_pressed():
-    if not agent_set:    
+    if not self_playing_agent:    
         $Sounds/menuBackgroundSound.stop()
         $Sounds/gameBackgroundSound.stream_paused = false
         $PauseAndResume/Pause_popup/Resume/clickSound.play()
@@ -143,7 +142,7 @@ func _on_Resume_pressed():
     get_tree().paused = false
 
 func _on_Pause_pressed():
-    if not agent_set:    
+    if not self_playing_agent:    
         $Sounds/gameBackgroundSound.stream_paused = true
         $Sounds/menuBackgroundSound.play()    
         $PauseAndResume/Pause/clickSound.play()
@@ -156,7 +155,7 @@ func _on_Pause_pressed():
     get_tree().paused = true
 
 func _on_Continue_pressed():
-    if not agent_set:
+    if not self_playing_agent:
         $UI/Help/Continue/clickSound.play()
     help.get_child(curr_layer).hide()
     curr_layer += 1
@@ -164,19 +163,19 @@ func _on_Continue_pressed():
 
 
 func _on_Skip_pressed():
-    if not agent_set:    
+    if not self_playing_agent:    
         $UI/Help/layer1/Skip/clickSound.play()
     _start()
 
 
 func _on_Start_pressed():
-    if not agent_set:    
+    if not self_playing_agent:    
         $UI/Help/layer11/Start/clickSound.play()
     _start()
 
 
 func _on_Previous_pressed():
-    if not agent_set:    
+    if not self_playing_agent:    
         $UI/Help/Previous/clickSound.play()
         
     help.get_child(curr_layer).hide()

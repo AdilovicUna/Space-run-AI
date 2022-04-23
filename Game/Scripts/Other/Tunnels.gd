@@ -21,30 +21,16 @@ var rotate_speed = 2
 # - second element decides if Hans should shoot : 1 - yes, 0 - no
 
 func _physics_process(delta):
-    if game.agent_set:
-        agent_physics_process()
-    else:
-       #rotates all children of "traps"
-        if Input.is_action_pressed("right"):
-            var tunnel = get_child(hans.get_current_tunnel())
-            tunnel.rotate_object_local(Vector3.RIGHT, -1 * delta * rotate_speed)
-        if Input.is_action_pressed("left"):
-            var tunnel = get_child(hans.get_current_tunnel())
-            tunnel.rotate_object_local(Vector3.LEFT, -1 * delta * rotate_speed)
-        if not hans == null: # if it is not instanced we can't call the function       
-            hans.switch_animation()
-
-func agent_physics_process():
     var move = game.agent.move()
     #rotates all children of "traps"
     if move[0] == 1:
         var tunnel = get_child(hans.get_current_tunnel())
-        tunnel.rotate_object_local(Vector3.RIGHT,-PI/90)
+        tunnel.rotate_object_local(Vector3.RIGHT,-rotate_speed * delta)
     elif move[0] == -1:
         var tunnel = get_child(hans.get_current_tunnel())
-        tunnel.rotate_object_local(Vector3.LEFT,-PI/90)
-    if not hans == null and move[1] == 1: # if it is not instanced we can't call the function       
-        hans.switch_animation()
+        tunnel.rotate_object_local(Vector3.LEFT,-rotate_speed * delta)
+    if not hans == null: # if it is not instanced we can't call the function       
+        hans.switch_animation(move[1] == 1)
 
 func create_first_level_traps():
     rand.randomize()
