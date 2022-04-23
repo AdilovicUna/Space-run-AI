@@ -3,7 +3,7 @@ extends Spatial
 export var speed = 100
 onready var sound = get_node_or_null("/root/Main/Game/Hans/Sounds/ShootSomethingDownSound")
 onready var score = get_parent().get_node("../../UI/Score")
-onready var game = get_node("/root/Main/Game")
+onready var game = get_parent().get_parent()
 
 const queue_free_time = 3
 var timer = 0

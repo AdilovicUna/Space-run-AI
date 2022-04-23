@@ -17,7 +17,6 @@ var n = 100
 var agent = "Keyboard"
 var scores_sum = 0.0
 var scores_count = 0
-var last_score = 0.0
 
 var paramSet = false
 
@@ -79,11 +78,10 @@ func set_param(param):
 
 func add_score(score):
     scores_count += 1
-    last_score = score
     scores_sum += score
 
 func print_score(score):
-    print("Game %d score: %.1f" % [scores_count,last_score])   
+    print("Game %d score: %.1f" % [scores_count,score])   
 
 func print_avg_score():
     print("Average score: %.1f" % [scores_sum / scores_count])
