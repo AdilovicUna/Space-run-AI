@@ -15,6 +15,7 @@ onready var pause = get_node("PauseAndResume/Pause")
 onready var pause_popup = get_node("PauseAndResume/Pause_popup")
 
 var agent = Keyboard.new()
+var tunnel = 0
 var self_playing_agent = false
 # curr_layer cannot be 0 unless the Help menu is actually shown
 # because of the End.gd script conditions
@@ -32,12 +33,14 @@ func set_agent(a):
     if a != "Keyboard":
         self_playing_agent = true
         
-    match (a):        
+    match a:        
         "Static":
             agent = Static.new()
         "Random":
             agent = Random.new()
 
+func set_tunnel(t):
+    tunnel = t - 1
 
 func disable_sound_loops():
     $PauseAndResume/Pause_popup/Resume/clickSound.stream.loop = false
@@ -69,7 +72,13 @@ func _start():
         
     tunnels.token_scenes.append(load("res://Scenes/Tokens/EnergyToken.tscn"))
     
-    tunnels.create_first_level_traps()
+    match tunnel:
+        hans.lvl.TWO:
+            hans.translation = Vector3(1250,-32,0)
+        hans.lvl.THREE:
+            hans.translation = Vector3(-1250,-32,0)
+    
+    tunnels.create_first_level_traps(tunnel)
     if not self_playing_agent:
         $Sounds/gameBackgroundSound.play()
 

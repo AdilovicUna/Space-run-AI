@@ -32,10 +32,10 @@ func _physics_process(delta):
     if not hans == null: # if it is not instanced we can't call the function       
         hans.switch_animation(move[1] == 1)
 
-func create_first_level_traps():
+func create_first_level_traps(tunnel):
     rand.randomize()
     # get the level we are making traps for
-    var level = hans.lvl.ONE
+    var level = tunnel
     # pick number of traps to be added
     var num_of_traps = rand.randi_range(50,65)
     var x = 1200
