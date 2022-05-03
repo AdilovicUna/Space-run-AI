@@ -1,6 +1,6 @@
 extends ColorRect
 
-onready var game = get_node("/root/Main/Game")
+onready var game = get_parent().get_parent()
 
 func _unhandled_input(event):
     # reset the game if enter is pressed
@@ -10,5 +10,5 @@ func _unhandled_input(event):
         var _result = get_tree().reload_current_scene()
         get_tree().paused = false
         
-    if event.is_action_pressed("enter") and game.curr_layer == 0:
+    elif event.is_action_pressed("enter") and game.curr_layer == 0:
         game._on_Skip_pressed()

@@ -16,7 +16,7 @@ var obstacle_number = 0
 var rotate_speed = 2
 
 # IMPORTANT!
-# agent returns a list of 2 elements:
+# agent's function move returns a list of 2 elements:
 # - first element indicates the movement : -1 - left, 0 - just go forward, 1 - right
 # - second element decides if Hans should shoot : 1 - yes, 0 - no
 

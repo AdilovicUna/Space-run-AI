@@ -14,13 +14,16 @@ onready var timer = get_node("UI/Battery/DropTimer")
 onready var pause = get_node("PauseAndResume/Pause")
 onready var pause_popup = get_node("PauseAndResume/Pause_popup")
 
-var agent = ""
+var agent = Keyboard.new()
 var self_playing_agent = false
-var curr_layer = 0
+# curr_layer cannot be 0 unless the Help menu is actually shown
+# because of the End.gd script conditions
+var curr_layer = -1
 
 func _ready():
     if not self_playing_agent:
         disable_sound_loops()
+        curr_layer = 0
         _show_first_help_layer()
     else:
         _start()
@@ -29,9 +32,7 @@ func set_agent(a):
     if a != "Keyboard":
         self_playing_agent = true
         
-    match (a):
-        "Keyboard":
-            agent = Keyboard.new()            
+    match (a):        
         "Static":
             agent = Static.new()
         "Random":
@@ -73,11 +74,9 @@ func _start():
         $Sounds/gameBackgroundSound.play()
 
 func hide_csg_shapes(node):
-    if node is CSGShape:
-        node.hide()
+    if node is CSGShape or node is AnimationPlayer:
+        node.queue_free()
     var children = node.get_children()
-    if children.size() == 0:
-        return
     for child in children:
         hide_csg_shapes(child)
 
@@ -168,6 +167,7 @@ func _on_Continue_pressed():
 
 
 func _on_Skip_pressed():
+    curr_layer = -1
     if not self_playing_agent:    
         $UI/Help/layer1/Skip/clickSound.play()
     _start()
