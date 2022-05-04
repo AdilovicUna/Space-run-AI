@@ -8,7 +8,7 @@ argument options:
     - tunnel=int : number of the tunnel to start from [1, 2, 3]
     - env=[string] : list of obstacles that will be chosen in the game 
         (subset of) [traps, bugs, viruses, tokens, I, O, MovingI, X, Walls, Hex, HexO, Balls, Triangles, HalfHex]
-    - shooting=bool : enable or disable shooting [enable, disable]
+    - shooting=bool : enable or disable shooting [enabled, disabled]
     - options : displays options
 """
 
@@ -90,9 +90,9 @@ func set_param(param):
                 env = param[key].split(",")
             if key == "shooting":
                 match param[key]:
-                    "enable" :
+                    "enabled" :
                         shooting = true
-                    "disable" :
+                    "disabled" :
                         shooting = false
                     _:
                         return false
