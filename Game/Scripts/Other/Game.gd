@@ -15,7 +15,7 @@ onready var pause = get_node("PauseAndResume/Pause")
 onready var pause_popup = get_node("PauseAndResume/Pause_popup")
 
 var agent = Keyboard.new()
-var tunnel = 0
+var tunnel = 1
 var self_playing_agent = false
 # curr_layer cannot be 0 unless the Help menu is actually shown
 # because of the End.gd script conditions
@@ -30,6 +30,10 @@ func _ready():
         _start()
 
 func set_agent(a):
+    # if there is no window, static agent is default
+    if not VisualServer.render_loop_enabled:
+        a = "Static"
+        
     if a != "Keyboard":
         self_playing_agent = true
         
@@ -83,11 +87,14 @@ func _start():
         $Sounds/gameBackgroundSound.play()
 
 func hide_csg_shapes(node):
-    if node is CSGShape or node is AnimationPlayer:
-        node.queue_free()
     var children = node.get_children()
     for child in children:
-        hide_csg_shapes(child)
+        if child is CSGShape or child is AnimationPlayer:
+            # child needs to be freed before removed, otherwise there will be leaked instances
+            child.queue_free()
+            node.remove_child(child)
+        else:
+            hide_csg_shapes(child)
 
 func _show_first_help_layer():    
     $Sounds/gameBackgroundSound.stop()

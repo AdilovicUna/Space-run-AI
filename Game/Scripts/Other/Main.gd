@@ -45,11 +45,10 @@ func _ready():
         play_game()
 
 func play_game():     
-    if agent == "Keyboard": # play a regular game
+    if agent == "Keyboard" and VisualServer.render_loop_enabled: # play a regular game
         game = game_scene.instance()
         set_param_in_game()
         add_child(game)
-        
     elif n > 0:
         n -= 1
         game = game_scene.instance()
