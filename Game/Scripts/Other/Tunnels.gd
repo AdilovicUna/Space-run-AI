@@ -5,10 +5,11 @@ onready var hans = get_node_or_null("../Hans")
 onready var battery = get_node_or_null("../UI/Battery")
 
 # load traps
-var trap_scenes = []
-var bug_scenes = []
-var virus_scenes = []
-var token_scenes = []
+var scenes = { "trap_scenes" : [],
+                "bug_scenes" : [],
+                "virus_scenes" : [],
+                "token_scenes" : []
+                }
 var rand = RandomNumberGenerator.new()
 var angle = 0	
 var deviation = 0.01
@@ -70,26 +71,41 @@ func create_one_obstacle(level,x):
     rotate_obstacle(obstacle)
 
 func pick_obstacle(scene):
-    if scene == token_scenes:
+    if scene == scenes["token_scenes"]:
         return 0
-    if scene == virus_scenes:
+    elif scene == scenes["virus_scenes"]:
         # rotavirus (index 0 in virus_scenes) will occur 75% of the time
         var i = rand.randf_range(0,1)
         return 0 if i <= 0.75 else 1
-    return rand.randi_range(0, len(scene) - 1)
+    else:
+        return rand.randi_range(0, len(scene) - 1)
 
-func pick_scene(level,scene = trap_scenes):
-    if rand.randf_range(0,1) < 0.1 or obstacle_number >= 10:
-        obstacle_number = 0
-        return token_scenes
-    var r = rand.randi_range(0,1)
-    if level == hans.lvl.TWO and r == 0:
-        scene = bug_scenes
-    elif level == hans.lvl.THREE and r == 0 :
-        scene = virus_scenes
-    obstacle_number += 1
-    return scene
+func pick_scene(level):
+    # NOTE: we are guaranteed to have at least one of the 4 scenes non empty
     
+    var scene = scenes["trap_scenes"]
+    
+    # only if token scenes are enabeled
+    if scenes["token_scenes"].size() > 0 and (rand.randf_range(0,1) < 0.1 or obstacle_number >= 10):
+        obstacle_number = 0
+        return scenes["token_scenes"]
+        
+    var r = rand.randi_range(0,1)
+    
+    # firstly we try to find default scene element for that tunnel
+    if scenes["bug_scenes"].size() > 0 and level == hans.lvl.TWO and (r == 0  or scene == []):
+        scene = scenes["bug_scenes"]
+    elif scenes["virus_scenes"].size() > 0 and level == hans.lvl.THREE and (r == 0 or scene == []):
+        scene = scenes["virus_scenes"]
+    obstacle_number += 1
+    
+    # if all elements that would usually be in that tunnel aren't enabeled, then we pick randomly out of remaining ones
+    while scene.size() == 0:
+        var s = scenes.keys()
+        scene = scenes[s[rand.randf_range(0, s.size()-1)]]
+    
+    return scene
+ 
 func rotate_obstacle(obstacle):
     # rotate the obstacle under some angle
     angle = rand.randi_range(0,5) * (PI / 3)

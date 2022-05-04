@@ -14,9 +14,16 @@ onready var timer = get_node("UI/Battery/DropTimer")
 onready var pause = get_node("PauseAndResume/Pause")
 onready var pause_popup = get_node("PauseAndResume/Pause_popup")
 
+var traps = ["TrapI","TrapO", "TrapMovingI", "TrapX", "TrapWalls", "TrapHex", "TrapHexO", "TrapBalls", "TrapTriangles", "TrapHalfHex"]
+var bugs = ["Worm", "LadybugFlying", "LadybugWalking"]
+var viruses = ["Rotavirus", "Bacteriophage"]
+var tokens = ["EnergyToken"]
+
 var agent = Keyboard.new()
 var tunnel = 1
 var self_playing_agent = false
+var shooting_enabled = true
+
 # curr_layer cannot be 0 unless the Help menu is actually shown
 # because of the End.gd script conditions
 var curr_layer = -1
@@ -46,6 +53,29 @@ func set_agent(a):
 func set_tunnel(t):
     tunnel = t - 1
 
+func set_env(parameters):
+    # env wasn't specified, so we put everything
+    if parameters.size() == 0:
+        return
+        
+    if not "traps" in parameters:
+        traps = []
+        for param in parameters:
+            if param != "bugs" and  param != "viruses" and param != "tokens":
+                traps.append("Trap" + param)
+                
+    if not "bugs" in parameters:
+        bugs = []
+        
+    if not "viruses" in parameters:
+        viruses = []
+        
+    if not "tokens" in parameters:
+        tokens = []
+    
+func set_shooting(shooting):
+    shooting_enabled = shooting
+
 func disable_sound_loops():
     $PauseAndResume/Pause_popup/Resume/clickSound.stream.loop = false
     $PauseAndResume/Pause/clickSound.stream.loop = false
@@ -64,17 +94,17 @@ func _start():
     timer.start()
     get_tree().paused = false 
     
-    for name in ["TrapI","TrapO", "TrapMovingI", "TrapX", "TrapWalls", "TrapHex", 
-                    "TrapHexO", "TrapBalls", "TrapTriangles", "TrapHalfHex"]:
-        tunnels.trap_scenes.append(load("res://Scenes/Traps/" + name + ".tscn"))
+    for name in traps:
+        tunnels.scenes["trap_scenes"].append(load("res://Scenes/Traps/" + name + ".tscn"))
         
-    for name in ["Worm", "LadybugFlying", "LadybugWalking"]:
-        tunnels.bug_scenes.append(load("res://Scenes/Characters/Bugs/" + name + ".tscn"))
+    for name in bugs:
+        tunnels.scenes["bug_scenes"].append(load("res://Scenes/Characters/Bugs/" + name + ".tscn"))
         
-    for name in ["Rotavirus", "Bacteriophage"]:
-        tunnels.virus_scenes.append(load("res://Scenes/Characters/Viruses/" + name + ".tscn"))
+    for name in viruses:
+        tunnels.scenes["virus_scenes"].append(load("res://Scenes/Characters/Viruses/" + name + ".tscn"))
         
-    tunnels.token_scenes.append(load("res://Scenes/Tokens/EnergyToken.tscn"))
+    for name in tokens:
+        tunnels.scenes["token_scenes"].append(load("res://Scenes/Tokens/" + name + ".tscn"))
     
     match tunnel:
         hans.lvl.TWO:

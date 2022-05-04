@@ -5,7 +5,10 @@ var options = """
 argument options:
     - n=int : number of games
     - agent=string : name of the agent [Static, Random]
-    - tunnel=int : number of the tunnel to start from [1,2,3]
+    - tunnel=int : number of the tunnel to start from [1, 2, 3]
+    - env=[string] : list of obstacles that will be chosen in the game 
+        (subset of) [traps, bugs, viruses, tokens, I, O, MovingI, X, Walls, Hex, HexO, Balls, Triangles, HalfHex]
+    - shooting=bool : enable or disable shooting [enable, disable]
     - options : displays options
 """
 
@@ -13,10 +16,13 @@ var game_scene = preload("res://Scenes/Other/Game.tscn")
 var game
 
 var all_agents = ["Keyboard", "Static", "Random"]
+var all_env = ["traps", "bugs", "viruses", "tokens", "I", "O", "MovingI", "X", "Walls", "Hex", "HexO", "Balls", "Triangles", "HalfHex"]
 
 var n = 100
 var agent = "Keyboard"
 var tunnel = 1
+var env = []
+var shooting = true
 
 var scores_sum = 0.0
 var scores_count = 0
@@ -62,6 +68,8 @@ func play_game():
 func set_param_in_game():
     game.set_agent(agent)
     game.set_tunnel(tunnel)
+    game.set_env(env)
+    game.set_shooting(shooting)
       
 func display_options():
     get_tree().quit() 
@@ -78,10 +86,26 @@ func set_param(param):
                 agent = param[key]
             if key == "tunnel":
                 tunnel = int(param[key])
-        
+            if key == "env":
+                env = param[key].split(",")
+            if key == "shooting":
+                match param[key]:
+                    "enable" :
+                        shooting = true
+                    "disable" :
+                        shooting = false
+                    _:
+                        return false
+                        
         #check if everything is valid
-        if n < 0 or not agent in all_agents or tunnel < 0 or tunnel > 3:
+        if n < 0 or not agent in all_agents or tunnel < 0 or tunnel > 3 or not check_env():
             return false   
+        
+func check_env():
+    for elem in env:
+        if not elem in all_env:
+            return false
+    return true
 
 func add_score(score):
     scores_count += 1
