@@ -86,7 +86,8 @@ func pick_scene(level):
     var scene = scenes["trap_scenes"]
     
     # only if token scenes are enabeled
-    if scenes["token_scenes"].size() > 0 and (rand.randf_range(0,1) < 0.1 or obstacle_number >= 10) or (scenes["trap_scenes"].size() == 0 and scenes["bug_scenes"].size() == 0 and scenes["virus_scenes"].size() == 0):
+    if (scenes["token_scenes"].size() > 0 and (rand.randf_range(0,1) < 0.1 or obstacle_number >= 10) or 
+        (scenes["trap_scenes"].size() == 0 and scenes["bug_scenes"].size() == 0 and scenes["virus_scenes"].size() == 0)):
         obstacle_number = 0
         return scenes["token_scenes"]
         
