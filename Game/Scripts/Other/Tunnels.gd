@@ -11,10 +11,10 @@ var scenes = { "trap_scenes" : [],
                 "token_scenes" : []
                 }
 var rand = RandomNumberGenerator.new()
-var angle = 0	
-var deviation = 0.01
 var obstacle_number = 0
-var rotate_speed = 2
+
+const DEVIATION = 0.01
+const ROTATE_SPEED = 2
 
 # IMPORTANT!
 # agent's function move returns a list of 2 elements:
@@ -26,10 +26,10 @@ func _physics_process(delta):
     #rotates all children of "traps"
     if move[0] == 1:
         var tunnel = get_child(hans.get_current_tunnel())
-        tunnel.rotate_object_local(Vector3.RIGHT,-rotate_speed * delta)
+        tunnel.rotate_object_local(Vector3.RIGHT,-ROTATE_SPEED * delta)
     elif move[0] == -1:
         var tunnel = get_child(hans.get_current_tunnel())
-        tunnel.rotate_object_local(Vector3.LEFT,-rotate_speed * delta)
+        tunnel.rotate_object_local(Vector3.LEFT,-ROTATE_SPEED * delta)
     if not hans == null: # if it is not instanced we can't call the function       
         hans.switch_animation(move[1] == 1)
 
@@ -109,7 +109,7 @@ func pick_scene(level):
  
 func rotate_obstacle(obstacle):
     # rotate the obstacle under some angle
-    angle = rand.randi_range(0,5) * (PI / 3)
+    var angle = rand.randi_range(0,5) * (PI / 3)
     obstacle.rotate_x(angle)
           
 func delete_obstacle_until_x(level,x):
@@ -124,19 +124,19 @@ func delete_obstacle_until_x(level,x):
 func bug_virus_movement(delta, curr_tunnel):
     var tunnels = get_children()
     for obstacle in tunnels[curr_tunnel].get_children():
-        # we only move bugs
+        # we only move bugs / viruses
         if "Trap" in obstacle.name or "torus" in obstacle.name or "Token" in obstacle.name:
             continue;
-        
+            
         # obstacles start moving torwards Hans only when he gets close enough
         # thit way we can avoid them all alligning at one point
-        if obstacle.transform.origin.x < hans.transform.origin.x - 150:
+        if obstacle.get_global_transform().origin.x < hans.get_global_transform().origin.x - (150):
             continue;
             
         var tunnel_rot = tunnels[curr_tunnel].rotation.x + PI
         var obstacle_rot = obstacle.rotation.x + PI
         
-        if (-1) * deviation > tunnel_rot + obstacle_rot  or tunnel_rot + obstacle_rot > deviation:
+        if (-1) * DEVIATION > tunnel_rot + obstacle_rot  or tunnel_rot + obstacle_rot > DEVIATION:
             var dec = fmod(abs(obstacle_rot + tunnel_rot),2 * PI) 
             var inc = abs(2 * PI - fmod(tunnel_rot + obstacle_rot, 2* PI))
             # speed for every instance is generated randomly

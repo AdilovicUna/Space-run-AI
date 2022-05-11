@@ -20,7 +20,7 @@ var viruses = ["Rotavirus", "Bacteriophage"]
 var tokens = ["EnergyToken"]
 
 var agent = Keyboard.new()
-var tunnel = 1
+var tunnel = 0
 var self_playing_agent = false
 var shooting_enabled = true
 
@@ -31,10 +31,9 @@ var curr_layer = -1
 func _ready():
     if not self_playing_agent:
         disable_sound_loops()
-        curr_layer = 0
-        _show_first_help_layer()
-    else:
-        _start()
+        #curr_layer = 0
+        #_show_first_help_layer()
+    _start()
 
 func set_agent(a):
     # if there is no window, static agent is default

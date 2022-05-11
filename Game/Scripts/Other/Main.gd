@@ -116,6 +116,7 @@ func print_score(score):
 
 func print_avg_score():
     print("Average score: %.1f" % [scores_sum / scores_count])
+    print("Average time per tick: ", Performance.get_monitor(2))
         
 func on_game_finished(score):
     add_score(score)

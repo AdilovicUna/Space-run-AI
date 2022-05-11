@@ -81,8 +81,7 @@ func _physics_process(delta):
     
     # bugs and viruses need to move torwards Hans
     # but not in the first tunnel    
-    if curr_tunnel != lvl.ONE:
-        tunnels.bug_virus_movement(delta, curr_tunnel)
+    tunnels.bug_virus_movement(delta, curr_tunnel)
     
     if isShootingButtonPressed:
         shoot()

@@ -5,7 +5,7 @@ onready var sound = get_parent().get_node("../../Hans/Sounds/ShootSomethingDownS
 onready var score = get_parent().get_node("../../UI/Score")
 onready var game = get_parent().get_parent().get_parent()
 
-const queue_free_time = 3
+const QUEUE_FREE_TIME = 3
 var timer = 0
 
 func _physics_process(delta):
@@ -14,7 +14,7 @@ func _physics_process(delta):
     
     # remove the bullet form the scene after certian time
     timer += delta
-    if timer >= queue_free_time:
+    if timer >= QUEUE_FREE_TIME:
         queue_free()
 
 func _on_Area_body_entered(body):
