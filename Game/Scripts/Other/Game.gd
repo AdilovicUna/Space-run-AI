@@ -19,7 +19,7 @@ var bugs = ["Worm", "LadybugFlying", "LadybugWalking"]
 var viruses = ["Rotavirus", "Bacteriophage"]
 var tokens = ["EnergyToken"]
 
-var agent = Keyboard.new()
+var agent
 var tunnel = 0
 var self_playing_agent = false
 var shooting_enabled = true
@@ -35,19 +35,11 @@ func _ready():
         #_show_first_help_layer()
     _start()
 
-func set_agent(a):
-    # if there is no window, static agent is default
-    if not VisualServer.render_loop_enabled:
-        a = "Static"
-        
-    if a != "Keyboard":
+func set_agent(agent_str, agent_inst):   
+    if agent_str != "Keyboard":
         self_playing_agent = true
-        
-    match a:        
-        "Static":
-            agent = Static.new()
-        "Random":
-            agent = Random.new()
+    
+    agent = agent_inst
 
 func set_tunnel(t):
     tunnel = t - 1

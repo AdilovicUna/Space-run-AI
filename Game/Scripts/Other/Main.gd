@@ -24,6 +24,8 @@ var tunnel = 1
 var env = []
 var shooting = true
 
+var agent_inst = Keyboard.new()
+
 var scores_sum = 0.0
 var scores_count = 0
 
@@ -48,6 +50,7 @@ func _ready():
     if set_param(args) == false:
         display_options()
     else:
+        instance_agent()
         play_game()
 
 func play_game():     
@@ -66,11 +69,23 @@ func play_game():
         get_tree().quit()        
 
 func set_param_in_game():
-    game.set_agent(agent)
+    game.set_agent(agent, agent_inst)
     game.set_tunnel(tunnel)
     game.set_env(env)
     game.set_shooting(shooting)
-      
+
+func instance_agent():
+    # if there is no window, static agent is default
+    if not VisualServer.render_loop_enabled:
+        agent = "Static"
+        
+    match agent:        
+        "Static":
+            agent_inst = Static.new()
+        "Random":
+            agent_inst = Random.new()
+
+
 func display_options():
     get_tree().quit() 
     print(options)
