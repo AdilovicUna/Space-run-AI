@@ -5,13 +5,11 @@
 [ext_resource path="res://Scripts/Bugs and Viruses/LadybugWalking.gd" type="Script" id=3]
 [ext_resource path="res://Scripts/Bugs and Viruses/LadybugWalkingKinematic.gd" type="Script" id=4]
 
-
-
 [sub_resource type="CapsuleShape" id=1]
 
 [sub_resource type="CapsuleShape" id=2]
 
-[node name="Pivot" type="Spatial"]
+[node name="LadybugWalking" type="Spatial"]
 script = ExtResource( 3 )
 
 [node name="LadybugWalking" type="KinematicBody" parent="."]

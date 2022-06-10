@@ -120,14 +120,14 @@ func delete_obstacle_until_x(level,x):
                 obstacle.queue_free()
             else:
                 return;
-                
+
 func bug_virus_movement(delta, curr_tunnel):
     var tunnels = get_children()
     for obstacle in tunnels[curr_tunnel].get_children():
         # we only move bugs / viruses
-        if "Trap" in obstacle.name or "torus" in obstacle.name or "Token" in obstacle.name:
+        if not isBugOrVirus(obstacle.name):
             continue;
-            
+        
         # obstacles start moving torwards Hans only when he gets close enough
         # thit way we can avoid them all alligning at one point
         if obstacle.get_global_transform().origin.x < hans.get_global_transform().origin.x - (150):
@@ -145,3 +145,12 @@ func bug_virus_movement(delta, curr_tunnel):
                 obstacle.rotate_x(obstacle.speed * delta * 75)
             else:
                 obstacle.rotate_x(-obstacle.speed * delta * 75)      
+
+func isBugOrVirus(name):
+    for bug in game.bugs:
+        if bug in name:
+            return true
+    for virus in game.viruses:
+        if virus in name:
+            return true
+    return false

@@ -5,14 +5,12 @@
 [ext_resource path="res://Scripts/Bugs and Viruses/Worm.gd" type="Script" id=3]
 [ext_resource path="res://Scripts/Bugs and Viruses/WormKinematic.gd" type="Script" id=4]
 
-
-
 [sub_resource type="CapsuleShape" id=1]
 height = 0.955663
 
 [sub_resource type="SphereShape" id=2]
 
-[node name="Pivot" type="Spatial"]
+[node name="Worm" type="Spatial"]
 script = ExtResource( 3 )
 
 [node name="Worm" type="KinematicBody" parent="."]

@@ -31,6 +31,7 @@ var curr_layer = -1
 func _ready():
     if not self_playing_agent:
         disable_sound_loops()
+        agent = Keyboard.new()
         #curr_layer = 0
         #_show_first_help_layer()
     _start()

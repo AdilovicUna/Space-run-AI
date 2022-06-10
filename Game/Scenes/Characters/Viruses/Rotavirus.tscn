@@ -4,8 +4,6 @@
 [ext_resource path="res://Scripts/Bugs and Viruses/Rotavirus.gd" type="Script" id=2]
 [ext_resource path="res://Scripts/Bugs and Viruses/RotavirusKinematic.gd" type="Script" id=3]
 
-
-
 [sub_resource type="Animation" id=1]
 resource_name = "Moving"
 length = 1.2
@@ -109,7 +107,7 @@ tracks/7/keys = {
 
 [sub_resource type="SphereShape" id=2]
 
-[node name="Pivot" type="Spatial"]
+[node name="Rotavirus" type="Spatial"]
 transform = Transform( 1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0, 0 )
 script = ExtResource( 2 )
 

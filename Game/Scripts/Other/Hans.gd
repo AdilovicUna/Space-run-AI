@@ -1,0 +1,201 @@
+extends KinematicBody
+
+export(PackedScene) var BulletZero
+export(PackedScene) var BulletOne
+
+const max_bullets_per_button_press = 8
+
+enum lvl {ONE, TWO, THREE}
+
+onready var game = get_parent()
+onready var ground = get_node("../Ground")
+onready var tunnels = get_node("../Tunnels") # Tunnels
+onready var tunnels_children = get_node("../Tunnels").get_children() # lvl1, lvl2, lvl3
+onready var score = get_node("../UI/Score")
+onready var end = get_node("../UI/End")
+onready var level = get_node("../UI/Level")
+onready var battery = get_node("../UI/Battery")
+onready var sick = get_node("../UI/Sick")
+
+var rand = RandomNumberGenerator.new()
+
+var move_tunnel = lvl.ONE
+var next_tunnel = lvl.TWO
+var curr_tunnel = lvl.ONE
+
+var speed = 50.0
+var total_translation = 1250 # original entrence to the level2 tunnel
+var x = rand.randi_range(1120,1190) # first trap for the next level will be here
+var new_trap = 3650 # start producing traps for the next level at this point
+var difference = 2500
+var show_level = 0 # used to measure how long level lable should be displayed
+var isShootingButtonPressed = false # indicates wheather Hans should shoot
+var can_shoot = true
+var bullets_in_air = 0
+var energy_token_exists = false
+
+func _physics_process(delta):
+    
+    # the game just started
+    if show_level == 0:
+        show_level_label()
+        
+    translate_tunnel_and_groud()
+    
+    # we passed one tunnel
+    if translation.x < total_translation: 
+        update_curr_tunnel()
+    
+    # Hans entered the new tunnel, hide the level label
+    if level.visible and abs(translation.x - show_level) > 75:
+        level.hide()        
+        
+    tunnels.delete_obstacle_until_x(curr_tunnel,translation.x - difference + 50)
+    
+    # create a trap in the next tunnel every 50 meters
+    if translation.x < new_trap:
+        create_new_trap()
+    
+    # updating score 
+    score._on_Meter_Passed()
+    
+    # Hans's movement
+    var velocity = Vector3.LEFT * speed
+    velocity = move_and_slide(velocity)
+    
+    check_collisions()
+    
+    # bugs and viruses need to move torwards Hans
+    # but not in the first tunnel    
+    tunnels.bug_virus_movement(delta, curr_tunnel)
+    
+    if isShootingButtonPressed:
+        shoot()
+
+func check_collisions():
+    for index in get_slide_count():
+        var collision = get_slide_collision(index)
+             
+        if collision.collider is KinematicBody:
+            # increase battery in Hans picks up an energy token
+            if "Token" in collision.collider.name:
+                if not game.self_playing_agent:
+                    $Sounds/pickUpTokenSound.play()
+                battery.value = 100
+            # decrease battery if Hans touches a bug
+            elif "Worm" in collision.collider.name or  "Ladybug" in collision.collider.name:
+                if not game.self_playing_agent:
+                    $Sounds/bugSqishSound.play()
+                battery.value -= 25
+            # make Hans sick if he touches rotavirus
+            elif "Rotavirus" in collision.collider.name and not sick.visible:
+                if not game.self_playing_agent:
+                    $Sounds/coughingSound.play()
+                sick.show()
+                $Sick_timer.start()
+            # End game if Hans touches the trap or bacteriophage virus  
+            # or a trap
+            # or rotavirus while he is sick                                           
+            else:	
+                game._game_over()
+                return   
+            collision.collider.queue_free()
+            return
+
+func create_new_trap():
+    new_trap -= 50
+    if x > -1200:
+        tunnels.create_one_obstacle(next_tunnel,x)
+        
+    # choose a place for the next obstacle
+    x -= rand.randi_range(70,90)
+
+func update_curr_tunnel():
+    # update cur_tunnel Hans is running through
+    total_translation -= 2500
+    next_tunnel = (next_tunnel + 1) % tunnels_children.size()
+    curr_tunnel = (curr_tunnel + 1) % tunnels_children.size()
+    
+    show_level_label()
+    
+    # increase speed after a full lap
+    if(curr_tunnel == lvl.ONE):
+        speed += 15.0
+        battery.update_timer()
+        print(speed)
+        
+    rand.randomize()
+    
+    # restart x
+    x = rand.randi_range(1120,1190)
+    
+    difference -= 2500
+
+func show_level_label():
+    #show which level we are approaching
+    show_level = translation.x
+    level.update_level()
+    level.show()
+    
+
+func translate_tunnel_and_groud():
+    # making tunnels (and ground) infinite by moving them forward
+    # after Hans passes them	
+    var tunnel = tunnels_children[move_tunnel]
+    if translation.x < tunnel.translation.x - 2000:				
+        tunnel.translation.x -= 7500    # move tunnel ahead (3x2500)
+        move_tunnel = (move_tunnel + 1) % tunnels_children.size()
+    if translation.x < ground.translation.x - 2000:
+        ground.translation.x -= 3000 # move ground ahead
+
+func get_current_tunnel():
+    return curr_tunnel
+  
+func switch_animation(move):
+    # toggle between Hans shooting and just running
+    if move:
+        isShootingButtonPressed = true
+        get_node("Pivot/Hans/Movement").play("HansShooting")
+    else:
+        isShootingButtonPressed = false
+        bullets_in_air = 0        
+        get_node("Pivot/Hans/Movement").play("HansRunning") 
+
+func shoot():
+    if bullets_in_air < max_bullets_per_button_press and can_shoot and game.shooting_enabled:
+        
+        # play shooting sound
+        if not game.self_playing_agent:
+            $Sounds/shootSound.play()
+        
+        # create bullet instance
+        var new_bullet = null
+        
+        if rand.randi_range(0,1) == 0:
+            new_bullet = BulletZero.instance()
+        else:
+            new_bullet = BulletOne.instance()
+            
+        # hide all csg shapes when the window isn't visible
+        if not VisualServer.render_loop_enabled:
+            game.hide_csg_shapes(new_bullet)
+            
+        tunnels_children[curr_tunnel].add_child(new_bullet)
+        new_bullet.global_transform = $Pivot/Hans/Muzzle.global_transform
+        
+        bullets_in_air += 1
+        can_shoot = false
+        
+        # Hans looses 1% battery for every bullet
+        battery.decrease_value()
+        
+        $Shooting_timer.start()        
+
+
+func _on_shooting_timer_timeout():
+    can_shoot = true
+
+
+func _on_Sick_timer_timeout():
+    sick.hide()
+
