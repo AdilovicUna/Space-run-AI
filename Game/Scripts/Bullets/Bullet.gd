@@ -1,6 +1,6 @@
 extends Spatial
 
-export var speed = 100
+export var SPEED = 100
 onready var sound = get_parent().get_node("../../Hans/Sounds/ShootSomethingDownSound")
 onready var score = get_parent().get_node("../../UI/Score")
 onready var game = get_parent().get_parent().get_parent()
@@ -10,7 +10,7 @@ var timer = 0
 
 func _physics_process(delta):
     # give bullet speed and direction
-    global_translate(Vector3.LEFT * speed * delta)
+    global_translate(Vector3.LEFT * SPEED * delta)
     
     # remove the bullet form the scene after certian time
     timer += delta

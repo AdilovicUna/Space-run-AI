@@ -15,6 +15,8 @@ var obstacle_number = 0
 
 const DEVIATION = 0.01
 const ROTATE_SPEED = 2
+const TRAP_RANGE_FROM = 70
+const TRAP_RANGE_TO = 90
 
 # IMPORTANT!
 # agent's function move returns a list of 2 elements:
@@ -42,7 +44,7 @@ func create_first_level_traps(tunnel):
     var x = 1200
     for n in num_of_traps:
         # add space between traps
-        x -= rand.randi_range(70,90)
+        x -= rand.randi_range(TRAP_RANGE_FROM,TRAP_RANGE_TO)
         # check if the trap will be inside the tunnel
         # if not, break
         if x < -1200:
@@ -99,7 +101,7 @@ func pick_scene(level):
     elif scenes["virus_scenes"].size() > 0 and level == hans.lvl.THREE and (r == 0 or scene == []):
         scene = scenes["virus_scenes"]
     obstacle_number += 1
-    
+        
     # if all elements that would usually be in that tunnel aren't enabeled, then we pick randomly out of remaining ones
     while scene.size() == 0:
         var s = scenes.keys()

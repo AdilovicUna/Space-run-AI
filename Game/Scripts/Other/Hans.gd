@@ -24,12 +24,12 @@ var next_tunnel = lvl.TWO
 var curr_tunnel = lvl.ONE
 
 var speed = 50.0
-var total_translation = 1250 # original entrence to the level2 tunnel
+var total_translation = 1250 # original entrance to the level2 tunnel
 var x = rand.randi_range(1120,1190) # first trap for the next level will be here
 var new_trap = 3650 # start producing traps for the next level at this point
 var difference = 2500
 var show_level = 0 # used to measure how long level lable should be displayed
-var isShootingButtonPressed = false # indicates wheather Hans should shoot
+var isShootingButtonPressed = false # indicates whether Hans should shoot
 var can_shoot = true
 var bullets_in_air = 0
 var energy_token_exists = false
@@ -40,7 +40,7 @@ func _physics_process(delta):
     if show_level == 0:
         show_level_label()
         
-    translate_tunnel_and_groud()
+    translate_tunnel_and_ground()
     
     # we passed one tunnel
     if translation.x < total_translation: 
@@ -108,7 +108,7 @@ func create_new_trap():
         tunnels.create_one_obstacle(next_tunnel,x)
         
     # choose a place for the next obstacle
-    x -= rand.randi_range(70,90)
+    x -= rand.randi_range(tunnels.TRAP_RANGE_FROM,tunnels.TRAP_RANGE_TO)
 
 func update_curr_tunnel():
     # update cur_tunnel Hans is running through
@@ -138,7 +138,7 @@ func show_level_label():
     level.show()
     
 
-func translate_tunnel_and_groud():
+func translate_tunnel_and_ground():
     # making tunnels (and ground) infinite by moving them forward
     # after Hans passes them	
     var tunnel = tunnels_children[move_tunnel]
@@ -186,7 +186,7 @@ func shoot():
         bullets_in_air += 1
         can_shoot = false
         
-        # Hans looses 1% battery for every bullet
+        # Hans loses 1% battery for every bullet
         battery.decrease_value()
         
         $Shooting_timer.start()        
