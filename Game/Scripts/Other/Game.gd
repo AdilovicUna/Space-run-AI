@@ -11,16 +11,19 @@ onready var cont = get_node("UI/Help/Continue")
 onready var prev = get_node("UI/Help/Previous")
 onready var battery = get_node("UI/Battery")
 onready var timer = get_node("UI/Battery/DropTimer")
+onready var state = get_node("UI/State")
 
 var traps = ["TrapI","TrapO", "TrapMovingI", "TrapX", "TrapWalls", "TrapHex", "TrapHexO", "TrapBalls", "TrapTriangles", "TrapHalfHex"]
 var bugs = ["Worm", "LadybugFlying", "LadybugWalking"]
-var viruses = ["Rotavirus", "Bacteriophage"]
+var viruses = ["rotavirus", "Bacteriophage"]
 var tokens = ["EnergyToken"]
 
 var agent
 var tunnel = 0
 var self_playing_agent = false
 var shooting_enabled = true
+var dists
+var rots
 
 var num_of_ticks = 0
 
@@ -67,6 +70,12 @@ func set_env(parameters):
     
 func set_shooting(shooting):
     shooting_enabled = shooting
+    
+func set_dists(d):
+    dists = d
+
+func set_rots(r):
+    rots = r
 
 func disable_sound_loops():
     $UI/Help/Continue/clickSound.stream.loop = false

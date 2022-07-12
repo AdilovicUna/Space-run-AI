@@ -16,6 +16,7 @@ onready var end = get_node("../UI/End")
 onready var level = get_node("../UI/Level")
 onready var battery = get_node("../UI/Battery")
 onready var sick = get_node("../UI/Sick")
+onready var state = get_node("../UI/State")
 
 var rand = RandomNumberGenerator.new()
 
@@ -73,6 +74,29 @@ func _physics_process(delta):
         shoot()
         
     game.num_of_ticks += 1
+
+    state.update_state(calc_dist(),calc_rot(),calc_type())
+
+func calc_dist():
+    # this will give us a number between 0 and 100
+    # we have to flip the number (eg. 8 should be 92 and vice versa)
+    var real_dist = -((int(translation.x - difference) % 100) - 100)
+    if real_dist == 100:
+        real_dist = 0
+    # now we determine which state we are in
+    # eg. game.dists = 4, 100/4 = 25
+    # possible dists are >0, >25, >50, >75
+    # suppose real_dist is 60, our state should be >50
+    # 60 div 25 = 2
+    # 25 * 2 = 50
+    var states = 100 / game.dists
+    return states * (real_dist / states)
+
+func calc_rot():
+    return 1
+
+func calc_type():
+    return 1
 
 func check_collisions():
     for index in get_slide_count():

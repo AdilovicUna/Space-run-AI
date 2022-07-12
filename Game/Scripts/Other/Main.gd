@@ -9,6 +9,8 @@ argument options:
     - env=[string] : list of obstacles that will be chosen in the game 
         (subset of) [traps, bugs, viruses, tokens, I, O, MovingI, X, Walls, Hex, HexO, Balls, Triangles, HalfHex]
     - shooting=bool : enable or disable shooting [enabled, disabled]
+    - dists=int : number of states in a 100-meter interval
+    - rots=int : number of states in 360 degrees rotation
     - options : displays options
 """
 
@@ -18,11 +20,14 @@ var game
 var all_agents = ["Keyboard", "Static", "Random"]
 var all_env = ["traps", "bugs", "viruses", "tokens", "I", "O", "MovingI", "X", "Walls", "Hex", "HexO", "Balls", "Triangles", "HalfHex"]
 
+# all parameters and their default values
 var n = 100
 var agent = "Keyboard"
 var tunnel = 1
 var env = []
 var shooting = true
+var dists = 1
+var rots = 1
 
 var agent_inst = Keyboard.new()
 
@@ -54,8 +59,8 @@ func _ready():
     if set_param(args) == false:
         display_options()
     else:
-        instance_agent()
         start = OS.get_ticks_usec()
+        instance_agent()
         play_game()
 
 func play_game():     
@@ -79,6 +84,8 @@ func set_param_in_game():
     game.set_tunnel(tunnel)
     game.set_env(env)
     game.set_shooting(shooting)
+    game.set_dists(dists)
+    game.set_rots(rots)
 
 func instance_agent():
     # if there is no window, static agent is default
@@ -101,25 +108,32 @@ func set_param(param):
         paramSet = true
         # modify options based on args
         for key in param:
-            if key == "n":
-                n = int(param[key])
-            if key == "agent":
-                agent = param[key]
-            if key == "tunnel":
-                tunnel = int(param[key])
-            if key == "env":
-                env = param[key].split(",")
-            if key == "shooting":
-                match param[key]:
-                    "enabled" :
-                        shooting = true
-                    "disabled" :
-                        shooting = false
-                    _:
-                        return false
+            match key:
+                "n":
+                    n = int(param[key])
+                "agent":
+                    agent = param[key]
+                "tunnel":
+                    tunnel = int(param[key])
+                "env":
+                    env = param[key].split(",")
+                "shooting":
+                    match param[key]:
+                        "enabled" :
+                            shooting = true
+                        "disabled" :
+                            shooting = false
+                        _:
+                            return false
+                "dists":
+                    dists = int(param[key])
+                "rots":
+                    rots = int(param[key])
                         
         #check if everything is valid
-        if n < 0 or not agent in all_agents or tunnel < 0 or tunnel > 3 or not check_env():
+        if (n < 0 or not agent in all_agents or 
+            tunnel < 0 or tunnel > 3 or not check_env() or
+            dists < 0 or rots < 0):
             return false   
         
 func check_env():

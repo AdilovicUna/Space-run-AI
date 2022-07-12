@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=2]
+[gd_scene load_steps=48 format=2]
 
 [ext_resource path="res://Scenes/Characters/Hans/Hans.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Tunnels/level2.tres" type="Material" id=2]
@@ -30,6 +30,7 @@
 [ext_resource path="res://Textures/help/movement.png" type="Texture" id=28]
 [ext_resource path="res://Sounds/menu_music.ogg" type="AudioStream" id=29]
 [ext_resource path="res://Textures/help/rotavirus.png" type="Texture" id=30]
+[ext_resource path="res://Scenes/Other/State.gd" type="Script" id=31]
 
 [sub_resource type="SpatialMaterial" id=1]
 
@@ -348,9 +349,9 @@ __meta__ = {
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -488.0
-margin_top = 14.0
+margin_top = 11.7551
 margin_right = 488.0
-margin_bottom = 61.0
+margin_bottom = 58.7551
 custom_colors/font_color = Color( 0.411765, 0.764706, 0.941176, 0.909804 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 text = "Score: 0.0"
@@ -1130,6 +1131,25 @@ margin_right = 132.818
 margin_bottom = 150.0
 rect_scale = Vector2( 0.7, 0.7 )
 texture = ExtResource( 26 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="State" type="Label" parent="UI"]
+anchor_left = 0.999
+anchor_top = 0.005
+anchor_right = 0.999
+anchor_bottom = 0.005
+margin_left = -342.976
+margin_top = -2.38419e-07
+margin_right = -13.9761
+margin_bottom = 55.0
+custom_colors/font_color = Color( 0.411765, 0.764706, 0.941176, 0.909804 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+text = "[d>0,r=0,t=0]"
+align = 2
+valign = 1
+script = ExtResource( 31 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
