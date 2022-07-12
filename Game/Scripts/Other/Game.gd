@@ -15,7 +15,7 @@ onready var state = get_node("UI/State")
 
 var traps = ["TrapI","TrapO", "TrapMovingI", "TrapX", "TrapWalls", "TrapHex", "TrapHexO", "TrapBalls", "TrapTriangles", "TrapHalfHex"]
 var bugs = ["Worm", "LadybugFlying", "LadybugWalking"]
-var viruses = ["rotavirus", "Bacteriophage"]
+var viruses = ["Rotavirus", "Bacteriophage"]
 var tokens = ["EnergyToken"]
 
 var agent

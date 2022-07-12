@@ -79,10 +79,13 @@ func _physics_process(delta):
 
 func calc_dist():
     # this will give us a number between 0 and 100
+    var real_dist = int(translation.x - difference) % 100
+    
     # we have to flip the number (eg. 8 should be 92 and vice versa)
-    var real_dist = -((int(translation.x - difference) % 100) - 100)
+    real_dist = -(real_dist - 100)
     if real_dist == 100:
         real_dist = 0
+        
     # now we determine which state we are in
     # eg. game.dists = 4, 100/4 = 25
     # possible dists are >0, >25, >50, >75
