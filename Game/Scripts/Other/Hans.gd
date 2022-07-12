@@ -96,7 +96,13 @@ func calc_dist():
     return states * (real_dist / states)
 
 func calc_rot():
-    return 1
+    # get the actual rotation
+    # note: rotation_degrees returns a number [-180,180]
+    var real_rot = int(tunnels_children[curr_tunnel].rotation_degrees.x) + 180
+    
+    # this step is similar as in calc_dist()
+    var states = 360 / game.rots
+    return (states * (real_rot / states)) - 180
 
 func calc_type():
     return 1

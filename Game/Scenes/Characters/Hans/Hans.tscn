@@ -12,6 +12,8 @@
 [ext_resource path="res://Sounds/bug_sqish.wav" type="AudioStream" id=10]
 [ext_resource path="res://Scripts/Other/Hans.gd" type="Script" id=11]
 
+
+
 [sub_resource type="CapsuleShape" id=2]
 
 [node name="Hans" type="KinematicBody"]
