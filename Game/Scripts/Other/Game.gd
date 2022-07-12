@@ -11,8 +11,6 @@ onready var cont = get_node("UI/Help/Continue")
 onready var prev = get_node("UI/Help/Previous")
 onready var battery = get_node("UI/Battery")
 onready var timer = get_node("UI/Battery/DropTimer")
-onready var pause = get_node("PauseAndResume/Pause")
-onready var pause_popup = get_node("PauseAndResume/Pause_popup")
 
 var traps = ["TrapI","TrapO", "TrapMovingI", "TrapX", "TrapWalls", "TrapHex", "TrapHexO", "TrapBalls", "TrapTriangles", "TrapHalfHex"]
 var bugs = ["Worm", "LadybugFlying", "LadybugWalking"]
@@ -71,8 +69,6 @@ func set_shooting(shooting):
     shooting_enabled = shooting
 
 func disable_sound_loops():
-    $PauseAndResume/Pause_popup/Resume/clickSound.stream.loop = false
-    $PauseAndResume/Pause/clickSound.stream.loop = false
     $UI/Help/Continue/clickSound.stream.loop = false
     $UI/Help/layer1/Skip/clickSound.stream.loop = false
     $UI/Help/layer11/Start/clickSound.stream.loop = false
@@ -83,7 +79,6 @@ func _start():
     $Sounds/menuBackgroundSound.stop()    
     help.hide() 
     score.show()
-    pause.show()
     battery.show()
     timer.start()
     get_tree().paused = false 
@@ -124,7 +119,6 @@ func _show_first_help_layer():
     $Sounds/gameBackgroundSound.stop()
     get_tree().paused = true        
     score.hide()
-    pause.hide()
     battery.hide()
     timer.stop()
     help.show()
@@ -172,31 +166,7 @@ func _game_over():
         yield(get_tree().create_timer(1.2), "timeout")
         
         end_children[2].show()
-       
-func _on_Resume_pressed():
-    if not self_playing_agent:    
-        $Sounds/menuBackgroundSound.stop()
-        $Sounds/gameBackgroundSound.stream_paused = false
-        $PauseAndResume/Pause_popup/Resume/clickSound.play()
-    pause.show()
-    score.show()
-    battery.show()
-    timer.start()    
-    pause_popup.hide()
-    get_tree().paused = false
 
-func _on_Pause_pressed():
-    if not self_playing_agent:    
-        $Sounds/gameBackgroundSound.stream_paused = true
-        $Sounds/menuBackgroundSound.play()    
-        $PauseAndResume/Pause/clickSound.play()
-        
-    pause_popup.show()
-    pause.hide()
-    score.hide()
-    battery.hide()
-    timer.stop()    
-    get_tree().paused = true
 
 func _on_Continue_pressed():
     if not self_playing_agent:
