@@ -31,6 +31,10 @@ var scores_count = 0
 
 var paramSet = false
 
+var start
+var end
+var num_of_ticks = 0.0
+
 func _ready():
     # get args
     var unparsed_args = OS.get_cmdline_args()
@@ -51,6 +55,7 @@ func _ready():
         display_options()
     else:
         instance_agent()
+        start = OS.get_ticks_usec()
         play_game()
 
 func play_game():     
@@ -65,6 +70,7 @@ func play_game():
         game.connect("game_finished", self, "on_game_finished")
         add_child(game)
     else:
+        end = OS.get_ticks_usec()
         print_avg_score()
         get_tree().quit()        
 
@@ -131,9 +137,12 @@ func print_score(score):
 
 func print_avg_score():
     print("Average score: %.1f" % [scores_sum / scores_count])
-    print("Average time per tick: ", Performance.get_monitor(2))
+    
+    # Note: we have to turn the microseconds to seconds, thus we devide by 1_000_000
+    print("Average time per tick: ", (end - start)/(num_of_ticks * 1_000_000))
         
-func on_game_finished(score):
+func on_game_finished(score, ticks):
+    num_of_ticks += ticks
     add_score(score)
     print_score(score)
     play_game()

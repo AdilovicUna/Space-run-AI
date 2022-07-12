@@ -24,6 +24,8 @@ var tunnel = 0
 var self_playing_agent = false
 var shooting_enabled = true
 
+var num_of_ticks = 0
+
 # curr_layer cannot be 0 unless the Help menu is actually shown
 # because of the End.gd script conditions
 var curr_layer = -1
@@ -154,7 +156,7 @@ func _game_over():
     battery.hide()
     timer.stop()
     if self_playing_agent:
-        emit_signal("game_finished", score.get_score())
+        emit_signal("game_finished", score.get_score(), num_of_ticks)
         queue_free()
     else:
         score._display_Final_Score()

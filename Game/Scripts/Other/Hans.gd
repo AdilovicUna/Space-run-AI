@@ -71,6 +71,8 @@ func _physics_process(delta):
     
     if isShootingButtonPressed:
         shoot()
+        
+    game.num_of_ticks += 1
 
 func check_collisions():
     for index in get_slide_count():
