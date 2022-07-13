@@ -74,8 +74,9 @@ func _physics_process(delta):
         shoot()
         
     game.num_of_ticks += 1
-
+    
     state.update_state(calc_dist(),calc_rot(),calc_type())
+    
 
 func calc_dist():
     # this will give us a number between 0 and 100
@@ -107,7 +108,23 @@ func calc_rot():
     return states * (real_rot / states)
     
 func calc_type():
-    return 1
+    # find out what is the next trap
+    var pos = translation.x - difference
+    var type
+    for obstacle in tunnels_children[curr_tunnel].get_children():
+        if (not "light" in obstacle.name and not "torus" in obstacle.name and 
+            not "Bullet" in obstacle.name):
+            if obstacle.translation.x <= pos:
+                type = obstacle.name
+                break
+                
+    # clean up the string we got
+    type = type.substr(type.find('@'),type.find_last('@')).replace('@','')
+    if "Trap" in type:
+        return type.trim_prefix("Trap")
+    if type == "":
+        return 1
+    return game.short_names[type]
 
 func check_collisions():
     for index in get_slide_count():

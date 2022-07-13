@@ -18,6 +18,9 @@ var bugs = ["Worm", "LadybugFlying", "LadybugWalking"]
 var viruses = ["Rotavirus", "Bacteriophage"]
 var tokens = ["EnergyToken"]
 
+var short_names = {"Worm" : "W", "LadybugFlying" : "LBF", "LadybugWalking" : "LBW",
+                    "Rotavirus" : "R", "Bacteriophage" : "B"}
+
 var agent
 var tunnel = 0
 var self_playing_agent = false

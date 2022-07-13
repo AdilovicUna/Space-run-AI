@@ -121,7 +121,7 @@ func delete_obstacle_until_x(level,x):
             if obstacle.translation.x > x:
                 obstacle.queue_free()
             else:
-                return;
+                return
 
 func bug_virus_movement(delta, curr_tunnel):
     var tunnels = get_children()
