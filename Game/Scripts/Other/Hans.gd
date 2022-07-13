@@ -122,8 +122,10 @@ func calc_type():
     type = type.substr(type.find('@'),type.find_last('@')).replace('@','')
     if "Trap" in type:
         return type.trim_prefix("Trap")
-    if type == "":
+        
+    if type == "": # this should never be the case
         return 1
+        
     return game.short_names[type]
 
 func check_collisions():
