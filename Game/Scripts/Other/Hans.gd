@@ -102,7 +102,7 @@ func calc_rot():
     
     # this step is similar as in calc_dist()
     var states = 360 / game.rots
-    return (states * (real_rot / states)) - 180
+    return states * (real_rot / states)
 
 func calc_type():
     return 1
