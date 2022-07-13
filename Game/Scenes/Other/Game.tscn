@@ -30,7 +30,8 @@
 [ext_resource path="res://Textures/help/movement.png" type="Texture" id=28]
 [ext_resource path="res://Sounds/menu_music.ogg" type="AudioStream" id=29]
 [ext_resource path="res://Textures/help/rotavirus.png" type="Texture" id=30]
-[ext_resource path="res://Scenes/Other/State.gd" type="Script" id=31]
+[ext_resource path="res://Scripts/Other/State.gd" type="Script" id=31]
+
 
 [sub_resource type="SpatialMaterial" id=1]
 

@@ -86,29 +86,29 @@ func calc_dist():
     if real_dist == 100:
         real_dist = 0
         
-    # now we determine which state we are in
+    return get_state(real_dist)
+
+func calc_rot():
+    # get the actual rotation
+    # note: rotation_degrees returns a number [-180,180]
+    var real_rot = int(tunnels_children[curr_tunnel].rotation_degrees.x) + 180
+    
+    return get_state(real_rot)
+    
+func calc_type():
+    return 1
+    
+func get_state(real):
+    # we determine which state we are in
     # eg. game.dists = 4, 100/4 = 25 
     # (we need to round up torwards the ceiling 
     # or otherwise we will have an extra state 
     # for the numbers not divisible by 100)
     # possible dists are >0, >25, >50, >75
-    # suppose real_dist is 60, our state should be >50
-    # 60 div 25 = 2
-    # 25 * 2 = 50
-    var states = int(ceil(100.0 / game.dists))
-    return states * (real_dist / states)
-
-func calc_rot():
-    # get the actual rotationcd
-    # note: rotation_degrees returns a number [-180,180]
-    var real_rot = int(tunnels_children[curr_tunnel].rotation_degrees.x) + 180
-    
-    # this step is similar as in calc_dist()
+    # suppose real is 60, our state should be >50
+    # 60 div 25 = 2, 25 * 2 = 50
     var states = int(ceil(360.0 / game.rots))
-    return states * (real_rot / states)
-
-func calc_type():
-    return 1
+    return states * (real / states)
 
 func check_collisions():
     for index in get_slide_count():

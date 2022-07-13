@@ -24,7 +24,7 @@ const TRAP_RANGE_TO = 90
 # - second element decides if Hans should shoot : 1 - yes, 0 - no
 
 func _physics_process(delta):
-    var move = game.agent.move()
+    var move = game.agent.move(game.state.get_state(), game.score.get_score())
     #rotates all children of "traps"
     if move[0] == 1:
         var tunnel = get_child(hans.get_current_tunnel())

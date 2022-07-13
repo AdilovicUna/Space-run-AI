@@ -1,6 +1,6 @@
 class_name Keyboard
     
-func move():
+func move(state, score):
     var result = [0,0]
     if Input.is_action_pressed("right"):
         result[0] = 1
