@@ -72,6 +72,7 @@ func play_game():
         n -= 1
         game = game_scene.instance()
         set_param_in_game()
+        game.agent.start_game()        
         game.connect("game_finished", self, "on_game_finished")
         add_child(game)
     else:
@@ -156,8 +157,12 @@ func print_avg_score():
     print("Average time per tick: ", (end - start)/(num_of_ticks * 1_000_000))
         
 func on_game_finished(score, ticks):
+    # calculations
     num_of_ticks += ticks
     add_score(score)
+    # finish up
     print_score(score)
+    game.agent.end_game(score)        
+    # start a new game
     play_game()
     

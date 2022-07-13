@@ -11,3 +11,9 @@ func move(state, score):
         result[1] = 1
         
     return result
+
+func start_game():
+    pass
+
+func end_game(final_score):
+    pass
