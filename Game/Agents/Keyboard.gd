@@ -1,6 +1,6 @@
 class_name Keyboard
     
-func move(state, score):
+func move(_state, _score):
     var result = [0,0]
     if Input.is_action_pressed("right"):
         result[0] = 1
@@ -15,5 +15,5 @@ func move(state, score):
 func start_game():
     pass
 
-func end_game(final_score):
+func end_game(_final_score):
     pass
