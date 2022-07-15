@@ -114,10 +114,9 @@ func calc_type():
     # find out what is the next trap
     var pos = translation.x - curr_tunnel_x
     var type
-    var tunnel_no = curr_tunnel
     var found = false
     
-    for obstacle in tunnels_children[tunnel_no].get_children():
+    for obstacle in tunnels_children[curr_tunnel].get_children():
         if (not "light" in obstacle.name and not "torus" in obstacle.name and 
             not "Bullet" in obstacle.name):
             if obstacle.translation.x <= pos:
@@ -128,8 +127,7 @@ func calc_type():
                 break
        
     if !found:
-        tunnel_no = (tunnel_no + 1) % tunnels_children.size()
-        for obstacle in tunnels_children[tunnel_no].get_children():
+        for obstacle in tunnels_children[next_tunnel].get_children():
             if (not "light" in obstacle.name and not "torus" in obstacle.name and 
                 not "Bullet" in obstacle.name):
                     type = obstacle.name
