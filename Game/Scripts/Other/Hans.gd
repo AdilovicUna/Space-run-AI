@@ -25,16 +25,16 @@ var next_tunnel = lvl.TWO
 var curr_tunnel = lvl.ONE
 
 var speed = 50.0
-var total_translation = 1250 # original entrance to the level2 tunnel
-var x = rand.randi_range(1120,1190) # first trap for the next level will be here
+var next_trap_pos = rand.randi_range(1120,1190) # first trap for the next level will be here
 var new_trap = 3650 # start producing traps for the next level at this point
-var difference = 2500
+var curr_tunnel_x = 2500
 var show_level = 0 # used to measure how long level lable should be displayed
 var isShootingButtonPressed = false # indicates whether Hans should shoot
 var can_shoot = true
 var bullets_in_air = 0
 var energy_token_exists = false
 var next_trap_posX = 0.0
+var next_trap_rotX = 0.0
 
 func _physics_process(delta):
     
@@ -45,14 +45,14 @@ func _physics_process(delta):
     translate_tunnel_and_ground()
     
     # we passed one tunnel
-    if translation.x < total_translation: 
+    if translation.x < (curr_tunnel_x - 1250): 
         update_curr_tunnel()
     
     # Hans entered the new tunnel, hide the level label
     if level.visible and abs(translation.x - show_level) > 75:
         level.hide()        
         
-    tunnels.delete_obstacle_until_x(curr_tunnel,translation.x - difference + 50)
+    tunnels.delete_obstacle_until_x(curr_tunnel,translation.x - curr_tunnel_x + 50)
     
     # create a trap in the next tunnel every 50 meters
     if translation.x < new_trap:
@@ -84,7 +84,7 @@ func _physics_process(delta):
 
 func calc_dist():
     # this will give us a number until the next trap
-    var real_dist = int(translation.x - difference - next_trap_posX)
+    var real_dist = int(translation.x - curr_tunnel_x - next_trap_posX)
  
     # we determine which state we are in
     # eg. game.dists = 4, 100/4 = 25 
@@ -103,7 +103,8 @@ func calc_dist():
 func calc_rot():
     # get the actual rotation
     # note: rotation_degrees returns a number [-180,180]
-    var real_rot = int(tunnels_children[curr_tunnel].rotation_degrees.x) + 180
+    var real_rot = int(tunnels_children[curr_tunnel].rotation_degrees.x + 
+                        next_trap_rotX) + 180
     
     # similar to calc_dist()
     var states = int(ceil(360.0 / game.rots))
@@ -111,7 +112,7 @@ func calc_rot():
     
 func calc_type():
     # find out what is the next trap
-    var pos = translation.x - difference
+    var pos = translation.x - curr_tunnel_x
     var type
     var tunnel_no = curr_tunnel
     var found = false
@@ -123,6 +124,7 @@ func calc_type():
                 found = true
                 type = obstacle.name
                 next_trap_posX = obstacle.translation.x
+                next_trap_rotX = obstacle.rotation_degrees.x
                 break
        
     if !found:
@@ -132,6 +134,7 @@ func calc_type():
                 not "Bullet" in obstacle.name):
                     type = obstacle.name
                     next_trap_posX = obstacle.translation.x
+                    next_trap_rotX = obstacle.rotation_degrees.x
                     break
                     
     # clean up the string we got
@@ -174,15 +177,14 @@ func check_collisions():
 
 func create_new_trap():
     new_trap -= 50
-    if x > -1200:
-        tunnels.create_one_obstacle(next_tunnel,x)
+    if next_trap_pos > -1200:
+        tunnels.create_one_obstacle(next_tunnel,next_trap_pos)
         
     # choose a place for the next obstacle
-    x -= rand.randi_range(tunnels.TRAP_RANGE_FROM,tunnels.TRAP_RANGE_TO)
+    next_trap_pos -= rand.randi_range(tunnels.TRAP_RANGE_FROM,tunnels.TRAP_RANGE_TO)
 
 func update_curr_tunnel():
     # update cur_tunnel Hans is running through
-    total_translation -= 2500
     next_tunnel = (next_tunnel + 1) % tunnels_children.size()
     curr_tunnel = (curr_tunnel + 1) % tunnels_children.size()
     
@@ -195,10 +197,10 @@ func update_curr_tunnel():
         
     rand.randomize()
     
-    # restart x
-    x = rand.randi_range(1120,1190)
+    # restart next_trap_pos
+    next_trap_pos = rand.randi_range(1120,1190)
     
-    difference -= 2500
+    curr_tunnel_x -= 2500
 
 func show_level_label():
     #show which level we are approaching
