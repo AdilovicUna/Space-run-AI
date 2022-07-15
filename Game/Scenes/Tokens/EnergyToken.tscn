@@ -47,7 +47,7 @@ tracks/1/keys = {
 
 [sub_resource type="CylinderShape" id=7]
 
-[node name="Token" type="Spatial"]
+[node name="EnergyToken" type="Spatial"]
 
 [node name="EnergyToken" type="KinematicBody" parent="."]
 transform = Transform( 6, 0, 0, 0, 6, 0, 0, 0, 6, 0, -10, 0 )

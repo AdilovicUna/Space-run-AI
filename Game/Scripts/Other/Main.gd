@@ -136,6 +136,8 @@ func set_param(param):
             tunnel < 0 or tunnel > 3 or not check_env() or
             dists < 0 or rots < 0):
             return false   
+            
+    return true
         
 func check_env():
     for elem in env:

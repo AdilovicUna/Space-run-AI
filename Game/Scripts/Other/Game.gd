@@ -19,7 +19,7 @@ var short_names = {"Worm" : "W", "LadybugFlying" : "LBF", "LadybugWalking" : "LB
                     "Rotavirus" : "R", "Bacteriophage" : "B", "EnergyToken" : "ET"}
 
 var agent
-var tunnel = 0
+var tunnel = 0 
 var self_playing_agent = false
 var shooting_enabled = true
 var dists

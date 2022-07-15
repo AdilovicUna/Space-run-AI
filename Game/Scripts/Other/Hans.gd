@@ -34,6 +34,7 @@ var isShootingButtonPressed = false # indicates whether Hans should shoot
 var can_shoot = true
 var bullets_in_air = 0
 var energy_token_exists = false
+var next_trap_posX = 0.0
 
 func _physics_process(delta):
     
@@ -75,18 +76,16 @@ func _physics_process(delta):
         
     game.num_of_ticks += 1
     
-    state.update_state(calc_dist(),calc_rot(),calc_type())
+    # type needs to be calculated before 
+    # so we know where the next trap is on x axis
+    var type = calc_type()
+    state.update_state(calc_dist(),calc_rot(),type)
     
 
 func calc_dist():
-    # this will give us a number between 0 and 100
-    var real_dist = int(translation.x - difference) % 100
-    
-    # we have to flip the number (eg. 8 should be 92 and vice versa)
-    real_dist = -(real_dist - 100)
-    if real_dist == 100:
-        real_dist = 0
-        
+    # this will give us a number until the next trap
+    var real_dist = int(translation.x - difference - next_trap_posX)
+ 
     # we determine which state we are in
     # eg. game.dists = 4, 100/4 = 25 
     # (we need to round up torwards the ceiling 
@@ -96,7 +95,10 @@ func calc_dist():
     # suppose real_dist is 60, our state should be >50
     # 60 div 25 = 2, 25 * 2 = 50
     var states = int(ceil(100.0 / game.dists))
-    return states * (real_dist / states)
+    var result = states * (real_dist / states)
+    if result < 0 or result > 99:
+        result = states * (game.dists - 1)
+    return result
 
 func calc_rot():
     # get the actual rotation
@@ -111,21 +113,33 @@ func calc_type():
     # find out what is the next trap
     var pos = translation.x - difference
     var type
-    for obstacle in tunnels_children[curr_tunnel].get_children():
+    var tunnel_no = curr_tunnel
+    var found = false
+    
+    for obstacle in tunnels_children[tunnel_no].get_children():
         if (not "light" in obstacle.name and not "torus" in obstacle.name and 
             not "Bullet" in obstacle.name):
             if obstacle.translation.x <= pos:
+                found = true
                 type = obstacle.name
+                next_trap_posX = obstacle.translation.x
                 break
-                
+       
+    if !found:
+        tunnel_no = (tunnel_no + 1) % tunnels_children.size()
+        for obstacle in tunnels_children[tunnel_no].get_children():
+            if (not "light" in obstacle.name and not "torus" in obstacle.name and 
+                not "Bullet" in obstacle.name):
+                    type = obstacle.name
+                    next_trap_posX = obstacle.translation.x
+                    break
+                    
     # clean up the string we got
-    type = type.substr(type.find('@'),type.find_last('@')).replace('@','')
+    if '@' in type:
+        type = type.substr(type.find('@'),type.find_last('@')).replace('@','')
     if "Trap" in type:
         return type.trim_prefix("Trap")
-        
-    if type == "": # this should never be the case
-        return 1
-        
+
     return game.short_names[type]
 
 func check_collisions():
@@ -178,7 +192,6 @@ func update_curr_tunnel():
     if(curr_tunnel == lvl.ONE):
         speed += 15.0
         battery.update_timer()
-        print(speed)
         
     rand.randomize()
     
