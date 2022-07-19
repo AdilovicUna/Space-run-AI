@@ -5,13 +5,15 @@ albedo_color = Color( 0.411765, 0.764706, 0.941176, 0.909804 )
 
 [sub_resource type="BoxShape" id=2]
 
-[node name="TrapI" type="KinematicBody"]
+[node name="TrapI" type="Spatial"]
+
+[node name="TrapI" type="KinematicBody" parent="."]
 transform = Transform( -2.82187e-06, 4.07302e-07, 1, 10, 4.33013, 0, -17.3205, 2.5, -1.62921e-07, 0, 0, 0 )
 collision_layer = 2
 
-[node name="CSGBox" type="CSGBox" parent="."]
+[node name="CSGBox" type="CSGBox" parent="TrapI"]
 collision_layer = 2
 material = SubResource( 1 )
 
-[node name="CollisionShape" type="CollisionShape" parent="."]
+[node name="CollisionShape" type="CollisionShape" parent="TrapI"]
 shape = SubResource( 2 )

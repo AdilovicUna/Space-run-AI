@@ -24,51 +24,53 @@ points = PoolVector3Array( 0.593526, -0.470234, 0.174239, 0.59353, 0.480511, 0.1
 [sub_resource type="ConvexPolygonShape" id=8]
 points = PoolVector3Array( 0.100671, -0.515684, -0.157857, 0.100671, -0.515684, 0.157814, 0.100671, 0.525969, -0.157857, 0.100671, 0.525969, 0.157814, 0.132329, -0.515684, -0.157857, 0.132329, 0.525969, -0.157857, 0.542585, -0.515684, 0.189429, 0.542585, 0.525969, 0.189429, 0.562391, 0.5, -0.119193, 0.567067, -0.5, -0.121998, 0.574197, -0.515684, 0.189429, 0.574197, 0.525969, 0.189429 )
 
-[node name="TrapO" type="KinematicBody"]
+[node name="TrapO" type="Spatial"]
+
+[node name="TrapO" type="KinematicBody" parent="."]
 transform = Transform( -3.58426e-06, 1, -9.61651e-07, 0, -4.37114e-08, -22, -22, -1.62921e-07, 1.56673e-13, 0, 0, 0 )
 collision_layer = 2
 
-[node name="trap" type="CSGCombiner" parent="."]
+[node name="trap" type="CSGCombiner" parent="TrapO"]
 
-[node name="CSGCylinder" type="CSGCylinder" parent="trap"]
+[node name="CSGCylinder" type="CSGCylinder" parent="TrapO/trap"]
 transform = Transform( 1, -1.33227e-15, 0, 9.09495e-13, 1, 4.54747e-13, 1.69407e-21, -5.27383e-23, 1, 0, 0, 0 )
 use_collision = true
 collision_layer = 2
 sides = 30
 material = SubResource( 1 )
 
-[node name="CSGCylinder" type="CSGCylinder" parent="trap/CSGCylinder"]
+[node name="CSGCylinder" type="CSGCylinder" parent="TrapO/trap/CSGCylinder"]
 transform = Transform( 0.5, 0, 0, 0, 1.2, 0, 0, 0, 0.5, -0.633947, 0, -0.0325918 )
 operation = 2
 sides = 30
 
-[node name="CSGCylinder2" type="CSGCylinder" parent="trap/CSGCylinder"]
+[node name="CSGCylinder2" type="CSGCylinder" parent="TrapO/trap/CSGCylinder"]
 transform = Transform( 0.5, 0, 0, 0, 1.2, 0, 0, 0, 0.5, 0.3271, -9.53674e-07, 0.595264 )
 operation = 2
 sides = 30
 
-[node name="CSGCylinder3" type="CSGCylinder" parent="trap/CSGCylinder"]
+[node name="CSGCylinder3" type="CSGCylinder" parent="TrapO/trap/CSGCylinder"]
 transform = Transform( 0.5, 0, 0, 0, 1.2, 0, 0, 0, 0.5, 0.353483, -0.0391388, -0.571256 )
 operation = 2
 sides = 30
 
-[node name="CollisionShape7" type="CollisionShape" parent="."]
+[node name="CollisionShape7" type="CollisionShape" parent="TrapO"]
 shape = SubResource( 2 )
 
-[node name="CollisionShape6" type="CollisionShape" parent="."]
+[node name="CollisionShape6" type="CollisionShape" parent="TrapO"]
 shape = SubResource( 3 )
 
-[node name="CollisionShape5" type="CollisionShape" parent="."]
+[node name="CollisionShape5" type="CollisionShape" parent="TrapO"]
 shape = SubResource( 4 )
 
-[node name="CollisionShape4" type="CollisionShape" parent="."]
+[node name="CollisionShape4" type="CollisionShape" parent="TrapO"]
 shape = SubResource( 5 )
 
-[node name="CollisionShape3" type="CollisionShape" parent="."]
+[node name="CollisionShape3" type="CollisionShape" parent="TrapO"]
 shape = SubResource( 6 )
 
-[node name="CollisionShape2" type="CollisionShape" parent="."]
+[node name="CollisionShape2" type="CollisionShape" parent="TrapO"]
 shape = SubResource( 7 )
 
-[node name="CollisionShape" type="CollisionShape" parent="."]
+[node name="CollisionShape" type="CollisionShape" parent="TrapO"]
 shape = SubResource( 8 )

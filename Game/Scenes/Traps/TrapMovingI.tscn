@@ -34,20 +34,22 @@ tracks/1/keys = {
 "values": [ Vector3( 0, 1.5, 0 ), Vector3( 0, 1, 0 ), Vector3( 0, 0.5, 0 ), Vector3( 0, 0, 0 ), Vector3( 0, -0.5, 0 ), Vector3( 0, -1, 0 ), Vector3( 0, -1.5, 0 ), Vector3( 0, -1, 0 ), Vector3( 0, -0.5, 0 ), Vector3( 0, 0, 0 ), Vector3( 0, 0.5, 0 ), Vector3( 0, 1, 0 ), Vector3( 0, 1.5, 0 ) ]
 }
 
-[node name="TrapMovingI" type="KinematicBody"]
+[node name="TrapMovingI" type="Spatial"]
+
+[node name="TrapMovingI" type="KinematicBody" parent="."]
 transform = Transform( 5.30863e-13, 6.51683e-07, 1, 20, -6.51683e-07, -1.20846e-20, 3.25841e-06, 4, -1.62921e-07, 0, 0, 0 )
 collision_layer = 2
 
-[node name="CSGBox" type="CSGBox" parent="."]
+[node name="CSGBox" type="CSGBox" parent="TrapMovingI"]
 transform = Transform( 1, -7.10543e-15, 0, 5.68434e-14, 1, 0, -1.6263e-19, -1.13687e-13, 1, 0, -1.45928, 0 )
 collision_layer = 2
 material = SubResource( 1 )
 
-[node name="CollisionShape" type="CollisionShape" parent="."]
+[node name="CollisionShape" type="CollisionShape" parent="TrapMovingI"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.45928, 0 )
 shape = SubResource( 2 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="TrapMovingI"]
 autoplay = "Sliding"
 playback_speed = 0.5
 anims/Sliding = SubResource( 3 )
