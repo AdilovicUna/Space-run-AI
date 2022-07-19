@@ -9,27 +9,29 @@ points = PoolVector3Array( -0.94647, -0.485934, -0.0927143, -0.94647, 0.477663, 
 [sub_resource type="SpatialMaterial" id=3]
 albedo_color = Color( 0.411765, 0.764706, 0.941176, 0.909804 )
 
-[node name="TrapHexO" type="KinematicBody"]
+[node name="TrapHexO" type="Spatial"]
+
+[node name="TrapHexO" type="KinematicBody" parent="."]
 transform = Transform( -3.58425e-06, -1, 0, 19.0526, -1.41093e-07, -11, 11, -8.14603e-08, 19.0526, 0, 0, 0 )
 collision_layer = 2
 
-[node name="CollisionShape2" type="CollisionShape" parent="."]
+[node name="CollisionShape2" type="CollisionShape" parent="TrapHexO"]
 transform = Transform( 1, 1.77636e-15, 0, -2.27374e-12, 1, 0, 0, 0, 0.886167, 0, 0, 0.0880151 )
 shape = SubResource( 1 )
 
-[node name="CollisionShape" type="CollisionShape" parent="."]
+[node name="CollisionShape" type="CollisionShape" parent="TrapHexO"]
 transform = Transform( 0.898579, 7.51077e-10, 0, 3.63516e-07, 0.999999, 0, 0, 0, 1, -0.0416548, 1.49301e-07, 0 )
 shape = SubResource( 2 )
 
-[node name="CSGCombiner" type="CSGCombiner" parent="."]
+[node name="CSGCombiner" type="CSGCombiner" parent="TrapHexO"]
 transform = Transform( 1, 4.44089e-16, 0, -2.27374e-13, 1, 0, 0, 0, 1, 0, 0, 0 )
 
-[node name="CSGCylinder" type="CSGCylinder" parent="CSGCombiner"]
+[node name="CSGCylinder" type="CSGCylinder" parent="TrapHexO/CSGCombiner"]
 transform = Transform( 1, 4.44089e-16, 0, -2.27374e-13, 1, 0, 0, 0, 1, 0, 0, 0 )
 sides = 6
 material = SubResource( 3 )
 
-[node name="CSGCylinder2" type="CSGCylinder" parent="CSGCombiner"]
+[node name="CSGCylinder2" type="CSGCylinder" parent="TrapHexO/CSGCombiner"]
 transform = Transform( 0.6, -9.07718e-13, 0, 2.27374e-13, 2, 0, 0, 0, 0.6, 0.695686, 0.211115, -0.380948 )
 operation = 2
 sides = 64

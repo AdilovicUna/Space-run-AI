@@ -24,7 +24,7 @@ var move_tunnel = lvl.ONE
 var next_tunnel = lvl.TWO
 var curr_tunnel = lvl.ONE
 
-var speed = 50.0
+var speed = 5.0
 var next_trap_pos = rand.randi_range(1120,1190) # first trap for the next level will be here
 var new_trap = 3650 # start producing traps for the next level at this point
 var curr_tunnel_x = 2500
@@ -103,15 +103,17 @@ func calc_dist():
 func calc_rot():
     # get the actual rotation
     # note: rotation_degrees returns a number [-180,180]
-    var real_rot = int(tunnels_children[curr_tunnel].rotation_degrees.x + 
-                        next_trap_rotX) + 180
-    
+    #var real_rot = int(tunnels_children[curr_tunnel].rotation_degrees.x) + 180
+    #real_rot = abs(real_rot - (int() + 180))
+    var real_rot = int((next_trap_rotX + 180) + 
+                tunnels_children[curr_tunnel].rotation_degrees.x)
+    #print([tunnels_children[curr_tunnel].rotation_degrees.x,next_trap_rotX])
     # similar to calc_dist()
     var states = int(ceil(360.0 / game.rots))
     return states * (real_rot / states)
     
 func calc_type():
-    # find out what is the next trap
+    # find out what is the next trap 
     var pos = translation.x - curr_tunnel_x
     var type
     var found = false
