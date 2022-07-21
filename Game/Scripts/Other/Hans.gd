@@ -103,8 +103,7 @@ func calc_dist():
 func calc_rot():
     # get the actual rotation
     # note: rotation_degrees returns a number [-180,180]
-    #var real_rot = int(tunnels_children[curr_tunnel].rotation_degrees.x) + 180
-    #real_rot = abs(real_rot - (int() + 180))
+
     var real_rot = int((next_trap_rotX + 180) + 
                 tunnels_children[curr_tunnel].rotation_degrees.x) % 360
                 
