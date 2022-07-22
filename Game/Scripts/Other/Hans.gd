@@ -94,25 +94,26 @@ func calc_dist():
     # possible dists are >0, >25, >50, >75
     # suppose real_dist is 60, our state should be >50
     # 60 div 25 = 2, 25 * 2 = 50
-    var states = int(ceil(100.0 / game.dists))
-    var result = states * (real_dist / states)
+    var interval = int(ceil(100.0 / game.dists))
+    var result = interval * (real_dist / interval)
+    
     if result < 0 or result > 99:
-        result = states * (game.dists - 1)
+        result = interval * (game.dists - 1)
     return result
 
 func calc_rot():
     # get the actual rotation
     # note: rotation_degrees returns a number [-180,180]
 
-    var real_rot = int((next_trap_rotX + 180) + 
+    var real_rot = int(next_trap_rotX + 
                 tunnels_children[curr_tunnel].rotation_degrees.x) % 360
                 
     if real_rot < 0:
         real_rot += 360
 
     # similar to calc_dist()
-    var states = int(ceil(360.0 / game.rots))
-    return states * (real_rot / states)
+    var interval = int(ceil(360.0 / game.rots))
+    return interval * (real_rot / interval)
     
 func calc_type():
     # find out what is the next trap 
