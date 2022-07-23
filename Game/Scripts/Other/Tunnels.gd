@@ -36,7 +36,11 @@ func _physics_process(delta):
         hans.switch_animation(move[1] == 1)
 
 func create_first_level_traps(tunnel):
-    rand.randomize()
+    if game.self_playing_agent:
+        rand.seed = 0
+    else:
+        rand.randomize()
+        
     # get the level we are making traps for
     var level = tunnel
     # pick number of traps to be added

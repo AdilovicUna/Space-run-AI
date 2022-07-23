@@ -4,7 +4,7 @@ extends Node
 var options = """
 argument options:
     - n=int : number of games
-    - agent=string : name of the agent [Static, Random]
+    - agent=string : name of the agent [Keyboard, Static, Random, MonteCarlo]
     - tunnel=int : number of the tunnel to start from [1, 2, 3]
     - env=[string] : list of obstacles that will be chosen in the game 
         (subset of) [traps, bugs, viruses, tokens, I, O, MovingI, X, Walls, Hex, HexO, Balls, Triangles, HalfHex]
@@ -17,7 +17,7 @@ argument options:
 var game_scene = preload("res://Scenes/Other/Game.tscn")
 var game
 
-var all_agents = ["Keyboard", "Static", "Random"]
+var all_agents = ["Keyboard", "Static", "Random", "MonteCarlo"]
 var all_env = ["traps", "bugs", "viruses", "tokens", "I", "O", "MovingI", "X", "Walls", "Hex", "HexO", "Balls", "Triangles", "HalfHex"]
 
 # all parameters and their default values
@@ -61,6 +61,7 @@ func _ready():
     else:
         start = OS.get_ticks_usec()
         instance_agent()
+        agent_inst.start_game(dists, rots, env)                
         play_game()
 
 func play_game():     
@@ -72,7 +73,6 @@ func play_game():
         n -= 1
         game = game_scene.instance()
         set_param_in_game()
-        game.agent.start_game()        
         game.connect("game_finished", self, "on_game_finished")
         add_child(game)
     else:
@@ -83,8 +83,8 @@ func play_game():
 func set_param_in_game():
     game.set_agent(agent, agent_inst)
     game.set_tunnel(tunnel)
-    game.set_env(env)
     game.set_shooting(shooting)
+    game.set_env(env)
     game.set_dists(dists)
     game.set_rots(rots)
 
@@ -98,6 +98,8 @@ func instance_agent():
             agent_inst = Static.new()
         "Random":
             agent_inst = Random.new()
+        "MonteCarlo":
+            agent_inst = MonteCarlo.new()
 
 
 func display_options():

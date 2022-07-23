@@ -99,6 +99,7 @@ func calc_dist():
     
     if result < 0 or result > 99:
         result = interval * (game.dists - 1)
+        
     return result
 
 func calc_rot():
@@ -111,7 +112,7 @@ func calc_rot():
     if real_rot < 0:
         real_rot += 360
 
-    # similar to calc_dist()
+    # similar to calc_dist()cd De   
     var interval = int(ceil(360.0 / game.rots))
     return interval * (real_rot / interval)
     
