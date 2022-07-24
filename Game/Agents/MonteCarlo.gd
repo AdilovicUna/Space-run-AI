@@ -8,11 +8,13 @@ class_name MonteCarlo
 # - first element indicates the movement : -1 - left, 0 - just go forward, 1 - right
 # - second element decides if Hans should shoot : 1 - yes, 0 - no
 
+# variables to write to a text file
 # total_return dictionary maps state_action → total return
 var total_return = {}
 # visits dictionary maps state_action → # of visits
 var visits = {}
 
+# variables that need to reset after each episode
 var last_action
 var last_state
 var episode_steps = []
@@ -20,7 +22,7 @@ var episode_steps = []
 # all possible actions
 const ACTIONS = [[-1,0], [0,0], [1,0], [-1,1], [0,1], [1,1]]
 # discounting value
-const GAMA = 1
+const GAMMA = 1
 
 # move and remember   
 func move(state, score):
@@ -41,25 +43,15 @@ func move(state, score):
     
     return last_action
 
-func Q(state, action):
-    var state_action = get_state_action(state, action)
-    return total_return[state_action] / visits[state_action]
-
 # initialize
-func start_game(dists, rots, types):
-    var state_action
-    
-    for dist in dists:
-        for rot in rots:
-            for type in types:
-                for action in ACTIONS:
-                    state_action = get_state_action([dist * int(ceil(100.0 / dists)), 
-                                                        rot * int(ceil(360.0 / rots)),
-                                                        type], action)
-                                        
-                    # we initialize with the "optimistic initial values" approach
-                    total_return[state_action] = 100.0
-                    visits[state_action] = 1
+func init():
+    pass
+
+# reset
+func start_game():
+    episode_steps = []
+    last_state = null
+    last_state = null
 
 # update
 func end_game(final_score):
@@ -74,6 +66,17 @@ func end_game(final_score):
             seen_state_actions.append(state_action)
             total_return[state_action] += (final_score - score)
             visits[state_action] += 1
+
+# write
+func save():
+    pass
+
+func Q(state, action):
+    var state_action = get_state_action(state, action)
+    if not (state_action in total_return):
+        total_return[state_action] = 100.0
+        visits[state_action] = 1
+    return total_return[state_action] / visits[state_action]
 
 func get_state_action(state, action):
     return ("[%d,%d,%s]_[%d,%d]" % 

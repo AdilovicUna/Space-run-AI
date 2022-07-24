@@ -37,7 +37,7 @@ func _physics_process(delta):
 
 func create_first_level_traps(tunnel):
     if game.self_playing_agent:
-        rand.seed = 0
+        rand.seed = game.seed_val
     else:
         rand.randomize()
         

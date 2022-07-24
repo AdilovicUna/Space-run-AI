@@ -61,7 +61,7 @@ func _ready():
     else:
         start = OS.get_ticks_usec()
         instance_agent()
-        agent_inst.start_game(dists, rots, env)                
+        agent_inst.init()                
         play_game()
 
 func play_game():     
@@ -73,10 +73,12 @@ func play_game():
         n -= 1
         game = game_scene.instance()
         set_param_in_game()
+        agent_inst.start_game()
         game.connect("game_finished", self, "on_game_finished")
         add_child(game)
     else:
         end = OS.get_ticks_usec()
+        agent_inst.save()
         print_avg_score()
         get_tree().quit()        
 
@@ -87,11 +89,12 @@ func set_param_in_game():
     game.set_env(env)
     game.set_dists(dists)
     game.set_rots(rots)
+    game.set_seed_val()
 
 func instance_agent():
     # if there is no window, static agent is default
     if not VisualServer.render_loop_enabled:
-        agent = "Static"
+        agent_inst = Static.new()
         
     match agent:        
         "Static":
@@ -166,7 +169,7 @@ func on_game_finished(score, ticks):
     add_score(score)
     # finish up
     print_score(score)
-    game.agent.end_game(score)        
+    agent_inst.end_game(score)        
     # start a new game
     play_game()
     

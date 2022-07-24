@@ -7,11 +7,22 @@ class_name Static
 
 var rand = RandomNumberGenerator.new()
 
+# move and remember
 func move(_state, _score):
    return [0,0]
 
-func start_game(_dists, _rots, _types):
+# initialize
+func init():
     pass
 
+# reset
+func start_game():
+    pass
+
+# update
 func end_game(_final_score):
+    pass
+
+#write
+func save():
     pass

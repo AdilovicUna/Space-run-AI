@@ -6,12 +6,24 @@ class_name Random
 # - second element decides if Hans should shoot : 1 - yes, 0 - no
 
 var rand = RandomNumberGenerator.new()
-    
+
+# move and remember
 func move(_state, _score):
    return [rand.randi_range(-1, 1), rand.randi_range(0, 1)]
 
-func start_game(_dists, _rots, _types):
+# initialize
+func init():
     pass
 
+# reset
+func start_game():
+    pass
+
+# update
 func end_game(_final_score):
     pass
+
+#write
+func save():
+    pass
+
