@@ -12,7 +12,7 @@ func move(_state, _score):
    return [0,0]
 
 # initialize
-func init():
+func init(_actions):
     pass
 
 # reset

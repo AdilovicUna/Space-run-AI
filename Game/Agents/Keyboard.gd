@@ -5,8 +5,11 @@ class_name Keyboard
 # - first element indicates the movement : -1 - left, 0 - just go forward, 1 - right
 # - second element decides if Hans should shoot : 1 - yes, 0 - no
 
+# NOTE: actions are constant for the keyboard agent since we don't want to change the behavior of the game
+
 # move and remember
 func move(_state, _score):
+    
     var result = [0,0]
     if Input.is_action_pressed("right"):
         result[0] = 1
@@ -15,11 +18,11 @@ func move(_state, _score):
         
     if Input.is_action_pressed("shoot"):
         result[1] = 1
-        
+
     return result
 
 # initialize
-func init():
+func init(_actions):
     pass
 
 # reset

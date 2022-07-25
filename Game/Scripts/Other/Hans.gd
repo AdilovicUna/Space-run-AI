@@ -237,7 +237,7 @@ func switch_animation(move):
         get_node("Pivot/Hans/Movement").play("HansRunning") 
 
 func shoot():
-    if bullets_in_air < max_bullets_per_button_press and can_shoot and game.shooting_enabled:
+    if bullets_in_air < max_bullets_per_button_press and can_shoot:
         
         # play shooting sound
         if not game.self_playing_agent:

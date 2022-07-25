@@ -26,6 +26,7 @@ var agent = "Keyboard"
 var tunnel = 1
 var env = []
 var shooting = true
+var actions = [[-1,0], [0,0], [1,0], [-1,1], [0,1], [1,1]] # depend on shooting parameter
 var dists = 1
 var rots = 1
 
@@ -61,7 +62,7 @@ func _ready():
     else:
         start = OS.get_ticks_usec()
         instance_agent()
-        agent_inst.init()                
+        agent_inst.init(actions)                
         play_game()
 
 func play_game():     
@@ -85,7 +86,6 @@ func play_game():
 func set_param_in_game():
     game.set_agent(agent, agent_inst)
     game.set_tunnel(tunnel)
-    game.set_shooting(shooting)
     game.set_env(env)
     game.set_dists(dists)
     game.set_rots(rots)
@@ -141,7 +141,13 @@ func set_param(param):
             tunnel < 0 or tunnel > 3 or not check_env() or
             dists < 0 or rots < 0):
             return false   
-            
+    
+    # we don't need actions that have shooting if it was specified in the command line
+    # or it is not necessary (there is nothing in the env to shoot)
+    
+    if not shooting or (not env.empty() and not "bugs" in env and not "viruses" in env):
+        actions = actions.slice(0,2)
+        
     return true
         
 func check_env():

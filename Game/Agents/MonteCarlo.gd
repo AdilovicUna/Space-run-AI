@@ -20,7 +20,7 @@ var last_state
 var episode_steps = []
 
 # all possible actions
-const ACTIONS = [[-1,0], [0,0], [1,0], [-1,1], [0,1], [1,1]]
+var ACTIONS = []
 # discounting value
 const GAMMA = 1
 
@@ -44,8 +44,8 @@ func move(state, score):
     return last_action
 
 # initialize
-func init():
-    pass
+func init(actions):
+    ACTIONS = actions
 
 # reset
 func start_game():

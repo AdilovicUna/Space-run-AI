@@ -7,13 +7,21 @@ class_name Random
 
 var rand = RandomNumberGenerator.new()
 
+# all possible actions
+var ACTIONS = []
+
 # move and remember
 func move(_state, _score):
-   return [rand.randi_range(-1, 1), rand.randi_range(0, 1)]
+    var result = [rand.randi_range(-1, 1), rand.randi_range(0, 1)]
+    
+    if result in ACTIONS:
+        return result
+        
+    return [result[0], 0]
 
 # initialize
-func init():
-    pass
+func init(actions):
+    ACTIONS = actions
 
 # reset
 func start_game():

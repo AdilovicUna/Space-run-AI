@@ -21,7 +21,6 @@ var short_names = {"Worm" : "W", "LadybugFlying" : "LBF", "LadybugWalking" : "LB
 var agent
 var tunnel = 0 
 var self_playing_agent = false
-var shooting_enabled = true
 var dists
 var rots
 var seed_val = 0
@@ -66,9 +65,6 @@ func set_env(parameters):
         
     if not "tokens" in parameters:
         tokens = []
-    
-func set_shooting(shooting):
-    shooting_enabled = shooting
     
 func set_dists(d):
     dists = d
