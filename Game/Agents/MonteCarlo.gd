@@ -21,6 +21,8 @@ var episode_steps = []
 
 # all possible actions
 var ACTIONS = []
+# name of the file we will read from and right to
+var FILENAME = ""
 # discounting value
 const GAMMA = 1
 
@@ -44,9 +46,32 @@ func move(state, score):
     return last_action
 
 # initialize
-func init(actions):
+func init(actions, filename):
     ACTIONS = actions
-
+    FILENAME = filename
+    
+    if FILENAME != "":
+        var file = File.new()
+        file.open("res://Agent_databases/" + FILENAME + ".txt", File.READ)
+        if file.is_open():
+            var line = ""
+            var reading_total_return = true
+            while not file.eof_reached():
+                line = file.get_line()
+                if line.empty():
+                    continue
+                    
+                if line == "---":
+                    reading_total_return = false
+                elif reading_total_return:
+                    line = line.split(':')
+                    total_return[line[0]] = float(line[1])
+                else:
+                    line = line.split(':')
+                    visits[line[0]] = int(line[1])
+                    
+            file.close()
+        
 # reset
 func start_game():
     episode_steps = []
@@ -69,8 +94,24 @@ func end_game(final_score):
 
 # write
 func save():
-    pass
+    if FILENAME == "":
+        return
 
+    var data = ""
+    
+    for elem in total_return:
+        data += (String(elem) + ':' + String(total_return[elem]) + '\n')
+        
+    data += "---\n"
+    
+    for elem in visits:
+        data += (String(elem) + ':' + String(visits[elem]) + '\n')
+        
+    var file = File.new()
+    file.open("res://Agent_databases/" + FILENAME + ".txt", File.WRITE)
+    file.store_string(data)
+    file.close()
+  
 func Q(state, action):
     var state_action = get_state_action(state, action)
     if not (state_action in total_return):

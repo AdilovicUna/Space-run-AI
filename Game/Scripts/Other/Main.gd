@@ -8,9 +8,12 @@ argument options:
     - tunnel=int : number of the tunnel to start from [1, 2, 3]
     - env=[string] : list of obstacles that will be chosen in the game 
         (subset of) [traps, bugs, viruses, tokens, I, O, MovingI, X, Walls, Hex, HexO, Balls, Triangles, HalfHex]
-    - shooting=bool : enable or disable shooting [enabled, disabled]
+    - shooting=string : enable or disable shooting [enabled, disabled]
     - dists=int : number of states in a 100-meter interval
     - rots=int : number of states in 360 degrees rotation
+    - useDatabase=bool : read the data for this command from a file (if it exists) 
+                     and update it after the command is executed [true, false]
+                     (will not influence the following agents: Keyboard, Static, Random)
     - options : displays options
 """
 
@@ -29,6 +32,7 @@ var shooting = true
 var actions = [[-1,0], [0,0], [1,0], [-1,1], [0,1], [1,1]] # depend on shooting parameter
 var dists = 1
 var rots = 1
+var useDatabase = false
 
 var agent_inst = Keyboard.new()
 
@@ -44,7 +48,6 @@ var num_of_ticks = 0.0
 func _ready():
     # get args
     var unparsed_args = OS.get_cmdline_args()
-    
     # show options
     if unparsed_args.size() == 1 and unparsed_args[0] == "--options":
         display_options()
@@ -55,14 +58,14 @@ func _ready():
         if arg.find("=") > 0:
             var key_value = arg.split("=")
             args[key_value[0].lstrip("--")] = key_value[1]
-    
+        
     # set param, if something went wrong, show options
     if set_param(args) == false:
         display_options()
     else:
         start = OS.get_ticks_usec()
         instance_agent()
-        agent_inst.init(actions)                
+        agent_inst.init(actions, build_filename())                
         play_game()
 
 func play_game():     
@@ -109,6 +112,16 @@ func display_options():
     get_tree().quit() 
     print(options)
 
+func build_filename():
+    if not useDatabase:
+        return ""
+        
+    # we sort it so that we would always get the same filename in build_filename()    
+    var sorted_env = Array(env)
+    sorted_env.sort()
+    
+    return PoolStringArray([n,agent, tunnel, sorted_env, shooting, actions, dists, rots]).join("_").replace(' ','')
+   
 func set_param(param):
     if not paramSet:
         paramSet = true
@@ -129,24 +142,32 @@ func set_param(param):
                             shooting = true
                         "disabled" :
                             shooting = false
-                        _:
+                        _: # invalid param value
                             return false
                 "dists":
                     dists = int(param[key])
                 "rots":
                     rots = int(param[key])
+                "useDatabase":
+                    match param[key]:
+                        "true" :
+                            useDatabase = true
+                        "false" :
+                            useDatabase = false
+                        _: # invalid param value
+                            return false
                         
         #check if everything is valid
         if (n < 0 or not agent in all_agents or 
             tunnel < 0 or tunnel > 3 or not check_env() or
             dists < 0 or rots < 0):
-            return false   
-    
-    # we don't need actions that have shooting if it was specified in the command line
-    # or it is not necessary (there is nothing in the env to shoot)
-    
-    if not shooting or (not env.empty() and not "bugs" in env and not "viruses" in env):
-        actions = actions.slice(0,2)
+            return false 
+              
+        # we don't need actions that have shooting if it was specified in the command line
+        # or it is not necessary (there is nothing in the env to shoot)
+        
+        if not shooting or (not env.empty() and not "bugs" in env and not "viruses" in env):
+            actions = actions.slice(0,2)
         
     return true
         
