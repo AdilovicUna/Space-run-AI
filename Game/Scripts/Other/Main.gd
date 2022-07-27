@@ -45,6 +45,9 @@ var start
 var end
 var num_of_ticks = 0.0
 
+var file = File.new()
+var command = ""
+
 func _ready():
     # get args
     var unparsed_args = OS.get_cmdline_args()
@@ -65,7 +68,8 @@ func _ready():
     else:
         start = OS.get_ticks_usec()
         instance_agent()
-        agent_inst.init(actions, build_filename())                
+        build_filename()
+        agent_inst.init(actions, command)                
         play_game()
 
 func play_game():     
@@ -83,7 +87,7 @@ func play_game():
     else:
         end = OS.get_ticks_usec()
         agent_inst.save()
-        print_avg_score()
+        print_and_write_avg_score()
         get_tree().quit()        
 
 func set_param_in_game():
@@ -114,13 +118,15 @@ func display_options():
 
 func build_filename():
     if not useDatabase:
-        return ""
+        return
         
     # we sort it so that we would always get the same filename in build_filename()    
     var sorted_env = Array(env)
     sorted_env.sort()
     
-    return PoolStringArray([n,agent, tunnel, sorted_env, shooting, actions, dists, rots]).join("_").replace(' ','')
+    command = PoolStringArray(["n",n,"agent", agent, "tunnel" , tunnel, "sorted_env", sorted_env, 
+                            "shooting",shooting, "actions", actions, "dists", dists, "rots", rots]
+                                ).join("_").replace(' ','')
    
 func set_param(param):
     if not paramSet:
@@ -181,21 +187,36 @@ func add_score(score):
     scores_count += 1
     scores_sum += score
 
-func print_score(score):
-    print("Game %d score: %.1f" % [scores_count,score])   
-
-func print_avg_score():
-    print("Average score: %.1f" % [scores_sum / scores_count])
-    
-    # Note: we have to turn the microseconds to seconds, thus we devide by 1_000_000
-    print("Average time per tick: ", (end - start)/(num_of_ticks * 1_000_000))
+func print_and_write_score(score):
+    if not file.is_open():
+        file.open("res://Command_outputs/" + command + ".txt", File.WRITE_READ)
         
+    var data = "Game %d score: %.1f" % [scores_count,score]
+    
+    print(data)   
+    write(data)
+
+func print_and_write_avg_score():
+    var avg_score = "Average score: %.1f" % [scores_sum / scores_count]
+    # Note: we have to turn the microseconds to seconds, thus we devide by 1_000_000
+    var avg_time_per_tick = "Average time per tick: " + String((end - start)/(num_of_ticks * 1_000_000))
+    
+    print(avg_score)
+    print(avg_time_per_tick)
+    
+    write(avg_score + '\n' + avg_time_per_tick + '\n')
+    file.close()
+
+func write(data):
+    file.seek_end()
+    file.store_line(data)
+
 func on_game_finished(score, ticks):
     # calculations
     num_of_ticks += ticks
     add_score(score)
     # finish up
-    print_score(score)
+    print_and_write_score(score)
     agent_inst.end_game(score)        
     # start a new game
     play_game()
