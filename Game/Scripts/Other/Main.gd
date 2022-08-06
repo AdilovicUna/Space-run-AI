@@ -119,7 +119,7 @@ func display_options():
 func build_filename():
     if not useDatabase:
         return
-        
+         
     # we sort it so that we would always get the same filename in build_filename()    
     var sorted_env = Array(env)
     sorted_env.sort()
@@ -175,6 +175,14 @@ func set_param(param):
         if not shooting or (not env.empty() and not "bugs" in env and not "viruses" in env):
             actions = actions.slice(0,2)
         
+        # create necessary directories
+        var directory = Directory.new()        
+        if not directory.dir_exists("res://Command_outputs"):
+            directory.make_dir("res://Command_outputs")        
+        if useDatabase:
+            if not directory.dir_exists("res://Agent_databases"):
+                directory.make_dir("res://Agent_databases")        
+        
     return true
         
 func check_env():
@@ -189,7 +197,7 @@ func add_score(score):
 
 func print_and_write_score(score):
     if not file.is_open():
-        file.open("res://Command_outputs/" + command + ".txt", File.WRITE_READ)
+            file.open("res://Command_outputs/" + command + ".txt", File.WRITE_READ)
         
     var data = "Game %d score: %.1f" % [scores_count,score]
     
