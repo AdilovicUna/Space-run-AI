@@ -46,31 +46,34 @@ func move(state, score):
     return last_action
 
 # initialize
-func init(actions, filename):
+func init(actions, read, filename):
     ACTIONS = actions
     FILENAME = filename
     
-    if FILENAME != "":
-        var file = File.new()
-        file.open("res://Agent_databases/" + FILENAME + ".txt", File.READ)
-        if file.is_open():
-            var line = ""
-            var reading_total_return = true
-            while not file.eof_reached():
-                line = file.get_line()
-                if line.empty():
-                    continue
-                    
-                if line == "---":
-                    reading_total_return = false
-                elif reading_total_return:
-                    line = line.split(':')
-                    total_return[line[0]] = float(line[1])
-                else:
-                    line = line.split(':')
-                    visits[line[0]] = int(line[1])
-                    
-            file.close()
+    if not read:
+        return
+    
+    var file = File.new()
+    file.open("res://Agent_databases/" + FILENAME + ".txt", File.READ)
+    if file.is_open():
+        var line = ""
+        var reading_total_return = true
+        while not file.eof_reached():
+            line = file.get_line()
+            if line.empty():
+                continue
+                
+            if line == "---":
+                reading_total_return = false
+            elif reading_total_return:
+                line = line.split(':')
+                total_return[line[0]] = float(line[1])
+            else:
+                line = line.split(':')
+                visits[line[0]] = int(line[1])
+                
+        file.close()
+    return
         
 # reset
 func start_game():
@@ -93,8 +96,8 @@ func end_game(final_score):
             visits[state_action] += 1
 
 # write
-func save():
-    if FILENAME == "":
+func save(write):
+    if not write:
         return
 
     var data = ""

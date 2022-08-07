@@ -12,7 +12,7 @@ func move(_state, _score):
    return [0,0]
 
 # initialize
-func init(_actions, _filename):
+func init(_actions, _read, _filename):
     pass
 
 # reset
@@ -24,5 +24,5 @@ func end_game(_final_score):
     pass
 
 #write
-func save(_filename):
+func save(_write):
     pass

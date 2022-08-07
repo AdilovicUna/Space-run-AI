@@ -11,8 +11,8 @@ argument options:
     - shooting=string : enable or disable shooting [enabled, disabled]
     - dists=int : number of states in a 100-meter interval
     - rots=int : number of states in 360 degrees rotation
-    - useDatabase=bool : read the data for this command from a file (if it exists) 
-                     and update it after the command is executed [true, false]
+    - database=string : read = read the data for this command from a file (if it exists) 
+                     write = update the data after the command is executed [read, write, read_write]
                      (will not influence the following agents: Keyboard, Static, Random)
     - options : displays options
 """
@@ -32,7 +32,8 @@ var shooting = true
 var actions = [[-1,0], [0,0], [1,0], [-1,1], [0,1], [1,1]] # depend on shooting parameter
 var dists = 1
 var rots = 1
-var useDatabase = false
+var read = false
+var write = false
 
 var agent_inst = Keyboard.new()
 
@@ -69,7 +70,7 @@ func _ready():
         start = OS.get_ticks_usec()
         instance_agent()
         build_filename()
-        agent_inst.init(actions, command)                
+        agent_inst.init(actions, read, command)                
         play_game()
 
 func play_game():     
@@ -86,7 +87,7 @@ func play_game():
         add_child(game)
     else:
         end = OS.get_ticks_usec()
-        agent_inst.save()
+        agent_inst.save(write)
         print_and_write_avg_score()
         get_tree().quit()        
 
@@ -117,14 +118,11 @@ func display_options():
     print(options)
 
 func build_filename():
-    if not useDatabase:
-        return
-         
-    # we sort it so that we would always get the same filename in build_filename()    
+# we sort it so that we would always get the same filename in build_filename()    
     var sorted_env = Array(env)
     sorted_env.sort()
     
-    command = PoolStringArray(["n",n,"agent", agent, "tunnel" , tunnel, "sorted_env", sorted_env, 
+    command = PoolStringArray(["agent", agent, "tunnel" , tunnel, "sorted_env", sorted_env, 
                             "shooting",shooting, "actions", actions, "dists", dists, "rots", rots]
                                 ).join("_").replace(' ','')
    
@@ -154,12 +152,15 @@ func set_param(param):
                     dists = int(param[key])
                 "rots":
                     rots = int(param[key])
-                "useDatabase":
+                "database":
                     match param[key]:
-                        "true" :
-                            useDatabase = true
-                        "false" :
-                            useDatabase = false
+                        "read" :
+                            read = true
+                        "write" :
+                            write = true
+                        "read_write" :
+                            read = true
+                            write = true
                         _: # invalid param value
                             return false
                         
@@ -179,7 +180,7 @@ func set_param(param):
         var directory = Directory.new()        
         if not directory.dir_exists("res://Command_outputs"):
             directory.make_dir("res://Command_outputs")        
-        if useDatabase:
+        if read or write:
             if not directory.dir_exists("res://Agent_databases"):
                 directory.make_dir("res://Agent_databases")        
         
