@@ -203,7 +203,7 @@ func print_and_write_score(score):
     var data = "Game %d score: %.1f" % [scores_count,score]
     
     print(data)   
-    write("%d %.1f" % [scores_count,score])
+    write_data("%.1f" % score)
 
 func print_and_write_avg_score():
     var avg_score = "Average score: %.1f" % [scores_sum / scores_count]
@@ -213,10 +213,10 @@ func print_and_write_avg_score():
     print(avg_score)
     print(avg_time_per_tick)
     
-    write("%.1f %s" % [(scores_sum / scores_count),(end - start)/(num_of_ticks * 1_000_000)])
+    write_data("%.1f" % (scores_sum / scores_count))
     file.close()
 
-func write(data):
+func write_data(data):
     file.seek_end()
     file.store_line(data)
 
