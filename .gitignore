@@ -8,5 +8,6 @@ export_presets.cfg
 .mono/
 data_*/
 
-Agent_databases
-Command_outputs 
+Game/Agent_databases
+Game/Command_outputs 
+*.png
