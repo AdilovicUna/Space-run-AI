@@ -70,7 +70,7 @@ func _ready():
         start = OS.get_ticks_usec()
         instance_agent()
         build_filename()
-        agent_inst.init(actions, read, command)                
+        agent_inst.init(actions, read, command, n)                
         play_game()
 
 func play_game():     
@@ -198,12 +198,13 @@ func add_score(score):
 
 func print_and_write_score(score):
     if not file.is_open():
-            file.open("res://Command_outputs/" + command + ".txt", File.WRITE_READ)
+        file.open("res://Command_outputs/" + command + ".txt", File.WRITE_READ)
         
     var data = "Game %d score: %.1f" % [scores_count,score]
     
     print(data)   
     write_data("%.1f" % score)
+    
 
 func print_and_write_avg_score():
     var avg_score = "Average score: %.1f" % [scores_sum / scores_count]
@@ -214,6 +215,7 @@ func print_and_write_avg_score():
     print(avg_time_per_tick)
     
     write_data("%.1f" % (scores_sum / scores_count))
+    write_data(agent_inst.get_n())
     file.close()
 
 func write_data(data):

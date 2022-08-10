@@ -19,6 +19,10 @@ var last_action
 var last_state
 var episode_steps = []
 
+# how many games are remembered in this file
+var n = 0
+var new_n = 0
+
 # all possible actions
 var ACTIONS = []
 # name of the file we will read from and right to
@@ -46,9 +50,10 @@ func move(state, score):
     return last_action
 
 # initialize
-func init(actions, read, filename):
+func init(actions, read, filename, curr_n):
     ACTIONS = actions
     FILENAME = filename
+    new_n = curr_n
     
     if not read:
         return
@@ -58,12 +63,15 @@ func init(actions, read, filename):
     if file.is_open():
         var line = ""
         var reading_total_return = true
+        var read_n = false
         while not file.eof_reached():
             line = file.get_line()
             if line.empty():
                 continue
-                
-            if line == "---":
+            if not read_n:
+                read_n = true
+                n = int(line)
+            elif line == "---":
                 reading_total_return = false
             elif reading_total_return:
                 line = line.split(':')
@@ -102,6 +110,9 @@ func save(write):
 
     var data = ""
     
+    # remember how many games have been played
+    data += String(n + new_n) + '\n'
+    
     for elem in total_return:
         data += (String(elem) + ':' + String(total_return[elem]) + '\n')
         
@@ -125,3 +136,6 @@ func Q(state, action):
 func get_state_action(state, action):
     return ("[%d,%d,%s]_[%d,%d]" % 
                         [state[0], state[1], state[2], action[0], action[1]])
+
+func get_n():
+    return String(n)

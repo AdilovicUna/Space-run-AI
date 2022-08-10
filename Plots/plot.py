@@ -19,16 +19,19 @@ def main():
       
 def plot(data):
     window = 10
-    scores = [float(i) for i in data[:-1]]
+    scores = [float(i) for i in data[:-2]]
     scores = [np.mean(scores[i:i + window]) if i <= len(scores) - window else np.mean(scores[i:]) for i in range(len(scores))]
     episodes = [i for i in range(1,len(scores)+1)]
-    avg_score = [float(data[-1])] * len(scores)
+    avg_score = [float(data[-2])] * len(scores)
+    num_of_prev_games = data[-1]
 
     _,ax = plt.subplots()
 
     ax.plot(episodes, scores, label='Data')
     ax.plot(episodes, avg_score, label='Mean', linestyle='--')
     ax.legend(loc='upper right')
+
+    plt.figtext(x=0.02, y=0.02, s="Previous games: " + num_of_prev_games)
 
     plt.xlabel('Episodes') 
     plt.ylabel('Scores') 
