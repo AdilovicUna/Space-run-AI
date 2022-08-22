@@ -28,10 +28,10 @@ var n = 100
 var agent = "Keyboard"
 var tunnel = 1
 var env = []
-var shooting = true
+var shooting = false
 var actions = [[-1,0], [0,0], [1,0], [-1,1], [0,1], [1,1]] # depend on shooting parameter
 var dists = 1
-var rots = 1
+var rots = 6
 var read = false
 var write = false
 
@@ -53,7 +53,7 @@ func _ready():
     # get args
     var unparsed_args = OS.get_cmdline_args()
     # show options
-    if unparsed_args.size() == 1 and unparsed_args[0] == "--options":
+    if unparsed_args.size() == 1 and unparsed_args[0] == "options":
         display_options()
     
     # parse agrs
@@ -61,7 +61,7 @@ func _ready():
     for arg in unparsed_args:
         if arg.find("=") > 0:
             var key_value = arg.split("=")
-            args[key_value[0].lstrip("--")] = key_value[1]
+            args[key_value[0]] = key_value[1]
         
     # set param, if something went wrong, show options
     if set_param(args) == false:
@@ -100,9 +100,10 @@ func set_param_in_game():
     game.set_seed_val()
 
 func instance_agent():
+    
     # if there is no window, static agent is default
-    if not VisualServer.render_loop_enabled:
-        agent_inst = Static.new()
+    if agent == "Keyboard" and not VisualServer.render_loop_enabled:
+        agent = "Static"
         
     match agent:        
         "Static":
@@ -118,13 +119,15 @@ func display_options():
     print(options)
 
 func build_filename():
-# we sort it so that we would always get the same filename in build_filename()    
+    # we sort it so that we would always get the same filename in build_filename()    
     var sorted_env = Array(env)
     sorted_env.sort()
+    if sorted_env == []:
+        sorted_env = "all"
     
-    command = PoolStringArray(["agent", agent, "tunnel" , tunnel, "sorted_env", sorted_env, 
-                            "shooting",shooting, "actions", actions, "dists", dists, "rots", rots]
-                                ).join("_").replace(' ','')
+    command = PoolStringArray(["agent=" + String(agent), "tunnel=" + String(tunnel), "env=" + String(sorted_env), 
+                            "shooting=" + String(shooting), "dists=" + String(dists), "rots=" + String(rots)]
+                                ).join(",").replace(' ','')
    
 func set_param(param):
     if not paramSet:
@@ -163,6 +166,8 @@ func set_param(param):
                             write = true
                         _: # invalid param value
                             return false
+                _: # invalid param value
+                    return false
                         
         #check if everything is valid
         if (n < 0 or not agent in all_agents or 
@@ -172,7 +177,6 @@ func set_param(param):
               
         # we don't need actions that have shooting if it was specified in the command line
         # or it is not necessary (there is nothing in the env to shoot)
-        
         if not shooting or (not env.empty() and not "bugs" in env and not "viruses" in env):
             actions = actions.slice(0,2)
         
