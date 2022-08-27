@@ -22,6 +22,7 @@ func move(_state, _score):
 # initialize
 func init(actions, _read, _filename, _curr_n):
     ACTIONS = actions
+    return true
 
 # reset
 func start_game():

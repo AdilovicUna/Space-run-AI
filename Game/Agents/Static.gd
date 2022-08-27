@@ -13,7 +13,7 @@ func move(_state, _score):
 
 # initialize
 func init(_actions, _read, _filename, _curr_n):
-    pass
+    return true
 
 # reset
 func start_game():

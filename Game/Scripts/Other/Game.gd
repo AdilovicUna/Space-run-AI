@@ -72,8 +72,8 @@ func set_dists(d):
 func set_rots(r):
     rots = r
 
-func set_seed_val():
-    seed_val += 1
+func set_seed_val(val):
+    seed_val = val
 
 func _start():
     score.show()

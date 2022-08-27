@@ -49,6 +49,8 @@ var num_of_ticks = 0.0
 var file = File.new()
 var command = ""
 
+var seed_val = 0
+
 func _ready():
     # get args
     var unparsed_args = OS.get_cmdline_args()
@@ -70,7 +72,9 @@ func _ready():
         start = OS.get_ticks_usec()
         instance_agent()
         build_filename()
-        agent_inst.init(actions, read, command, n)                
+        if not agent_inst.init(actions, read, command, n):
+            get_tree().quit()
+            
         play_game()
 
 func play_game():     
@@ -97,7 +101,8 @@ func set_param_in_game():
     game.set_env(env)
     game.set_dists(dists)
     game.set_rots(rots)
-    game.set_seed_val()
+    game.set_seed_val(seed_val)
+    seed_val += 1
 
 func instance_agent():
     

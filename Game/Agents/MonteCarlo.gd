@@ -56,7 +56,7 @@ func init(actions, read, filename, curr_n):
     new_n = curr_n
     
     if not read:
-        return
+        return true
     
     var file = File.new()
     file.open("res://Agent_databases/" + FILENAME + ".txt", File.READ)
@@ -78,7 +78,11 @@ func init(actions, read, filename, curr_n):
                 visits[line[0]] = int(line2[1])
                 
         file.close()
-    return
+    else:
+        print("File does not exist")
+        return false
+        
+    return true
         
 # reset
 func start_game():
