@@ -62,7 +62,7 @@ func init(actions, read, filename, curr_n):
     file.open("res://Agent_databases/" + FILENAME + ".txt", File.READ)
     if file.is_open():
         var line = ""
-        var reading_total_return = true
+        var line2 = ""
         var read_n = false
         while not file.eof_reached():
             line = file.get_line()
@@ -71,14 +71,11 @@ func init(actions, read, filename, curr_n):
             if not read_n:
                 read_n = true
                 n = int(line)
-            elif line == "---":
-                reading_total_return = false
-            elif reading_total_return:
-                line = line.split(':')
-                total_return[line[0]] = float(line[1])
             else:
                 line = line.split(':')
-                visits[line[0]] = int(line[1])
+                line2 = line[1].split('/')
+                total_return[line[0]] = float(line2[0])
+                visits[line[0]] = int(line2[1])
                 
         file.close()
     return
@@ -114,12 +111,7 @@ func save(write):
     data += String(n + new_n) + '\n'
     
     for elem in total_return:
-        data += (String(elem) + ':' + String(total_return[elem]) + '\n')
-        
-    data += "---\n"
-    
-    for elem in visits:
-        data += (String(elem) + ':' + String(visits[elem]) + '\n')
+        data += (String(elem) + ':' + String(total_return[elem]) + '/' + String(visits[elem]) + '\n')
         
     var file = File.new()
     file.open("res://Agent_databases/" + FILENAME + ".txt", File.WRITE)
