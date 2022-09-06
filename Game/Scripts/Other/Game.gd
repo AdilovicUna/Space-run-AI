@@ -9,6 +9,7 @@ onready var end = get_node("UI/End")
 onready var battery = get_node("UI/Battery")
 onready var timer = get_node("UI/Battery/DropTimer")
 onready var state = get_node("UI/State")
+onready var level = get_node("UI/Level")
 
 const NUM_OF_TUNNELS = 3
 
@@ -29,6 +30,7 @@ var seed_val = 0
 
 var num_of_ticks = 0
 var num_of_speed_ups = 0
+var max_tunnels = 0
 
 # curr_layer cannot be 0 unless the Help menu is actually shown
 # because of the End.gd script conditions
@@ -79,6 +81,9 @@ func set_rots(r):
 
 func set_seed_val(val):
     seed_val = val
+    
+func set_max_tunnels(mt):
+    max_tunnels = mt
 
 func _start():
     score.show()
@@ -128,7 +133,7 @@ func _game_over():
     battery.hide()
     timer.stop()
     if self_playing_agent:
-        emit_signal("game_finished", score.get_score(), num_of_ticks)
+        emit_signal("game_finished", score.get_score(), num_of_ticks, level.get_level() > max_tunnels)
         queue_free()
     else:
         score._display_Final_Score()

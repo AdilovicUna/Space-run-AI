@@ -1,6 +1,6 @@
 extends Node
 
-const MAX_TUNNEL = 10
+const MAX_TUNNELS = 10
 
 var options = """
 argument options:
@@ -39,13 +39,14 @@ var write = false
 var agent_inst = Keyboard.new()
 
 var scores_sum = 0.0
-var scores_count = 0
+var num_of_games = 0
 
 var paramSet = false
 
 var start
 var end
 var num_of_ticks = 0.0
+var wins = 0
 
 var file = File.new()
 var command = ""
@@ -75,7 +76,6 @@ func _ready():
         build_filename()
         if not agent_inst.init(actions, read, command, n):
             get_tree().quit()
-            
         play_game()
 
 func play_game():     
@@ -93,7 +93,7 @@ func play_game():
     else:
         end = OS.get_ticks_usec()
         agent_inst.save(write)
-        print_and_write_avg_score()
+        print_and_write_ending()
         get_tree().quit()        
 
 func set_param_in_game():
@@ -103,6 +103,7 @@ func set_param_in_game():
     game.set_dists(dists)
     game.set_rots(rots)
     game.set_seed_val(seed_val)
+    game.set_max_tunnels(MAX_TUNNELS)
     seed_val += 1
 
 func instance_agent():
@@ -177,7 +178,7 @@ func set_param(param):
                         
         #check if everything is valid
         if (n < 0 or not agent in all_agents or 
-            tunnel < 0 or tunnel > MAX_TUNNEL or not check_env() or
+            tunnel < 0 or tunnel > MAX_TUNNELS or not check_env() or
             dists < 0 or rots < 0):
             return false 
               
@@ -203,28 +204,34 @@ func check_env():
     return true
 
 func add_score(score):
-    scores_count += 1
+    num_of_games += 1
     scores_sum += score
 
-func print_and_write_score(score):
+func print_and_write_score(score, win):
     if not file.is_open():
         file.open("res://Command_outputs/" + command + ".txt", File.WRITE_READ)
-        
-    var data = "Game %d score: %.1f" % [scores_count,score]
+      
+    var data = "Game %d score: %.1f" % [num_of_games,score]
     
-    print(data)   
     write_data("%.1f" % score)
     
+    if win:  
+        data += " Game won!"  
+        
+    print(data)   
+    
 
-func print_and_write_avg_score():
-    var avg_score = "Average score: %.1f" % [scores_sum / scores_count]
+func print_and_write_ending():
+    var ratio_of_wins = "Games won: %d/%d" % [wins, num_of_games]    
+    var avg_score = "Average score: %.1f" % [scores_sum / num_of_games]
     # Note: we have to turn the microseconds to seconds, thus we devide by 1_000_000
     var avg_time_per_tick = "Average time per tick: " + String((end - start)/(num_of_ticks * 1_000_000))
     
+    print(ratio_of_wins)
     print(avg_score)
     print(avg_time_per_tick)
     
-    write_data("%.1f" % (scores_sum / scores_count))
+    write_data("%.1f" % (scores_sum / num_of_games))
     write_data(agent_inst.get_n())
     file.close()
 
@@ -232,12 +239,13 @@ func write_data(data):
     file.seek_end()
     file.store_line(data)
 
-func on_game_finished(score, ticks):
+func on_game_finished(score, ticks, win):
     # calculations
     num_of_ticks += ticks
+    wins += int(win)
     add_score(score)
     # finish up
-    print_and_write_score(score)
+    print_and_write_score(score, win)
     agent_inst.end_game(score)        
     # start a new game
     play_game()

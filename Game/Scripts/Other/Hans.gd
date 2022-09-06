@@ -198,6 +198,8 @@ func update_curr_tunnel():
     curr_tunnel = (curr_tunnel + 1) % tunnels_children.size()
     
     show_level_label()
+    if game.self_playing_agent and  level.get_level() > game.max_tunnels:
+        game._game_over()        
     
     # increase speed after a full lap
     if(curr_tunnel == lvl.ONE):
