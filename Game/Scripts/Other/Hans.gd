@@ -3,7 +3,8 @@ extends KinematicBody
 export(PackedScene) var BulletZero
 export(PackedScene) var BulletOne
 
-const max_bullets_per_button_press = 8
+const MAX_BULLETS_PER_BUTTON_PRESS = 8
+const SPEED_INCREASE = 15.0
 
 enum lvl {ONE, TWO, THREE}
 
@@ -81,7 +82,11 @@ func _physics_process(delta):
     var type = calc_type()
     state.update_state(calc_dist(),calc_rot(),type)
     
-
+func set_speed(n):
+    # n represents how many times we need to increase the speed
+    # based on which tunnel we are in
+    speed += n * SPEED_INCREASE
+    
 func calc_dist():
     # this will give us a number until the next trap
     var real_dist = int(translation.x - curr_tunnel_x - next_trap_posX)
@@ -196,7 +201,7 @@ func update_curr_tunnel():
     
     # increase speed after a full lap
     if(curr_tunnel == lvl.ONE):
-        speed += 15.0
+        speed += SPEED_INCREASE
         battery.update_timer()
         
     rand.randomize()
@@ -237,7 +242,7 @@ func switch_animation(move):
         get_node("Pivot/Hans/Movement").play("HansRunning") 
 
 func shoot():
-    if bullets_in_air < max_bullets_per_button_press and can_shoot:
+    if bullets_in_air < MAX_BULLETS_PER_BUTTON_PRESS and can_shoot:
         
         # play shooting sound
         if not game.self_playing_agent:

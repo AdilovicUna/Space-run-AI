@@ -10,6 +10,8 @@ onready var battery = get_node("UI/Battery")
 onready var timer = get_node("UI/Battery/DropTimer")
 onready var state = get_node("UI/State")
 
+const NUM_OF_TUNNELS = 3
+
 var traps = ["TrapI","TrapO", "TrapMovingI", "TrapX", "TrapWalls", "TrapHex", "TrapHexO", "TrapBalls", "TrapTriangles", "TrapHalfHex"]
 var bugs = ["Worm", "LadybugFlying", "LadybugWalking"]
 var viruses = ["Rotavirus", "Bacteriophage"]
@@ -26,6 +28,7 @@ var rots
 var seed_val = 0
 
 var num_of_ticks = 0
+var num_of_speed_ups = 0
 
 # curr_layer cannot be 0 unless the Help menu is actually shown
 # because of the End.gd script conditions
@@ -35,6 +38,7 @@ func _ready():
     if not self_playing_agent:
         hans.get_node("Sounds/shootSound").stream.loop = false
         agent = Keyboard.new()
+    hans.set_speed(num_of_speed_ups)
     _start()
 
 func set_agent(agent_str, agent_inst):   
@@ -44,7 +48,8 @@ func set_agent(agent_str, agent_inst):
     agent = agent_inst
 
 func set_tunnel(t):
-    tunnel = t - 1
+    tunnel = t % NUM_OF_TUNNELS
+    num_of_speed_ups = int(t / NUM_OF_TUNNELS)
 
 func set_env(parameters):
     # env wasn't specified, so we put everything

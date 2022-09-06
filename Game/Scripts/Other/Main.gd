@@ -1,11 +1,12 @@
 extends Node
 
+const MAX_TUNNEL = 10
 
 var options = """
 argument options:
     - n=int : number of games
     - agent=string : name of the agent [Keyboard, Static, Random, MonteCarlo]
-    - tunnel=int : number of the tunnel to start from [1, 2, 3]
+    - tunnel=int : number of the tunnel to start from [1, ... , 10]
     - env=[string] : list of obstacles that will be chosen in the game 
         (subset of) [traps, bugs, viruses, tokens, I, O, MovingI, X, Walls, Hex, HexO, Balls, Triangles, HalfHex]
     - shooting=string : enable or disable shooting [enabled, disabled]
@@ -176,7 +177,7 @@ func set_param(param):
                         
         #check if everything is valid
         if (n < 0 or not agent in all_agents or 
-            tunnel < 0 or tunnel > 3 or not check_env() or
+            tunnel < 0 or tunnel > MAX_TUNNEL or not check_env() or
             dists < 0 or rots < 0):
             return false 
               
