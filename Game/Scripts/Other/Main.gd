@@ -231,6 +231,7 @@ func print_and_write_ending():
     print(avg_score)
     print(avg_time_per_tick)
     
+    write_data("%d/%d" % [wins, num_of_games])
     write_data("%.1f" % (scores_sum / num_of_games))
     write_data(agent_inst.get_n())
     file.close()
