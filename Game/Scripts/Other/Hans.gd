@@ -206,7 +206,10 @@ func update_curr_tunnel():
         speed += SPEED_INCREASE
         battery.update_timer()
         
-    rand.randomize()
+    if game.self_playing_agent:
+        rand.seed = game.seed_val
+    else:
+        rand.randomize()
     
     # restart next_trap_pos
     next_trap_pos = rand.randi_range(1120,1190)
