@@ -6,7 +6,7 @@ var options = """
 argument options:
     - n=int :           number of games
     
-    - agent=string :    name of the agent 
+    - agent=string :    name of the agent
                         options: [Keyboard, Static, Random, MonteCarlo]
                         
     - tunnel=int :      number of the tunnel to start from 
