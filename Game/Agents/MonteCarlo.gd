@@ -79,7 +79,6 @@ func init(actions, read, filename, curr_n):
                 
         file.close()
     else:
-        print("File does not exist")
         return false
         
     return true

@@ -4,18 +4,31 @@ const MAX_TUNNELS = 10
 
 var options = """
 argument options:
-    - n=int : number of games
-    - agent=string : name of the agent [Keyboard, Static, Random, MonteCarlo]
-    - tunnel=int : number of the tunnel to start from [1, ... , 10]
-    - env=[string] : list of obstacles that will be chosen in the game 
-        (subset of) [traps, bugs, viruses, tokens, I, O, MovingI, X, Walls, Hex, HexO, Balls, Triangles, HalfHex]
-    - shooting=string : enable or disable shooting [enabled, disabled]
-    - dists=int : number of states in a 100-meter interval
-    - rots=int : number of states in 360 degrees rotation
-    - database=string : read = read the data for this command from a file (if it exists) 
-                     write = update the data after the command is executed [read, write, read_write]
-                     (will not influence the following agents: Keyboard, Static, Random)
-    - options : displays options
+    - n=int :           number of games
+    
+    - agent=string :    name of the agent 
+                        options: [Keyboard, Static, Random, MonteCarlo]
+                        
+    - tunnel=int :      number of the tunnel to start from 
+                        options: [1, ... , 10]
+                        
+    - env=[string] :    list of obstacles that will be chosen in the game 
+                        options (any subset of): [traps, bugs, viruses, tokens, I, O, MovingI, X, 
+                                                  Walls, Hex, HexO, Balls, Triangles, HalfHex]
+                                            
+    - shooting=string : enable or disable shooting 
+                        options: [enabled, disabled]
+                        
+    - dists=int :       number of states in a 100-meter interval
+    
+    - rots=int :        number of states in 360 degrees rotation
+    
+    - database=string : read = read the data for this command from an existing file 
+                        write = update the data after the command is executed 
+                        options: [read, write, read_write]
+                        Note: will not influence the following agents: Keyboard, Static, Random
+                        
+    - options :         displays options
 """
 
 var game_scene = preload("res://Scenes/Other/Game.tscn")
@@ -75,6 +88,8 @@ func _ready():
         instance_agent()
         build_filename()
         if not agent_inst.init(actions, read, command, n):
+            print("Something went wrong, please try again")
+            print(options)
             get_tree().quit()
         play_game()
 
