@@ -79,14 +79,15 @@ def get_table(ad_data, agent):
     col_labels = []
     cell_text = []
 
-    for key, value in chosen_moves.items():
+    for key in chosen_moves.keys():
         key = key.split(',')
         key = [key[0][1:], key[1], key[2][:-1]]
         
         row_labels.append(key[1])
         col_labels.append((key[0], key[2]))
         
-        cell_text.append(value)
+    
+    cell_text = chosen_moves.values()
 
     print('cell_text: ', cell_text)        
     print('row_labels: ', row_labels)
