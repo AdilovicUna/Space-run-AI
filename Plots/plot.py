@@ -29,7 +29,7 @@ def main():
         agent = filename.split(',')[0].split('=')[1]
         ad_f = open(agent_databases_path + filename + '.txt', 'r')
         ad_data = get_table(ad_f.read().strip().split('\n')[1:], agent)
-        
+        print("_____________________________________________________________________________________________")
         #plot(co_data, ad_data)
         #plt.savefig(filename + '.png')
 
@@ -62,10 +62,11 @@ def plot(co_data, ad_data):
 
 def get_table(ad_data, agent):
     # ad_data (list of lines from agent_databases file) into:
-    # dict ('parameters_for_specific_agent', [ '[dist,rot,obstacle]', '[movement,shooting]' ])
+    # dict ('parameters_for_specific_agent': [ '[dist,rot,obstacle]', '[movement,shooting]' ])
     ad_data = [line.split(':') for line in ad_data]
     ad_data = dict((line[1], line[0].split('_')) for line in ad_data)
-
+    
+    # resulting datastructure: dict { ((dist, 'obstacle'), rot) : MOVES_MAP value }
     chosen_moves = {}
     # get the move the agent would choose based on the agent we are using
     match agent:
@@ -75,23 +76,32 @@ def get_table(ad_data, agent):
             raise Exception('Agent ' + agent + ' does not exist')
 
 
-    row_labels = []
+    cell_text = []    
     col_labels = []
-    cell_text = []
-
-    for key in chosen_moves.keys():
-        key = key.split(',')
-        key = [key[0][1:], key[1], key[2][:-1]]
-        
-        row_labels.append(key[1])
-        col_labels.append((key[0], key[2]))
-        
+    row_labels = []
     
-    cell_text = chosen_moves.values()
+    for key in chosen_moves.keys():
+        if not key[0] in row_labels:
+            row_labels.append(key[0])
+        if not key[1] in col_labels:
+            col_labels.append(key[1])
 
-    print('cell_text: ', cell_text)        
+    row_labels.sort()
     print('row_labels: ', row_labels)
+    col_labels.sort()
     print('col_labels: ', col_labels)
+    for row in row_labels:
+        cell = []
+        for col in col_labels:
+            if (row,col) in chosen_moves:
+                cell.append(chosen_moves[row,col])
+            else:
+                cell.append("_")
+        cell_text.append(cell)
+
+    print(col_labels)
+    for i in range(len(row_labels)):
+        print(row_labels[i], " ", cell_text[i])       
 
     return
 
@@ -108,7 +118,7 @@ def monte_carlo_calc(ad_data):
         param = eval(param)
 
         if state_move[0] != last_state and last_state != '':
-            result[last_state] = MOVES_MAP[curr_move]
+            result[parse_state(last_state)] = MOVES_MAP[curr_move]
             curr_state_max = -1
 
         if curr_state_max < param:
@@ -117,9 +127,13 @@ def monte_carlo_calc(ad_data):
 
         last_state = state_move[0]
 
-    result[last_state] = MOVES_MAP[curr_move]
+    result[parse_state(last_state)] = MOVES_MAP[curr_move]
+
     print(result)
     return result
 
+def parse_state(state):
+    state = state.split(',')
+    return ((int(state[0][1:]),state[2][:-1]), int(state[1]) )
 
 main()
