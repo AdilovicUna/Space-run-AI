@@ -1,3 +1,4 @@
+from calendar import c
 import matplotlib.pyplot as plt
 import numpy as np
 import os
@@ -29,9 +30,8 @@ def main():
         agent = filename.split(',')[0].split('=')[1]
         ad_f = open(agent_databases_path + filename + '.txt', 'r')
         ad_data = get_table(ad_f.read().strip().split('\n')[1:], agent)
-        print("_____________________________________________________________________________________________")
-        #plot(co_data, ad_data)
-        #plt.savefig(filename + '.png')
+        plot(co_data, ad_data)
+        plt.savefig(filename + '.png')
 
 
 def plot(co_data, ad_data):
@@ -50,16 +50,24 @@ def plot(co_data, ad_data):
     ax.plot(episodes, avg_score, label='Mean', linestyle='--')
     ax.legend(loc='upper right')
 
-    plt.figtext(x=0.02, y=0.04, s='Winning rate: ' + win_rate)
+    plt.figtext(x=0.02, y=0.05, s='Winning rate: ' + win_rate)
     plt.figtext(x=0.02, y=0.01, s='Previous games: ' + num_of_prev_games)
 
     plt.xlabel('Episodes')
     plt.ylabel('Scores')
 
+    plt.table(  cellText=ad_data[0],
+                cellLoc='center',
+                rowLabels=ad_data[1],
+                rowLoc='center',
+                colLabels=ad_data[2], 
+                colLoc='center',
+                loc='bottom')
+
+    plt.subplots_adjust(left=0.2, bottom=0.2)
+
 # each row of the ad_data should be in the form of:
 # [dist,rot,obstacle]_[movement,shooting]:parameters_for_specific_agent
-
-
 def get_table(ad_data, agent):
     # ad_data (list of lines from agent_databases file) into:
     # dict ('parameters_for_specific_agent': [ '[dist,rot,obstacle]', '[movement,shooting]' ])
@@ -87,9 +95,8 @@ def get_table(ad_data, agent):
             col_labels.append(key[1])
 
     row_labels.sort()
-    print('row_labels: ', row_labels)
     col_labels.sort()
-    print('col_labels: ', col_labels)
+
     for row in row_labels:
         cell = []
         for col in col_labels:
@@ -99,11 +106,7 @@ def get_table(ad_data, agent):
                 cell.append("_")
         cell_text.append(cell)
 
-    print(col_labels)
-    for i in range(len(row_labels)):
-        print(row_labels[i], " ", cell_text[i])       
-
-    return
+    return (cell_text, row_labels, col_labels)
 
 '''
     calculates which move we will choose for each possible state for the Monte Carlo agent
@@ -129,11 +132,10 @@ def monte_carlo_calc(ad_data):
 
     result[parse_state(last_state)] = MOVES_MAP[curr_move]
 
-    print(result)
     return result
 
 def parse_state(state):
     state = state.split(',')
-    return ((int(state[0][1:]),state[2][:-1]), int(state[1]) )
+    return ('(' + state[0][1:] + ', ' + state[2][:-1] + ')', int(state[1]) )
 
 main()
