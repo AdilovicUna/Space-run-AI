@@ -1,8 +1,7 @@
-from calendar import c
+import sys
 import matplotlib.pyplot as plt
 import numpy as np
 import os
-from pathlib import Path
 
 # - first element indicates the movement : -1 - left, 0 - Forward, 1 - right
 # - second element decides if Hans should shoot : 1 - yes, 0 - no
@@ -16,7 +15,7 @@ loop through all the files from Command_outputs, plot the data and save the plot
 '''
 
 
-def main():
+def main(window):
     command_outputs_path = '../Game/Command_outputs/'
     agent_databases_path = '../Game/Agent_databases/'
 
@@ -30,28 +29,30 @@ def main():
         agent = filename.split(',')[0].split('=')[1]
         ad_f = open(agent_databases_path + filename + '.txt', 'r')
         ad_data = get_table(ad_f.read().strip().split('\n')[1:], agent)
-        plot(co_data, ad_data)
+        plot(window, co_data, ad_data)
         plt.savefig(filename + '.png')
 
 
-def plot(co_data, ad_data):
-    window = 10  # take average of window size scores
-    scores = [float(i) for i in co_data[:-3]]
+def plot(window, co_data, ad_data):
+    scores = [float(i) for i in co_data[:-4]]
     scores = [np.mean(scores[i:i + window]) if i <= len(scores) -
               window else np.mean(scores[i:]) for i in range(len(scores))]
     episodes = [i for i in range(1, len(scores)+1)]
-    win_rate = co_data[-3]
-    avg_score = [float(co_data[-2])] * len(scores)
-    num_of_prev_games = co_data[-1]
+    winning_score = [float(co_data[-4].split()[1])] * len(scores) if co_data[-4].split()[1] != 'unknown' else -1
+    win_rate = co_data[-3].split()[1]
+    avg_score = [float(co_data[-2].split()[1])] * len(scores)
+    num_of_prev_games = co_data[-1].split()[1]
 
     _, ax = plt.subplots()
 
-    ax.plot(episodes, scores, label='Data')
-    ax.plot(episodes, avg_score, label='Mean', linestyle='--')
+    ax.plot(episodes, scores, '-c', label='Data')
+    ax.plot(episodes, avg_score, '--r', label='Mean')
+    if winning_score != -1:
+        ax.plot(episodes, winning_score, '--b', label='Winning score')
     ax.legend(loc='upper right')
 
-    plt.figtext(x=0.02, y=0.05, s='Winning rate: ' + win_rate)
-    plt.figtext(x=0.02, y=0.01, s='Previous games: ' + num_of_prev_games)
+    plt.figtext(x=0.02, y=0.95, s='Winning rate: ' + win_rate)
+    plt.figtext(x=0.02, y=0.91, s='Previous games: ' + num_of_prev_games)
 
     plt.xlabel('Episodes')
     plt.ylabel('Scores')
@@ -62,9 +63,10 @@ def plot(co_data, ad_data):
                 rowLoc='center',
                 colLabels=ad_data[2], 
                 colLoc='center',
-                loc='bottom')
+                loc='bottom', 
+                bbox=[0.0,-0.5 - (len(ad_data[1]) + 1) * 0.05,1, 0.09 + (len(ad_data[1]) + 1) * 0.09])
 
-    plt.subplots_adjust(left=0.2, bottom=0.2)
+    plt.subplots_adjust(left=0.2, bottom=0.4)
 
 # each row of the ad_data should be in the form of:
 # [dist,rot,obstacle]_[movement,shooting]:parameters_for_specific_agent
@@ -138,4 +140,19 @@ def parse_state(state):
     state = state.split(',')
     return ('(' + state[0][1:] + ', ' + state[2][:-1] + ')', int(state[1]) )
 
-main()
+if __name__ == "__main__":
+
+    # take average of window size scores (default 10)
+    window = 10
+    if len(sys.argv) == 2:
+        temp = sys.argv[1].split('=')
+        if temp[0] == "window":
+            window = int(temp[1])
+        else:
+            print("Invalid arguments")
+            exit 
+    elif len(sys.argv) > 2:
+        print("Invalid number of arguments")
+        exit
+    
+    main(window)

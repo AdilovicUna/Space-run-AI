@@ -60,6 +60,7 @@ var start
 var end
 var num_of_ticks = 0.0
 var wins = 0
+var winning_score = 0.0
 
 var file = File.new()
 var command = ""
@@ -232,7 +233,7 @@ func print_and_write_score(score, win):
     
     if win:  
         data += " Game won!"  
-        
+        winning_score = score
     print(data)   
     
 
@@ -246,9 +247,14 @@ func print_and_write_ending():
     print(avg_score)
     print(avg_time_per_tick)
     
-    write_data("%d/%d" % [wins, num_of_games])
-    write_data("%.1f" % (scores_sum / num_of_games))
-    write_data(agent_inst.get_n())
+    if winning_score > 0.0:
+        write_data("winning_score %d" % winning_score)   
+    else :
+         write_data("winning_score unknown")   
+        
+    write_data("win_rate %d/%d" % [wins, num_of_games])    
+    write_data("avg_score %.1f" % (scores_sum / num_of_games))
+    write_data("previous_games %s" % agent_inst.get_n())
     file.close()
 
 func write_data(data):
