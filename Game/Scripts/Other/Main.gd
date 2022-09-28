@@ -1,6 +1,6 @@
 extends Node
 
-const MAX_TUNNELS = 10
+const MAX_LEVEL = 10
 
 var options = """
 argument options:
@@ -9,7 +9,7 @@ argument options:
     - agent=string :    name of the agent
                         options: [Keyboard, Static, Random, MonteCarlo]
                         
-    - tunnel=int :      number of the tunnel to start from 
+    - level=int :      number of the level to start from 
                         options: [1, ... , 10]
                         
     - env=[string] :    list of obstacles that will be chosen in the game 
@@ -40,7 +40,7 @@ var all_env = ["traps", "bugs", "viruses", "tokens", "I", "O", "MovingI", "X", "
 # all parameters and their default values
 var n = 100
 var agent = "Keyboard"
-var tunnel = 1
+var level = 1
 var env = []
 var shooting = false
 var actions = [[-1,0], [0,0], [1,0], [-1,1], [0,1], [1,1]] # depend on shooting parameter
@@ -114,16 +114,15 @@ func play_game():
 
 func set_param_in_game():
     game.set_agent(agent, agent_inst)
-    game.set_tunnel(tunnel)
+    game.set_tunnel(level - 1) # tunnels start from 0
     game.set_env(env)
     game.set_dists(dists)
     game.set_rots(rots)
     game.set_seed_val(seed_val)
-    game.set_max_tunnels(MAX_TUNNELS)
+    game.set_max_tunnels(MAX_LEVEL)
     seed_val += 1
 
 func instance_agent():
-    
     # if there is no window, static agent is default
     if agent == "Keyboard" and not VisualServer.render_loop_enabled:
         agent = "Static"
@@ -148,7 +147,7 @@ func build_filename():
     if sorted_env == []:
         sorted_env = "all"
     
-    command = PoolStringArray(["agent=" + String(agent), "tunnel=" + String(tunnel), "env=" + String(sorted_env), 
+    command = PoolStringArray(["agent=" + String(agent), "level=" + String(level), "env=" + String(sorted_env), 
                             "shooting=" + String(shooting), "dists=" + String(dists), "rots=" + String(rots)]
                                 ).join(",").replace(' ','')
    
@@ -162,8 +161,8 @@ func set_param(param):
                     n = int(param[key])
                 "agent":
                     agent = param[key]
-                "tunnel":
-                    tunnel = int(param[key])
+                "level":
+                    level = int(param[key])
                 "env":
                     env = param[key].split(",")
                 "shooting":
@@ -194,7 +193,7 @@ func set_param(param):
                         
         #check if everything is valid
         if (n < 0 or not agent in all_agents or 
-            tunnel < 0 or tunnel > MAX_TUNNELS or not check_env() or
+            level < 0 or level > MAX_LEVEL or not check_env() or
             dists < 0 or rots < 0):
             return false 
               

@@ -38,7 +38,6 @@ var next_trap_posX = 0.0
 var next_trap_rotX = 0.0
 
 func _physics_process(delta):
-    
     # the game just started
     if show_level == 0:
         show_level_label()
@@ -81,7 +80,15 @@ func _physics_process(delta):
     # so we know where the next trap is on x axis
     var type = calc_type()
     state.update_state(calc_dist(),calc_rot(),type)
+
+func set_tunnel_vars(starting_level, tunnel):
+    move_tunnel = tunnel
+    next_tunnel = (tunnel + 1) % tunnels.get_child_count()
+    curr_tunnel = tunnel
     
+    # we already subtracted 1 so if starting_level is 0 it won't change  the variable
+    curr_tunnel_x -= 2500 * starting_level 
+  
 func set_speed(n):
     # n represents how many times we need to increase the speed
     # based on which tunnel we are in

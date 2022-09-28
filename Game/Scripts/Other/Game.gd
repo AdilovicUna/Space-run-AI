@@ -31,6 +31,7 @@ var seed_val = 0
 var num_of_ticks = 0
 var num_of_speed_ups = 0
 var max_tunnels = 0
+var starting_level = 0  
 
 # curr_layer cannot be 0 unless the Help menu is actually shown
 # because of the End.gd script conditions
@@ -41,6 +42,7 @@ func _ready():
         hans.get_node("Sounds/shootSound").stream.loop = false
         agent = Keyboard.new()
     hans.set_speed(num_of_speed_ups)
+    hans.set_tunnel_vars(starting_level, tunnel)
     _start()
 
 func set_agent(agent_str, agent_inst):   
@@ -50,6 +52,7 @@ func set_agent(agent_str, agent_inst):
     agent = agent_inst
 
 func set_tunnel(t):
+    starting_level = t
     tunnel = t % NUM_OF_TUNNELS
     num_of_speed_ups = int(t / NUM_OF_TUNNELS)
 
