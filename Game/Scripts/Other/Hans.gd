@@ -126,7 +126,7 @@ func calc_rot():
 
     # similar to calc_dist()cd De   
     var interval = int(ceil(360.0 / game.rots))
-    return interval * (real_rot / interval)
+    return abs(interval * (real_rot / interval) - 360)
     
 func calc_type():
     # find out what is the next trap 
