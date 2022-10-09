@@ -8,3 +8,6 @@ func update_level():
 
 func get_level():
     return level
+    
+func set_level(starting_level):
+    level = starting_level

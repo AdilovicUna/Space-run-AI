@@ -115,11 +115,11 @@ func play_game():
 func set_param_in_game():
     game.set_agent(agent, agent_inst)
     game.set_tunnel(level - 1) # tunnels start from 0
+    game.set_max_tunnels(MAX_LEVEL)
     game.set_env(env)
     game.set_dists(dists)
     game.set_rots(rots)
     game.set_seed_val(seed_val)
-    game.set_max_tunnels(MAX_LEVEL)
     seed_val += 1
 
 func instance_agent():

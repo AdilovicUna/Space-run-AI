@@ -31,7 +31,7 @@ var seed_val = 0
 var num_of_ticks = 0
 var num_of_speed_ups = 0
 var max_tunnels = 0
-var starting_level = 0  
+var starting_level = 1
 
 # curr_layer cannot be 0 unless the Help menu is actually shown
 # because of the End.gd script conditions
@@ -55,7 +55,10 @@ func set_tunnel(t):
     starting_level = t
     tunnel = t % NUM_OF_TUNNELS
     num_of_speed_ups = int(t / NUM_OF_TUNNELS)
-
+    
+func set_max_tunnels(mt):
+    max_tunnels = mt
+    
 func set_env(parameters):
     # env wasn't specified, so we put everything
     if parameters.size() == 0:
@@ -84,9 +87,6 @@ func set_rots(r):
 
 func set_seed_val(val):
     seed_val = val
-    
-func set_max_tunnels(mt):
-    max_tunnels = mt
 
 func _start():
     score.show()

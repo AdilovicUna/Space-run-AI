@@ -21,14 +21,12 @@ onready var state = get_node("../UI/State")
 
 var rand = RandomNumberGenerator.new()
 
-var move_tunnel = lvl.ONE
 var next_tunnel = lvl.TWO
 var curr_tunnel = lvl.ONE
 
 var speed = 50.0
 var next_trap_pos = rand.randi_range(1120,1190) # first trap for the next level will be here
 var new_trap = 3650 # start producing traps for the next level at this point
-var curr_tunnel_x = 2500
 var show_level = 0 # used to measure how long level lable should be displayed
 var isShootingButtonPressed = false # indicates whether Hans should shoot
 var can_shoot = true
@@ -42,17 +40,15 @@ func _physics_process(delta):
     if show_level == 0:
         show_level_label()
         
-    translate_tunnel_and_ground()
-    
     # we passed one tunnel
-    if translation.x < (curr_tunnel_x - 1250): 
+    if translation.x < (tunnels_children[curr_tunnel].translation.x - 1250): 
         update_curr_tunnel()
     
     # Hans entered the new tunnel, hide the level label
     if level.visible and abs(translation.x - show_level) > 75:
         level.hide()        
         
-    tunnels.delete_obstacle_until_x(curr_tunnel,translation.x - curr_tunnel_x + 50)
+    tunnels.delete_obstacle_until_x(curr_tunnel,translation.x - tunnels_children[curr_tunnel].translation.x + 50)
     
     # create a trap in the next tunnel every 50 meters
     if translation.x < new_trap:
@@ -82,13 +78,14 @@ func _physics_process(delta):
     state.update_state(calc_dist(),calc_rot(),type)
 
 func set_tunnel_vars(starting_level, tunnel):
-    move_tunnel = tunnel
     next_tunnel = (tunnel + 1) % tunnels.get_child_count()
     curr_tunnel = tunnel
+    var other1_tunnel  = (curr_tunnel + 1) % tunnels.get_child_count()
+    var other2_tunnel = (curr_tunnel + 2) % tunnels.get_child_count()
+    tunnels_children[other1_tunnel].translation.x = tunnels_children[curr_tunnel].translation.x - 2500
+    tunnels_children[other2_tunnel].translation.x = tunnels_children[curr_tunnel].translation.x - 5000
+    level.set_level(starting_level)
     
-    # we already subtracted 1 so if starting_level is 0 it won't change  the variable
-    curr_tunnel_x -= 2500 * starting_level 
-  
 func set_speed(n):
     # n represents how many times we need to increase the speed
     # based on which tunnel we are in
@@ -96,7 +93,7 @@ func set_speed(n):
     
 func calc_dist():
     # this will give us a number until the next trap
-    var real_dist = int(translation.x - curr_tunnel_x - next_trap_posX)
+    var real_dist = int(translation.x - tunnels_children[curr_tunnel].translation.x - next_trap_posX)
  
     # we determine which state we are in
     # eg. game.dists = 4, 100/4 = 25 
@@ -130,7 +127,7 @@ func calc_rot():
     
 func calc_type():
     # find out what is the next trap 
-    var pos = translation.x - curr_tunnel_x
+    var pos = translation.x - tunnels_children[curr_tunnel].translation.x
     var type
     var found = false
     
@@ -200,6 +197,7 @@ func create_new_trap():
     next_trap_pos -= rand.randi_range(tunnels.TRAP_RANGE_FROM,tunnels.TRAP_RANGE_TO)
 
 func update_curr_tunnel():
+    var prev_tunnel = curr_tunnel
     # update cur_tunnel Hans is running through
     next_tunnel = (next_tunnel + 1) % tunnels_children.size()
     curr_tunnel = (curr_tunnel + 1) % tunnels_children.size()
@@ -221,8 +219,9 @@ func update_curr_tunnel():
     # restart next_trap_pos
     next_trap_pos = rand.randi_range(1120,1190)
     
-    curr_tunnel_x -= 2500
-
+    translate_tunnel_and_ground(prev_tunnel)    
+    
+    
 func show_level_label():
     #show which level we are approaching
     show_level = translation.x
@@ -230,13 +229,10 @@ func show_level_label():
     level.show()
     
 
-func translate_tunnel_and_ground():
+func translate_tunnel_and_ground(prev_tunnel):
     # making tunnels (and ground) infinite by moving them forward
     # after Hans passes them	
-    var tunnel = tunnels_children[move_tunnel]
-    if translation.x < tunnel.translation.x - 2000:				
-        tunnel.translation.x -= 7500    # move tunnel ahead (3x2500)
-        move_tunnel = (move_tunnel + 1) % tunnels_children.size()
+    tunnels_children[prev_tunnel].translation.x -= 7500    # move tunnel ahead (3x2500)
     if translation.x < ground.translation.x - 2000:
         ground.translation.x -= 3000 # move ground ahead
 

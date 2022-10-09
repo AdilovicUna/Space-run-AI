@@ -9,7 +9,6 @@ class_name Keyboard
 
 # move and remember
 func move(_state, _score):
-    
     var result = [0,0]
     if Input.is_action_pressed("right"):
         result[0] = 1
