@@ -1,3 +1,4 @@
+from pydoc import ispath
 import sys
 import matplotlib.pyplot as plt
 import numpy as np
@@ -30,7 +31,23 @@ def main(window):
         ad_f = open(agent_databases_path + filename + '.txt', 'r')
         ad_data = get_table(ad_f.read().strip().split('\n')[1:], agent)
         plot(window, co_data, ad_data)
-        plt.savefig(filename + '.png')
+
+
+        # create path so that we can sort out the plots nicely
+        env = filename[filename.find('env'):]
+        env = 'all' if 'all' in env else env[5:env.find(']')]
+
+        path = 'plots/' + env + '/win=' + str(window) + '/no_disc,iov=100.00/'
+        if not os.path.isdir(path):
+            os.makedirs(path)
+
+        while True:
+            if os.path.isdir(path + filename + '.png'):
+                filename += '_rep'
+            else:
+                break
+
+        plt.savefig(path + filename + '.png')
 
 
 def plot(window, co_data, ad_data):
