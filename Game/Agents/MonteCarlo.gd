@@ -29,6 +29,7 @@ var ACTIONS = []
 var FILENAME = ""
 # discounting value
 const GAMMA = 1
+const INITIAL_OPTIMISTIC_VALUE = 20.0
 
 # move and remember   
 func move(state, score):
@@ -124,7 +125,7 @@ func save(write):
 func Q(state, action):
     var state_action = get_state_action(state, action)
     if not (state_action in total_return):
-        total_return[state_action] = 100.0
+        total_return[state_action] = INITIAL_OPTIMISTIC_VALUE
         visits[state_action] = 1
     return total_return[state_action] / visits[state_action]
 

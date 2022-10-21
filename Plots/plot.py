@@ -35,19 +35,14 @@ def main(window):
 
         # create path so that we can sort out the plots nicely
         env = filename[filename.find('env'):]
-        env = 'all' if 'all' in env else env[5:env.find(']')]
+        env = 'all' if '=all' in env else env[5:env.find(']')]
 
         path = 'plots/' + env + '/win=' + str(window) + '/no_disc,iov=100.00/'
         if not os.path.isdir(path):
             os.makedirs(path)
 
-        while True:
-            if os.path.isdir(path + filename + '.png'):
-                filename += '_rep'
-            else:
-                break
 
-        plt.savefig(path + filename + '.png')
+        plt.savefig(path + filename + '.png',bbox_inches='tight', pad_inches=0.2, dpi=100)
 
 
 def plot(window, co_data, ad_data):
@@ -74,17 +69,15 @@ def plot(window, co_data, ad_data):
     plt.xlabel('Episodes')
     plt.ylabel('Scores')
 
-    plt.table(  cellText=ad_data[0],
+    ax.table(  cellText=ad_data[0],
                 cellLoc='center',
                 rowLabels=ad_data[1],
                 rowLoc='center',
                 colLabels=ad_data[2], 
                 colLoc='center',
-                loc='bottom', 
-                bbox=[0.0,-0.5 - (len(ad_data[1]) + 1) * 0.05,1, 0.09 + (len(ad_data[1]) + 1) * 0.09])
-
-    plt.subplots_adjust(left=0.2, bottom=0.4)
-
+                loc='bottom',
+                bbox=[0, -0.5 - (len(ad_data[1]) + 1) * 0.025, 1, 0.3 + (len(ad_data[1]) + 1) * 0.025])
+   
 # each row of the ad_data should be in the form of:
 # [dist,rot,obstacle]_[movement,shooting]:parameters_for_specific_agent
 def get_table(ad_data, agent):
