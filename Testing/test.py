@@ -20,7 +20,7 @@ def run_with_one_env(database, agent, n, env, shooting, level, path, curr_env):
     command_outputs_path = '../Game/Command_outputs/'
 
     while True:
-        if win_rate >= 0.3 or (dists == 4 and rots == 30):
+        if win_rate >= 0.3 or (dists == 4 and rots == 24):
             break
 
         command = ['godot', '--no-window', '--fixed-fps', '1', '--disable-render-loop',
@@ -40,6 +40,12 @@ def run_with_one_env(database, agent, n, env, shooting, level, path, curr_env):
         # co_data = co_f.read().strip().split('\n')
         # win_rate = co_data[-3].split()[1]
         # print(win_rate)
+
+        if rots == 24:
+            dists += 1
+            rots = 6
+        else:
+            rots += 1
 
         break
 
@@ -68,7 +74,6 @@ def main():
 
             n = 3 * len(curr_env)
             env = ','.join(curr_env)
-
            
             run_with_one_env(database, agent, n, env, 'disabled', level, path, curr_env)
 
