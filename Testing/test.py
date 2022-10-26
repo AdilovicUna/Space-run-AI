@@ -118,6 +118,9 @@ if __name__ == '__main__':
     # arg format: env=I,MovingI,bugs,... subsets=False (or True)
 
     all_env = ['traps', 'bugs', 'viruses', 'tokens', 'I', 'O', 'MovingI', 'X', 'Walls', 'Hex', 'HexO', 'Balls', 'Triangles', 'HalfHex']
+    
+    # indicates if the program should test only individual elements of the all_env
+    # or all of the subsets (powerset)
     subsets = True
 
     if len(sys.argv) <= 3:
