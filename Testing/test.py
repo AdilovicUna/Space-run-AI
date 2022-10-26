@@ -1,3 +1,4 @@
+from email.policy import default
 import subprocess
 import sys
 
@@ -41,8 +42,8 @@ def run_with_one_env(database, agent, n, env, shooting, level, path, curr_env):
             agent, level, curr_env, shooting, dists, rots)
         co_f = open(command_outputs_path + filename + '.txt', 'r')
         co_data = co_f.read().strip().split('\n')
-        win_rate = co_data[-3].split()[1]
-        win_rate = int(win_rate[0]) / int(win_rate[2])
+        win_rate = co_data[-3].split()[1].split('/')
+        win_rate = int(win_rate[0]) / int(win_rate[1])
 
         if rots == 24:
             dists += 1
@@ -50,8 +51,27 @@ def run_with_one_env(database, agent, n, env, shooting, level, path, curr_env):
         else:
             rots += 1
 
+def run(curr_env, games_per_env, 
+        len_traps, len_bugs, len_viruses, len_tokens,
+        database, agent, level, path):
+    
+    n = (games_per_env * len(curr_env) + 
+        games_per_env * len_traps * int('traps' in curr_env) + 
+        games_per_env * len_bugs * int('bugs' in curr_env) + 
+        games_per_env * len_viruses * int('viruses' in curr_env) + 
+        games_per_env * len_tokens * int('tokens' in curr_env))
 
-def main(all_env):
+    env = ','.join(curr_env)
+
+    run_with_one_env(database, agent, n, env,
+                        'disabled', level, path, curr_env)
+
+    if 'bugs' in curr_env or 'viruses' in curr_env:
+        run_with_one_env(database, agent, n, env,
+                            'enabled', level, path, curr_env)
+
+
+def main(all_env, subsets):
     special_env = ['I', 'bugs', 'viruses']
     len_traps = 10
     len_bugs = 3
@@ -72,46 +92,53 @@ def main(all_env):
 
     path = '../Game'
 
-    for i in all_env:
-        for j in range(len(env_powerset)):
-            curr_env = env_powerset[j]+[i]
-            env_powerset += [curr_env]
+    if subsets:
+        for i in all_env:
+            for j in range(len(env_powerset)):
+                curr_env = env_powerset[j]+[i]
 
-            if env_powerset == []:
-                continue
-            
-            n = (games_per_env * len(curr_env) + 
-                games_per_env * len_traps * int('traps' in curr_env) + 
-                games_per_env * len_bugs * int('bugs' in curr_env) + 
-                games_per_env * len_viruses * int('viruses' in curr_env) + 
-                games_per_env * len_tokens * int('tokens' in curr_env))
+                env_powerset += [curr_env]
+                if env_powerset == []:
+                    return
 
-            env = ','.join(curr_env)
-
-            run_with_one_env(database, agent, n, env,
-                             'disabled', level, path, curr_env)
-
-            if 'bugs' in curr_env or 'viruses' in curr_env:
-                run_with_one_env(database, agent, n, env,
-                                 'enabled', level, path, curr_env)
+                run(curr_env, games_per_env,
+                    len_traps, len_bugs, len_viruses, len_tokens,
+                    database, agent, level, path)
+    else:
+        for i in all_env:
+            print(all_env)
+            print(i)
+            curr_env = [i]
+            run(curr_env, games_per_env,
+                len_traps, len_bugs, len_viruses, len_tokens,
+                database, agent, level, path)
 
 if __name__ == '__main__':
 
-    # arg format: env=I,MovingI,bugs ...
+    # arg format: env=I,MovingI,bugs,... subsets=False (or True)
 
     all_env = ['traps', 'bugs', 'viruses', 'tokens', 'I', 'O', 'MovingI', 'X', 'Walls', 'Hex', 'HexO', 'Balls', 'Triangles', 'HalfHex']
+    subsets = True
 
-    if len(sys.argv) == 2:
-        temp = sys.argv[1].split('=')
+    if len(sys.argv) <= 3:
+        for i in sys.argv:
+            temp = i.split('=')
 
-        if temp[0] == "env":
-            all_env = temp[1].split(',')
+            match temp[0]:
+                case "env":
+                    all_env = temp[1].split(',')
+                case "subsets":
+                    subsets = temp[1] == 'True'
+                case _:
+                    print("Invalid arguments")
+                    exit 
         else:
             print("Invalid arguments")
             exit 
 
-    elif len(sys.argv) > 2:
+        main(all_env, subsets)
+
+    else:
         print("Invalid number of arguments")
         exit
     
-    main(all_env)
