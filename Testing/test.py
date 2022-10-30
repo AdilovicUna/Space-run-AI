@@ -1,6 +1,8 @@
 from email.policy import default
+from genericpath import exists
 import subprocess
 import sys
+from turtle import goto
 
 
 def build_filename(agent, level, env, shooting, dists, rots):
@@ -15,16 +17,19 @@ def build_filename(agent, level, env, shooting, dists, rots):
     return ','.join(command).replace(' ', '').replace('\'', '')
 
 
-def run_with_one_env(database, agent, n, env, shooting, level, path, curr_env):
-    dists = 1
-    rots = 6
-    win_rate = 0
+def run_with_one_env(database, agent, n, env, shooting, level, path, curr_env,
+                    dists_from, dists_to, rots_from, rots_to, win_rate_minimum):
 
+    dists = dists_from
+    rots = rots_from
+
+    win_rate = 0
     command_outputs_path = '../Game/Command_outputs/'
 
     while True:
-        if win_rate >= 0.3 or (dists == 4 and rots == 24):
-            break
+        if (win_rate >= win_rate_minimum or 
+            (dists == dists_to and rots == rots_to)):
+            return
 
         command = ['godot', '--no-window', '--fixed-fps', '1', '--disable-render-loop',
                    'database=' + database,
@@ -45,44 +50,66 @@ def run_with_one_env(database, agent, n, env, shooting, level, path, curr_env):
         win_rate = co_data[-3].split()[1].split('/')
         win_rate = int(win_rate[0]) / int(win_rate[1])
 
-        if rots == 24:
+        if rots == rots_to:
             dists += 1
-            rots = 6
+            rots = rots_from
         else:
             rots += 1
 
+def find_minimum_param(agent, level, curr_env,shooting):
+    result_d = 1
+    result_r = 6
+    command_outputs_path = '../Game/Command_outputs/'
+    for env in curr_env:
+        dists = 10
+        rots = 100
+        for d in range(dists, 0, -1):
+            for r in range(rots, 0, -1):
+                filename = build_filename(agent, level, [env], 
+                                            shooting, d, r)
+                if exists(command_outputs_path + filename + '.txt'):
+                    result_d = max(result_d, d)
+                    result_r = max(result_r, r)
+                    break
+            else:
+                continue
+            break
+
+    return [result_d, result_r]
+
 def run(curr_env, games_per_env, 
         len_traps, len_bugs, len_viruses, len_tokens,
-        database, agent, level, path):
+        database, agent, level, path,
+        dists_from, dists_to, rots_from, rots_to, win_rate_minimum):
     
     n = (games_per_env * len(curr_env) + 
         games_per_env * len_traps * int('traps' in curr_env) + 
         games_per_env * len_bugs * int('bugs' in curr_env) + 
         games_per_env * len_viruses * int('viruses' in curr_env) + 
-        games_per_env * len_tokens * int('tokens' in curr_env))
+        games_per_env * len_tokens * int('tokens' in curr_env) +
+        games_per_env * int(dists_to > 4) + 
+        games_per_env * int(rots_to > 12))
 
     env = ','.join(curr_env)
 
+    dists_from, rots_from = find_minimum_param(agent, level, curr_env,'disabled')
+    
     run_with_one_env(database, agent, n, env,
-                        'disabled', level, path, curr_env)
+                        'disabled', level, path, curr_env,
+                         dists_from, dists_to, rots_from, rots_to, win_rate_minimum)
 
     if 'bugs' in curr_env or 'viruses' in curr_env:
+        dists_from, rots_from = find_minimum_param(agent, level, curr_env,'enabled')
         run_with_one_env(database, agent, n, env,
-                            'enabled', level, path, curr_env)
+                            'enabled', level, path, curr_env,
+                            dists_from, dists_to, rots_from, rots_to, win_rate_minimum)
 
-
-def main(all_env, subsets):
-    special_env = ['I', 'bugs', 'viruses']
+def main(all_env, subsets, dists_from, dists_to, rots_from, rots_to, 
+            games_per_env, win_rate_minimum):
     len_traps = 10
     len_bugs = 3
     len_viruses = 2
     len_tokens = 1
-    
-    # 250 per env in case dists and rots get very big
-    games_per_env = 250
-
-    if 'traps' in all_env:
-        all_env = [env for env in all_env if env in special_env]
     
     env_powerset = [[]]
 
@@ -93,55 +120,78 @@ def main(all_env, subsets):
     path = '../Game'
 
     if subsets:
+        special_env = ['traps', 'bugs', 'viruses', 'tokens']
+        if 'traps' in all_env:
+            all_env = [env for env in all_env if env in special_env]
+
         for i in all_env:
             for j in range(len(env_powerset)):
                 curr_env = env_powerset[j]+[i]
+                print('curr_env: ', curr_env)
 
                 env_powerset += [curr_env]
                 if env_powerset == []:
                     return
-
+                
                 run(curr_env, games_per_env,
                     len_traps, len_bugs, len_viruses, len_tokens,
-                    database, agent, level, path)
+                    database, agent, level, path, 
+                    dists_from, dists_to, rots_from, rots_to, win_rate_minimum)
     else:
         for i in all_env:
-            print(all_env)
-            print(i)
             curr_env = [i]
             run(curr_env, games_per_env,
                 len_traps, len_bugs, len_viruses, len_tokens,
-                database, agent, level, path)
+                database, agent, level, path,
+                dists_from, dists_to, rots_from, rots_to, win_rate_minimum)
 
 if __name__ == '__main__':
 
     # arg format: env=I,MovingI,bugs,... subsets=False (or True)
+    #             dists=1,4 rots=6,12 win_rate_minimum=0.3 games_per_env=250
 
-    all_env = ['traps', 'bugs', 'viruses', 'tokens', 'I', 'O', 'MovingI', 'X', 'Walls', 'Hex', 'HexO', 'Balls', 'Triangles', 'HalfHex']
+    #all_env = ['traps', 'bugs', 'viruses', 'tokens', 'I', 'O', 'MovingI', 'X', 'Walls', 'Hex', 'HexO', 'Balls', 'Triangles', 'HalfHex']
+    #all_env = ['I', 'O', 'MovingI', 'X', 'Walls', 'Hex', 'HexO', 'Balls', 'Triangles', 'HalfHex']
+    #all_env = ['I', 'O', 'MovingI', 'X', 'Walls', 'Hex', 'Triangles']
+    #all_env = ['HexO', 'Balls', 'HalfHex']
     
     # indicates if the program should test only individual elements of the all_env
     # or all of the subsets (powerset)
     subsets = True
 
-    if len(sys.argv) <= 3:
-        for i in sys.argv:
-            temp = i.split('=')
+    games_per_env = 250
 
-            match temp[0]:
-                case "env":
-                    all_env = temp[1].split(',')
-                case "subsets":
-                    subsets = temp[1] == 'True'
-                case _:
-                    print("Invalid arguments")
-                    exit 
-        else:
-            print("Invalid arguments")
-            exit 
+    dists_from = 1
+    dists_to = 4
 
-        main(all_env, subsets)
+    rots_from = 6
+    rots_to = 24
 
-    else:
-        print("Invalid number of arguments")
-        exit
-    
+    win_rate_minimum = 0.3
+
+    for i in range(1,len(sys.argv)):
+        i = sys.argv[i]
+        temp = i.split('=')
+
+        match temp[0]:
+            case "env":
+                all_env = temp[1].split(',')
+            case "subsets":
+                subsets = temp[1] == 'True'
+            case "dists":
+                d = temp[1].split(',')
+                dists_from = int(d[0])
+                dists_to = int(d[1])
+            case "rots":
+                r = temp[1].split(',')
+                rots_from = int(r[0])
+                rots_to = int(r[1])
+            case "win_rate_minimum":
+                win_rate_minimum = int(temp[1])
+            case "games_per_env":
+                games_per_env = int(temp[1])
+            case _:
+                print("Invalid arguments")
+                exit 
+            
+    main(all_env, subsets, dists_from, dists_to, rots_from, rots_to, games_per_env, win_rate_minimum)
