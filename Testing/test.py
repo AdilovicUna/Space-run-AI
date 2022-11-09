@@ -80,7 +80,7 @@ def find_minimum_param(agent, level, curr_env,shooting):
 def run(curr_env, games_per_env, 
         len_traps, len_bugs, len_viruses, len_tokens,
         database, agent, level, path,
-        dists_from, dists_to, rots_from, rots_to, win_rate_minimum):
+        dists_from, dists_to, rots_from, rots_to, win_rate_minimum, subsets):
     
     n = (games_per_env * len(curr_env) + 
         games_per_env * len_traps * int('traps' in curr_env) + 
@@ -92,14 +92,16 @@ def run(curr_env, games_per_env,
 
     env = ','.join(curr_env)
 
-    dists_from, rots_from = find_minimum_param(agent, level, curr_env,'disabled')
+    if subsets:
+        dists_from, rots_from = find_minimum_param(agent, level, curr_env,'disabled')
     
     run_with_one_env(database, agent, n, env,
                         'disabled', level, path, curr_env,
                          dists_from, dists_to, rots_from, rots_to, win_rate_minimum)
 
     if 'bugs' in curr_env or 'viruses' in curr_env:
-        dists_from, rots_from = find_minimum_param(agent, level, curr_env,'enabled')
+        if subsets:
+            dists_from, rots_from = find_minimum_param(agent, level, curr_env,'enabled')
         run_with_one_env(database, agent, n, env,
                             'enabled', level, path, curr_env,
                             dists_from, dists_to, rots_from, rots_to, win_rate_minimum)
@@ -136,14 +138,14 @@ def main(all_env, subsets, dists_from, dists_to, rots_from, rots_to,
                 run(curr_env, games_per_env,
                     len_traps, len_bugs, len_viruses, len_tokens,
                     database, agent, level, path, 
-                    dists_from, dists_to, rots_from, rots_to, win_rate_minimum)
+                    dists_from, dists_to, rots_from, rots_to, win_rate_minimum, subsets)
     else:
         for i in all_env:
             curr_env = [i]
             run(curr_env, games_per_env,
                 len_traps, len_bugs, len_viruses, len_tokens,
                 database, agent, level, path,
-                dists_from, dists_to, rots_from, rots_to, win_rate_minimum)
+                dists_from, dists_to, rots_from, rots_to, win_rate_minimum, subsets)
 
 if __name__ == '__main__':
 
@@ -152,7 +154,7 @@ if __name__ == '__main__':
 
     #all_env = ['traps', 'bugs', 'viruses', 'tokens', 'I', 'O', 'MovingI', 'X', 'Walls', 'Hex', 'HexO', 'Balls', 'Triangles', 'HalfHex']
     #all_env = ['I', 'O', 'MovingI', 'X', 'Walls', 'Hex', 'HexO', 'Balls', 'Triangles', 'HalfHex']
-    #all_env = ['I', 'O', 'MovingI', 'X', 'Walls', 'Hex', 'Triangles']
+    all_env = ['I', 'O', 'MovingI', 'X', 'Walls', 'Hex', 'Triangles']
     #all_env = ['HexO', 'Balls', 'HalfHex']
     
     # indicates if the program should test only individual elements of the all_env
@@ -172,7 +174,6 @@ if __name__ == '__main__':
     for i in range(1,len(sys.argv)):
         i = sys.argv[i]
         temp = i.split('=')
-
         match temp[0]:
             case "env":
                 all_env = temp[1].split(',')

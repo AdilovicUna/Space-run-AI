@@ -21,7 +21,7 @@ func move(_state, _score):
     return result
 
 # initialize
-func init(_actions, _read, _filename, _curr_n):
+func init(_actions, _read, _filename, _curr_n, _agent_specific_param):
     return true
 
 # reset

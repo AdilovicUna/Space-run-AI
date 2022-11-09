@@ -15,8 +15,8 @@ var obstacle_number = 0
 
 const DEVIATION = 0.01
 const ROTATE_SPEED = 2
-const TRAP_RANGE_FROM = 70
-const TRAP_RANGE_TO = 90
+const TRAP_RANGE_FROM = 80
+const TRAP_RANGE_TO = 100
 
 # IMPORTANT!
 # agent's function move returns a list of 2 elements:
@@ -24,6 +24,9 @@ const TRAP_RANGE_TO = 90
 # - second element decides if Hans should shoot : 1 - yes, 0 - no
 
 func _physics_process(delta):
+    if game.done:
+        return
+        
     var move = game.agent.move(game.state.get_state(), game.score.get_score())
     #rotates all children of "traps"
     if move[0] == 1:

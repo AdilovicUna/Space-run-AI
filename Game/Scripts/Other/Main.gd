@@ -9,7 +9,7 @@ argument options:
     - agent=string :    name of the agent
                         options: [Keyboard, Static, Random, MonteCarlo]
                         
-    - level=int :      number of the level to start from 
+    - level=int :       number of the level to start from 
                         options: [1, ... , 10]
                         
     - env=[string] :    list of obstacles that will be chosen in the game 
@@ -23,10 +23,16 @@ argument options:
     
     - rots=int :        number of states in 360 degrees rotation
     
-    - database=string : read = read the data for this command from an existing file 
-                        write = update the data after the command is executed 
-                        options: [read, write, read_write]
-                        Note: will not influence the following agents: Keyboard, Static, Random
+    - database=string :     read = read the data for this command from an existing file 
+                            write = update the data after the command is executed 
+                            options: [read, write, read_write]
+                            Note: will not influence the following agents: Keyboard, Static, Random
+    - agent_specific_param : 
+                            indicates parameters specific for the particular agent as follows:
+                            Keyboard=[]
+                            Static=[]
+                            Random=[]
+                            Monte Carlo=[float, float] : [GAMMA (range [0,1]), INITIAL OPTIMISTIC VALUE [0,~)]
                         
     - options :         displays options
 """
@@ -48,6 +54,7 @@ var dists = 1
 var rots = 6
 var read = false
 var write = false
+var agent_specific_param = []
 
 var agent_inst = Keyboard.new()
 
@@ -88,7 +95,7 @@ func _ready():
         start = OS.get_ticks_usec()
         instance_agent()
         build_filename()
-        if not agent_inst.init(actions, read, command, n):
+        if not agent_inst.init(actions, read, command, n, agent_specific_param):
             print("Something went wrong, please try again")
             print(options)
             get_tree().quit()
@@ -188,6 +195,9 @@ func set_param(param):
                             write = true
                         _: # invalid param value
                             return false
+                "agent_specific_param":
+                    agent_specific_param = param[key].split(",")
+                    
                 _: # invalid param value
                     return false
                         

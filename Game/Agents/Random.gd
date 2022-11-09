@@ -20,7 +20,7 @@ func move(_state, _score):
     return [result[0], 0]
 
 # initialize
-func init(actions, _read, _filename, _curr_n):
+func init(actions, _read, _filename, _curr_n, _agent_specific_param):
     ACTIONS = actions
     return true
 

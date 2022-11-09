@@ -37,6 +37,8 @@ var starting_level = 1
 # because of the End.gd script conditions
 var curr_layer = -1
 
+var done = false
+
 func _ready():
     if not self_playing_agent:
         hans.get_node("Sounds/shootSound").stream.loop = false
@@ -127,6 +129,7 @@ func hide_csg_shapes(node):
             hide_csg_shapes(child)
         
 func _game_over():
+    done = true
     if not self_playing_agent:    
         $Sounds/gameBackgroundSound.stop()
         $Sounds/gameOverSound.play()	

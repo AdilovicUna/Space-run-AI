@@ -4,7 +4,7 @@ export(PackedScene) var BulletZero
 export(PackedScene) var BulletOne
 
 const MAX_BULLETS_PER_BUTTON_PRESS = 8
-const SPEED_INCREASE = 15.0
+const SPEED_INCREASE = 10.0
 
 enum lvl {ONE, TWO, THREE}
 
@@ -24,7 +24,7 @@ var rand = RandomNumberGenerator.new()
 var next_tunnel = lvl.TWO
 var curr_tunnel = lvl.ONE
 
-var speed = 50.0
+var speed = 40.0
 var next_trap_pos = rand.randi_range(1120,1190) # first trap for the next level will be here
 var new_trap = 3650 # start producing traps for the next level at this point
 var show_level = 0 # used to measure how long level lable should be displayed
