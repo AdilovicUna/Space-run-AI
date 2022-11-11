@@ -20,7 +20,7 @@ func start_game():
     pass
 
 # update
-func end_game(_final_score):
+func end_game(_final_score, _final_time):
     pass
 
 #write

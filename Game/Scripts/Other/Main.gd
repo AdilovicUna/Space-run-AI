@@ -270,14 +270,14 @@ func write_data(data):
     file.seek_end()
     file.store_line(data)
 
-func on_game_finished(score, ticks, win):
+func on_game_finished(score, ticks, win, time):
     # calculations
     num_of_ticks += ticks
     wins += int(win)
     add_score(score)
     # finish up
     print_and_write_score(score, win)
-    agent_inst.end_game(score)        
+    agent_inst.end_game(score, time)        
     # start a new game
     play_game()
     

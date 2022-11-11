@@ -102,20 +102,20 @@ func start_game():
     last_state = null
 
 # update
-func end_game(final_score):
+func end_game(final_score, final_time):
     var G = 0
-    #for i in range(len(episode_steps) - 2,-1,-1):
-    for i in range(0, len(episode_steps)):
+    episode_steps.append(Step.new("", final_score, final_time))
+    
+    for i in range(len(episode_steps) - 2,-1,-1):
         var curr_step = episode_steps[i]
-        #var next_step = episode_steps[i+1]
-        #var R = (next_step.score - curr_step.score)
-        #G = pow(GAMMA,int(next_step.time - curr_step.time)) * (R + G)
-       
+        var next_step = episode_steps[i+1]
+        var R = (next_step.score - curr_step.score)
+        G = (R / log(GAMMA)) * (pow(GAMMA,next_step.time) - pow(GAMMA,curr_step.time)) * (R + G)
+        
         # since we are using the first visit approach,
         # we only need the first occurrence  of this state_action
         if is_first_occurrence (curr_step.state_action, i):
-            #total_return[curr_step.state_action] += G
-            total_return[curr_step.state_action] += (final_score - curr_step.score)
+            total_return[curr_step.state_action] += G
             visits[curr_step.state_action] += 1
    
 # write

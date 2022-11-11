@@ -139,7 +139,7 @@ func _game_over():
     battery.hide()
     timer.stop()
     if self_playing_agent:
-        emit_signal("game_finished", score.get_score(), num_of_ticks, level.get_level() > max_tunnels)
+        emit_signal("game_finished", score.get_score(), num_of_ticks, level.get_level() > max_tunnels, OS.get_ticks_msec() / 1000.0)
         queue_free()
     else:
         score._display_Final_Score()
