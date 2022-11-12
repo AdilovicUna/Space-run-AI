@@ -40,7 +40,6 @@ def run_with_one_env(database, agent, n, env, shooting, level, path, curr_env,
                    'rots=' + str(rots),
                    'dists=' + str(dists),
                    'shooting=' + shooting]
-
         subprocess.run(command, cwd=path)
 
         filename = build_filename(

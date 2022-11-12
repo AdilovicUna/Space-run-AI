@@ -1,7 +1,9 @@
 class_name MonteCarlo
 
+var rand = RandomNumberGenerator.new()
+
 # About the agent:
-# on-policy, first visit, optimistic initial values
+# on-policy, first visit, optimistic initial values, epsilon-greedy policy
 
 # IMPORTANT!
 # agent's function move returns a list of 2 elements:
@@ -30,6 +32,10 @@ var FILENAME = ""
 # discounting value
 var GAMMA = 1.0
 var INITIAL_OPTIMISTIC_VALUE = 100.0
+var EPSILON = 0.0
+
+var count = 0
+var count2 = 0
 
 # move and remember  
 func move(state, score):
@@ -43,7 +49,22 @@ func move(state, score):
         if Q(state, action) > max_q:
             max_q = Q(state, action)
             last_action = action
-   
+            
+# 6 actions
+# prob max_action x (1/6)
+# prob of every other action y (5/6)
+# if <= EPSILON
+
+    if rand.randi_range(0,1) < EPSILON:
+        count += 1
+        while true:
+            var rand_action = ACTIONS[rand.randi_range(0,len(ACTIONS) - 1)]            
+            if last_action != rand_action:
+                last_action = rand_action
+                break
+    else:
+        count2 += 1
+    
     # remember relevant infromation
     last_state = state
     episode_steps.append(Step.new(get_state_action(last_state, last_action), score, OS.get_ticks_msec() / 1000.0))
@@ -52,18 +73,22 @@ func move(state, score):
 
 # initialize
 func init(actions, read, filename, curr_n, agent_specific_param):
+    # so that we can replicate experiments
+    rand.seed = 0
+    
     ACTIONS = actions
     FILENAME = filename
     
     if agent_specific_param != []:
-        if len(agent_specific_param) != 2:
+        if len(agent_specific_param) != 3:
             return false
             
         GAMMA = float(agent_specific_param[0])
         INITIAL_OPTIMISTIC_VALUE = float(agent_specific_param [1])
+        EPSILON = float(agent_specific_param[2])
     
-    if GAMMA < 0 or GAMMA > 1 or INITIAL_OPTIMISTIC_VALUE < 0:
-        return false
+        if GAMMA < 0 or GAMMA > 1 or INITIAL_OPTIMISTIC_VALUE < 0:
+            return false
     
     new_n = curr_n
    
@@ -110,13 +135,19 @@ func end_game(final_score, final_time):
         var curr_step = episode_steps[i]
         var next_step = episode_steps[i+1]
         var R = (next_step.score - curr_step.score)
-        G = (R / log(GAMMA)) * (pow(GAMMA,next_step.time) - pow(GAMMA,curr_step.time)) * (R + G)
         
+        #G = (R / log(GAMMA)) * (pow(GAMMA,next_step.time) - pow(GAMMA,curr_step.time)) * (R + G)
+        G =  pow(GAMMA,int(next_step.time - curr_step.time)) * (R + G)
+            
         # since we are using the first visit approach,
         # we only need the first occurrence  of this state_action
         if is_first_occurrence (curr_step.state_action, i):
-            total_return[curr_step.state_action] += G
             visits[curr_step.state_action] += 1
+            
+        # decrease epsilon by 1% after each game 
+        # so that exploring decreases over time
+        if EPSILON > 0:
+            EPSILON = EPSILON * 0.99
    
 # write
 func save(write):

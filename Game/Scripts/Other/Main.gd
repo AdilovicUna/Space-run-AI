@@ -7,7 +7,7 @@ argument options:
     - n=int :           number of games
     
     - agent=string :    name of the agent
-                        options: [Keyboard, Static, Random, MonteCarlo]
+                        options: [Keyboard, Static, Random, MonteCarlo, SARSA]
                         
     - level=int :       number of the level to start from 
                         options: [1, ... , 10]
@@ -40,7 +40,7 @@ argument options:
 var game_scene = preload("res://Scenes/Other/Game.tscn")
 var game
 
-var all_agents = ["Keyboard", "Static", "Random", "MonteCarlo"]
+var all_agents = ["Keyboard", "Static", "Random", "MonteCarlo", "SARSA"]
 var all_env = ["traps", "bugs", "viruses", "tokens", "I", "O", "MovingI", "X", "Walls", "Hex", "HexO", "Balls", "Triangles", "HalfHex"]
 
 # all parameters and their default values

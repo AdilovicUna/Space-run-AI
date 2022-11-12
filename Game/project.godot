@@ -25,6 +25,11 @@ _global_script_classes=[ {
 "path": "res://Agents/Random.gd"
 }, {
 "base": "Reference",
+"class": "SARSA",
+"language": "GDScript",
+"path": "res://Agents/SARSA.gd"
+}, {
+"base": "Reference",
 "class": "Static",
 "language": "GDScript",
 "path": "res://Agents/Static.gd"
@@ -38,6 +43,7 @@ _global_script_class_icons={
 "Keyboard": "",
 "MonteCarlo": "",
 "Random": "",
+"SARSA": "",
 "Static": "",
 "Step": ""
 }
