@@ -8,6 +8,9 @@ argument options:
     
     - agent=string :    name of the agent
                         options: [Keyboard, Static, Random, MonteCarlo, SARSA]
+                        sub-options (only for the agents listed below):
+                            MonteCarlo=[float, float, float] : [gam (range [0,1]), eps (range [0,1]), initOptVal [0,~)]
+                            eg. use: "MonteCarlo:eps=0.1,gam=0.2"
                         
     - level=int :       number of the level to start from 
                         options: [1, ... , 10]
@@ -27,12 +30,6 @@ argument options:
                             write = update the data after the command is executed 
                             options: [read, write, read_write]
                             Note: will not influence the following agents: Keyboard, Static, Random
-    - agent_specific_param : 
-                            indicates parameters specific for the particular agent as follows:
-                            Keyboard=[]
-                            Static=[]
-                            Random=[]
-                            Monte Carlo=[float, float] : [GAMMA (range [0,1]), INITIAL OPTIMISTIC VALUE [0,~)]
                         
     - options :         displays options
 """
@@ -80,14 +77,14 @@ func _ready():
     # show options
     if unparsed_args.size() == 1 and unparsed_args[0] == "options":
         display_options()
-    
     # parse agrs
     var args = {}
     for arg in unparsed_args:
         if arg.find("=") > 0:
             var key_value = arg.split("=")
-            args[key_value[0]] = key_value[1]
-        
+            var value = slice(key_value, 1, len(key_value))
+            args[key_value[0]] = value.join("=")
+            
     # set param, if something went wrong, show options
     if set_param(args) == false:
         display_options()
@@ -101,6 +98,14 @@ func _ready():
             get_tree().quit()
         play_game()
 
+func slice(array, start, end):
+    var result = []
+    for i in range(start,end):
+        if i >= len(array):
+            return result
+        result.append(array[i])
+    return PoolStringArray(result)
+    
 func play_game():     
     if agent == "Keyboard" and VisualServer.render_loop_enabled: # play a regular game
         game = game_scene.instance()
@@ -167,7 +172,9 @@ func set_param(param):
                 "n":
                     n = int(param[key])
                 "agent":
-                    agent = param[key]
+                    var temp = param[key].split(":")
+                    agent = temp[0]
+                    agent_specific_param = temp[1].split(",")    
                 "level":
                     level = int(param[key])
                 "env":
@@ -195,9 +202,6 @@ func set_param(param):
                             write = true
                         _: # invalid param value
                             return false
-                "agent_specific_param":
-                    agent_specific_param = param[key].split(",")
-                    
                 _: # invalid param value
                     return false
                         

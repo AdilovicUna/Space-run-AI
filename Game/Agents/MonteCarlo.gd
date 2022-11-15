@@ -32,7 +32,7 @@ var FILENAME = ""
 # discounting value
 var GAMMA = 1.0
 var INITIAL_OPTIMISTIC_VALUE = 100.0
-var EPSILON = 0.0
+var EPSILON = 0.2   
 
 var count = 0
 var count2 = 0
@@ -79,15 +79,20 @@ func init(actions, read, filename, curr_n, agent_specific_param):
     ACTIONS = actions
     FILENAME = filename
     
-    if agent_specific_param != []:
-        if len(agent_specific_param) != 3:
-            return false
+    if len(agent_specific_param) > 0:
+        for param in agent_specific_param:
+            param = param.split("=")
+            match param[0]:
+                "gam":
+                    GAMMA = float(param[1])
+                "eps":
+                    EPSILON = float(param[1])
+                "initOptVal":
+                    INITIAL_OPTIMISTIC_VALUE = float(param[1])
             
-        GAMMA = float(agent_specific_param[0])
-        INITIAL_OPTIMISTIC_VALUE = float(agent_specific_param [1])
-        EPSILON = float(agent_specific_param[2])
-    
-        if GAMMA < 0 or GAMMA > 1 or INITIAL_OPTIMISTIC_VALUE < 0:
+        if (GAMMA < 0 or GAMMA > 1 or 
+            INITIAL_OPTIMISTIC_VALUE < 0 or
+            EPSILON < 0 or EPSILON > 1):
             return false
     
     new_n = curr_n
