@@ -5,19 +5,20 @@ import sys
 from turtle import goto
 
 
-def build_filename(agent, level, env, shooting, dists, rots):
+def build_filename(agent, agent_spec_param, level, env, shooting, dists, rots):
     sorted_env = sorted(env)
+    sorted_agent_spec_param = sorted(agent_spec_param)
 
     if sorted_env == None:
         sorted_env = "all"
 
-    command = ["agent=" + str(agent), "level=" + str(level), "env=" + str(sorted_env),
+    command = ["agent=" + str(agent), "agentSpecParam=" + str(sorted_agent_spec_param), "level=" + str(level), "env=" + str(sorted_env),
                "shooting=" + str(shooting == 'enabled'), "dists=" + str(dists), "rots=" + str(rots)]
 
     return ','.join(command).replace(' ', '').replace('\'', '')
 
 
-def run_with_one_env(database, agent, n, env, shooting, level, path, curr_env,
+def run_with_one_env(database, agent, agent_spec_param, n, env, shooting, level, path, curr_env,
                     dists_from, dists_to, rots_from, rots_to, win_rate_minimum):
 
     dists = dists_from
@@ -25,6 +26,8 @@ def run_with_one_env(database, agent, n, env, shooting, level, path, curr_env,
 
     win_rate = 0
     command_outputs_path = '../Game/Command_outputs/'
+
+    agent_spec_param_str = ','.join(agent_spec_param)
 
     while True:
         if (win_rate >= win_rate_minimum or 
@@ -34,7 +37,7 @@ def run_with_one_env(database, agent, n, env, shooting, level, path, curr_env,
         command = ['godot', '--no-window', '--fixed-fps', '1', '--disable-render-loop',
                    'database=' + database,
                    'level=' + str(level),
-                   'agent=' + agent + ':eps=0.1,gam=0.2',
+                   'agent=' + agent + ':' + agent_spec_param_str,
                    'n=' + str(n),
                    'env=' + env,
                    'rots=' + str(rots),
@@ -43,7 +46,7 @@ def run_with_one_env(database, agent, n, env, shooting, level, path, curr_env,
         subprocess.run(command, cwd=path)
 
         filename = build_filename(
-            agent, level, curr_env, shooting, dists, rots)
+            agent,  agent_spec_param, level, curr_env, shooting, dists, rots)
         co_f = open(command_outputs_path + filename + '.txt', 'r')
         co_data = co_f.read().strip().split('\n')
         win_rate = co_data[-3].split()[1].split('/')
@@ -78,35 +81,38 @@ def find_minimum_param(agent, level, curr_env,shooting):
 
 def run(curr_env, games_per_env, 
         len_traps, len_bugs, len_viruses, len_tokens,
-        database, agent, level, path,
+        database, agent, agent_spec_param, level, path,
         dists_from, dists_to, rots_from, rots_to, win_rate_minimum, subsets):
     
-    n = (games_per_env * len(curr_env) + 
-        games_per_env * len_traps * int('traps' in curr_env) + 
-        games_per_env * len_bugs * int('bugs' in curr_env) + 
-        games_per_env * len_viruses * int('viruses' in curr_env) + 
-        games_per_env * len_tokens * int('tokens' in curr_env) +
-        games_per_env * int(dists_to > 4) + 
-        games_per_env * int(rots_to > 12))
+    # n = (games_per_env * len(curr_env) + 
+    #     games_per_env * len_traps * int('traps' in curr_env) + 
+    #     games_per_env * len_bugs * int('bugs' in curr_env) + 
+    #     games_per_env * len_viruses * int('viruses' in curr_env) + 
+    #     games_per_env * len_tokens * int('tokens' in curr_env) +
+    #     games_per_env * int(dists_to > 4) + 
+    #     games_per_env * int(rots_to > 12))
+
+    n=1
 
     env = ','.join(curr_env)
 
     if subsets:
         dists_from, rots_from = find_minimum_param(agent, level, curr_env,'disabled')
     
-    run_with_one_env(database, agent, n, env,
+    run_with_one_env(database, agent, agent_spec_param, n, env,
                         'disabled', level, path, curr_env,
                          dists_from, dists_to, rots_from, rots_to, win_rate_minimum)
 
     if 'bugs' in curr_env or 'viruses' in curr_env:
         if subsets:
             dists_from, rots_from = find_minimum_param(agent, level, curr_env,'enabled')
-        run_with_one_env(database, agent, n, env,
+        run_with_one_env(database, agent, agent_spec_param, n, env,
                             'enabled', level, path, curr_env,
                             dists_from, dists_to, rots_from, rots_to, win_rate_minimum)
 
 def main(all_env, subsets, dists_from, dists_to, rots_from, rots_to, 
-            games_per_env, win_rate_minimum):
+            games_per_env, win_rate_minimum,
+            gam, eps, initOptVal):
     len_traps = 10
     len_bugs = 3
     len_viruses = 2
@@ -117,6 +123,8 @@ def main(all_env, subsets, dists_from, dists_to, rots_from, rots_to,
     agent = 'MonteCarlo'
     database = 'write'
     level = 1
+
+    agent_spec_param =["gam=" + str(gam), "eps=" + str(eps), "initOptVal=" + str(initOptVal)]
 
     path = '../Game'
 
@@ -136,14 +144,14 @@ def main(all_env, subsets, dists_from, dists_to, rots_from, rots_to,
                 
                 run(curr_env, games_per_env,
                     len_traps, len_bugs, len_viruses, len_tokens,
-                    database, agent, level, path, 
+                    database, agent, agent_spec_param, level, path, 
                     dists_from, dists_to, rots_from, rots_to, win_rate_minimum, subsets)
     else:
         for i in all_env:
             curr_env = [i]
             run(curr_env, games_per_env,
                 len_traps, len_bugs, len_viruses, len_tokens,
-                database, agent, level, path,
+                database, agent, agent_spec_param, level, path,
                 dists_from, dists_to, rots_from, rots_to, win_rate_minimum, subsets)
 
 if __name__ == '__main__':
@@ -168,6 +176,10 @@ if __name__ == '__main__':
     rots_from = 6
     rots_to = 24
 
+    gam = 1
+    eps = 0
+    initOptVal = 100
+
     win_rate_minimum = 0.3
 
     for i in range(1,len(sys.argv)):
@@ -190,8 +202,14 @@ if __name__ == '__main__':
                 win_rate_minimum = int(temp[1])
             case "games_per_env":
                 games_per_env = int(temp[1])
+            case "gam":
+                gam = float(temp[1])
+            case "eps":
+                eps = float(temp[1])
+            case "initOptVal":
+                initOptVal = float(temp[1])
             case _:
                 print("Invalid arguments")
                 exit 
             
-    main(all_env, subsets, dists_from, dists_to, rots_from, rots_to, games_per_env, win_rate_minimum)
+    main(all_env, subsets, dists_from, dists_to, rots_from, rots_to, games_per_env, win_rate_minimum, gam, eps, initOptVal)

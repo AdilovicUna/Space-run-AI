@@ -36,5 +36,8 @@ func end_game(_final_score, _final_time):
 func save(_write):
     pass
 
+func get_agent_specific_parameters():
+    return []
+
 func get_n():
     return '0'

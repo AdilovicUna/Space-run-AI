@@ -91,11 +91,11 @@ func _ready():
     else:
         start = OS.get_ticks_usec()
         instance_agent()
-        build_filename()
         if not agent_inst.init(actions, read, command, n, agent_specific_param):
             print("Something went wrong, please try again")
             print(options)
             get_tree().quit()
+        build_filename()
         play_game()
 
 func slice(array, start, end):
@@ -159,7 +159,10 @@ func build_filename():
     if sorted_env == []:
         sorted_env = "all"
     
-    command = PoolStringArray(["agent=" + String(agent), "level=" + String(level), "env=" + String(sorted_env), 
+    var sorted_agent_specific_param = agent_inst.get_agent_specific_parameters()
+    sorted_agent_specific_param.sort()
+    
+    command = PoolStringArray(["agent=" + String(agent), "agentSpecParam=" + String(sorted_agent_specific_param), "level=" + String(level), "env=" + String(sorted_env), 
                             "shooting=" + String(shooting), "dists=" + String(dists), "rots=" + String(rots)]
                                 ).join(",").replace(' ','')
    

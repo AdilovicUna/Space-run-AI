@@ -55,7 +55,7 @@ func move(state, score):
 # prob of every other action y (5/6)
 # if <= EPSILON
 
-    if rand.randi_range(0,1) < EPSILON:
+    if rand.randf_range(0,1) < EPSILON:
         count += 1
         while true:
             var rand_action = ACTIONS[rand.randi_range(0,len(ACTIONS) - 1)]            
@@ -89,14 +89,15 @@ func init(actions, read, filename, curr_n, agent_specific_param):
                     EPSILON = float(param[1])
                 "initOptVal":
                     INITIAL_OPTIMISTIC_VALUE = float(param[1])
-            
+                _: # invalid param value
+                        return false
+                        
         if (GAMMA < 0 or GAMMA > 1 or 
             INITIAL_OPTIMISTIC_VALUE < 0 or
             EPSILON < 0 or EPSILON > 1):
             return false
     
     new_n = curr_n
-   
     if not read:
         return true
    
@@ -171,6 +172,9 @@ func save(write):
     file.open("res://Agent_databases/" + FILENAME + ".txt", File.WRITE)
     file.store_string(data)
     file.close()
+
+func get_agent_specific_parameters():
+    return ["gam=" + String(GAMMA), "eps=" + String(EPSILON), "initOptVal=" + String(INITIAL_OPTIMISTIC_VALUE)]
  
 func Q(state, action):
     var state_action = get_state_action(state, action)
