@@ -15,8 +15,8 @@ var obstacle_number = 0
 
 const DEVIATION = 0.01
 const ROTATE_SPEED = 2
-const TRAP_RANGE_FROM = 80
-const TRAP_RANGE_TO = 100
+const TRAP_RANGE_FROM = 90
+const TRAP_RANGE_TO = 110
 
 # IMPORTANT!
 # agent's function move returns a list of 2 elements:

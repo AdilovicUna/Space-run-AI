@@ -30,7 +30,7 @@ def main(window):
         agent = filename.split(',')[0].split('=')[1]
         ad_f = open(agent_databases_path + filename + '.txt', 'r')
         ad_data = get_table(ad_f.read().strip().split('\n')[1:], agent)
-        plot(window, co_data, ad_data)
+        plot(window, co_data, ad_data, agent, filename)
 
 
         # create path so that we can sort out the plots nicely
@@ -42,10 +42,10 @@ def main(window):
             os.makedirs(path)
 
 
-        plt.savefig(path + filename + '.png',bbox_inches='tight', pad_inches=0.2, dpi=100)
+        plt.savefig(path + filename + '.png', bbox_inches='tight', pad_inches=0.2, dpi=100)
 
 
-def plot(window, co_data, ad_data):
+def plot(window, co_data, ad_data, agent, filename):
     scores = [float(i) for i in co_data[:-4]]
     scores = [np.mean(scores[i:i + window]) if i <= len(scores) -
               window else np.mean(scores[i:]) for i in range(len(scores))]
@@ -63,8 +63,15 @@ def plot(window, co_data, ad_data):
         ax.plot(episodes, winning_score, '--b', label='Winning score')
     ax.legend(loc='upper right')
 
-    plt.figtext(x=0.02, y=0.95, s='Winning rate: ' + win_rate)
-    plt.figtext(x=0.02, y=0.91, s='Previous games: ' + num_of_prev_games)
+    # text above the plot
+    spaces = '    '
+    plt.figtext(x=0.02, y=0.95, s='Winning rate: ' + win_rate + spaces + 'Previous games: ' + num_of_prev_games+ spaces + 'Agent: ' + agent)
+    if agent == 'MonteCarlo':
+        agentSpecParam ='='.join(','.join(filename.split(',')[1:4]).split('=')[1:]).split(',')
+        eps = agentSpecParam[0].split('=')[1]
+        gam = agentSpecParam[1].split('=')[1]
+        initOptVal = agentSpecParam[2].split('=')[1][:-1]
+        plt.figtext(x=0.02, y=0.91, s='ε: ' + eps + spaces + 'γ: ' + gam + spaces + 'Initial optimistic value: ' + initOptVal)
 
     plt.xlabel('Episodes')
     plt.ylabel('Scores')

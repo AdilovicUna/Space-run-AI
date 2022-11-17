@@ -33,6 +33,8 @@ var num_of_speed_ups = 0
 var max_tunnels = 0
 var starting_level = 1
 
+var DEBUG = false
+
 # curr_layer cannot be 0 unless the Help menu is actually shown
 # because of the End.gd script conditions
 var curr_layer = -1
@@ -43,9 +45,13 @@ func _ready():
     if not self_playing_agent:
         hans.get_node("Sounds/shootSound").stream.loop = false
         agent = Keyboard.new()
+        hans.speed = 50.0
     hans.set_speed(num_of_speed_ups)
     hans.set_tunnel_vars(starting_level, tunnel)
     _start()
+
+func set_debug(d):
+    DEBUG = d
 
 func set_agent(agent_str, agent_inst):   
     if agent_str != "Keyboard":
@@ -138,6 +144,8 @@ func _game_over():
     end.show()
     battery.hide()
     timer.stop()
+    if DEBUG:
+        print('died on level %d, rot = %d' % [level.level, state.state[1]])
     if self_playing_agent:
         emit_signal("game_finished", score.get_score(), num_of_ticks, level.get_level() > max_tunnels, OS.get_ticks_msec() / 1000.0)
         queue_free()

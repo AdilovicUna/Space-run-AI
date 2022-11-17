@@ -21,7 +21,7 @@ func move(_state, _score):
     return result
 
 # initialize
-func init(_actions, _read, _filename, _curr_n, _agent_specific_param):
+func init(_actions, _read, _write, _filename, _curr_n, _debug):
     return true
 
 # reset
@@ -36,7 +36,7 @@ func end_game(_final_score, _final_time):
 func save(_write):
     pass
         
-func get_agent_specific_parameters():
+func get_and_set_agent_specific_parameters(_agent_specific_param):
     return []
     
 func get_n():

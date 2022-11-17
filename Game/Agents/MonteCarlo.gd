@@ -33,6 +33,9 @@ var FILENAME = ""
 var GAMMA = 1.0
 var INITIAL_OPTIMISTIC_VALUE = 100.0
 var EPSILON = 0.2   
+var EPSILON_DECREASE = 0.98
+
+var DEBUG = false
 
 var count = 0
 var count2 = 0
@@ -55,7 +58,8 @@ func move(state, score):
 # prob of every other action y (5/6)
 # if <= EPSILON
 
-    if rand.randf_range(0,1) < EPSILON:
+    var epsilon_action = rand.randf_range(0,1) < EPSILON
+    if epsilon_action:
         count += 1
         while true:
             var rand_action = ACTIONS[rand.randi_range(0,len(ACTIONS) - 1)]            
@@ -67,39 +71,37 @@ func move(state, score):
     
     # remember relevant infromation
     last_state = state
-    episode_steps.append(Step.new(get_state_action(last_state, last_action), score, OS.get_ticks_msec() / 1000.0))
-   
+    episode_steps.append(Step.new(
+        get_state_action(last_state, last_action), score, OS.get_ticks_msec() / 1000.0,
+        epsilon_action))
+
     return last_action
 
 # initialize
-func init(actions, read, filename, curr_n, agent_specific_param):
+func init(actions, read, write, filename, curr_n, debug):
     # so that we can replicate experiments
     rand.seed = 0
     
+    DEBUG = debug
+    
     ACTIONS = actions
     FILENAME = filename
-    
-    if len(agent_specific_param) > 0:
-        for param in agent_specific_param:
-            param = param.split("=")
-            match param[0]:
-                "gam":
-                    GAMMA = float(param[1])
-                "eps":
-                    EPSILON = float(param[1])
-                "initOptVal":
-                    INITIAL_OPTIMISTIC_VALUE = float(param[1])
-                _: # invalid param value
-                        return false
                         
-        if (GAMMA < 0 or GAMMA > 1 or 
-            INITIAL_OPTIMISTIC_VALUE < 0 or
-            EPSILON < 0 or EPSILON > 1):
-            return false
+    if (GAMMA < 0 or GAMMA > 1 or 
+        INITIAL_OPTIMISTIC_VALUE < 0 or
+        EPSILON < 0 or EPSILON > 1):
+        return false
+    
+    EPSILON_DECREASE = (EPSILON - 0.001) / curr_n
     
     new_n = curr_n
+    
     if not read:
         return true
+    
+    if not write: 
+        # we just want to check how good agent is without any randomness
+        EPSILON = 0
    
     var file = File.new()
     file.open("res://Agent_databases/" + FILENAME + ".txt", File.READ)
@@ -134,27 +136,41 @@ func start_game():
 
 # update
 func end_game(final_score, final_time):
+    if DEBUG:
+        var n_steps = len(episode_steps)
+        var s = "last actions: "
+        for i in range(max(n_steps - 7, 0), n_steps):
+            var step = episode_steps[i]
+            if step.epsilon_action:
+                s += "*"
+            s += String(step.state_action) + " "
+        print(s)
+
     var G = 0
-    episode_steps.append(Step.new("", final_score, final_time))
+    episode_steps.append(Step.new("", final_score, final_time, false))
     
     for i in range(len(episode_steps) - 2,-1,-1):
         var curr_step = episode_steps[i]
         var next_step = episode_steps[i+1]
         var R = (next_step.score - curr_step.score)
         
-        #G = (R / log(GAMMA)) * (pow(GAMMA,next_step.time) - pow(GAMMA,curr_step.time)) * (R + G)
-        G =  pow(GAMMA,int(next_step.time - curr_step.time)) * (R + G)
+        G =  pow(GAMMA,next_step.time - curr_step.time) * (R + G)
             
         # since we are using the first visit approach,
         # we only need the first occurrence  of this state_action
         if is_first_occurrence (curr_step.state_action, i):
+            total_return[curr_step.state_action] += G
             visits[curr_step.state_action] += 1
             
-        # decrease epsilon by 1% after each game 
-        # so that exploring decreases over time
-        if EPSILON > 0:
-            EPSILON = EPSILON * 0.99
-   
+    # epsilon will decrease on each game
+    # so that by the end it is 0.001
+    # (random action will occur 1/1000)
+    if EPSILON > 0:
+        EPSILON -= EPSILON_DECREASE
+        
+    if DEBUG:    
+        print('\nepsilon = %.3f' % EPSILON)   
+
 # write
 func save(write):
     if not write:
@@ -166,14 +182,27 @@ func save(write):
     data += String(n + new_n) + '\n'
    
     for elem in total_return:
-        data += (String(elem) + ':' + String(total_return[elem]) + '/' + String(visits[elem]) + '\n')
-       
+        var avg = total_return[elem] / visits[elem]
+        data += "%s:%s/%s:%.1f\n" % [elem, total_return[elem], visits[elem], avg]
+    
     var file = File.new()
     file.open("res://Agent_databases/" + FILENAME + ".txt", File.WRITE)
     file.store_string(data)
     file.close()
 
-func get_agent_specific_parameters():
+func get_and_set_agent_specific_parameters(agent_specific_param):
+    for param in agent_specific_param:
+        param = param.split("=")
+        match param[0]:
+            "gam":
+                GAMMA = float(param[1])
+            "eps":
+                EPSILON = float(param[1])
+            "initOptVal":
+                INITIAL_OPTIMISTIC_VALUE = float(param[1])
+            _: # invalid param value
+                    return false
+                        
     return ["gam=" + String(GAMMA), "eps=" + String(EPSILON), "initOptVal=" + String(INITIAL_OPTIMISTIC_VALUE)]
  
 func Q(state, action):

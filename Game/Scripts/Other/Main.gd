@@ -4,34 +4,38 @@ const MAX_LEVEL = 10
 
 var options = """
 argument options:
-    - n=int :           number of games
+    - n=int :               number of games
     
-    - agent=string :    name of the agent
-                        options: [Keyboard, Static, Random, MonteCarlo, SARSA]
-                        sub-options (only for the agents listed below):
-                            MonteCarlo=[float, float, float] : [gam (range [0,1]), eps (range [0,1]), initOptVal [0,~)]
-                            eg. use: "MonteCarlo:eps=0.1,gam=0.2"
+    - agent=string :        name of the agent
+                            options: [Keyboard, Static, Random, MonteCarlo, SARSA]
+                            sub-options (only for the agents listed below):
+                                MonteCarlo=[float, float, float, float] : 
+                                    [gam (range [0,1]), eps (range [0,1]), epsDec (range [0,1]), initOptVal [0,~)]
+                                    eg. use: "MonteCarlo:eps=0.1,gam=0.2"
                         
-    - level=int :       number of the level to start from 
-                        options: [1, ... , 10]
+    - level=int :           number of the level to start from 
+                            options: [1, ... , 10]
                         
-    - env=[string] :    list of obstacles that will be chosen in the game 
-                        options (any subset of): [traps, bugs, viruses, tokens, I, O, MovingI, X, 
-                                                  Walls, Hex, HexO, Balls, Triangles, HalfHex]
+    - env=[string] :        list of obstacles that will be chosen in the game 
+                            options (any subset of): [traps, bugs, viruses, tokens, I, O, MovingI, X, 
+                                                      Walls, Hex, HexO, Balls, Triangles, HalfHex]
                                             
-    - shooting=string : enable or disable shooting 
-                        options: [enabled, disabled]
+    - shooting=string :     enable or disable shooting 
+                            options: [enabled, disabled]
                         
-    - dists=int :       number of states in a 100-meter interval
+    - dists=int :           number of states in a 100-meter interval
     
-    - rots=int :        number of states in 360 degrees rotation
+    - rots=int :            number of states in 360 degrees rotation
     
     - database=string :     read = read the data for this command from an existing file 
                             write = update the data after the command is executed 
                             options: [read, write, read_write]
                             Note: will not influence the following agents: Keyboard, Static, Random
-                        
-    - options :         displays options
+   
+    - debug=bool :          display debug print statements
+                            optionsL [true,false]
+             
+    - options :             displays options
 """
 
 var game_scene = preload("res://Scenes/Other/Game.tscn")
@@ -52,6 +56,7 @@ var rots = 6
 var read = false
 var write = false
 var agent_specific_param = []
+var debug = false
 
 var agent_inst = Keyboard.new()
 
@@ -91,16 +96,17 @@ func _ready():
     else:
         start = OS.get_ticks_usec()
         instance_agent()
-        if not agent_inst.init(actions, read, command, n, agent_specific_param):
+        build_filename()
+        if not agent_inst.init(actions, read, write, command, n, debug):
             print("Something went wrong, please try again")
             print(options)
             get_tree().quit()
-        build_filename()
         play_game()
 
-func slice(array, start, end):
+func slice(array, start_index, end_index):
+    # end_index is not included
     var result = []
-    for i in range(start,end):
+    for i in range(start_index, end_index):
         if i >= len(array):
             return result
         result.append(array[i])
@@ -132,6 +138,7 @@ func set_param_in_game():
     game.set_dists(dists)
     game.set_rots(rots)
     game.set_seed_val(seed_val)
+    game.set_debug(debug)
     seed_val += 1
 
 func instance_agent():
@@ -159,7 +166,7 @@ func build_filename():
     if sorted_env == []:
         sorted_env = "all"
     
-    var sorted_agent_specific_param = agent_inst.get_agent_specific_parameters()
+    var sorted_agent_specific_param = agent_inst.get_and_set_agent_specific_parameters(agent_specific_param)
     sorted_agent_specific_param.sort()
     
     command = PoolStringArray(["agent=" + String(agent), "agentSpecParam=" + String(sorted_agent_specific_param), "level=" + String(level), "env=" + String(sorted_env), 
@@ -203,6 +210,14 @@ func set_param(param):
                         "read_write" :
                             read = true
                             write = true
+                        _: # invalid param value
+                            return false
+                "debug":
+                    match param[key]:
+                        "true" :
+                            debug = true
+                        "false" :
+                            debug = false
                         _: # invalid param value
                             return false
                 _: # invalid param value
