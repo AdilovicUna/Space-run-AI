@@ -23,6 +23,7 @@ def main(window):
     # files have the same names in both folders
     for filename in os.listdir(command_outputs_path):
         filename = filename[:-4]
+        print('filename: ', filename)
         
         co_f = open(command_outputs_path + filename + '.txt', 'r')
         co_data = co_f.read().strip().split('\n')
@@ -76,7 +77,7 @@ def plot(window, co_data, ad_data, agent, filename):
     plt.xlabel('Episodes')
     plt.ylabel('Scores')
 
-    ax.table(  cellText=ad_data[0],
+    ax.table(   cellText=ad_data[0],
                 cellLoc='center',
                 rowLabels=ad_data[1],
                 rowLoc='center',

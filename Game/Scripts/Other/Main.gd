@@ -184,7 +184,8 @@ func set_param(param):
                 "agent":
                     var temp = param[key].split(":")
                     agent = temp[0]
-                    agent_specific_param = temp[1].split(",")    
+                    if len(temp) > 1:
+                        agent_specific_param = temp[1].split(",")    
                 "level":
                     level = int(param[key])
                 "env":

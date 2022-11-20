@@ -37,9 +37,6 @@ var EPSILON_DECREASE = 0.98
 
 var DEBUG = false
 
-var count = 0
-var count2 = 0
-
 # move and remember  
 func move(state, score):
     # we are still in the previous state
@@ -60,14 +57,11 @@ func move(state, score):
 
     var epsilon_action = rand.randf_range(0,1) < EPSILON
     if epsilon_action:
-        count += 1
         while true:
             var rand_action = ACTIONS[rand.randi_range(0,len(ACTIONS) - 1)]            
             if last_action != rand_action:
                 last_action = rand_action
                 break
-    else:
-        count2 += 1
     
     # remember relevant infromation
     last_state = state
@@ -131,7 +125,7 @@ func init(actions, read, write, filename, curr_n, debug):
 # reset
 func start_game():
     episode_steps = []
-    last_state = null
+    last_action = null
     last_state = null
 
 # update
