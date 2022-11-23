@@ -153,6 +153,8 @@ func instance_agent():
             agent_inst = Random.new()
         "MonteCarlo":
             agent_inst = MonteCarlo.new()
+        "SARSA":
+            agent_inst = SARSA.new()
 
 
 func display_options():
@@ -257,7 +259,9 @@ func add_score(score):
 
 func print_and_write_score(score, win):
     if not file.is_open():
-        file.open("res://Command_outputs/" + command + ".txt", File.WRITE_READ)
+        while file.file_exists("res://Command_outputs/" + command + ".txt"):
+            command += '_'
+        file.open("res://Command_outputs/" + command + ".txt", File.WRITE_READ) 
       
     var data = "Game %d score: %.1f" % [num_of_games,score]
     

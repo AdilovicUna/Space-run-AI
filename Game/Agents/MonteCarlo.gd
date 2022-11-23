@@ -1,5 +1,17 @@
 class_name MonteCarlo
 
+class Step:
+    var state_action
+    var score
+    var time
+    var epsilon_action
+
+    func _init(sa, s, t, e):
+        state_action = sa
+        score = s
+        time = t
+        epsilon_action = e
+        
 var rand = RandomNumberGenerator.new()
 
 # About the agent:
@@ -35,7 +47,11 @@ var INITIAL_OPTIMISTIC_VALUE = 100.0
 var EPSILON = 0.2   
 var EPSILON_DECREASE = 0.98
 
+const FINAL_EPSILON_VAL = 0.0001
+
 var DEBUG = false
+
+var prev_sec = OS.get_ticks_msec() / 1000.0 
 
 # move and remember  
 func move(state, score):
@@ -54,14 +70,17 @@ func move(state, score):
 # prob max_action x (1/6)
 # prob of every other action y (5/6)
 # if <= EPSILON
-
-    var epsilon_action = rand.randf_range(0,1) < EPSILON
-    if epsilon_action:
-        while true:
-            var rand_action = ACTIONS[rand.randi_range(0,len(ACTIONS) - 1)]            
-            if last_action != rand_action:
-                last_action = rand_action
-                break
+    var epsilon_action = false
+    var curr_sec = OS.get_ticks_msec()
+    if curr_sec - prev_sec >= 0.05:
+        prev_sec = curr_sec
+        epsilon_action = rand.randf_range(0,1) < EPSILON
+        if epsilon_action:
+            while true:
+                var rand_action = ACTIONS[rand.randi_range(0,len(ACTIONS) - 1)]            
+                if last_action != rand_action:
+                    last_action = rand_action
+                    break
     
     # remember relevant infromation
     last_state = state
@@ -86,7 +105,10 @@ func init(actions, read, write, filename, curr_n, debug):
         EPSILON < 0 or EPSILON > 1):
         return false
     
-    EPSILON_DECREASE = (EPSILON - 0.001) / curr_n
+    if DEBUG:
+        print('\nepsilon = %.3f' % EPSILON)  
+         
+    EPSILON_DECREASE = pow(FINAL_EPSILON_VAL / EPSILON, 1.0 / curr_n)
     
     new_n = curr_n
     
@@ -129,7 +151,7 @@ func start_game():
     last_state = null
 
 # update
-func end_game(final_score, final_time):
+func end_game(final_score, final_sec):
     if DEBUG:
         var n_steps = len(episode_steps)
         var s = "last actions: "
@@ -141,7 +163,7 @@ func end_game(final_score, final_time):
         print(s)
 
     var G = 0
-    episode_steps.append(Step.new("", final_score, final_time, false))
+    episode_steps.append(Step.new("", final_score, final_sec, false))
     
     for i in range(len(episode_steps) - 2,-1,-1):
         var curr_step = episode_steps[i]
@@ -160,7 +182,7 @@ func end_game(final_score, final_time):
     # so that by the end it is 0.001
     # (random action will occur 1/1000)
     if EPSILON > 0:
-        EPSILON -= EPSILON_DECREASE
+        EPSILON *= EPSILON_DECREASE
         
     if DEBUG:    
         print('\nepsilon = %.3f' % EPSILON)   

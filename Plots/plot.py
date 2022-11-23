@@ -23,9 +23,15 @@ def main(window):
     # files have the same names in both folders
     for filename in os.listdir(command_outputs_path):
         filename = filename[:-4]
+        print('----------------------------')
         print('filename: ', filename)
         
-        co_f = open(command_outputs_path + filename + '.txt', 'r')
+        underscore_num = 0
+        while (filename[-1] == '_'):
+            filename = filename[:-1]
+            underscore_num += 1
+        
+        co_f = open(command_outputs_path + filename + '_'*underscore_num + '.txt', 'r')
         co_data = co_f.read().strip().split('\n')
 
         agent = filename.split(',')[0].split('=')[1]
@@ -43,7 +49,7 @@ def main(window):
             os.makedirs(path)
 
 
-        plt.savefig(path + filename + '.png', bbox_inches='tight', pad_inches=0.2, dpi=100)
+        plt.savefig(path + filename + '_'*underscore_num + '.png', bbox_inches='tight', pad_inches=0.2, dpi=100)
 
 
 def plot(window, co_data, ad_data, agent, filename):

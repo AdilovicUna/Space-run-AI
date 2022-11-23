@@ -33,19 +33,13 @@ _global_script_classes=[ {
 "class": "Static",
 "language": "GDScript",
 "path": "res://Agents/Static.gd"
-}, {
-"base": "Reference",
-"class": "Step",
-"language": "GDScript",
-"path": "res://Scripts/Other/Step.gd"
 } ]
 _global_script_class_icons={
 "Keyboard": "",
 "MonteCarlo": "",
 "Random": "",
 "SARSA": "",
-"Static": "",
-"Step": ""
+"Static": ""
 }
 
 [application]

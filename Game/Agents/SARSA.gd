@@ -12,10 +12,13 @@ var rand = RandomNumberGenerator.new()
 
 var q = {}
 
+var visits = {}
+
 # variables that need to reset after each episode
 var new_action
 var last_action
 var last_state
+var last_score
 
 # how many games are remembered in this file
 var n = 0
@@ -26,11 +29,12 @@ var ACTIONS = []
 # name of the file we will read from and right to
 var FILENAME = ""
 # discounting value
-var ALPHA = 1.0
 var GAMMA = 1.0
-var INITIAL_OPTIMISTIC_VALUE = 100.0
+var INITIAL_OPTIMISTIC_VALUE = 0.0
 var EPSILON = 0.2   
 var EPSILON_DECREASE = 0.98
+
+const FINAL_EPSILON_VAL = 0.0001
 
 var DEBUG = false
 
@@ -56,13 +60,15 @@ func move(state, score):
                 break
     
     # update q
-    var state_action = get_state_action(last_state,last_action)
-    var new_state_action = get_state_action(state,new_action)
-    update_q(state_action, new_state_action, score)
+    if last_state != null and last_action != null:      
+        var state_action = get_state_action(last_state,last_action)
+        var new_state_action = get_state_action(state,new_action)
+        var R = score - last_score
+        update_dicts(state_action, new_state_action, R)
     
     last_state = state
     last_action = new_action
-    
+    last_score = score
     return last_action
 
 # initialize
@@ -75,13 +81,15 @@ func init(actions, read, write, filename, curr_n, debug):
     ACTIONS = actions
     FILENAME = filename
                         
-    if (ALPHA <= 0 or ALPHA > 1 or
-        GAMMA < 0 or GAMMA > 1 or 
+    if (GAMMA < 0 or GAMMA > 1 or 
         INITIAL_OPTIMISTIC_VALUE < 0 or
         EPSILON < 0 or EPSILON > 1):
         return false
-    
-    EPSILON_DECREASE = (EPSILON - 0.001) / curr_n
+        
+    if DEBUG:
+        print('\nepsilon = %.3f' % EPSILON)  
+         
+    EPSILON_DECREASE = pow(FINAL_EPSILON_VAL / EPSILON, 1.0 / curr_n)
     
     new_n = curr_n
     
@@ -96,7 +104,6 @@ func init(actions, read, write, filename, curr_n, debug):
     file.open("res://Agent_databases/" + FILENAME + ".txt", File.READ)
     if file.is_open():
         var line = ""
-        var line2 = ""
         var read_n = false
         while not file.eof_reached():
             line = file.get_line()
@@ -108,6 +115,7 @@ func init(actions, read, write, filename, curr_n, debug):
             else:
                 line = line.split(':')
                 q[line[0]] = float(line[1])
+                visits[line[0]] = float(line[2])
                
         file.close()
     else:
@@ -120,10 +128,18 @@ func start_game():
     new_action = null
     last_action = null
     last_state = null
+    last_score = 0
 
 # update
 func end_game(_final_score, _final_time):
-    pass
+    # epsilon will decrease on each game
+    # so that by the end it is 0.001
+    # (random action will occur 1/1000)
+    if EPSILON > 0:
+        EPSILON *= EPSILON_DECREASE
+        
+    if DEBUG:    
+        print('\nepsilon = %.3f' % EPSILON)   
 
 # write
 func save(write):
@@ -136,7 +152,7 @@ func save(write):
     data += String(n + new_n) + '\n'
    
     for elem in q.keys():
-        data += "%s:%s\n" % [elem, q[elem]]
+        data += "%s:%s:%s\n" % [elem, q[elem], visits[elem]]
     
     var file = File.new()
     file.open("res://Agent_databases/" + FILENAME + ".txt", File.WRITE)
@@ -147,8 +163,6 @@ func get_and_set_agent_specific_parameters(agent_specific_param):
     for param in agent_specific_param:
         param = param.split("=")
         match param[0]:
-            "alp":
-                ALPHA = float(param[1])
             "gam":
                 GAMMA = float(param[1])
             "eps":
@@ -157,20 +171,26 @@ func get_and_set_agent_specific_parameters(agent_specific_param):
                 INITIAL_OPTIMISTIC_VALUE = float(param[1])
             _: # invalid param value
                     return false
-                        
-    return ["alp=" + String(ALPHA), "gam=" + String(GAMMA), "eps=" + String(EPSILON), "initOptVal=" + String(INITIAL_OPTIMISTIC_VALUE)]
+    return ["gam=" + String(GAMMA), "eps=" + String(EPSILON), "initOptVal=" + String(INITIAL_OPTIMISTIC_VALUE)]
  
 func Q(state, action):
     var state_action = get_state_action(state, action)
     if not (state_action in q.keys()):
         q[state_action] = INITIAL_OPTIMISTIC_VALUE
+        visits[state_action] = 0
+        
     return q[state_action]
     
-func update_q(state_action, new_state_action, R):
+func update_dicts(state_action, new_state_action, R):
     if not (state_action in q.keys()):
         q[state_action] = INITIAL_OPTIMISTIC_VALUE
+        visits[state_action] = 0
         
-    q[state_action] += ALPHA * (R + GAMMA * q[new_state_action] - q[state_action])    
+    visits[state_action] += 1
+    var alpha = 1.0 / visits[state_action]
+    q[state_action] += alpha * (R + GAMMA * q[new_state_action] - q[state_action])    
+
+        
 
 func get_state_action(state, action):
     return ("[%d,%d,%s]_[%d,%d]" %

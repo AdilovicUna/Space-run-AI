@@ -47,8 +47,6 @@ func _ready():
         agent = Keyboard.new()
         if DEBUG:
             hans.speed=15.0
-        else:
-            hans.speed = 50.0
     hans.set_speed(num_of_speed_ups)
     hans.set_tunnel_vars(starting_level, tunnel)
     _start()
