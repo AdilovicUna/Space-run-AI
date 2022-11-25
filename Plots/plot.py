@@ -73,7 +73,7 @@ def plot(window, co_data, ad_data, agent, filename):
     # text above the plot
     spaces = '    '
     plt.figtext(x=0.02, y=0.95, s='Winning rate: ' + win_rate + spaces + 'Previous games: ' + num_of_prev_games+ spaces + 'Agent: ' + agent)
-    if agent == 'MonteCarlo':
+    if agent == 'MonteCarlo' or agent == 'SARSA':
         agentSpecParam ='='.join(','.join(filename.split(',')[1:4]).split('=')[1:]).split(',')
         eps = agentSpecParam[0].split('=')[1]
         gam = agentSpecParam[1].split('=')[1]
@@ -106,6 +106,8 @@ def get_table(ad_data, agent):
     match agent:
         case 'MonteCarlo':
             chosen_moves = monte_carlo_calc(ad_data)
+        case 'SARSA':
+            chosen_moves = sarsa_carlo_calc(ad_data)
         case _:
             raise Exception('Agent ' + agent + ' does not exist')
 
@@ -145,6 +147,29 @@ def monte_carlo_calc(ad_data):
     for param, state_move in ad_data.items():
         # for this agent we only need to devide the parameters
         param = eval(param)
+
+        if state_move[0] != last_state and last_state != '':
+            result[parse_state(last_state)] = MOVES_MAP[curr_move]
+            curr_state_max = -1
+
+        if curr_state_max < param:
+            curr_state_max = param
+            curr_move = state_move[1]
+
+        last_state = state_move[0]
+
+    result[parse_state(last_state)] = MOVES_MAP[curr_move]
+
+    return result
+
+def sarsa_carlo_calc(ad_data):
+    result = {}
+    curr_state_max = -1
+    curr_move = ''
+    last_state = ''
+    for param, state_move in ad_data.items():
+        # for this agent the parameter is calculated
+        param = float(param)
 
         if state_move[0] != last_state and last_state != '':
             result[parse_state(last_state)] = MOVES_MAP[curr_move]

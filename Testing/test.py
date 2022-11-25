@@ -112,6 +112,11 @@ def run(curr_env, games_per_env,
 def main(all_env, subsets, dists_from, dists_to, rots_from, rots_to, 
             games_per_env, win_rate_minimum,
             gam, eps, initOptVal, debug):
+
+    agent_spec_param =['gam=' + str(gam), 'eps=' + str(eps), 'initOptVal=' + str(initOptVal)]
+
+    path = '../Game'
+
     len_traps = 10
     len_bugs = 3
     len_viruses = 2
@@ -122,10 +127,6 @@ def main(all_env, subsets, dists_from, dists_to, rots_from, rots_to,
     agent = 'MonteCarlo'
     database = 'write'
     level = 1
-
-    agent_spec_param =['gam=' + str(gam), 'eps=' + str(eps), 'initOptVal=' + str(initOptVal)]
-
-    path = '../Game'
 
     if subsets:
         special_env = ['traps', 'bugs', 'viruses', 'tokens']
