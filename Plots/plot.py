@@ -22,20 +22,23 @@ def main(window):
 
     # files have the same names in both folders
     for filename in os.listdir(command_outputs_path):
+        # filename format: f_c1_c2.txt
+        # c1 = agent_databases counter
+        # c2 = command_outputs counter
         filename = filename[:-4]
         print('----------------------------')
         print('filename: ', filename)
         
-        underscore_num = 0
-        while (filename[-1] == '_'):
-            filename = filename[:-1]
-            underscore_num += 1
-        
-        co_f = open(command_outputs_path + filename + '_'*underscore_num + '.txt', 'r')
+        split_filename = filename.split('_')
+        filename = split_filename[0]
+        ad_ver = split_filename[1]
+        co_ver = split_filename[2]
+
+        co_f = open(command_outputs_path + filename + '_' + ad_ver + '_' + co_ver + '.txt', 'r')
         co_data = co_f.read().strip().split('\n')
 
         agent = filename.split(',')[0].split('=')[1]
-        ad_f = open(agent_databases_path + filename + '.txt', 'r')
+        ad_f = open(agent_databases_path + filename + '_' + ad_ver + '.txt', 'r')
         ad_data = get_table(ad_f.read().strip().split('\n')[1:], agent)
         plot(window, co_data, ad_data, agent, filename)
 
@@ -49,7 +52,7 @@ def main(window):
             os.makedirs(path)
 
 
-        plt.savefig(path + filename + '_'*underscore_num + '.png', bbox_inches='tight', pad_inches=0.2, dpi=100)
+        plt.savefig(path + filename + '_' + ad_ver + '_' + co_ver + '.png', bbox_inches='tight', pad_inches=0.2, dpi=100)
 
 
 def plot(window, co_data, ad_data, agent, filename):

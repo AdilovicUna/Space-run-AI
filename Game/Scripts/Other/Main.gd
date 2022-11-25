@@ -12,6 +12,9 @@ argument options:
                                 MonteCarlo=[float, float, float, float] : 
                                     [gam (range [0,1]), eps (range [0,1]), epsDec (range [0,1]), initOptVal [0,~)]
                                     eg. use: "MonteCarlo:eps=0.1,gam=0.2"
+                                SARSA=[float, float, float, float] : 
+                                    [gam (range [0,1]), eps (range [0,1]), epsDec (range [0,1]), initOptVal [0,~)]
+                                    eg. use: "SARSA:eps=0.1,gam=0.2"
                         
     - level=int :           number of the level to start from 
                             options: [1, ... , 10]
@@ -27,11 +30,15 @@ argument options:
     
     - rots=int :            number of states in 360 degrees rotation
     
-    - database=string :     read = read the data for this command from an existing file 
+    - database=string:      read = read the data for this command from an existing file 
                             write = update the data after the command is executed 
                             options: [read, write, read_write]
                             Note: will not influence the following agents: Keyboard, Static, Random
-   
+                            sub-option:
+                                version=int - specifies Agent_databases vesion of the file
+                                eg. use: "database=read:1"
+                                   
+
     - debug=bool :          display debug print statements
                             optionsL [true,false]
              
@@ -57,6 +64,7 @@ var read = false
 var write = false
 var agent_specific_param = []
 var debug = false
+var ad_ver = 0
 
 var agent_inst = Keyboard.new()
 
@@ -97,7 +105,8 @@ func _ready():
         start = OS.get_ticks_usec()
         instance_agent()
         build_filename()
-        if not agent_inst.init(actions, read, write, command, n, debug):
+        rename_files()
+        if not agent_inst.init(actions, read, write, command + '_' + String(ad_ver), n, debug):
             print("Something went wrong, please try again")
             print(options)
             get_tree().quit()
@@ -173,7 +182,7 @@ func build_filename():
     
     command = PoolStringArray(["agent=" + String(agent), "agentSpecParam=" + String(sorted_agent_specific_param), "level=" + String(level), "env=" + String(sorted_env), 
                             "shooting=" + String(shooting), "dists=" + String(dists), "rots=" + String(rots)]
-                                ).join(",").replace(' ','')
+                                ).join(",").replace(' ','')    
    
 func set_param(param):
     if not paramSet:
@@ -205,7 +214,8 @@ func set_param(param):
                 "rots":
                     rots = int(param[key])
                 "database":
-                    match param[key]:
+                    var temp = param[key].split(":")
+                    match temp[0]:
                         "read" :
                             read = true
                         "write" :
@@ -215,6 +225,8 @@ func set_param(param):
                             write = true
                         _: # invalid param value
                             return false
+                    if len(temp) > 1:
+                        ad_ver = int(temp[1])
                 "debug":
                     match param[key]:
                         "true" :
@@ -243,10 +255,69 @@ func set_param(param):
             directory.make_dir("res://Command_outputs")        
         if read or write:
             if not directory.dir_exists("res://Agent_databases"):
-                directory.make_dir("res://Agent_databases")        
+                directory.make_dir("res://Agent_databases")      
         
     return true
+
+func rename_files():
+    # to avoid overwriting a file in Agent_databases 
+    # and having wrong policies displayed in plots 
+    # we will rename all previous files
+    # in Agent_databases and Command_outputs
+    
+    # format: f_c1_c2.txt
+    # c1 = agent_databases counter
+    # c2 = command_outputs counter
+    if write:
+        ad_ver += 1
+        rename_files_helper("res://Agent_databases", true, write)
+    rename_files_helper("res://Command_outputs", false, write)
+
+func rename_files_helper(path, ad, writeOpt):
+    print(path)
+    var dir = Directory.new()
+    var file_names = []
+    if dir.open(path) == OK:
+        dir.list_dir_begin()
+        var file_name = dir.get_next()
+        while file_name != "":
+            if not dir.current_is_dir():
+                if command in file_name:
+                    file_names.append(file_name)
+            file_name = dir.get_next()
+    else:
+        print("An error occurred when trying to access the path.")
         
+    rename_files_helper_helper(file_names, path, ad, writeOpt)
+    
+func rename_files_helper_helper(file_names, path, ad, writeOpt):
+    var dir = Directory.new()
+    if dir.open(path) == OK:
+        for i in range(len(file_names) - 1, -1, -1):
+            var file_name = file_names[i]
+            var file_name_comp = file_name.split('_')
+            var last = len(file_name_comp) - 1
+            file_name_comp[last] = file_name_comp[last].substr(0,len(file_name) - 4)
+            
+            var new_file_name
+            if ad:
+                new_file_name = (file_name_comp[0] + '_' +
+                                    String(int(file_name_comp[1]) + 1) + 
+                                    ".txt")
+            else:
+                if writeOpt:
+                    # we update Agent_databases counter as well
+                    file_name_comp[1] = String(int(file_name_comp[1]) + 1)
+                # update Command_outputs counter
+                file_name_comp[2] = String(int(file_name_comp[2]) + 1)
+                
+                new_file_name = (file_name_comp[0] + '_' +
+                                    file_name_comp[1] + '_' +
+                                    file_name_comp[2] +
+                                    ".txt")
+                
+            dir.rename(file_name,new_file_name)
+            
 func check_env():
     for elem in env:
         if not elem in all_env:
@@ -259,9 +330,8 @@ func add_score(score):
 
 func print_and_write_score(score, win):
     if not file.is_open():
-        while file.file_exists("res://Command_outputs/" + command + ".txt"):
-            command += '_'
-        file.open("res://Command_outputs/" + command + ".txt", File.WRITE_READ) 
+        # new command outputs will be 0 and version of the ad we are using is specified
+        file.open("res://Command_outputs/" + command + '_0_' + String(ad_ver) + ".txt", File.WRITE_READ) 
       
     var data = "Game %d score: %.1f" % [num_of_games,score]
     

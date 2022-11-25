@@ -115,11 +115,12 @@ func init(actions, read, write, filename, curr_n, debug):
     if not read:
         return true
     
+    var file = File.new()
+    
     if not write: 
         # we just want to check how good agent is without any randomness
         EPSILON = 0
-   
-    var file = File.new()
+    
     file.open("res://Agent_databases/" + FILENAME + ".txt", File.READ)
     if file.is_open():
         var line = ""
@@ -202,7 +203,8 @@ func save(write):
         data += "%s:%s/%s:%.1f\n" % [elem, total_return[elem], visits[elem], avg]
     
     var file = File.new()
-    file.open("res://Agent_databases/" + FILENAME + ".txt", File.WRITE)
+    # we always write into version 0
+    file.open("res://Agent_databases/" + FILENAME.substr(0,len(FILENAME)-1) + '0' + ".txt", File.WRITE)
     file.store_string(data)
     file.close()
 

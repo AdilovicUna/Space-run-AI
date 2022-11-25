@@ -115,7 +115,8 @@ func init(actions, read, write, filename, curr_n, debug):
             else:
                 line = line.split(':')
                 q[line[0]] = float(line[1])
-                visits[line[0]] = float(line[2])
+                #visits[line[0]] = float(line[2])
+                visits[line[0]] = 0
                
         file.close()
     else:
