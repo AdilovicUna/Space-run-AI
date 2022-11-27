@@ -1,4 +1,4 @@
-from pydoc import ispath
+from pathlib import Path
 import sys
 import matplotlib.pyplot as plt
 import numpy as np
@@ -33,6 +33,10 @@ def main(window):
         filename = split_filename[0]
         ad_ver = split_filename[1]
         co_ver = split_filename[2]
+
+        if not Path(agent_databases_path + filename + '_' + ad_ver + '.txt').is_file():
+            print("Not in Agent_databases")
+            continue
 
         co_f = open(command_outputs_path + filename + '_' + ad_ver + '_' + co_ver + '.txt', 'r')
         co_data = co_f.read().strip().split('\n')

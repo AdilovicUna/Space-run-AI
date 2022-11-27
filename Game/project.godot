@@ -15,6 +15,11 @@ _global_script_classes=[ {
 "path": "res://Agents/Keyboard.gd"
 }, {
 "base": "Reference",
+"class": "LearningAgent",
+"language": "GDScript",
+"path": "res://Agents/LearningAgent.gd"
+}, {
+"base": "Reference",
 "class": "MonteCarlo",
 "language": "GDScript",
 "path": "res://Agents/MonteCarlo.gd"
@@ -36,6 +41,7 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Keyboard": "",
+"LearningAgent": "",
 "MonteCarlo": "",
 "Random": "",
 "SARSA": "",

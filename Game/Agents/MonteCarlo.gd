@@ -1,5 +1,10 @@
 class_name MonteCarlo
 
+# About the agent:
+# on-policy, first visit, optimistic initial values, epsilon-greedy policy
+
+extends "res://Agents/LearningAgent.gd"
+
 class Step:
     var state_action
     var score
@@ -11,45 +16,7 @@ class Step:
         score = s
         time = t
         epsilon_action = e
-        
-var rand = RandomNumberGenerator.new()
 
-# About the agent:
-# on-policy, first visit, optimistic initial values, epsilon-greedy policy
-
-# IMPORTANT!
-# agent's function move returns a list of 2 elements:
-# - first element indicates the movement : -1 - left, 0 - just go forward, 1 - right
-# - second element decides if Hans should shoot : 1 - yes, 0 - no
-
-# variables to write to a text file
-# total_return dictionary maps state_action → total return
-var total_return = {}
-# visits dictionary maps state_action → # of visits
-var visits = {}
-
-# variables that need to reset after each episode
-var last_action
-var last_state
-var episode_steps = []
-
-# how many games are remembered in this file
-var n = 0
-var new_n = 0
-
-# all possible actions
-var ACTIONS = []
-# name of the file we will read from and right to
-var FILENAME = ""
-# discounting value
-var GAMMA = 1.0
-var INITIAL_OPTIMISTIC_VALUE = 100.0
-var EPSILON = 0.2   
-var EPSILON_DECREASE = 0.98
-
-const FINAL_EPSILON_VAL = 0.0001
-
-var DEBUG = false
 
 var prev_sec = OS.get_ticks_msec() / 1000.0 
 
@@ -92,64 +59,11 @@ func move(state, score):
 
 # initialize
 func init(actions, read, write, filename, curr_n, debug):
-    # so that we can replicate experiments
-    rand.seed = 0
-    
-    DEBUG = debug
-    
-    ACTIONS = actions
-    FILENAME = filename
-                        
-    if (GAMMA < 0 or GAMMA > 1 or 
-        INITIAL_OPTIMISTIC_VALUE < 0 or
-        EPSILON < 0 or EPSILON > 1):
-        return false
-    
-    if DEBUG:
-        print('\nepsilon = %.3f' % EPSILON)  
-         
-    EPSILON_DECREASE = pow(FINAL_EPSILON_VAL / EPSILON, 1.0 / curr_n)
-    
-    new_n = curr_n
-    
-    if not read:
-        return true
-    
-    var file = File.new()
-    
-    if not write: 
-        # we just want to check how good agent is without any randomness
-        EPSILON = 0
-    
-    file.open("res://Agent_databases/" + FILENAME + ".txt", File.READ)
-    if file.is_open():
-        var line = ""
-        var line2 = ""
-        var read_n = false
-        while not file.eof_reached():
-            line = file.get_line()
-            if line.empty():
-                continue
-            if not read_n:
-                read_n = true
-                n = int(line)
-            else:
-                line = line.split(':')
-                line2 = line[1].split('/')
-                total_return[line[0]] = float(line2[0])
-                visits[line[0]] = int(line2[1])
-               
-        file.close()
-    else:
-        return false
-       
-    return true
-       
-# reset
+    return init_agent('MonteCarlo', actions, read, write, filename, curr_n, debug)
+   
+# reset  
 func start_game():
-    episode_steps = []
-    last_action = null
-    last_state = null
+    start()
 
 # update
 func end_game(final_score, final_sec):
@@ -179,50 +93,12 @@ func end_game(final_score, final_sec):
             total_return[curr_step.state_action] += G
             visits[curr_step.state_action] += 1
             
-    # epsilon will decrease on each game
-    # so that by the end it is 0.001
-    # (random action will occur 1/1000)
-    if EPSILON > 0:
-        EPSILON *= EPSILON_DECREASE
-        
-    if DEBUG:    
-        print('\nepsilon = %.3f' % EPSILON)   
+    epsilon_update()
 
 # write
 func save(write):
-    if not write:
-        return
+    ad_write('MonteCarlo', write)
 
-    var data = ""
-   
-    # remember how many games have been played
-    data += String(n + new_n) + '\n'
-   
-    for elem in total_return:
-        var avg = total_return[elem] / visits[elem]
-        data += "%s:%s/%s:%.1f\n" % [elem, total_return[elem], visits[elem], avg]
-    
-    var file = File.new()
-    # we always write into version 0
-    file.open("res://Agent_databases/" + FILENAME.substr(0,len(FILENAME)-1) + '0' + ".txt", File.WRITE)
-    file.store_string(data)
-    file.close()
-
-func get_and_set_agent_specific_parameters(agent_specific_param):
-    for param in agent_specific_param:
-        param = param.split("=")
-        match param[0]:
-            "gam":
-                GAMMA = float(param[1])
-            "eps":
-                EPSILON = float(param[1])
-            "initOptVal":
-                INITIAL_OPTIMISTIC_VALUE = float(param[1])
-            _: # invalid param value
-                    return false
-                        
-    return ["gam=" + String(GAMMA), "eps=" + String(EPSILON), "initOptVal=" + String(INITIAL_OPTIMISTIC_VALUE)]
- 
 func Q(state, action):
     var state_action = get_state_action(state, action)
     if not (state_action in total_return):
@@ -230,13 +106,7 @@ func Q(state, action):
         visits[state_action] = 1
     return total_return[state_action] / visits[state_action]
 
-func get_state_action(state, action):
-    return ("[%d,%d,%s]_[%d,%d]" %
-                        [state[0], state[1], state[2], action[0], action[1]])
 
-func get_n():
-    return String(n)
-   
 func is_first_occurrence (state_action, index):
     for i in range(len(episode_steps)):
         var step = episode_steps[i]

@@ -10,10 +10,10 @@ argument options:
                             options: [Keyboard, Static, Random, MonteCarlo, SARSA]
                             sub-options (only for the agents listed below):
                                 MonteCarlo=[float, float, float, float] : 
-                                    [gam (range [0,1]), eps (range [0,1]), epsDec (range [0,1]), initOptVal [0,~)]
+                                    [gam (range [0,1]), eps (range [0,1]), initOptVal [0,~)]
                                     eg. use: "MonteCarlo:eps=0.1,gam=0.2"
                                 SARSA=[float, float, float, float] : 
-                                    [gam (range [0,1]), eps (range [0,1]), epsDec (range [0,1]), initOptVal [0,~)]
+                                    [gam (range [0,1]), eps (range [0,1]), initOptVal [0,~)]
                                     eg. use: "SARSA:eps=0.1,gam=0.2"
                         
     - level=int :           number of the level to start from 
@@ -274,7 +274,6 @@ func rename_files():
     rename_files_helper("res://Command_outputs", false, write)
 
 func rename_files_helper(path, ad, writeOpt):
-    print(path)
     var dir = Directory.new()
     var file_names = []
     if dir.open(path) == OK:
@@ -329,7 +328,7 @@ func add_score(score):
     scores_sum += score
 
 func print_and_write_score(score, win):
-    if not file.is_open():
+    if not file.is_open() and (write or read):
         # new command outputs will be 0 and version of the ad we are using is specified
         file.open("res://Command_outputs/" + command + '_0_' + String(ad_ver) + ".txt", File.WRITE_READ) 
       
@@ -361,9 +360,14 @@ func print_and_write_ending():
     write_data("win_rate %d/%d" % [wins, num_of_games])    
     write_data("avg_score %.1f" % (scores_sum / num_of_games))
     write_data("previous_games %s" % agent_inst.get_n())
-    file.close()
+    
+    if write or read:
+        file.close()
 
 func write_data(data):
+    if not read and not write:
+        return
+        
     file.seek_end()
     file.store_line(data)
 
