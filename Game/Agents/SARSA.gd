@@ -40,7 +40,7 @@ func move(state, score):
 
 # initialize
 func init(actions, read, write, filename, curr_n, debug):
-    return init_agent('SARSA', actions, read, write, filename, curr_n, debug)
+    return init_agent(actions, read, write, filename, curr_n, debug)
 
 # reset  
 func start_game():
@@ -55,7 +55,7 @@ func end_game(final_score, _final_time):
 
 # write
 func save(write):
-    ad_write('SARSA', write)
+    ad_write(write)
 
 
 func Q(state, action):
@@ -75,4 +75,12 @@ func update_dicts(state_action, new_state_action, R, terminal = false):
     var alpha = 1.0 / visits[state_action]
     var new_state_val = 0 if terminal else q[new_state_action]
     q[state_action] += alpha * (R + GAMMA * new_state_val - q[state_action])    
-        
+    
+func parse_line(line):   
+    q[line[0]] = float(line[1])
+    visits[line[0]] = float(line[2])
+
+func store_data(data):
+    for elem in q.keys():
+        data += "%s:%s:%s\n" % [elem, q[elem], visits[elem]]
+    return data

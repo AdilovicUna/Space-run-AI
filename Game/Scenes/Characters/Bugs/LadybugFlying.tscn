@@ -13,7 +13,7 @@
 script = ExtResource( 3 )
 
 [node name="LadybugFlying" type="KinematicBody" parent="."]
-transform = Transform( -4.88762e-07, 0, -3, 0, 3, 0, 3, 0, -4.88762e-07, 0, -22, 0 )
+transform = Transform( -4.88762e-07, 0, -3, 0, 3, 0, 3, 0, -4.88762e-07, 10, -22, 0 )
 collision_layer = 2
 collision_mask = 5
 script = ExtResource( 4 )

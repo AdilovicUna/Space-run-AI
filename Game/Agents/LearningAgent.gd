@@ -40,7 +40,7 @@ var new_action
 var last_score
 var episode_steps = []
 
-func init_agent(agent_name, actions, read, write, filename, curr_n, debug):
+func init_agent(actions, read, write, filename, curr_n, debug):
      # so that we can replicate experiments
     rand.seed = 0
     
@@ -56,8 +56,11 @@ func init_agent(agent_name, actions, read, write, filename, curr_n, debug):
     
     if DEBUG:
         print('\nepsilon = %.3f' % EPSILON)  
-         
-    EPSILON_DECREASE = pow(FINAL_EPSILON_VAL / EPSILON, 1.0 / curr_n)
+    
+    if EPSILON == 0.0:
+        EPSILON_DECREASE = 0.0
+    else:
+        EPSILON_DECREASE = pow(FINAL_EPSILON_VAL / EPSILON, 1.0 / curr_n)
     
     new_n = curr_n
     
@@ -72,7 +75,6 @@ func init_agent(agent_name, actions, read, write, filename, curr_n, debug):
     file.open("res://Agent_databases/" + FILENAME + ".txt", File.READ)
     if file.is_open():
         var line = ""
-        var line2 = ""
         var read_n = false
         while not file.eof_reached():
             line = file.get_line()
@@ -83,13 +85,7 @@ func init_agent(agent_name, actions, read, write, filename, curr_n, debug):
                 n = int(line)
             else:
                 line = line.split(':')
-                if agent_name == 'MonteCarlo':
-                    line2 = line[1].split('/')
-                    total_return[line[0]] = float(line2[0])
-                    visits[line[0]] = int(line2[1])
-                elif agent_name == 'SARSA':
-                    q[line[0]] = float(line[1])
-                    visits[line[0]] = float(line[2])
+                parse_line(line)
                
         file.close()
     else:
@@ -104,7 +100,7 @@ func start():
     last_state = null
     last_score = 0
 
-func ad_write(agent_name, write):
+func ad_write(write):
     if not write:
         return
 
@@ -113,13 +109,7 @@ func ad_write(agent_name, write):
     # remember how many games have been played
     data += String(n + new_n) + '\n'
    
-    if agent_name == 'MonteCarlo':
-        for elem in total_return:
-            var avg = total_return[elem] / visits[elem]
-            data += "%s:%s/%s:%.1f\n" % [elem, total_return[elem], visits[elem], avg]
-    elif agent_name == 'SARSA':
-        for elem in q.keys():
-            data += "%s:%s:%s\n" % [elem, q[elem], visits[elem]]
+    data = store_data(data)
     
     var file = File.new()
     # we always write into version 0
@@ -160,3 +150,9 @@ func get_state_action(state, action):
 
 func get_n():
     return String(n)
+
+func parse_line(_line):
+    pass
+
+func store_data(_data):
+    pass

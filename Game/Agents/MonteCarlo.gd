@@ -17,7 +17,6 @@ class Step:
         time = t
         epsilon_action = e
 
-
 var prev_sec = OS.get_ticks_msec() / 1000.0 
 
 # move and remember  
@@ -59,7 +58,7 @@ func move(state, score):
 
 # initialize
 func init(actions, read, write, filename, curr_n, debug):
-    return init_agent('MonteCarlo', actions, read, write, filename, curr_n, debug)
+    return init_agent(actions, read, write, filename, curr_n, debug)
    
 # reset  
 func start_game():
@@ -97,7 +96,7 @@ func end_game(final_score, final_sec):
 
 # write
 func save(write):
-    ad_write('MonteCarlo', write)
+    ad_write(write)
 
 func Q(state, action):
     var state_action = get_state_action(state, action)
@@ -112,3 +111,14 @@ func is_first_occurrence (state_action, index):
         var step = episode_steps[i]
         if step.state_action == state_action:
             return i == index
+
+func parse_line(line):
+    var line2 = line[1].split('/')
+    total_return[line[0]] = float(line2[0])
+    visits[line[0]] = int(line2[1])
+
+func store_data(data):
+    for elem in total_return:
+        var avg = total_return[elem] / visits[elem]
+        data += "%s:%s/%s:%.1f\n" % [elem, total_return[elem], visits[elem], avg]
+    return data
