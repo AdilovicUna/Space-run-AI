@@ -35,8 +35,11 @@ argument options:
                             options: [read, write, read_write]
                             Note: will not influence the following agents: Keyboard, Static, Random
 
+    - ceval=bool :          performs continuous evaluation
+                            options: [true,false]
+                                
     - debug=bool :          display debug print statements
-                            optionsL [true,false]
+                            options: [true,false]
              
     - options :             displays options
 """
@@ -59,10 +62,13 @@ var rots = 6
 var read = false
 var write = false
 var agent_specific_param = []
+var ceval = false
 var debug = false
+var ad_ver = 0
 
 var agent_inst = Keyboard.new()
 
+var is_eval_game
 var scores_sum = 0.0
 var num_of_games = 0
 
@@ -105,6 +111,9 @@ func _ready():
             print("Something went wrong, please try again")
             print(options)
             get_tree().quit()
+
+        if ceval:
+            n *= 2      # play n learning games + n evaluation games
         play_game()
 
 func slice(array, start_index, end_index):
@@ -125,7 +134,10 @@ func play_game():
         n -= 1
         game = game_scene.instance()
         set_param_in_game()
-        agent_inst.start_game()
+        is_eval_game = ceval and n % 2 == 0
+        if ceval:
+            print("\n%s game:" % ("evaluation" if is_eval_game else "learning"))
+        agent_inst.start_game(is_eval_game)
         game.connect("game_finished", self, "on_game_finished")
         add_child(game)
     else:
@@ -220,6 +232,14 @@ func set_param(param):
                             write = true
                         _: # invalid param value
                             return false
+                "ceval":
+                    match param[key]:
+                        "true" :
+                            ceval = true
+                        "false" :
+                            ceval = false
+                        _: # invalid param value
+                            return false
                 "debug":
                     match param[key]:
                         "true" :
@@ -309,7 +329,8 @@ func print_and_write_score(score, win):
       
     var data = "Game %d score: %.1f" % [num_of_games,score]
     
-    write_data("%.1f" % score)
+    if not ceval or is_eval_game:
+        write_data("%.1f" % score)
     
     if win:  
         data += " Game won!"  
@@ -352,9 +373,8 @@ func print_and_write_ending():
     write_data("avg_score %.1f" % (scores_sum / num_of_games))
     write_data("previous_games %s" % agent_inst.get_n())
     
-    write_agent_databases()
-    
     if write or read:
+        write_agent_databases()
         file.close()
 
 func write_data(data, writing_agent_databases = false):
@@ -367,8 +387,9 @@ func write_data(data, writing_agent_databases = false):
 func on_game_finished(score, ticks, win, time):
     # calculations
     num_of_ticks += ticks
-    wins += int(win)
-    add_score(score)
+    if not ceval or is_eval_game:
+        wins += int(win)
+        add_score(score)
     # finish up
     print_and_write_score(score, win)
     agent_inst.end_game(score, time)        

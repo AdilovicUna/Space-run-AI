@@ -25,28 +25,24 @@ func move(state, score):
     if last_state == state:
         return last_action    
    
-    # next action should be the one with the maximum value of Q function
-    var max_q = 0.0
-    for action in ACTIONS:
-        if Q(state, action) > max_q:
-            max_q = Q(state, action)
-            last_action = action
+    last_action = .best_action(state)
             
 # 6 actions
 # prob max_action x (1/6)
 # prob of every other action y (5/6)
 # if <= EPSILON
     var epsilon_action = false
-    var curr_sec = OS.get_ticks_msec()
-    if curr_sec - prev_sec >= 0.05:
-        prev_sec = curr_sec
-        epsilon_action = rand.randf_range(0,1) < EPSILON
-        if epsilon_action:
-            while true:
-                var rand_action = ACTIONS[rand.randi_range(0,len(ACTIONS) - 1)]            
-                if last_action != rand_action:
-                    last_action = rand_action
-                    break
+    if not is_eval_game:
+        var curr_sec = OS.get_ticks_msec()
+        if curr_sec - prev_sec >= 0.05:
+            prev_sec = curr_sec
+            epsilon_action = rand.randf_range(0,1) < EPSILON
+            if epsilon_action:
+                while true:
+                    var rand_action = ACTIONS[rand.randi_range(0,len(ACTIONS) - 1)]            
+                    if last_action != rand_action:
+                        last_action = rand_action
+                        break
     
     # remember relevant infromation
     last_state = state
@@ -61,38 +57,39 @@ func init(actions, read, write, filename, curr_n, debug):
     return init_agent(actions, read, write, filename, curr_n, debug)
    
 # reset  
-func start_game():
-    start()
+func start_game(eval):
+    start(eval)
 
 # update
 func end_game(final_score, final_sec):
     if DEBUG:
         var n_steps = len(episode_steps)
-        var s = "last actions: "
+        var s = "  last actions: "
         for i in range(max(n_steps - 7, 0), n_steps):
             var step = episode_steps[i]
             if step.epsilon_action:
-                s 
+                s += "*"
             s += String(step.state_action) + " "
         print(s)
 
     var G = 0
     episode_steps.append(Step.new("", final_score, final_sec, false))
     
-    for i in range(len(episode_steps) - 2,-1,-1):
-        var curr_step = episode_steps[i]
-        var next_step = episode_steps[i+1]
-        var R = (next_step.score - curr_step.score)
-        
-        G =  pow(GAMMA,next_step.time - curr_step.time) * (R + G)
-    
-        # since we are using the first visit approach,
-        # we only need the first occurrence  of this state_action
-        if is_first_occurrence (curr_step.state_action, i):
-            total_return[curr_step.state_action] += G
-            visits[curr_step.state_action] += 1
+    if not is_eval_game:
+        for i in range(len(episode_steps) - 2,-1,-1):
+            var curr_step = episode_steps[i]
+            var next_step = episode_steps[i+1]
+            var R = (next_step.score - curr_step.score)
             
-    epsilon_update()
+            G =  pow(GAMMA,next_step.time - curr_step.time) * (R + G)
+        
+            # since we are using the first visit approach,
+            # we only need the first occurrence  of this state_action
+            if is_first_occurrence (curr_step.state_action, i):
+                total_return[curr_step.state_action] += G
+                visits[curr_step.state_action] += 1
+                
+        epsilon_update()
 
 # write
 func save(write):
@@ -122,3 +119,6 @@ func store_data(data):
         var avg = total_return[elem] / visits[elem]
         data += "%s:%s/%s:%.1f\n" % [elem, total_return[elem], visits[elem], avg]
     return data
+
+func all_state_actions():
+    return total_return.keys()

@@ -39,6 +39,7 @@ var last_state
 var new_action
 var last_score
 var episode_steps = []
+var is_eval_game
 
 func init_agent(actions, read, write, filename, curr_n, debug):
      # so that we can replicate experiments
@@ -53,9 +54,6 @@ func init_agent(actions, read, write, filename, curr_n, debug):
         INITIAL_OPTIMISTIC_VALUE < 0 or
         EPSILON < 0 or EPSILON > 1):
         return false
-    
-    if DEBUG:
-        print('\nepsilon = %.3f' % EPSILON)  
     
     if EPSILON == 0.0:
         EPSILON_DECREASE = 0.0
@@ -93,12 +91,26 @@ func init_agent(actions, read, write, filename, curr_n, debug):
        
     return true
 
-func start():
+func start(eval):
     episode_steps = []
     last_action = null    
     new_action = null
     last_state = null
     last_score = 0
+    is_eval_game = eval
+
+func Q(_state, _action):
+    pass    # subclass must implement
+
+func best_action(state):
+    # next action should be the one with the maximum value of Q function
+    var max_q = 0.0
+    var best = null
+    for action in ACTIONS:
+        if Q(state, action) >= max_q:
+            max_q = Q(state, action)
+            best = action
+    return best
 
 func ad_write(write):
     if not write:
@@ -112,7 +124,6 @@ func ad_write(write):
     data = store_data(data)
     
     var file = File.new()
-    
     file.open("res://Agent_databases/" + FILENAME + ".txt", File.WRITE)
     file.store_string(data)
     file.close()
@@ -123,9 +134,10 @@ func epsilon_update():
     # (random action will occur 1/10000)
     if EPSILON > 0:
         EPSILON *= EPSILON_DECREASE
-            
+    
+    print('epsilon = %.3f' % EPSILON)
     if DEBUG:    
-        print('\nepsilon = %.3f' % EPSILON) 
+        show_policy()
 
 func get_and_set_agent_specific_parameters(agent_specific_param):
     for param in agent_specific_param:
@@ -155,3 +167,53 @@ func parse_line(_line):
 
 func store_data(_data):
     pass
+
+func all_state_actions():
+    pass
+
+const MOVES_MAP = {
+    '[-1, 0]': '←', '[0, 0]': '↑', '[1, 0]': '→',
+    '[-1, 1]': '←*', '[0, 1]': '↑*', '[1, 1]': '→*'
+}
+
+var last_policy = null
+
+func show_policy():
+    var dists_d = {}
+    var rots_d = {}
+    var obstacles_d = {}
+    for sa in all_state_actions():    # e.g. "[0,210,I]_[-1,0]"
+        var words = sa.split("_")
+        var left = words[0].trim_prefix("[").trim_suffix("]").split(",")
+        dists_d[int(left[0])] = null
+        rots_d[int(left[1])] = null
+        obstacles_d[left[2]] = null
+
+    var dists = dists_d.keys()
+    dists.sort()
+    var rots = rots_d.keys()
+    rots.sort()
+    var obstacles = obstacles_d.keys()
+    obstacles.sort()
+
+    var policy = {}
+    var s = "        "
+    for rot in rots:
+        s += "%4d" % rot
+    print(s)
+    for obstacle in obstacles:
+        for dist in dists:
+            s = "(%d, %s)" % [dist, obstacle]
+            s = "%8s" % s
+            for rot in rots:
+                var state = str([dist, obstacle, rot])
+                var action = best_action([dist, rot, obstacle])
+                policy[state] = action
+                var t
+                if last_policy != null and last_policy.get(state) != action:
+                    t = "(%s)" % MOVES_MAP[str(action)]
+                else:
+                    t = MOVES_MAP[str(action)] + " "
+                s += "%4s" % t
+            print(s)
+    last_policy = policy

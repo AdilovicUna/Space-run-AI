@@ -25,7 +25,7 @@ func init(_actions, _read, _write, _filename, _curr_n, _debug):
     return true
 
 # reset
-func start_game():
+func start_game(_eval):
     pass
 
 # update

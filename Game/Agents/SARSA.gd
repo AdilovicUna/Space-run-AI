@@ -11,12 +11,7 @@ func move(state, score):
     if last_state == state:
         return last_action    
    
-    # next action should be the one with the maximum value of Q function
-    var max_q = 0.0
-    for action in ACTIONS:
-        if Q(state, action) >= max_q:
-            max_q = Q(state, action)
-            new_action = action
+    new_action = .best_action(state)
             
     var epsilon_action = rand.randf_range(0,1) < EPSILON
     if epsilon_action:
@@ -43,15 +38,16 @@ func init(actions, read, write, filename, curr_n, debug):
     return init_agent(actions, read, write, filename, curr_n, debug)
 
 # reset  
-func start_game():
-    start()
+func start_game(eval):
+    start(eval)
 
 # update
 func end_game(final_score, _final_time):
-    var state_action = get_state_action(last_state,last_action)
-    var R = final_score - last_score
-    update_dicts(state_action, '', R, true)
-    epsilon_update()
+    if not is_eval_game:
+        var state_action = get_state_action(last_state,last_action)
+        var R = final_score - last_score
+        update_dicts(state_action, '', R, true)
+        epsilon_update()
 
 # write
 func save(write):
@@ -84,3 +80,7 @@ func store_data(data):
     for elem in q.keys():
         data += "%s:%s:%s\n" % [elem, q[elem], visits[elem]]
     return data
+
+func all_state_actions():
+    return q.keys()
+    
