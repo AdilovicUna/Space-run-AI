@@ -72,7 +72,7 @@ func end_game(final_score, final_sec):
         for i in range(max(n_steps - 7, 0), n_steps):
             var step = episode_steps[i]
             if step.epsilon_action:
-                s += "*"
+                s 
             s += String(step.state_action) + " "
         print(s)
 
@@ -85,7 +85,7 @@ func end_game(final_score, final_sec):
         var R = (next_step.score - curr_step.score)
         
         G =  pow(GAMMA,next_step.time - curr_step.time) * (R + G)
-            
+    
         # since we are using the first visit approach,
         # we only need the first occurrence  of this state_action
         if is_first_occurrence (curr_step.state_action, i):

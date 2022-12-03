@@ -18,7 +18,6 @@ loop through all the files from Command_outputs, plot the data and save the plot
 
 def main(window):
     command_outputs_path = '../Game/Command_outputs/'
-    agent_databases_path = '../Game/Agent_databases/'
 
     # files have the same names in both folders
     for filename in os.listdir(command_outputs_path):
@@ -31,21 +30,16 @@ def main(window):
         
         split_filename = filename.split('_')
         filename = split_filename[0]
-        ad_ver = split_filename[1]
-        co_ver = split_filename[2]
+        co_ver = split_filename[1]
 
-        if not Path(agent_databases_path + filename + '_' + ad_ver + '.txt').is_file():
-            print("Not in Agent_databases")
-            continue
-
-        co_f = open(command_outputs_path + filename + '_' + ad_ver + '_' + co_ver + '.txt', 'r')
-        co_data = co_f.read().strip().split('\n')
+        co_f = open(command_outputs_path + filename + '_' + co_ver + '.txt', 'r')
+        co_f = co_f.read().strip().split('\n')
+        index = co_f.index('')
+        co_data = co_f[:index]
 
         agent = filename.split(',')[0].split('=')[1]
-        ad_f = open(agent_databases_path + filename + '_' + ad_ver + '.txt', 'r')
-        ad_data = get_table(ad_f.read().strip().split('\n')[1:], agent)
+        ad_data = get_table(co_f[index+1:], agent)
         plot(window, co_data, ad_data, agent, filename)
-
 
         # create path so that we can sort out the plots nicely
         env = filename[filename.find('env'):]
@@ -54,10 +48,8 @@ def main(window):
         path = 'plots/' + env + '/win=' + str(window) + '/no_disc,iov=100.00/'
         if not os.path.isdir(path):
             os.makedirs(path)
-
-
-        plt.savefig(path + filename + '_' + ad_ver + '_' + co_ver + '.png', bbox_inches='tight', pad_inches=0.2, dpi=100)
-
+        
+        plt.savefig(path + filename + '_' + co_ver + '.png', bbox_inches='tight', pad_inches=0.2, dpi=100)
 
 def plot(window, co_data, ad_data, agent, filename):
     scores = [float(i) for i in co_data[:-4]]

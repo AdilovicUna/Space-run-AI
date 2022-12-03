@@ -34,10 +34,6 @@ argument options:
                             write = update the data after the command is executed 
                             options: [read, write, read_write]
                             Note: will not influence the following agents: Keyboard, Static, Random
-                            sub-option:
-                                version=int - specifies Agent_databases vesion of the file
-                                eg. use: "database=read:1"
-                                   
 
     - debug=bool :          display debug print statements
                             optionsL [true,false]
@@ -64,7 +60,6 @@ var read = false
 var write = false
 var agent_specific_param = []
 var debug = false
-var ad_ver = 0
 
 var agent_inst = Keyboard.new()
 
@@ -106,7 +101,7 @@ func _ready():
         instance_agent()
         build_filename()
         rename_files()
-        if not agent_inst.init(actions, read, write, command + '_' + String(ad_ver), n, debug):
+        if not agent_inst.init(actions, read, write, command, n, debug):
             print("Something went wrong, please try again")
             print(options)
             get_tree().quit()
@@ -225,8 +220,6 @@ func set_param(param):
                             write = true
                         _: # invalid param value
                             return false
-                    if len(temp) > 1:
-                        ad_ver = int(temp[1])
                 "debug":
                     match param[key]:
                         "true" :
@@ -260,22 +253,12 @@ func set_param(param):
     return true
 
 func rename_files():
-    # to avoid overwriting a file in Agent_databases 
-    # and having wrong policies displayed in plots 
-    # we will rename all previous files
-    # in Agent_databases and Command_outputs
-    
-    # format: f_c1_c2.txt
-    # c1 = agent_databases counter
-    # c2 = command_outputs counter
-    if write:
-        ad_ver += 1
-        rename_files_helper("res://Agent_databases", true, write)
-    rename_files_helper("res://Command_outputs", false, write)
-
-func rename_files_helper(path, ad, writeOpt):
+    #command outputs format:
+    # f_c.txt
+    # c = command outputs counter
     var dir = Directory.new()
     var file_names = []
+    var path = "res://Command_outputs"
     if dir.open(path) == OK:
         dir.list_dir_begin()
         var file_name = dir.get_next()
@@ -287,9 +270,9 @@ func rename_files_helper(path, ad, writeOpt):
     else:
         print("An error occurred when trying to access the path.")
         
-    rename_files_helper_helper(file_names, path, ad, writeOpt)
-    
-func rename_files_helper_helper(file_names, path, ad, writeOpt):
+    rename_files_helper(file_names, path)
+
+func rename_files_helper(file_names, path):
     var dir = Directory.new()
     if dir.open(path) == OK:
         for i in range(len(file_names) - 1, -1, -1):
@@ -299,21 +282,13 @@ func rename_files_helper_helper(file_names, path, ad, writeOpt):
             file_name_comp[last] = file_name_comp[last].substr(0,len(file_name) - 4)
             
             var new_file_name
-            if ad:
-                new_file_name = (file_name_comp[0] + '_' +
-                                    String(int(file_name_comp[1]) + 1) + 
-                                    ".txt")
-            else:
-                if writeOpt:
-                    # we update Agent_databases counter as well
-                    file_name_comp[1] = String(int(file_name_comp[1]) + 1)
-                # update Command_outputs counter
-                file_name_comp[2] = String(int(file_name_comp[2]) + 1)
-                
-                new_file_name = (file_name_comp[0] + '_' +
-                                    file_name_comp[1] + '_' +
-                                    file_name_comp[2] +
-                                    ".txt")
+        
+            # update Command_outputs counter
+            file_name_comp[1] = String(int(file_name_comp[1]) + 1)
+            
+            new_file_name = (file_name_comp[0] + '_' +
+                                file_name_comp[1] +
+                                ".txt")
                 
             dir.rename(file_name,new_file_name)
             
@@ -329,8 +304,8 @@ func add_score(score):
 
 func print_and_write_score(score, win):
     if not file.is_open() and (write or read):
-        # new command outputs will be 0 and version of the ad we are using is specified
-        file.open("res://Command_outputs/" + command + '_0_' + String(ad_ver) + ".txt", File.WRITE_READ) 
+        # new command outputs will be 0 and version of the agent_databases we are using is specified
+        file.open("res://Command_outputs/" + command + '_0' + ".txt", File.WRITE_READ) 
       
     var data = "Game %d score: %.1f" % [num_of_games,score]
     
@@ -340,7 +315,23 @@ func print_and_write_score(score, win):
         data += " Game won!"  
         winning_score = score
     print(data)   
-    
+
+func write_agent_databases():
+    write_data("")
+    var ad_file = File.new()
+    ad_file.open("res://Agent_databases/" + command + ".txt", File.READ)
+    if ad_file.is_open():
+        var line = ""
+        var read_n = false
+        while not ad_file.eof_reached():
+            line = ad_file.get_line()
+            if line.empty():
+                continue
+            if not read_n:
+                read_n = true
+            else:
+                write_data(line,true)
+        ad_file.close()
 
 func print_and_write_ending():
     var ratio_of_wins = "Games won: %d/%d" % [wins, num_of_games]    
@@ -355,17 +346,19 @@ func print_and_write_ending():
     if winning_score > 0.0:
         write_data("winning_score %d" % winning_score)   
     else :
-         write_data("winning_score unknown")   
+         write_data("winning_score unknown")
         
     write_data("win_rate %d/%d" % [wins, num_of_games])    
     write_data("avg_score %.1f" % (scores_sum / num_of_games))
     write_data("previous_games %s" % agent_inst.get_n())
     
+    write_agent_databases()
+    
     if write or read:
         file.close()
 
-func write_data(data):
-    if not read and not write:
+func write_data(data, writing_agent_databases = false):
+    if not writing_agent_databases and not read and not write:
         return
         
     file.seek_end()

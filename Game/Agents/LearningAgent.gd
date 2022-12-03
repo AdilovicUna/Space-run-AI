@@ -112,11 +112,10 @@ func ad_write(write):
     data = store_data(data)
     
     var file = File.new()
-    # we always write into version 0
-    file.open("res://Agent_databases/" + FILENAME.substr(0,len(FILENAME)-1) + '0' + ".txt", File.WRITE)
+    
+    file.open("res://Agent_databases/" + FILENAME + ".txt", File.WRITE)
     file.store_string(data)
     file.close()
-    
 
 func epsilon_update():
     # epsilon will decrease on each game
