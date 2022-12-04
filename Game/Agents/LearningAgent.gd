@@ -82,7 +82,6 @@ func init_agent(actions, read, write, filename, curr_n, debug):
                 read_n = true
                 n = int(line)
             else:
-                line = line.split(':')
                 parse_line(line)
                
         file.close()
@@ -135,7 +134,7 @@ func epsilon_update():
     if EPSILON > 0:
         EPSILON *= EPSILON_DECREASE
     
-    print('epsilon = %.3f' % EPSILON)
+    print('epsilon = %.4f' % EPSILON)
     if DEBUG:    
         show_policy()
 
@@ -163,13 +162,13 @@ func get_n():
     return String(n)
 
 func parse_line(_line):
-    pass
+    pass # subclass must implement
 
 func store_data(_data):
-    pass
+    pass # subclass must implement
 
 func all_state_actions():
-    pass
+    pass # subclass must implement
 
 const MOVES_MAP = {
     '[-1, 0]': '←', '[0, 0]': '↑', '[1, 0]': '→',

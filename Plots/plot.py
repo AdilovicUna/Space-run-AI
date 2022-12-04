@@ -74,12 +74,11 @@ def plot(window, co_data, ad_data, agent, filename):
     # text above the plot
     spaces = '    '
     plt.figtext(x=0.02, y=0.95, s='Winning rate: ' + win_rate + spaces + 'Previous games: ' + num_of_prev_games+ spaces + 'Agent: ' + agent)
-    if agent == 'MonteCarlo' or agent == 'SARSA':
-        agentSpecParam ='='.join(','.join(filename.split(',')[1:4]).split('=')[1:]).split(',')
-        eps = agentSpecParam[0].split('=')[1]
-        gam = agentSpecParam[1].split('=')[1]
-        initOptVal = agentSpecParam[2].split('=')[1][:-1]
-        plt.figtext(x=0.02, y=0.91, s='ε: ' + eps + spaces + 'γ: ' + gam + spaces + 'Initial optimistic value: ' + initOptVal)
+    agentSpecParam ='='.join(','.join(filename.split(',')[1:4]).split('=')[1:]).split(',')
+    eps = agentSpecParam[0].split('=')[1]
+    gam = agentSpecParam[1].split('=')[1]
+    initOptVal = agentSpecParam[2].split('=')[1][:-1]
+    plt.figtext(x=0.02, y=0.91, s='ε: ' + eps + spaces + 'γ: ' + gam + spaces + 'Initial optimistic value: ' + initOptVal)
 
     plt.xlabel('Episodes')
     plt.ylabel('Scores')
@@ -99,7 +98,11 @@ def get_table(ad_data, agent):
     # ad_data (list of lines from agent_databases file) into:
     # dict ('parameters_for_specific_agent': [ '[dist,rot,obstacle]', '[movement,shooting]' ])
     ad_data = [line.split(':') for line in ad_data]
-    ad_data = dict((line[1], line[0].split('_')) for line in ad_data)
+
+    if agent == 'DoubleQ_learning':
+        ad_data = dict((line[1] if line[1] > line[2] else line[2], line[0].split('_')) for line in ad_data)
+    else:
+        ad_data = dict((line[1], line[0].split('_')) for line in ad_data)
     
     # resulting datastructure: dict { ((dist, 'obstacle'), rot) : MOVES_MAP value }
     chosen_moves = {}
@@ -108,7 +111,13 @@ def get_table(ad_data, agent):
         case 'MonteCarlo':
             chosen_moves = monte_carlo_calc(ad_data)
         case 'SARSA':
-            chosen_moves = sarsa_carlo_calc(ad_data)
+            chosen_moves = TD_calc(ad_data)
+        case 'QLearning':
+            chosen_moves = TD_calc(ad_data)
+        case 'ExpectedSARSA':
+            chosen_moves = TD_calc(ad_data)
+        case 'DoubleQLearning':
+            chosen_moves = TD_calc(ad_data)
         case _:
             raise Exception('Agent ' + agent + ' does not exist')
 
@@ -163,7 +172,7 @@ def monte_carlo_calc(ad_data):
 
     return result
 
-def sarsa_carlo_calc(ad_data):
+def TD_calc(ad_data):
     result = {}
     curr_state_max = -1
     curr_move = ''

@@ -110,6 +110,7 @@ func is_first_occurrence (state_action, index):
             return i == index
 
 func parse_line(line):
+    line = line.split(':')
     var line2 = line[1].split('/')
     total_return[line[0]] = float(line2[0])
     visits[line[0]] = int(line2[1])

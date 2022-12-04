@@ -7,7 +7,7 @@ argument options:
     - n=int :               number of games
     
     - agent=string :        name of the agent
-                            options: [Keyboard, Static, Random, MonteCarlo, SARSA]
+                            options: [Keyboard, Static, Random, MonteCarlo, SARSA, QLearning, ExpectedSARSA, DoubleQLearning]
                             sub-options (only for the agents listed below):
                                 MonteCarlo=[float, float, float, float] : 
                                     [gam (range [0,1]), eps (range [0,1]), initOptVal [0,~)]
@@ -15,7 +15,15 @@ argument options:
                                 SARSA=[float, float, float, float] : 
                                     [gam (range [0,1]), eps (range [0,1]), initOptVal [0,~)]
                                     eg. use: "SARSA:eps=0.1,gam=0.2"
-                        
+                                QLearning=[float, float, float, float] : 
+                                    [gam (range [0,1]), eps (range [0,1]), initOptVal [0,~)]
+                                    eg. use: "QLearning:eps=0.1,gam=0.2"
+                                ExpectedSARSA=[float, float, float, float] : 
+                                    [gam (range [0,1]), eps (range [0,1]), initOptVal [0,~)]
+                                    eg. use: "ExpectedSARSA:eps=0.1,gam=0.2"
+                                DoubleQLearning=[float, float, float, float] : 
+                                    [gam (range [0,1]), eps (range [0,1]), initOptVal [0,~)]
+                                    eg. use: "DoubleQLearning:eps=0.1,gam=0.2"
     - level=int :           number of the level to start from 
                             options: [1, ... , 10]
                         
@@ -47,7 +55,7 @@ argument options:
 var game_scene = preload("res://Scenes/Other/Game.tscn")
 var game
 
-var all_agents = ["Keyboard", "Static", "Random", "MonteCarlo", "SARSA"]
+var all_agents = ["Keyboard", "Static", "Random", "MonteCarlo", "SARSA", "QLearning", "ExpectedSARSA", "DoubleQLearning"]
 var all_env = ["traps", "bugs", "viruses", "tokens", "I", "O", "MovingI", "X", "Walls", "Hex", "HexO", "Balls", "Triangles", "HalfHex"]
 
 # all parameters and their default values
@@ -171,6 +179,14 @@ func instance_agent():
             agent_inst = MonteCarlo.new()
         "SARSA":
             agent_inst = SARSA.new()
+        "QLearning":
+            agent_inst = QLearning.new()
+        "ExpectedSARSA":
+            agent_inst = ExpectedSARSA.new()
+        "DoubleQLearning":
+            agent_inst = DoubleQLearning.new()
+            
+            
 
 
 func display_options():
