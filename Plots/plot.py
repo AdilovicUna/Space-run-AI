@@ -74,11 +74,12 @@ def plot(window, co_data, ad_data, agent, filename):
     # text above the plot
     spaces = '    '
     plt.figtext(x=0.02, y=0.95, s='Winning rate: ' + win_rate + spaces + 'Previous games: ' + num_of_prev_games+ spaces + 'Agent: ' + agent)
-    agentSpecParam ='='.join(','.join(filename.split(',')[1:4]).split('=')[1:]).split(',')
+    agentSpecParam ='='.join(','.join(filename.split(',')[1:5]).split('=')[1:]).split(',')
     eps = agentSpecParam[0].split('=')[1]
-    gam = agentSpecParam[1].split('=')[1]
-    initOptVal = agentSpecParam[2].split('=')[1][:-1]
-    plt.figtext(x=0.02, y=0.91, s='ε: ' + eps + spaces + 'γ: ' + gam + spaces + 'Initial optimistic value: ' + initOptVal)
+    finalEps = agentSpecParam[1].split('=')[1]
+    gam = agentSpecParam[2].split('=')[1]
+    initOptVal = agentSpecParam[3].split('=')[1][:-1]
+    plt.figtext(x=0.02, y=0.91, s='ε: ' + eps + spaces + 'Final-ε: ' + finalEps + spaces + 'γ: ' + gam + spaces + 'Initial optimistic value: ' + initOptVal)
 
     plt.xlabel('Episodes')
     plt.ylabel('Scores')

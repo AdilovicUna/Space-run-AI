@@ -27,9 +27,8 @@ var FILENAME = ""
 var GAMMA = 1.0
 var INITIAL_OPTIMISTIC_VALUE = 100.0
 var EPSILON = 0.2   
+var FINAL_EPSILON_VAL = 0.0001
 var EPSILON_DECREASE
-
-const FINAL_EPSILON_VAL = 0.0001
 
 var DEBUG = false
 
@@ -148,10 +147,12 @@ func get_and_set_agent_specific_parameters(agent_specific_param):
                 EPSILON = float(param[1])
             "initOptVal":
                 INITIAL_OPTIMISTIC_VALUE = float(param[1])
+            "epsFinal":
+                FINAL_EPSILON_VAL = float(param[1])
             _: # invalid param value
                     return false
                         
-    return ["gam=" + String(GAMMA), "eps=" + String(EPSILON), "initOptVal=" + String(INITIAL_OPTIMISTIC_VALUE)]
+    return ["gam=" + String(GAMMA), "eps=" + String(EPSILON), "epsFinal=" + String(FINAL_EPSILON_VAL), "initOptVal=" + String(INITIAL_OPTIMISTIC_VALUE)]
  
 
 func get_state_action(state, action):

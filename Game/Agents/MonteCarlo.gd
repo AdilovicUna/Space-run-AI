@@ -27,15 +27,11 @@ func move(state, score):
    
     last_action = .best_action(state)
             
-# 6 actions
-# prob max_action x (1/6)
-# prob of every other action y (5/6)
-# if <= EPSILON
     var epsilon_action = false
     if not is_eval_game:
-        var curr_sec = OS.get_ticks_msec()
-        if curr_sec - prev_sec >= 0.05:
-            prev_sec = curr_sec
+        #var curr_sec = OS.get_ticks_msec()
+        #if curr_sec - prev_sec >= 0.05:
+            #prev_sec = curr_sec
             epsilon_action = rand.randf_range(0,1) < EPSILON
             if epsilon_action:
                 while true:
