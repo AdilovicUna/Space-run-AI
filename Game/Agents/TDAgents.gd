@@ -55,7 +55,6 @@ func Q(state, action):
     if not (state_action in q.keys()):
         q[state_action] = INITIAL_OPTIMISTIC_VALUE
         visits[state_action] = 0
-        
     return q[state_action]
     
 func update_dicts(state_action, new_state_action, R, terminal = false):
@@ -66,7 +65,9 @@ func update_dicts(state_action, new_state_action, R, terminal = false):
     visits[state_action] += 1
     
     var alpha = 1.0 / visits[state_action]
-    var new_state_val = 0 if terminal else q[new_state_action]
+    var new_state_val = (0 if terminal else 
+                        float(new_state_action) if new_state_action.is_valid_float()
+                        else q[new_state_action])
     q[state_action] += alpha * (R + GAMMA * new_state_val - q[state_action])
     
 func get_update(_state, _new_action, _best_action):
