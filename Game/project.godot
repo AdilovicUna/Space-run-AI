@@ -55,9 +55,9 @@ _global_script_classes=[ {
 "path": "res://Agents/Static.gd"
 }, {
 "base": "Reference",
-"class": "TDAgents",
+"class": "TDAgent",
 "language": "GDScript",
-"path": "res://Agents/TDAgents.gd"
+"path": "res://Agents/TDAgent.gd"
 } ]
 _global_script_class_icons={
 "DoubleQLearning": "",
@@ -69,7 +69,7 @@ _global_script_class_icons={
 "Random": "",
 "SARSA": "",
 "Static": "",
-"TDAgents": ""
+"TDAgent": ""
 }
 
 [application]

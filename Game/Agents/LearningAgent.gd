@@ -40,6 +40,11 @@ var last_score
 var episode_steps = []
 var is_eval_game
 
+var num_of_ticks = 0
+var prev_sec = 0
+
+var epsilon_action = false # needed in MonteCarlo but is changed in this class
+
 func init_agent(actions, read, write, filename, curr_n, debug):
      # so that we can replicate experiments
     rand.seed = 0
@@ -100,13 +105,18 @@ func start(eval):
 func Q(_state, _action):
     pass    # subclass must implement
 
-func best_action(state):
+func best_action(state, specific_dict = null):
     # next action should be the one with the maximum value of Q function
     var max_q = 0.0
     var best = null
     for action in ACTIONS:
-        if Q(state, action) >= max_q:
-            max_q = Q(state, action)
+        var new_q = Q(state, action)
+        if specific_dict == null:
+            new_q = Q(state, action)
+        else:
+            specific_dict[get_state_action(state, action)]
+        if new_q >= max_q:
+            max_q = new_q
             best = action
     return best
 
@@ -217,3 +227,16 @@ func show_policy():
                 s += "%4s" % t
             print(s)
     last_policy = policy
+
+func choose_action(action):
+    num_of_ticks += 1
+    var curr_sec = num_of_ticks * 33
+    epsilon_action = false
+    if not is_eval_game:
+        if curr_sec - prev_sec >= 50:
+            prev_sec = curr_sec
+            epsilon_action = rand.randf_range(0,1) < EPSILON
+            if epsilon_action:
+                action = ACTIONS[rand.randi_range(0,len(ACTIONS) - 1)]  
+                   
+    return action

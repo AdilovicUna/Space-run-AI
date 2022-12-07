@@ -17,34 +17,19 @@ class Step:
         time = t
         epsilon_action = e
 
-var prev_sec = OS.get_ticks_msec() / 1000.0 
 
 # move and remember  
 func move(state, score):
     # we are still in the previous state
     if last_state == state:
         return last_action    
-   
-    last_action = .best_action(state)
-            
-    var epsilon_action = false
-    if not is_eval_game:
-        #var curr_sec = OS.get_ticks_msec()
-        #if curr_sec - prev_sec >= 0.05:
-            #prev_sec = curr_sec
-            epsilon_action = rand.randf_range(0,1) < EPSILON
-            if epsilon_action:
-                while true:
-                    var rand_action = ACTIONS[rand.randi_range(0,len(ACTIONS) - 1)]            
-                    if last_action != rand_action:
-                        last_action = rand_action
-                        break
-    
+        
+    last_action = choose_action(.best_action(state))
+                   
     # remember relevant infromation
     last_state = state
     episode_steps.append(Step.new(
-        get_state_action(last_state, last_action), score, OS.get_ticks_msec() / 1000.0,
-        epsilon_action))
+        get_state_action(last_state, last_action), score, num_of_ticks * 33, epsilon_action))
 
     return last_action
 

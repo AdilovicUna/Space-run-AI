@@ -6,23 +6,12 @@ extends "res://Agents/LearningAgent.gd"
 
 var q2 = {}
 
-enum pick_dict {NONE, Q1, Q2}
-var dict_to_pick = pick_dict.NONE
-
 func move(state, score):
     # we are still in the previous state
     if last_state == state:
         return last_action    
    
-    last_action = .best_action(state)
-            
-    var epsilon_action = rand.randf_range(0,1) < EPSILON
-    if epsilon_action:
-        while true:
-            var rand_action = ACTIONS[rand.randi_range(0,len(ACTIONS) - 1)]            
-            if last_action != rand_action:
-                last_action = rand_action
-                break
+    last_action = choose_action(.best_action(state))     
     
     # update q
     if last_state != null and last_action != null:      
@@ -88,12 +77,7 @@ func Q(state, action):
     if not (state_action in q2.keys()):
         q2[state_action] = INITIAL_OPTIMISTIC_VALUE
     
-    if dict_to_pick == pick_dict.Q1:
-        return q[state_action] 
-    elif dict_to_pick == pick_dict.Q2:
-        return q2[state_action] 
-        
-    return q[state_action] if q[state_action] > q2[state_action] else q2[state_action]
+    return q[state_action] + q2[state_action]
 
 func update_dicts(state_action, state, R, terminal = false):        
     if not (state_action in visits.keys()):
@@ -107,17 +91,13 @@ func update_dicts(state_action, state, R, terminal = false):
         if not (state_action in q.keys()):
             q[state_action] = INITIAL_OPTIMISTIC_VALUE
         
-        dict_to_pick = pick_dict.Q1
-        var new_state_val = 0 if terminal else q2[get_state_action(state,.best_action(state))]
+        var new_state_val = 0 if terminal else q2[get_state_action(state,.best_action(state,q))]
         q[state_action] += alpha * (R + GAMMA * new_state_val - q[state_action])
         
     else:
         if not (state_action in q2.keys()):
             q2[state_action] = INITIAL_OPTIMISTIC_VALUE
             
-        dict_to_pick = pick_dict.Q2       
-        var new_state_val = 0 if terminal else q[get_state_action(state,.best_action(state))]
+        var new_state_val = 0 if terminal else q[get_state_action(state,.best_action(state,q2   ))]
         q2[state_action] += alpha * (R + GAMMA * new_state_val - q2[state_action])
-    
-    dict_to_pick = pick_dict.NONE
     
