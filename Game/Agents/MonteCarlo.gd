@@ -23,7 +23,7 @@ func move(state, score, num_of_ticks):
     # we are still in the previous state
     if last_state == state:
         return last_action    
-        
+    
     last_action = choose_action(.best_action(state), num_of_ticks)
                    
     # remember relevant infromation
@@ -63,7 +63,7 @@ func end_game(final_score, final_sec):
             var R = (next_step.score - curr_step.score)
             
             G =  pow(GAMMA,next_step.time - curr_step.time) * (R + G)
-        
+            
             # since we are using the first visit approach,
             # we only need the first occurrence  of this state_action
             if is_first_occurrence (curr_step.state_action, i):

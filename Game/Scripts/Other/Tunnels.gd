@@ -85,7 +85,10 @@ func pick_obstacle(scene):
     elif scene == scenes["virus_scenes"]:
         # rotavirus (index 0 in virus_scenes) will occur 75% of the time
         var i = rand.randf_range(0,1)
-        return 0 if i <= 0.75 else 1
+        if len(scenes["virus_scenes"]) > 1:
+            return 0 if i <= 0.75 else 1
+        else:
+            return 0
     else:
         return rand.randi_range(0, len(scene) - 1)
 

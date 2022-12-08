@@ -100,11 +100,6 @@ func set_env(parameters):
         if param in POSSIBLE_VIRUSES:
                 viruses.append(param)
                 
-    print(traps)
-    print(bugs)
-    print(viruses)
-    print(tokens)
-                
 func set_dists(d):
     dists = d
 

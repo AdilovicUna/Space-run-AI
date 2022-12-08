@@ -14,7 +14,7 @@ height = 0.955663
 script = ExtResource( 3 )
 
 [node name="Worm" type="KinematicBody" parent="."]
-transform = Transform( -8.14603e-07, 0, 5, 0, 5, 0, -5, 0, -8.14603e-07, 50.5859, -21, 0 )
+transform = Transform( -6.51683e-07, 0, 4, 0, 4, 0, -4, 0, -6.51683e-07, 40, -21, 0 )
 collision_layer = 2
 collision_mask = 5
 script = ExtResource( 4 )
