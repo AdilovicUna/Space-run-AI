@@ -3,19 +3,19 @@ class_name TDAgent
 extends "res://Agents/LearningAgent.gd"
 
 # move and remember  
-func move(state, score):
+func move(state, score, num_of_ticks):
     # we are still in the previous state
     if last_state == state:
         return last_action    
    
-    new_action = choose_action(.best_action(state))     
+    new_action = choose_action(.best_action(state), num_of_ticks)     
     
     # update q
     if last_state != null and last_action != null:      
         var state_action = get_state_action(last_state,last_action)
         var new_state_action = get_update(state, new_action, .best_action(state))
         var R = score - last_score
-        update_dicts(state_action, new_state_action, R)
+        update_dicts(state_action, new_state_action, R, num_of_ticks * 33)
     
     last_state = state
     last_action = new_action
@@ -31,11 +31,11 @@ func start_game(eval):
     start(eval)
 
 # update
-func end_game(final_score, _final_time):
+func end_game(final_score, final_time):
     if not is_eval_game:
         var state_action = get_state_action(last_state,last_action)
         var R = final_score - last_score
-        update_dicts(state_action, '', R, true)
+        update_dicts(state_action, '', R, final_time, true)
         epsilon_update()
 
 # write
@@ -49,7 +49,7 @@ func Q(state, action):
         visits[state_action] = 0
     return q[state_action]
     
-func update_dicts(state_action, new_state_action, R, terminal = false):
+func update_dicts(state_action, new_state_action, R, curr_time, terminal = false):
     if not (state_action in q.keys()):
         q[state_action] = INITIAL_OPTIMISTIC_VALUE
         visits[state_action] = 0
@@ -58,7 +58,8 @@ func update_dicts(state_action, new_state_action, R, terminal = false):
     
     var alpha = 1.0 / visits[state_action]
     var new_state_val = 0 if terminal else new_state_action
-    q[state_action] += alpha * (R + GAMMA * new_state_val - q[state_action])
+    var new_gamma = pow(GAMMA,curr_time - prev_msec)
+    q[state_action] += alpha * (R + new_gamma * new_state_val - q[state_action])
     
 func get_update(_state, _new_action, _best_action):
     pass # subclass must implement

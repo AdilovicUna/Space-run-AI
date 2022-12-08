@@ -8,7 +8,7 @@ class_name Static
 var rand = RandomNumberGenerator.new()
 
 # move and remember
-func move(_state, _score):
+func move(_state, _score, _num_of_ticks):
    return [0,0]
 
 # initialize

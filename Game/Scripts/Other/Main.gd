@@ -9,27 +9,20 @@ argument options:
     - agent=string :        name of the agent
                             options: [Keyboard, Static, Random, MonteCarlo, SARSA, QLearning, ExpectedSARSA, DoubleQLearning]
                             sub-options (only for the agents listed below):
-                                MonteCarlo=[float, float, float, float] : 
-                                    [gam (range [0,1]), eps (range [0,1]), initOptVal [0,~)]
-                                    eg. use: "MonteCarlo:eps=0.1,gam=0.2"
-                                SARSA=[float, float, float, float] : 
-                                    [gam (range [0,1]), eps (range [0,1]), initOptVal [0,~)]
-                                    eg. use: "SARSA:eps=0.1,gam=0.2"
-                                QLearning=[float, float, float, float] : 
-                                    [gam (range [0,1]), eps (range [0,1]), initOptVal [0,~)]
-                                    eg. use: "QLearning:eps=0.1,gam=0.2"
-                                ExpectedSARSA=[float, float, float, float] : 
-                                    [gam (range [0,1]), eps (range [0,1]), initOptVal [0,~)]
-                                    eg. use: "ExpectedSARSA:eps=0.1,gam=0.2"
-                                DoubleQLearning=[float, float, float, float] : 
-                                    [gam (range [0,1]), eps (range [0,1]), initOptVal [0,~)]
-                                    eg. use: "DoubleQLearning:eps=0.1,gam=0.2"
+                                MonteCarlo, SARSA, QLearning, ExpectedSARSA, DoubleQLearning
+                                =[float, float, float, float] : 
+                                [gam (range [0,1]), eps (range [0,1]), epsFinal (range [0,1]), initOptVal [0,~)]
+                                eg. use: "MonteCarlo:eps=0.1,gam=0.2"
+            
     - level=int :           number of the level to start from 
                             options: [1, ... , 10]
                         
     - env=[string] :        list of obstacles that will be chosen in the game 
-                            options (any subset of): [traps, bugs, viruses, tokens, I, O, MovingI, X, 
-                                                      Walls, Hex, HexO, Balls, Triangles, HalfHex]
+                            options (any subset of): [Traps, Bugs, Viruses, Tokens, 
+                                                      I, O, MovingI, X, Walls, Hex, 
+                                                      HexO, Balls, Triangles, HalfHex,
+                                                      Worm, LadybugFlying, LadybugWalking,
+                                                      Rotavirus, Bacteriophage]
                                             
     - shooting=string :     enable or disable shooting 
                             options: [enabled, disabled]
@@ -56,7 +49,11 @@ var game_scene = preload("res://Scenes/Other/Game.tscn")
 var game
 
 var all_agents = ["Keyboard", "Static", "Random", "MonteCarlo", "SARSA", "QLearning", "ExpectedSARSA", "DoubleQLearning"]
-var all_env = ["traps", "bugs", "viruses", "tokens", "I", "O", "MovingI", "X", "Walls", "Hex", "HexO", "Balls", "Triangles", "HalfHex"]
+var all_env = [ "Traps", "Bugs", "Viruses", "Tokens", 
+                "I", "O", "MovingI", "X", "Walls", "Hex", 
+                "HexO", "Balls", "Triangles", "HalfHex",
+                "Worm", "LadybugFlying", "LadybugWalking",
+                "Rotavirus", "Bacteriophage"]
 
 # all parameters and their default values
 var n = 100

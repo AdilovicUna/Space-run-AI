@@ -12,11 +12,18 @@ onready var state = get_node("UI/State")
 onready var level = get_node("UI/Level")
 
 const NUM_OF_TUNNELS = 3
+const POSSIBLE_TRAPS = ["I","O", "MovingI", "X", "Walls", 
+                        "Hex", "HexO", "Balls", "Triangles", "HalfHex"]
+const POSSIBLE_BUGS = ["Worm", "LadybugFlying", "LadybugWalking"]
+const POSSIBLE_VIRUSES = ["Rotavirus", "Bacteriophage"]
 
-var traps = ["TrapI","TrapO", "TrapMovingI", "TrapX", "TrapWalls", "TrapHex", "TrapHexO", "TrapBalls", "TrapTriangles", "TrapHalfHex"]
+var traps = ["TrapI","TrapO", "TrapMovingI", "TrapX", "TrapWalls", 
+             "TrapHex", "TrapHexO", "TrapBalls", "TrapTriangles", "TrapHalfHex"]
 var bugs = ["Worm", "LadybugFlying", "LadybugWalking"]
 var viruses = ["Rotavirus", "Bacteriophage"]
 var tokens = ["EnergyToken"]
+
+
 
 var short_names = {"Worm" : "W", "LadybugFlying" : "LBF", "LadybugWalking" : "LBW",
                     "Rotavirus" : "R", "Bacteriophage" : "B", "EnergyToken" : "ET"}
@@ -73,21 +80,31 @@ func set_env(parameters):
     if parameters.size() == 0:
         return
         
-    if not "traps" in parameters:
+    if not "Traps" in parameters:
         traps = []
-        for param in parameters:
-            if param != "bugs" and  param != "viruses" and param != "tokens":
-                traps.append("Trap" + param)
                 
-    if not "bugs" in parameters:
+    if not "Bugs" in parameters:
         bugs = []
-        
-    if not "viruses" in parameters:
+                
+    if not "Viruses" in parameters:
         viruses = []
-        
-    if not "tokens" in parameters:
+                
+    if not "Tokens" in parameters:
         tokens = []
-    
+        
+    for param in parameters:
+        if param in POSSIBLE_TRAPS:
+            traps.append("Trap" + param)
+        if param in POSSIBLE_BUGS:
+            bugs.append(param)
+        if param in POSSIBLE_VIRUSES:
+                viruses.append(param)
+                
+    print(traps)
+    print(bugs)
+    print(viruses)
+    print(tokens)
+                
 func set_dists(d):
     dists = d
 

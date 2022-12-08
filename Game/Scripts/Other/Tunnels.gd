@@ -27,7 +27,7 @@ func _physics_process(delta):
     if game.done:
         return
         
-    var move = game.agent.move(game.state.get_state(), game.score.get_score())
+    var move = game.agent.move(game.state.get_state(), game.score.get_score(), game.num_of_ticks)
     #rotates all children of "traps"
     if move[0] == 1:
         var tunnel = get_child(hans.get_current_tunnel())

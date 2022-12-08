@@ -8,7 +8,7 @@ class_name Keyboard
 # NOTE: actions are constant for the keyboard agent since we don't want to change the behavior of the game
 
 # move and remember
-func move(_state, _score):
+func move(_state, _score, _num_of_ticks):
     var result = [0,0]
     if Input.is_action_pressed("right"):
         result[0] = 1

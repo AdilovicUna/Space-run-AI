@@ -40,8 +40,7 @@ var last_score
 var episode_steps = []
 var is_eval_game
 
-var num_of_ticks = 0
-var prev_sec = 0
+var prev_msec = 0
 
 var epsilon_action = false # needed in MonteCarlo but is changed in this class
 
@@ -110,11 +109,11 @@ func best_action(state, specific_dict = null):
     var max_q = 0.0
     var best = null
     for action in ACTIONS:
-        var new_q = Q(state, action)
+        var new_q
         if specific_dict == null:
             new_q = Q(state, action)
         else:
-            specific_dict[get_state_action(state, action)]
+            new_q = specific_dict[get_state_action(state, action)]
         if new_q >= max_q:
             max_q = new_q
             best = action
@@ -162,7 +161,10 @@ func get_and_set_agent_specific_parameters(agent_specific_param):
             _: # invalid param value
                     return false
                         
-    return ["gam=" + String(GAMMA), "eps=" + String(EPSILON), "epsFinal=" + String(FINAL_EPSILON_VAL), "initOptVal=" + String(INITIAL_OPTIMISTIC_VALUE)]
+    return ["gam=" + String(GAMMA), 
+            "eps=" + String(EPSILON), 
+            "epsFinal=" + String(FINAL_EPSILON_VAL), 
+            "initOptVal=" + String(INITIAL_OPTIMISTIC_VALUE)]
  
 
 func get_state_action(state, action):
@@ -228,13 +230,12 @@ func show_policy():
             print(s)
     last_policy = policy
 
-func choose_action(action):
-    num_of_ticks += 1
-    var curr_sec = num_of_ticks * 33
+func choose_action(action, num_of_ticks):
+    var curr_msec = num_of_ticks * 33
     epsilon_action = false
     if not is_eval_game:
-        if curr_sec - prev_sec >= 50:
-            prev_sec = curr_sec
+        if curr_msec - prev_msec >= 50:
+            prev_msec = curr_msec
             epsilon_action = rand.randf_range(0,1) < EPSILON
             if epsilon_action:
                 action = ACTIONS[rand.randi_range(0,len(ACTIONS) - 1)]  

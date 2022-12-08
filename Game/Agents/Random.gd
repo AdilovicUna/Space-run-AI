@@ -11,7 +11,7 @@ var rand = RandomNumberGenerator.new()
 var ACTIONS = []
 
 # move and remember
-func move(_state, _score):
+func move(_state, _score, _num_of_ticks):
     var result = [rand.randi_range(-1, 1), rand.randi_range(0, 1)]
     
     if result in ACTIONS:

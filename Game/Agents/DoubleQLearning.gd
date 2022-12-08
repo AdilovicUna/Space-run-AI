@@ -6,18 +6,18 @@ extends "res://Agents/LearningAgent.gd"
 
 var q2 = {}
 
-func move(state, score):
+func move(state, score, num_of_ticks):
     # we are still in the previous state
     if last_state == state:
         return last_action    
    
-    last_action = choose_action(.best_action(state))     
+    last_action = choose_action(.best_action(state), num_of_ticks)     
     
     # update q
     if last_state != null and last_action != null:      
         var state_action = get_state_action(last_state,last_action)
         var R = score - last_score
-        update_dicts(state_action, state, R)
+        update_dicts(state_action, state, R, num_of_ticks * 33)
             
     last_state = state
     last_score = score
@@ -32,11 +32,11 @@ func start_game(eval):
     start(eval)
 
 # update 
-func end_game(final_score, _final_time):
+func end_game(final_score, final_time):
     if not is_eval_game:
         var state_action = get_state_action(last_state,last_action)
         var R = final_score - last_score
-        update_dicts(state_action, '', R, true)
+        update_dicts(state_action, '', R, final_time, true)
         epsilon_update()
 
 # write
@@ -79,25 +79,26 @@ func Q(state, action):
     
     return q[state_action] + q2[state_action]
 
-func update_dicts(state_action, state, R, terminal = false):        
+func update_dicts(state_action, state, R, curr_time, terminal = false):        
     if not (state_action in visits.keys()):
         visits[state_action] = 0
     
     visits[state_action] += 1
     
     var alpha = 1.0 / visits[state_action]
-    
+    var new_gamma = pow(GAMMA,curr_time - prev_msec)
+        
     if rand.randf_range(0,1) < 0.5:
         if not (state_action in q.keys()):
             q[state_action] = INITIAL_OPTIMISTIC_VALUE
         
         var new_state_val = 0 if terminal else q2[get_state_action(state,.best_action(state,q))]
-        q[state_action] += alpha * (R + GAMMA * new_state_val - q[state_action])
+        q[state_action] += alpha * (R + new_gamma * new_state_val - q[state_action])
         
     else:
         if not (state_action in q2.keys()):
             q2[state_action] = INITIAL_OPTIMISTIC_VALUE
             
         var new_state_val = 0 if terminal else q[get_state_action(state,.best_action(state,q2   ))]
-        q2[state_action] += alpha * (R + GAMMA * new_state_val - q2[state_action])
+        q2[state_action] += alpha * (R + new_gamma * new_state_val - q2[state_action])
     

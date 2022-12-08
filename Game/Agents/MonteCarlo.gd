@@ -19,12 +19,12 @@ class Step:
 
 
 # move and remember  
-func move(state, score):
+func move(state, score, num_of_ticks):
     # we are still in the previous state
     if last_state == state:
         return last_action    
         
-    last_action = choose_action(.best_action(state))
+    last_action = choose_action(.best_action(state), num_of_ticks)
                    
     # remember relevant infromation
     last_state = state
