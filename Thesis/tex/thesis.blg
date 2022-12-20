@@ -9,6 +9,8 @@ Reallocating 'name_of_file' (item size: 1) to 15 items.
 A level-1 auxiliary file: GameDesign.aux
 Reallocating 'name_of_file' (item size: 1) to 23 items.
 A level-1 auxiliary file: GameImplementation.aux
+Reallocating 'name_of_file' (item size: 1) to 38 items.
+A level-1 auxiliary file: StructureOfTheExperimentalSetting.aux
 Reallocating 'name_of_file' (item size: 1) to 19 items.
 A level-1 auxiliary file: AlgorithmsUsed.aux
 Reallocating 'name_of_file' (item size: 1) to 25 items.
@@ -25,7 +27,7 @@ Reallocating 'name_of_file' (item size: 1) to 13 items.
 Database file #1: bibliography.bib
 You've used 1 entry,
             2773 wiz_defined-function locations,
-            610 strings with 5098 characters,
+            611 strings with 5135 characters,
 and the built_in function-call counts, 354 in all, are:
 = -- 30
 > -- 10

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.12) (preloaded format=pdflatex 2022.12.18)  19 DEC 2022 23:57
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.12) (preloaded format=pdflatex 2022.12.18)  20 DEC 2022 16:35
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -508,19 +508,19 @@ Package: paralist 2017/01/22 v2.7 Extended list environments
 \plparsep=\skip64
 \pl@lab=\toks33
 )
-Package hyperref Info: Option `unicode' set `true' on input line 104.
-Package hyperref Info: Option `breaklinks' set `true' on input line 105.
+Package hyperref Info: Option `unicode' set `true' on input line 107.
+Package hyperref Info: Option `breaklinks' set `true' on input line 108.
 
 
 LaTeX Warning: \include should only be used after \begin{document} on input lin
-e 108.
+e 111.
 
 (macros.tex
 \c@thm=\count292
 \c@defn=\count293
 )
 LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 1
-11.
+14.
  (C:\Users\Una\AppData\Local\Programs\MiKTeX\tex/latex/lm\ot1lmr.fd
 File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
@@ -530,28 +530,29 @@ File: l3backend-pdftex.def 2022-10-26 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count294
 \l__pdf_internal_box=\box56
 ) (thesis.aux (title.aux) (Introduction.aux) (GameDesign.aux)
-(GameImplementation.aux) (AlgorithmsUsed.aux) (AgentsImplementation.aux)
-(Experiments.aux) (Conclusion.aux) (bibliography.aux))
+(GameImplementation.aux) (StructureOfTheExperimentalSetting.aux)
+(AlgorithmsUsed.aux) (AgentsImplementation.aux) (Experiments.aux)
+(Conclusion.aux) (bibliography.aux))
 \openout1 = `thesis.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 111.
-LaTeX Font Info:    ... okay on input line 111.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 111.
-LaTeX Font Info:    ... okay on input line 111.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 111.
-LaTeX Font Info:    ... okay on input line 111.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 111.
-LaTeX Font Info:    ... okay on input line 111.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 111.
-LaTeX Font Info:    ... okay on input line 111.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 111.
-LaTeX Font Info:    ... okay on input line 111.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 111.
-LaTeX Font Info:    ... okay on input line 111.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 111.
-LaTeX Font Info:    ... okay on input line 111.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 111.
-LaTeX Font Info:    ... okay on input line 111.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 114.
+LaTeX Font Info:    ... okay on input line 114.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 114.
+LaTeX Font Info:    ... okay on input line 114.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 114.
+LaTeX Font Info:    ... okay on input line 114.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 114.
+LaTeX Font Info:    ... okay on input line 114.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 114.
+LaTeX Font Info:    ... okay on input line 114.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 114.
+LaTeX Font Info:    ... okay on input line 114.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 114.
+LaTeX Font Info:    ... okay on input line 114.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 114.
+LaTeX Font Info:    ... okay on input line 114.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 114.
+LaTeX Font Info:    ... okay on input line 114.
 
 (C:\Users\Una\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -576,7 +577,7 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 (C:\Users\Una\AppData\Local\Programs\MiKTeX\tex/latex/00miktex\epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
-Package hyperref Info: Link coloring OFF on input line 111.
+Package hyperref Info: Link coloring OFF on input line 114.
  (thesis.out) (thesis.out)
 \@outlinefile=\write5
 \openout5 = `thesis.out'.
@@ -585,7 +586,7 @@ Package hyperref Info: Link coloring OFF on input line 111.
 
  (title.tex
 Package hyperref Info: Option `pageanchor' set `false' on input line 6.
-<../img/logo-en.pdf, id=98, 506.4591pt x 156.49065pt>
+<../img/logo-en.pdf, id=130, 506.4591pt x 156.49065pt>
 File: ../img/logo-en.pdf Graphic file (type pdf)
 <use ../img/logo-en.pdf>
 Package pdftex.def Info: ../img/logo-en.pdf  used on input line 9.
@@ -657,17 +658,50 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
  (GameDesign.tex
 Chapter 1.
-) [3
+<../img//traps.pdf, id=203, 1150.2975pt x 386.94562pt>
+File: ../img//traps.pdf Graphic file (type pdf)
+<use ../img//traps.pdf>
+Package pdftex.def Info: ../img//traps.pdf  used on input line 13.
+(pdftex.def)             Requested size: 412.56496pt x 138.78073pt.
+<../img//bugs.pdf, id=205, 564.60938pt x 133.24782pt>
+File: ../img//bugs.pdf Graphic file (type pdf)
+<use ../img//bugs.pdf>
+Package pdftex.def Info: ../img//bugs.pdf  used on input line 23.
+(pdftex.def)             Requested size: 412.56496pt x 97.36768pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[3
+
+
+
+
+ <../img//traps.pdf>]
+<../img//viruses.pdf, id=218, 526.96875pt x 165.61874pt>
+File: ../img//viruses.pdf Graphic file (type pdf)
+<use ../img//viruses.pdf>
+Package pdftex.def Info: ../img//viruses.pdf  used on input line 32.
+(pdftex.def)             Requested size: 412.56496pt x 129.66983pt.
+ [4 <../img//bugs.pdf> <../img//viruses.pdf
+
+pdfTeX warning: pdflatex (file ../img//viruses.pdf): PDF inclusion: multiple pd
+fs with page group included in a single page
+>]) [5]
+\openout2 = `GameImplementation.aux'.
+
+ (GameImplementation.tex
+Chapter 2.
+) [6
 
 
 
 
 ]
-\openout2 = `GameImplementation.aux'.
+\openout2 = `StructureOfTheExperimentalSetting.aux'.
 
- (GameImplementation.tex
-Chapter 2.
-) [4
+ (StructureOfTheExperimentalSetting.tex
+Chapter 3.
+) [7
 
 
 
@@ -676,8 +710,8 @@ Chapter 2.
 \openout2 = `AlgorithmsUsed.aux'.
 
  (AlgorithmsUsed.tex
-Chapter 3.
-) [5
+Chapter 4.
+) [8
 
 
 
@@ -686,8 +720,8 @@ Chapter 3.
 \openout2 = `AgentsImplementation.aux'.
 
  (AgentsImplementation.tex
-Chapter 4.
-) [6
+Chapter 5.
+) [9
 
 
 
@@ -696,8 +730,8 @@ Chapter 4.
 \openout2 = `Experiments.aux'.
 
  (Experiments.tex
-Chapter 5.
-) [7
+Chapter 6.
+) [10
 
 
 
@@ -705,7 +739,7 @@ Chapter 5.
 ]
 \openout2 = `Conclusion.aux'.
 
- (Conclusion.tex) [8
+ (Conclusion.tex) [11
 
 
 
@@ -713,7 +747,7 @@ Chapter 5.
 ]
 \openout2 = `bibliography.aux'.
 
- (bibliography.tex (thesis.bbl)) [9
+ (bibliography.tex (thesis.bbl)) [12
 
 
 
@@ -723,7 +757,7 @@ Chapter 5.
 \openout7 = `thesis.lof'.
 
 
-[10
+[13
 
 
 
@@ -731,26 +765,27 @@ Chapter 5.
 \tf@lot=\write8
 \openout8 = `thesis.lot'.
 
- [11
+ [14
 
-] [12
+] [15
 
 ]
 Appendix A.
-[13
+[16
 
 ] (thesis.aux (title.aux) (Introduction.aux) (GameDesign.aux)
-(GameImplementation.aux) (AlgorithmsUsed.aux) (AgentsImplementation.aux)
-(Experiments.aux) (Conclusion.aux) (bibliography.aux))
+(GameImplementation.aux) (StructureOfTheExperimentalSetting.aux)
+(AlgorithmsUsed.aux) (AgentsImplementation.aux) (Experiments.aux)
+(Conclusion.aux) (bibliography.aux))
 Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 81645C74C74BB69B9E36D9A5EDFEF429;4910.
+(rerunfilecheck)             Checksum: 7250E41DAC1E34C8B5E0E5F0A4145BA6;6112.
  ) 
 Here is how much of TeX's memory you used:
- 15065 strings out of 475281
- 238529 string characters out of 2775008
- 557285 words of memory out of 3000000
- 36171 multiletter control sequences out of 15000+600000
- 514564 words of font info for 61 fonts, out of 8000000 for 9000
+ 15158 strings out of 475281
+ 241197 string characters out of 2775008
+ 560852 words of memory out of 3000000
+ 36241 multiletter control sequences out of 15000+600000
+ 520458 words of font info for 63 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  89i,6n,93p,937b,2379s stack positions out of 10000i,1000n,20000p,200000b,80000s
 {C:/Users/Una/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rm.enc}<C:/
@@ -758,9 +793,9 @@ Users/Una/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Us
 ers/Una/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users
 /Una/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr17.pfb><C:/Users/Un
 a/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri12.pfb>
-Output written on thesis.pdf (17 pages, 449805 bytes).
+Output written on thesis.pdf (20 pages, 645038 bytes).
 PDF statistics:
- 244 PDF objects out of 1000 (max. 8388607)
- 42 named destinations out of 1000 (max. 500000)
- 202 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 325 PDF objects out of 1000 (max. 8388607)
+ 56 named destinations out of 1000 (max. 500000)
+ 281 words of extra memory for PDF output out of 10000 (max. 10000000)
 
