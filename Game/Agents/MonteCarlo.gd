@@ -29,7 +29,7 @@ func move(state, score, num_of_ticks):
     # remember relevant infromation
     last_state = state
     episode_steps.append(Step.new(
-        get_state_action(last_state, last_action), score, num_of_ticks * 33, epsilon_action))
+        get_state_action(last_state, last_action), score, (num_of_ticks * 33)/1000.0, epsilon_action))
 
     return last_action
 
@@ -61,7 +61,6 @@ func end_game(final_score, final_sec):
             var curr_step = episode_steps[i]
             var next_step = episode_steps[i+1]
             var R = (next_step.score - curr_step.score)
-            
             G =  pow(GAMMA,next_step.time - curr_step.time) * (R + G)
             
             # since we are using the first visit approach,

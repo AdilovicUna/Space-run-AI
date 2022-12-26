@@ -5,6 +5,7 @@ class_name DoubleQLearning
 extends "res://Agents/LearningAgent.gd"
 
 var q2 = {}
+var prev_time = 0
 
 func move(state, score, num_of_ticks):
     # we are still in the previous state
@@ -17,10 +18,11 @@ func move(state, score, num_of_ticks):
     if last_state != null and last_action != null:      
         var state_action = get_state_action(last_state,last_action)
         var R = score - last_score
-        update_dicts(state_action, state, R, num_of_ticks * 33)
+        update_dicts(state_action, state, R, (num_of_ticks * 33) / 1000.0)
             
     last_state = state
     last_score = score
+    prev_time = (num_of_ticks * 33) / 1000.0
     return last_action
 
 # initialize
@@ -86,19 +88,19 @@ func update_dicts(state_action, state, R, curr_time, terminal = false):
     visits[state_action] += 1
     
     var alpha = 1.0 / visits[state_action]
-    var new_gamma = pow(GAMMA,curr_time - prev_msec)
+    var new_gamma = pow(GAMMA,curr_time - prev_time)
         
     if rand.randf_range(0,1) < 0.5:
         if not (state_action in q.keys()):
             q[state_action] = INITIAL_OPTIMISTIC_VALUE
         
         var new_state_val = 0 if terminal else q2[get_state_action(state,.best_action(state,q))]
-        q[state_action] += alpha * (R + new_gamma * new_state_val - q[state_action])
+        q[state_action] += alpha * (new_gamma * (R + new_state_val) - q[state_action])
         
     else:
         if not (state_action in q2.keys()):
             q2[state_action] = INITIAL_OPTIMISTIC_VALUE
             
         var new_state_val = 0 if terminal else q[get_state_action(state,.best_action(state,q2   ))]
-        q2[state_action] += alpha * (R + new_gamma * new_state_val - q2[state_action])
+        q2[state_action] += alpha * (new_gamma * (R + new_state_val) - q2[state_action])
     

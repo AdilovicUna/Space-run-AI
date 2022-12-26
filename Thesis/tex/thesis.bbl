@@ -5,10 +5,9 @@
   \providecommand{\doi}[1]{doi: #1}\else
   \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
 
-\bibitem[Anděl(2007)]{Andel07}
-J.~Anděl.
-\newblock \emph{Základy matematické statistiky}.
-\newblock Druhé opravené vydání. Matfyzpress, Praha, 2007.
-\newblock ISBN 80-7378-001-1.
+\bibitem[Sutton and Barto(2018)]{RLSuttonBarto}
+Richard~S Sutton and Andrew~G Barto.
+\newblock \emph{Reinforcement Learning: An Introduction}.
+\newblock MIT press, Praha, 2018.
 
 \end{thebibliography}

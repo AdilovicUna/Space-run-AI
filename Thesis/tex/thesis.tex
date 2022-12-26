@@ -50,9 +50,25 @@
 \usepackage{booktabs}       % improved horizontal lines in tables
 \usepackage{paralist}       % improved enumerate and itemize
 \usepackage{xcolor}         % typesetting in color
+\usepackage{hyperref}
+\usepackage{wrapfig}
+\usepackage{listings}
+\usepackage{array}
 
 \graphicspath{ {../img/} }
-\DeclareGraphicsExtensions{.png,.pdf}
+\DeclareGraphicsExtensions{.jpg,.png,.pdf}
+ 
+\lstset{frame=tb,
+  language=python,
+  aboveskip=5mm,
+  belowskip=5mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=4} 
  
 %%% Basic information on the thesis
 

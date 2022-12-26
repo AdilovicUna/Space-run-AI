@@ -1,5 +1,132 @@
 \chapter{Structure of the Experimental Setting}
-code structure of the environment, basically how main.gd works
-\section{Title of the first subchapter of the second chapter}
+\label{agent_code_chapter}
+To train the agent on a specific environment, the user must utilize a command line interface. There are various options available to cater to the user's needs. The following sections will outline all of the provided options and how they are encoded.
 
-\section{Title of the second subchapter of the second chapter}
+\section{Command line options}
+\label{commOpt}
+\begin{center}
+\begin{tabular}{ | p{4cm}|p{10cm} | } 
+  \hline
+  \hyperref[opt:n]{n=int} & number of games\\ 
+  \hline
+  \hyperref[opt:agent]{agent=string} & name of the agent\\ 
+  \hline
+  \hyperref[opt:level]{level=int} & number of the level to start from \\ 
+  \hline
+  \hyperref[opt:env]{env=[string]} & list of obstacles that will be chosen in the game \\ 
+  \hline
+  \hyperref[opt:shooting]{shooting=string} & enable or disable shooting  \\ 
+  \hline
+  \hyperref[opt:dists]{dists=int} & number of states in a 100-meter interval \\ 
+  \hline
+  \hyperref[opt:rots]{rots=int} & number of states in 360 degrees rotation \\ 
+  \hline
+  \hyperref[opt:database]{database=string} & read the data for this command from an existing file and/or update the data after the command is executed  \\ 
+  \hline
+  \hyperref[opt:ceval]{ceval=bool} & performs continuous evaluation \\ 
+  \hline
+  \hyperref[opt:debug]{debug=bool} & display debug print statements \\ 
+  \hline
+  \hyperref[opt:options]{options} & displays options \\ 
+  \hline
+\end{tabular}
+\end{center}
+Note: any of these options can be omitted as they all have default values. If no options are specified, a normal game with the Keyboard agent will be run.
+\subsection{Command line option descriptions}
+\begin{description}
+\item[n] - Number of games the agent will train on in this session \label{opt:n}
+\item[agent] - Name of the desired agent \label{opt:agent}\\
+Options: [Keyboard, Static, Random, MonteCarlo, SARSA, QLearning, ExpectedSARSA, DoubleQLearning]\\
+Sub-options (only for the listed agents):
+MonteCarlo, SARSA, QLearning, ExpectedSARSA, DoubleQLearning
+=[float, float, float, float] :
+[gam (range [0,1]), eps (range [0,1]), epsFinal (range [0,1]), initOptVal [0,~)]\\
+Example usage: ``MonteCarlo:eps=0.1,gam=0.2''
+\item[level] - Number of the level to start from \label{opt:level}\\
+Options: [1, ... , 10]\\
+Note: after the 10th level, the agent is considered to have won the game
+\item[env] - List of obstacles that will be chosen in the game \label{opt:env}\\
+Options (any subset of): [Traps, Bugs, Viruses, Tokens,
+I, O, MovingI, X, Walls, Hex,
+HexO, Balls, Triangles, HalfHex,
+Worm, LadybugFlying, LadybugWalking,
+Rotavirus, Bacteriophage]\\
+Note: if this parameter is not included, the environment will contain all available options (i.e. the full game).
+\item[shooting] - Enable or disable shooting \label{opt:shooting}\\
+Options: [enabled, disabled]\\
+Note: this option is disabled by default.
+\item[dists] - Number of states in a 100-meter interval \label{opt:dists}\\
+This parameter is part of the state label and typical options range from 1 to 3. Default value is 1.
+\item[rots] - Number of states in 360 degrees rotation \label{opt:rots}\\
+This parameter is part of the state label and the minimum viable option is 6. This is also the default value.
+\item[database] - Read or write data for this command from/to a file \label{opt:database}\\
+Options: [read, write, read\_write]\\
+Note: these files are typically used to start another session of the agent's training from the last point of the previous session, to run a game with visuals and observe the agent's performance, or for plotting the results. This option does not affect the Keyboard, Static, or Random agents.
+\item[ceval] - Performs continuous evaluation \label{opt:ceval}\\
+This parameter, with a value of true or false, indicates that after each training game, a test game will be played using only the policy(s) learned thus far. For example, if the user specifies ``n=100'', a total of 200 games will be executed, with 100 of them being training games and the remaining 100 being test games. This allows for the assessment of the agent's progress and performance during the training process. 
+\item[debug] - Display debug print statements \label{opt:debug}\\
+Options: [true,false]
+\item[options] - Displays all of the mentioned options \label{opt:options}\\
+\end{description}
+
+\section{Main}
+The\texttt{Main.tscn} scene is the top level scene in the game and consists of a single Node type node. The script attached to this node, Main.gd, is responsible for ensuring that all options specified in the command line (as discussed in Section \ref{commOpt}) are executed correctly. This script is the starting point of the training and handles the initialization and execution of ore or more game sessions.
+There are several key functions within the \texttt{Main.gd} script that are worth discussing in more detail.
+
+\begin{lstlisting}
+func _ready():
+    # get args
+    var unparsed_args = OS.get_cmdline_args()
+    # show options
+    if unparsed_args.size() == 1 and unparsed_args[0] == "options":
+        display_options()
+        
+    # parse agrs
+    		...
+            
+    # set param, if something went wrong, show options
+    if set_param(args) == false:
+        display_options()
+    else:
+        # make an instance of the chosen agent
+        instance_agent()
+        # this filename will contain all options 
+        # and will use as a unique key for the training session
+        build_filename()
+        # there was a problem while initializing an agent
+        if not agent_inst.init(actions, read, write, command, n, debug):
+            print("Something went wrong, please try again")
+            print(options)
+
+        play_game()
+\end{lstlisting}
+The \texttt{\_ready()} function is the starting point of the program when run from the command line. It is responsible for parsing all of the arguments and checking their validity. If any issues are encountered, the program will display options and terminate. If the arguments are valid, the first game will be played. 
+
+\begin{lstlisting} 
+func play_game():     
+    if agent == "Keyboard" and VisualServer.render_loop_enabled: # play a regular game
+       ...
+    # there are still some number of games that need to be played
+    elif n > 0:
+        n -= 1
+        game = game_scene.instance()
+        set_param_in_game()
+        # prepare the agent
+        agent_inst.start_game(is_eval_game)
+    # we came to the end of the session
+    else:
+        agent_inst.save(write)
+        print_and_write_ending()
+               
+\end{lstlisting}
+The \texttt{play\_game()} function is called each time a game is played. If the specified number of games (as defined by the "n" parameter) have already been played, the program will terminate. Otherwise, a single game will be executed.
+
+\begin{lstlisting}
+func on_game_finished(score, ticks, win, time):
+    # finish up
+    print_and_write_score(score, win)
+    agent_inst.end_game(score, time)        
+    # start a new game
+    play_game()
+\end{lstlisting}
+The \texttt{game\_over()} function is called when the game emits a signal indicating that it has finished. Upon execution, this function outputs the necessary information, updates the agent through the \texttt{end\_game()} function, and then calls the \texttt{play\_game()} function to continue the game session.
