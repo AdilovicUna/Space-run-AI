@@ -112,6 +112,8 @@ func _ready():
         instance_agent()
         build_filename()
         rename_files()
+        # set seed val for an agent
+        agent_inst.set_seed_val(seed_val)
         if not agent_inst.init(actions, read, write, command, n, debug):
             print("Something went wrong, please try again")
             print(options)

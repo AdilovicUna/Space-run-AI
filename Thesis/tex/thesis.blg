@@ -25,44 +25,47 @@ Reallocating 'name_of_file' (item size: 1) to 9 items.
 The style file: plainnat.bst
 Reallocating 'name_of_file' (item size: 1) to 13 items.
 Database file #1: bibliography.bib
-You've used 1 entry,
+Warning--to sort, need author or key in tunnelrush
+Warning--to sort, need author or key in blender
+You've used 6 entries,
             2773 wiz_defined-function locations,
-            609 strings with 5141 characters,
-and the built_in function-call counts, 394 in all, are:
-= -- 29
-> -- 21
-< -- 1
-+ -- 7
-- -- 6
-* -- 26
-:= -- 68
-add.period$ -- 3
-call.type$ -- 1
-change.case$ -- 4
-chr.to.int$ -- 1
-cite$ -- 2
-duplicate$ -- 20
-empty$ -- 33
-format.name$ -- 9
-if$ -- 77
+            632 strings with 5531 characters,
+and the built_in function-call counts, 1784 in all, are:
+= -- 159
+> -- 51
+< -- 4
++ -- 21
+- -- 15
+* -- 105
+:= -- 246
+add.period$ -- 17
+call.type$ -- 6
+change.case$ -- 23
+chr.to.int$ -- 6
+cite$ -- 16
+duplicate$ -- 95
+empty$ -- 199
+format.name$ -- 21
+if$ -- 393
 int.to.chr$ -- 1
 int.to.str$ -- 1
 missing$ -- 2
-newline$ -- 13
-num.names$ -- 4
-pop$ -- 12
+newline$ -- 37
+num.names$ -- 16
+pop$ -- 73
 preamble$ -- 1
-purify$ -- 4
+purify$ -- 17
 quote$ -- 0
-skip$ -- 16
+skip$ -- 85
 stack$ -- 0
-substring$ -- 2
-swap$ -- 1
+substring$ -- 14
+swap$ -- 6
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 6
-warning$ -- 0
-while$ -- 3
+type$ -- 61
+warning$ -- 2
+while$ -- 12
 width$ -- 0
-write$ -- 20
+write$ -- 79
+(There were 2 warnings)

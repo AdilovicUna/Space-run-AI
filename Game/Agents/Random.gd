@@ -36,6 +36,9 @@ func end_game(_final_score, _final_time):
 func save(_write):
     pass
 
+func set_seed_val(val):
+    rand.seed = val
+
 func get_and_set_agent_specific_parameters(_agent_specific_param):
     return []
 

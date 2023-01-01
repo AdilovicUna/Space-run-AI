@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.12) (preloaded format=pdflatex 2022.12.18)  26 DEC 2022 08:01
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.12) (preloaded format=pdflatex 2022.12.18)  1 JAN 2023 21:57
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -544,19 +544,19 @@ Package: listings 2020/03/24 1.8d (Carsten Heinz)
 (C:\Users\Una\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.sty
 File: lstlang1.sty 2020/03/24 1.8d listings language file
 )
-Package hyperref Info: Option `unicode' set `true' on input line 123.
-Package hyperref Info: Option `breaklinks' set `true' on input line 124.
+Package hyperref Info: Option `unicode' set `true' on input line 125.
+Package hyperref Info: Option `breaklinks' set `true' on input line 126.
 
 
 LaTeX Warning: \include should only be used after \begin{document} on input lin
-e 127.
+e 129.
 
 (macros.tex
 \c@thm=\count301
 \c@defn=\count302
 )
 LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 1
-30.
+32.
  (C:\Users\Una\AppData\Local\Programs\MiKTeX\tex/latex/lm\ot1lmr.fd
 File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
@@ -571,24 +571,24 @@ File: l3backend-pdftex.def 2022-10-26 L3 backend support: PDF output (pdfTeX)
 (Conclusion.aux) (bibliography.aux))
 \openout1 = `thesis.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 130.
-LaTeX Font Info:    ... okay on input line 130.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 130.
-LaTeX Font Info:    ... okay on input line 130.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 130.
-LaTeX Font Info:    ... okay on input line 130.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 130.
-LaTeX Font Info:    ... okay on input line 130.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 130.
-LaTeX Font Info:    ... okay on input line 130.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 130.
-LaTeX Font Info:    ... okay on input line 130.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 130.
-LaTeX Font Info:    ... okay on input line 130.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 130.
-LaTeX Font Info:    ... okay on input line 130.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 130.
-LaTeX Font Info:    ... okay on input line 130.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 132.
+LaTeX Font Info:    ... okay on input line 132.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 132.
+LaTeX Font Info:    ... okay on input line 132.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 132.
+LaTeX Font Info:    ... okay on input line 132.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 132.
+LaTeX Font Info:    ... okay on input line 132.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 132.
+LaTeX Font Info:    ... okay on input line 132.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 132.
+LaTeX Font Info:    ... okay on input line 132.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 132.
+LaTeX Font Info:    ... okay on input line 132.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 132.
+LaTeX Font Info:    ... okay on input line 132.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 132.
+LaTeX Font Info:    ... okay on input line 132.
 
 (C:\Users\Una\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -613,7 +613,7 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 (C:\Users\Una\AppData\Local\Programs\MiKTeX\tex/latex/00miktex\epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
-Package hyperref Info: Link coloring OFF on input line 130.
+Package hyperref Info: Link coloring OFF on input line 132.
  (thesis.out) (thesis.out)
 \@outlinefile=\write5
 \openout5 = `thesis.out'.
@@ -623,7 +623,7 @@ Package hyperref Info: Link coloring OFF on input line 130.
 
  (title.tex
 Package hyperref Info: Option `pageanchor' set `false' on input line 6.
-<../img/logo-en.pdf, id=146, 506.4591pt x 156.49065pt>
+<../img/logo-en.pdf, id=150, 506.4591pt x 156.49065pt>
 File: ../img/logo-en.pdf Graphic file (type pdf)
 <use ../img/logo-en.pdf>
 Package pdftex.def Info: ../img/logo-en.pdf  used on input line 9.
@@ -684,10 +684,10 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
 
 
-]
+] [2]
 \openout2 = `Introduction.aux'.
 
- (Introduction.tex) [2
+ (Introduction.tex) [3
 
 
 ]
@@ -695,90 +695,91 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
  (GameDesign.tex
 Chapter 1.
-<../img//second_tunnel.png, id=227, 761.09344pt x 447.17062pt>
+<../img//second_tunnel.png, id=238, 761.09344pt x 447.17062pt>
 File: ../img//second_tunnel.png Graphic file (type png)
 <use ../img//second_tunnel.png>
 Package pdftex.def Info: ../img//second_tunnel.png  used on input line 10.
 (pdftex.def)             Requested size: 412.56496pt x 242.40332pt.
-<../img//hans.jpg, id=228, 106.89937pt x 167.12437pt>
+<../img//hans.jpg, id=241, 106.89937pt x 167.12437pt>
 File: ../img//hans.jpg Graphic file (type jpg)
 <use ../img//hans.jpg>
-Package pdftex.def Info: ../img//hans.jpg  used on input line 17.
+Package pdftex.def Info: ../img//hans.jpg  used on input line 18.
 (pdftex.def)             Requested size: 64.1401pt x 100.27538pt.
-[3
+[4
 
 
 
 
- <../img//second_tunnel.png> <../img//hans.jpg>]
-<../img//traps.pdf, id=239, 1150.2975pt x 386.94562pt>
+ <../img//second_tunnel.png>]
+<../img//traps.pdf, id=250, 1150.2975pt x 386.94562pt>
 File: ../img//traps.pdf Graphic file (type pdf)
 <use ../img//traps.pdf>
 Package pdftex.def Info: ../img//traps.pdf  used on input line 30.
 (pdftex.def)             Requested size: 412.56496pt x 138.78073pt.
-<../img//bugs.pdf, id=241, 564.60938pt x 133.24782pt>
+<../img//bugs.pdf, id=252, 564.60938pt x 133.24782pt>
 File: ../img//bugs.pdf Graphic file (type pdf)
 <use ../img//bugs.pdf>
 Package pdftex.def Info: ../img//bugs.pdf  used on input line 40.
 (pdftex.def)             Requested size: 412.56496pt x 97.36768pt.
-<../img//viruses.pdf, id=244, 526.96875pt x 165.61874pt>
-File: ../img//viruses.pdf Graphic file (type pdf)
-<use ../img//viruses.pdf>
-Package pdftex.def Info: ../img//viruses.pdf  used on input line 49.
-(pdftex.def)             Requested size: 412.56496pt x 129.66983pt.
- [4 <../img//traps.pdf> <../img//bugs.pdf
+ [5 <../img//hans.jpg> <../img//traps.pdf> <../img//bugs.pdf
 
 pdfTeX warning: pdflatex (file ../img//bugs.pdf): PDF inclusion: multiple pdfs 
 with page group included in a single page
 >]
-<../img//first_tunnel.jpg, id=259, 767.11594pt x 447.92343pt>
+<../img//viruses.pdf, id=268, 526.96875pt x 165.61874pt>
+File: ../img//viruses.pdf Graphic file (type pdf)
+<use ../img//viruses.pdf>
+Package pdftex.def Info: ../img//viruses.pdf  used on input line 49.
+(pdftex.def)             Requested size: 412.56496pt x 129.66983pt.
+<../img//first_tunnel.jpg, id=270, 767.11594pt x 447.92343pt>
 File: ../img//first_tunnel.jpg Graphic file (type jpg)
 <use ../img//first_tunnel.jpg>
 Package pdftex.def Info: ../img//first_tunnel.jpg  used on input line 60.
 (pdftex.def)             Requested size: 412.56496pt x 240.90451pt.
- [5 <../img//viruses.pdf> <../img//first_tunnel.jpg>]) [6]
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+) [6 <../img//viruses.pdf>] [7 <../img//first_tunnel.jpg>]
 \openout2 = `GameImplementation.aux'.
 
 
 (GameImplementation.tex
 Chapter 2.
-<../img//game_tree.png, id=277, 563.10374pt x 402.50375pt>
+<../img//game_tree.png, id=296, 563.10374pt x 402.50375pt>
 File: ../img//game_tree.png Graphic file (type png)
 <use ../img//game_tree.png>
-Package pdftex.def Info: ../img//game_tree.png  used on input line 9.
+Package pdftex.def Info: ../img//game_tree.png  used on input line 11.
 (pdftex.def)             Requested size: 330.05322pt x 235.9213pt.
 LaTeX Font Info:    Trying to load font information for OT1+lmtt on input line 
-14.
+16.
 (C:\Users\Una\AppData\Local\Programs\MiKTeX\tex/latex/lm\ot1lmtt.fd
 File: ot1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-) [7
+)
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <10> on input line 16.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <7> on input line 16.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <5> on input line 16.
+ [8
 
 
 
 
  <../img//game_tree.png>]
+LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 2
+5.
+
+(C:\Users\Una\AppData\Local\Programs\MiKTeX\tex/latex/lm\ts1lmr.fd
+File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+) [9]
 LaTeX Font Info:    Font shape `OT1/lmtt/bx/n' in size <10.95> not available
-(Font)              Font shape `OT1/lmtt/b/n' tried instead on input line 37.
-
-Overfull \hbox (48.48322pt too wide) in paragraph at lines 41--43
-[][][][][][][][][][][][][][][][][][][][][][][][][][][] |
- []
-
-
-Overfull \hbox (77.22688pt too wide) in paragraph at lines 44--46
-[][][][][][][][][][][][][][][][][][][][][][][][][][][] |
- []
-
-
-Overfull \hbox (8.24208pt too wide) in paragraph at lines 47--49
-[][][][][][][][][][][][][][][][][][][][][][][][][] |
- []
-
-[8] [9]
-<../img//third_tunnel.jpg, id=350, 769.37437pt x 450.18187pt>
+(Font)              Font shape `OT1/lmtt/b/n' tried instead on input line 41.
+<../img//third_tunnel.jpg, id=334, 769.37437pt x 450.18187pt>
 File: ../img//third_tunnel.jpg Graphic file (type jpg)
 <use ../img//third_tunnel.jpg>
-Package pdftex.def Info: ../img//third_tunnel.jpg  used on input line 120.
+Package pdftex.def Info: ../img//third_tunnel.jpg  used on input line 72.
 (pdftex.def)             Requested size: 412.56496pt x 241.41164pt.
 
 
@@ -790,37 +791,43 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 
 (StructureOfTheExperimentalSetting.tex
 Chapter 3.
-
-Overfull \hbox (10.9736pt too wide) in paragraph at lines 8--33
- [] |
- []
-
 [14
 
 
 
 
-]
-Underfull \hbox (badness 10000) in paragraph at lines 69--70
+] [15]
+Underfull \hbox (badness 10000) in paragraph at lines 80--81
 
  []
 
-[15] [16]) [17]
+[16] [17]) [18]
 \openout2 = `AlgorithmsUsed.aux'.
 
  (AlgorithmsUsed.tex
 Chapter 4.
-) [18
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[19
 
 
 
 
-]
+])
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[20]
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[21] [22]
 \openout2 = `AgentsImplementation.aux'.
 
  (AgentsImplementation.tex
 Chapter 5.
-) [19
+) [23
 
 
 
@@ -830,7 +837,7 @@ Chapter 5.
 
  (Experiments.tex
 Chapter 6.
-) [20
+) [24
 
 
 
@@ -838,7 +845,7 @@ Chapter 6.
 ]
 \openout2 = `Conclusion.aux'.
 
- (Conclusion.tex) [21
+ (Conclusion.tex) [25
 
 
 
@@ -846,7 +853,7 @@ Chapter 6.
 ]
 \openout2 = `bibliography.aux'.
 
- (bibliography.tex (thesis.bbl)) [22
+ (bibliography.tex (thesis.bbl)) [26
 
 
 
@@ -856,7 +863,7 @@ Chapter 6.
 \openout7 = `thesis.lof'.
 
 
-[23
+[27
 
 
 
@@ -864,42 +871,54 @@ Chapter 6.
 \tf@lot=\write8
 \openout8 = `thesis.lot'.
 
- [24
+ [28
 
-] [25
+] [29
 
 ]
 Appendix A.
-[26
+[30
 
 ] (thesis.aux (title.aux) (Introduction.aux) (GameDesign.aux)
 (GameImplementation.aux) (StructureOfTheExperimentalSetting.aux)
 (AlgorithmsUsed.aux) (AgentsImplementation.aux) (Experiments.aux)
 (Conclusion.aux) (bibliography.aux))
 Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: B3C87E840554521B0A265A98BC900ADF;5820.
+(rerunfilecheck)             Checksum: 388E00B19C700C23A6E759B0B73FD657;5548.
  ) 
 Here is how much of TeX's memory you used:
- 17433 strings out of 475281
- 272801 string characters out of 2775008
- 829085 words of memory out of 3000000
- 38279 multiletter control sequences out of 15000+600000
- 524643 words of font info for 68 fonts, out of 8000000 for 9000
+ 17582 strings out of 475281
+ 274691 string characters out of 2775008
+ 833089 words of memory out of 3000000
+ 38427 multiletter control sequences out of 15000+600000
+ 547838 words of font info for 93 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 89i,8n,93p,989b,3507s stack positions out of 10000i,1000n,20000p,200000b,80000s
+ 89i,9n,93p,1155b,3619s stack positions out of 10000i,1000n,20000p,200000b,80000s
 {C:/Users/Una/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rm.enc}{C:/
-Users/Una/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rmtt.enc}<C:/User
-s/Una/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/
-Una/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users/Una
-/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr17.pfb><C:/Users/Una/Ap
-pData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri12.pfb><C:/Users/Una/AppD
-ata/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtk10.pfb><C:/Users/Una/AppDat
-a/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt10.pfb><C:/Users/Una/AppData/
-Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt12.pfb><C:/Users/Una/AppData/Lo
-cal/Programs/MiKTeX/fonts/type1/public/lm/lmtti10.pfb>
-Output written on thesis.pdf (30 pages, 2061967 bytes).
+Users/Una/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathex.enc}{C:/Us
+ers/Una/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathit.enc}{C:/User
+s/Una/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.enc}{C:/Users/
+Una/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rmtt.enc}{C:/Users/Una/
+AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ts1.enc}<C:/Users/Una/AppDa
+ta/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/Una/AppData
+/Local/Programs/MiKTeX/fonts/type1/public/lm/lmex10.pfb><C:/Users/Una/AppData/L
+ocal/Programs/MiKTeX/fonts/type1/public/lm/lmmi12.pfb><C:/Users/Una/AppData/Loc
+al/Programs/MiKTeX/fonts/type1/public/lm/lmmi8.pfb><C:/Users/Una/AppData/Local/
+Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/Una/AppData/Local/Pro
+grams/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users/Una/AppData/Local/Progra
+ms/MiKTeX/fonts/type1/public/lm/lmr17.pfb><C:/Users/Una/AppData/Local/Programs/
+MiKTeX/fonts/type1/public/lm/lmr7.pfb><C:/Users/Una/AppData/Local/Programs/MiKT
+eX/fonts/type1/public/lm/lmr8.pfb><C:/Users/Una/AppData/Local/Programs/MiKTeX/f
+onts/type1/public/lm/lmri12.pfb><C:/Users/Una/AppData/Local/Programs/MiKTeX/fon
+ts/type1/public/lm/lmsy10.pfb><C:/Users/Una/AppData/Local/Programs/MiKTeX/fonts
+/type1/public/lm/lmsy8.pfb><C:/Users/Una/AppData/Local/Programs/MiKTeX/fonts/ty
+pe1/public/lm/lmtk10.pfb><C:/Users/Una/AppData/Local/Programs/MiKTeX/fonts/type
+1/public/lm/lmtt10.pfb><C:/Users/Una/AppData/Local/Programs/MiKTeX/fonts/type1/
+public/lm/lmtt12.pfb><C:/Users/Una/AppData/Local/Programs/MiKTeX/fonts/type1/pu
+blic/lm/lmtti10.pfb>
+Output written on thesis.pdf (34 pages, 2184450 bytes).
 PDF statistics:
- 680 PDF objects out of 1000 (max. 8388607)
- 264 named destinations out of 1000 (max. 500000)
- 338 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 753 PDF objects out of 1000 (max. 8388607)
+ 247 named destinations out of 1000 (max. 500000)
+ 346 words of extra memory for PDF output out of 10000 (max. 10000000)
 

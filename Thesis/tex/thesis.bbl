@@ -1,13 +1,37 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{6}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
   \providecommand{\doi}[1]{doi: #1}\else
   \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
 
+\bibitem[ble(2022)]{blender}
+Blender, 2022.
+\newblock URL \url{https://www.blender.org/}.
+
+\bibitem[tun(2022)]{tunnelrush}
+Tunnel rush, 2022.
+\newblock URL \url{https://tunnelrush2.com/}.
+
+\bibitem[Adilovic(2022)]{spacerunai}
+Una Adilovic.
+\newblock Space run ai, 2022.
+\newblock URL \url{https://github.com/AdilovicUna/Space-run-AI}.
+
+\bibitem[Engine(2021)]{GodotDocs}
+Godot Engine.
+\newblock Godot engine - documentation, 2021.
+\newblock URL \url{https://docs.godotengine.org/en/stable/index.html}.
+\newblock Accessed: 2021-06-03.
+
+\bibitem[Group(2022)]{gltf}
+Khronos Group.
+\newblock gltf - runtime 3d asset delivery, 2022.
+\newblock URL \url{https://www.khronos.org/gltf/}.
+
 \bibitem[Sutton and Barto(2018)]{RLSuttonBarto}
-Richard~S Sutton and Andrew~G Barto.
+Richard~S. Sutton and Andrew~G. Barto.
 \newblock \emph{Reinforcement Learning: An Introduction}.
-\newblock MIT press, Praha, 2018.
+\newblock MIT Press, London, England, second edition, 2018.
 
 \end{thebibliography}

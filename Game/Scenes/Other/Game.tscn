@@ -371,9 +371,6 @@ tint_under = Color( 0.478431, 0.709804, 0.94902, 0.0980392 )
 tint_over = Color( 0.027451, 0.0313726, 0.294118, 1 )
 tint_progress = Color( 0.0627451, 0.27451, 0.607843, 0.423529 )
 script = ExtResource( 12 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Percentage" type="Label" parent="UI/Battery"]
 anchor_left = 0.5

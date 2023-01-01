@@ -93,6 +93,9 @@ func init_agent(actions, read, write, filename, curr_n, debug):
        
     return true
 
+func set_seed_val(val):
+    rand.seed = val
+
 func start(eval):
     episode_steps = []
     last_action = null    
@@ -170,7 +173,7 @@ func get_and_set_agent_specific_parameters(agent_specific_param):
 func get_state_action(state, action):
     return ("[%d,%d,%s]_[%d,%d]" %
                         [state[0], state[1], state[2], action[0], action[1]])
-
+                        
 func get_n():
     return String(n)
 
@@ -230,13 +233,10 @@ func show_policy():
             print(s)
     last_policy = policy
 
-func choose_action(action, num_of_ticks):
-    var curr_msec = num_of_ticks * 33
+func choose_action(action):
     epsilon_action = false
     if not is_eval_game:
-        if (curr_msec - prev_msec) >= 50:
-            prev_msec = curr_msec
-            epsilon_action = rand.randf_range(0,1) < EPSILON
-            if epsilon_action:
-                action = ACTIONS[rand.randi_range(0,len(ACTIONS) - 1)]  
+        epsilon_action = rand.randf_range(0,1) < EPSILON
+        if epsilon_action:
+            action = ACTIONS[rand.randi_range(0,len(ACTIONS) - 1)]  
     return action

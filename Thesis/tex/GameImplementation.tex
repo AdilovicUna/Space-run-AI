@@ -1,7 +1,9 @@
 \chapter{Implementation of the Game}
-``Space-run'' was developed using the Godot Engine (version v3.2.3.stable) , an open-source game engine licensed under the MIT license. It is a cross-platform tool that offers a range of features for game development, including a visual scripting language, 2D and 3D graphics support, and a powerful physics engine. The Godot Engine utilizes a node-based architecture, where nodes are organized within scenes that can be reused, instanced, inherited, and nested. This structure allows for efficient project management and development within the engine. The game was written entirely in GDScript, the primary scripting language of the Godot Engine. Overall, the Godot Engine provides a user-friendly environment for game development and offers a comprehensive set of features for creating immersive and engaging games.
+``Space-run'' was developed using the Godot Engine (version v3.2.3.stable) , an open-source game engine licensed under the MIT license. It is a cross-platform tool that offers a range of features for game development, including a visual scripting language, 2D and 3D graphics support, and a powerful physics engine. The Godot Engine utilizes a node-based architecture, where nodes are organized within scenes that can be reused, instanced, inherited, and nested. This structure allows for efficient project management and development within the engine. The game was written entirely in GDScript, the primary scripting language of the Godot Engine (\cite{GodotDocs}).
 
-In addition to using the Godot Engine, the development team also utilized Blender (version 6.2.0) for creating and animating the characters in the game. Blender is a popular open-source 3D modeling and animation software that offers a range of features for creating detailed and realistic characters. The characters were then imported into the Godot Engine using the .glTF 2.0 file format, which is a widely supported file format for exchanging 3D graphics data.
+In addition to using the Godot Engine, I also utilized Blender (version 6.2.0) \cite{blender} for creating and animating the characters in the game. Blender is a popular open-source 3D modeling and animation software that offers a range of features for creating detailed and realistic characters. The characters were then imported into the Godot Engine using the .glTF 2.0 \cite{gltf} file format, which is a widely supported file format for exchanging 3D graphics data.
+
+The source code for the game, and for the whole thesis can be found at the following repository \cite{spacerunai}.
 
 \section{The top-level organization}
 \begin{figure}[h]
@@ -11,72 +13,22 @@ In addition to using the Godot Engine, the development team also utilized Blende
     \label{fig:game_tree}
 \end{figure}
 
-The main scene for the game, referred to as \texttt{Game.tscn}, is depicted in Figure \ref{fig:game_tree}. It includes several nodes, including Ground, UI, Sound, Game, Hans, and Tunnels. The Ground node is a CSGBox that serves as the ground in the game, while the UI and Sound nodes handle the user interface and audio aspects, respectively. The Game, Hans, and Tunnels nodes contain the majority of the game's functionality. Specifically, the Game node manages the overall gameplay, the Hans node controls the player character, and the Tunnels node manages the movement and appearance of the tunnels.
+The main scene for the game, referred to as \texttt{Game.tscn}, is depicted in Figure \ref{fig:game_tree}. It includes several nodes, including Ground, UI, Sound, Game, Hans, and Tunnels. The Ground node is a CSGBox\footnote{CSGBox is a 3D object that represents a box with a Constructive Solid Geometry (CSG) shape.} that serves as the ground in the game, while the UI and Sounds nodes handle the user interface and audio aspects, respectively. The Game, Hans, and Tunnels nodes contain the majority of the game's functionality. Specifically, the Game node manages the overall gameplay, the Hans node controls the player character, and the Tunnels node manages the movement and appearance of the tunnels.
 
 For a more in-depth understanding, let us examine some of the core aspects of the game in the following sections.
 
 \section{Game}
 The script for the Game node is the initial point of the game session and includes both the \texttt{\_start()} and \texttt{\_game\_over()} methods. It also serves as a link between the game and the agent environment described in Chapter \ref{agent_code_chapter}, and as such includes all of the necessary set methods for the agent environment. These methods allow for communication between the game and the agent environment, enabling the agent to interact with and influence the game.
 
-The following examples demonstrate the simplified code of the main functions within \texttt{Game.gd}. It is important to note that code that is not relevant to any agent except the Keyboard agent, which is the player agent and the only one not designated as a "self-playing agent," has been omitted (and will be in future examples) as it is not relevant to the focus of this thesis. The Keyboard agent allows the player to interact with and control the game, while the other agents, referred to as "self-playing agents," operate independently within the game environment.
-
-\begin{lstlisting}
-func _ready():
-    # lines relevant to the Keyboard agent:
-    		...
-    hans.set_speed(num_of_speed_ups)
-    hans.set_tunnel_vars(starting_level, tunnel)  
-    _start()
-\end{lstlisting}
-
-The ready function is called at the start of the game's execution and, after setting up the environment, it triggers the start function. This function initiates the gameplay and sets the necessary conditions for the game to proceed.
-
-\begin{lstlisting}
-func _start():
-	# add all of obstacle objects specified in the environment
-    for name in traps:
-        tunnels.scenes["trap_scenes"].append(load("res://Scenes/Traps/" + name + ".tscn"))
-        
-    for name in bugs:
-        tunnels.scenes["bug_scenes"].append(load("res://Scenes/Characters/Bugs/" + name + ".tscn"))
-        
-    for name in viruses:
-        tunnels.scenes["virus_scenes"].append(load("res://Scenes/Characters/Viruses/" + name + ".tscn"))
-        
-    for name in tokens:
-        tunnels.scenes["token_scenes"].append(load("res://Scenes/Tokens/" + name + ".tscn"))
-    
-    # set Hans's position in front of the chosen tunnel
-    match tunnel:
-        hans.lvl.TWO:
-            hans.translation = Vector3(1250,-32,0)
-        hans.lvl.THREE:
-            hans.translation = Vector3(-1250,-32,0)
-    
-    # add traps to the first tunnel Hans is passing through
-    tunnels.create_first_level_traps(tunnel)
-\end{lstlisting}  
-
-As described in more detail in Chapter \ref{agent_code_chapter}, the user can specify environment parameters and a starting level for the agent through the command line. These parameters determine the obstacles that the player will face and the starting position of the player character, Hans. The start function incorporates these parameters into the obstacle arrays and positions Hans accordingly. The function also generates the obstacles for the designated starting level. The creation and deletion of obstacles during gameplay is discussed in Section \ref{tunnel_script} of this chapter.
-
-\begin{lstlisting} 
-func _game_over():
-    if DEBUG:
-    		# print debugging statement
-        print('died on level %d, rot = %d' % [level.level, state.state[1]])
-    if self_playing_agent:
-    		# if this is an agent playing, emit the necesarry signal that the game is over
-        emit_signal("game_finished", score.get_score(), num_of_ticks, level.get_level() > max_tunnels, OS.get_ticks_msec() / 1000.0) 
-        queue_free()
-    else:
-    		# otherwise handle the game over for the player
-        
-\end{lstlisting}
-
-The game over function manages the end of the game and sends a signal to the top-level script, \texttt{Main.gd} (described in Chapter \ref{agent_code_chapter}), indicating that the game has ended. It also provides \texttt{Main.gd} with the necessary information about the game's status and outcome.
+The following text describes the core functionalities of the main methods within \texttt{Game.gd}:
+\begin{itemize}
+\item The ready function is called at the start of the game's execution and, after setting up the environment, it triggers the start function. This function initiates the gameplay and sets the necessary conditions for the game to proceed.
+\item As described in more detail in Chapter \ref{agent_code_chapter}, the user can specify environment parameters and a starting level for the agent through the command line. These parameters determine the obstacles that the player will face and the starting position of the player character, Hans. The start function incorporates these parameters into the obstacle arrays and positions Hans accordingly. The function also generates the obstacles for the designated starting level. The creation and deletion of obstacles during gameplay is discussed in Section \ref{tunnel_script} of this chapter.
+\item The game over function manages the end of the game and sends a signal to the top-level script, \texttt{Main.gd} (described in Chapter \ref{agent_code_chapter}), indicating that the game has ended. It also provides \texttt{Main.gd} with the necessary information about the game's status and outcome.
+\end{itemize}
 
 \section{Hans}
-The next node we want to examine is Hans. While \texttt{Hans.tscn} is a scene with the main character and its necesarry animations, what interests us more is the Hans.gd and its key components.
+The next node we want to examine is Hans. While \texttt{Hans.tscn} is a scene with the main character and its necessary animations, what interests us more is the \texttt{Hans.gd} and its key components.
 
 \begin{lstlisting}
 func _physics_process(delta): 
@@ -124,7 +76,7 @@ It is also worth noting that this script handles the movement of the tunnels to 
 
 \section{Tunnels}
 \label{tunnel_script}
-The Tunnels node, which is a child of the main scene in the game tree, contains three child nodes of the Spatial type (level1, level2, and level3) and each of these nodes includes a CSGTorus node, which represents the physical appearance of the tunnels. Obstacles are added to the appropriate level node as instances. The \texttt{Tunnels.gd} script, which is attached to the Tunnels node, handles many of the previously mentioned functions such as obstacle creation and deletion and tunnel rotation. In the following code snippets, we will examine the Tunnels.gd script in greater detail.
+The Tunnels node, which is a child of the main scene in the game tree, contains three child nodes of the Spatial type\footnote{Spatial node is a type of node that represents a 3D object or transformation in the game world. It is a versatile node that can be used to create and manipulate 3D objects, including meshes, materials, and lighting. Spatial nodes are often used as the root node for 3D objects in a scene, and they can be nested inside other Spatial nodes to create hierarchical transformations.} (level1, level2, and level3) and each of these nodes includes a CSGTorus\footnote{ CSGTorus node is a type of 3D object that represents a torus shape in the game world.} node, which represents the physical appearance of the tunnels. Obstacles are added to the appropriate level node as instances. The \texttt{Tunnels.gd} script, which is attached to the Tunnels node, handles many of the previously mentioned functions such as obstacle creation and deletion and tunnel rotation. In the following code snippets, we will examine the \texttt{Tunnels.gd} script in greater detail.
 
 \begin{lstlisting}
 func _physics_process(delta):   
@@ -150,20 +102,15 @@ The \texttt{\_physics\_process()} function within the \texttt{Tunnels.gd} script
 
 \begin{lstlisting} 
 func create_first_level_traps(tunnel):
-    # get the level we are making traps for
-    var level = tunnel
-    
-    # pick number of traps to be added
-    var num_of_traps = rand.randi_range(50,65)
-    var x = 1200
+    level <- level we are making traps for
+    num_of_traps <- randomly pick number of traps to be added
+    x <- x position of the first trap
     
     for n in num_of_traps:
-        # add space between traps
-        x -= rand.randi_range(TRAP_RANGE_FROM,TRAP_RANGE_TO)
-        # check if the trap will be inside the tunnel
-        # if not, break
-        if x < -1200:
+        x <- update x to next position
+        if x is outside the tunnel:
             break
+        # create one trap at x
         create_one_obstacle(level, x) 
 \end{lstlisting}
 
@@ -171,39 +118,24 @@ The function depicted in the code above serves to generate obstacles in the star
 
 \begin{lstlisting} 
 func create_one_obstacle(level,x):
-    # pick which kind of obstacle will be added
-    # this process is partially random, depending on weather the tunnel 
-    # can contain one or more kinds of obstacles
-    var scene  = pick_scene(level)   
+    scene <- pick which kind of obstacle will be added
+    tunnel <- get the level we are making traps for
+    i <- randomly pick an obstacle
     
-    # get the level we are making traps for
-    var tunnel = get_child(level)
-    
-    # randomly pick an obstacle
-    var i = pick_obstacle(scene)
-    
-    # make an instance
-    var obstacle = scene[i].instance()
-    obstacle.translation.x = x
-    
-    tunnel.add_child(obstacle)
-    
-    # randomly pick obstacle rotation
-    rotate_obstacle(obstacle)
+    using previous information, make an instance of the obstacle
+    set its position at x and rotate it randomly by n * 60 degrees  
 \end{lstlisting}
 
-The tunnels are positioned along the x axis, and this function allows for the creation of obstacles within them at specific x positions.
+The tunnels are positioned along the x axis, and this function allows for the creation of obstacles within them at specific x positions and a random rotation.
 
 \begin{lstlisting}           
 func delete_obstacle_until_x(level,x):
-    var tunnel = get_child(level)
-    # loop through children of the tunnel
-    # and eliminate any obstacles
-    # until position x
-    for obstacle in tunnel.get_children():
-        if not "light" in obstacle.name and not "torus" in obstacle.name and not "Bullet" in obstacle.name:
-            if obstacle.translation.x > x:
-                obstacle.queue_free()
+    tunnel <- get current tunnel
+
+    for child in children of the tunnel:
+        if child is an obstacle:
+            if we passed the child:
+                remove it
             else:
                 return
 \end{lstlisting}

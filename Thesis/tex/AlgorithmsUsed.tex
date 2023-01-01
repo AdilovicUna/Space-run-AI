@@ -1,5 +1,83 @@
 \chapter{Applied Algorithms}
-talk ab algos
-\section{Title of the first subchapter of the second chapter}
+The algorithms utilized in this thesis fall under the categories of Monte Carlo methods and Temporal Difference (TD) Learning. These methods involve the selection of actions by an agent over time in order to maximize a reward signal. The agents are unaware of the environment dynamics of the game and are only provided with information regarding the current state and score. In this chapter, we will discuss the specific algorithms implemented in the project. Firstly, however, a few key concepts need to be introduced:
 
-\section{Title of the second subchapter of the second chapter}
+A \textbf{policy} is a mapping from states to actions that determines the actions an agent takes in each state. An \textbf{$\epsilon$-greedy policy} is a type of policy in which the agent takes the action that maximizes the expected reward with probability (1 - $\epsilon$), and takes a random action with probability $\epsilon$. A \textbf{state} is a representation of the current situation of the environment, and an \textbf{action} is a decision made by the agent in response to the current state. A \textbf{reward} is a scalar value that represents the immediate feedback received by the agent for its action in a given state.
+
+In the previous chapter, the representation of the state in the game was discussed, and it was briefly mentioned that the actions an agent can take are [\texttt{left, right, forward, left + shoot, right + shoot, and forward + shoot}].\\ As for the reward, the most natural choice is the score variable from the game.
+
+Before looking into individual algorithms, there is one more key concept to introduce: \textbf{exploration vs exploitation}. In the field of reinforcement learning, the exploration-exploitation trade-off refers to the balancing act between discovering new information or strategies and utilizing existing knowledge to maximize reward. Exploration involves trying out different actions or strategies in order to gather more information about the environment and its rewards, while exploitation involves utilizing the information gathered to maximize reward. Finding the right balance between exploration and exploitation is crucial in reinforcement learning, as excessive exploration can lead to suboptimal results, while excessive exploitation can result in suboptimal performance.
+
+\section{Monte Carlo}
+The Monte Carlo method is a type of reinforcement learning algorithm that uses a sample of the past experiences of the agent to estimate the value function. It can be used with either on-policy or off-policy learning, depending on how the samples are collected. On-policy learning means that the agent is using the same behaviour policy to collect samples as it is using to evaluate the value function. First visit Monte Carlo is a variant of on-policy Monte Carlo that only considers the first time a state is visited in an episode, as opposed to all visits. Optimistic initial values are a technique used in Monte Carlo methods to encourage exploration by setting the initial value of all states to a high number, encouraging the agent to visit as many states as possible in order to learn their true value. For the purpose of this thesis, we have used on-policy first visit Monte Carlo algorithm, with both initial optimistic value and an $\epsilon$-greedy policy as tools to enforce exploration. 
+
+
+\begin{figure}[h]
+    \centering
+    \begin{lstlisting}
+    For each episode:
+    		Initialize value function for all states to a high number (optimistic initial value).
+		Initialize the epsilon-greedy policy with a probability of exploration (epsilon).
+		Loop for each step of episode, t = T-1, T-2,..., 0:
+			Initialize state and action
+			Take the action and observe the next state and reward.
+			If the state has not been visited before in this episode (first visit):
+				update the value function using the reward.
+			Choose the next action using the epsilon-greedy policy.
+		
+		Update the epsilon-greedy policy based on the results of the learning process.
+	\end{lstlisting}	
+    \caption{On-policy first-visit Monte Carlo control (for $\epsilon$-greedy policy)}
+    \label{algo:MC}
+\end{figure}
+
+\section{Temporal Difference Learning}
+Temporal difference (TD) learning is a type of reinforcement learning algorithm that estimates the value function using the difference between the immediate reward and the expected future reward. It can be used with either on-policy or off-policy learning, depending on how the samples are collected.
+On the other hand, Monte Carlo methods require a complete episode to finish before the value function can be updated, whereas TD learning can update the value function incrementally as the agent takes actions. This means that TD learning can start learning and adapting to the environment much earlier than Monte Carlo methods.
+
+\begin{figure}[h]
+    \centering
+    \begin{lstlisting}
+    Loop through each episode:
+    		Initialize state S
+    		For each step of the episode
+    			Pick an action A using epsilon-greedy policy
+    			Take action A and observe the reward R and the next state S' 
+    			Update the policy depending on the algorithm
+    			S <- S'
+    		Until S is terminal
+	\end{lstlisting}
+    \caption{Tabular TD learning}
+    \label{algo:TD}
+\end{figure}
+
+The main difference between SARSA, Q-learning, expected SARSA, and double Q-learning is the way in which they estimate the value of the action-value function. The pseudo code above shows us the common core idea for all the TD learning algorithms used in this thesis. Now, we can look at them individually, based on their update functions.
+\begin{figure}[h]
+    \centering
+   $$Q(S,A) \leftarrow Q(S,A) + \alpha [R + \gamma Q(S',A') - Q(S,A)$$
+    \caption{SARSA update function}
+    \label{algo:S}
+\end{figure}
+SARSA stands for "state-action-reward-state-action", and is an on-policy TD learning algorithm. This means that it uses the same behavior policy to collect samples as it is using to evaluate the action-value function. In SARSA, the action-value function is updated using the current state, current action, reward, next state, and next action.
+\begin{figure}[h]
+    \centering
+    $$Q(S,A) \leftarrow Q(S,A) + \alpha [R + \gamma {max}_a Q(S',a) - Q(S,A)]$$
+    \caption{Q-learning update function}
+    \label{algo:QL}
+\end{figure}
+Q-learning is an off-policy TD learning algorithm, meaning that it uses a different behavior policy to collect samples than it is using to evaluate the action-value function. In Q-learning, the action-value function is updated using the current state, current action, reward, and next state, with the next action chosen using the greedy policy.
+\begin{figure}[h]
+    \centering
+    $$Q(S,A) \leftarrow Q(S,A) + \alpha [R + \sum_a \pi (a|S') Q(S',a) - Q(S,A)]$$
+    \caption{Expected SARSA update function}
+    \label{algo:ES}
+\end{figure}
+Expected SARSA is a variant of SARSA that uses the expected value of the next action, rather than the actual next action, to update the action-value function. This allows the algorithm to take into account the probability of each possible next action, rather than just the action chosen by the behavior policy.
+\begin{figure}[h]
+    With 0.5 probability:
+    $$Q_1(S,A) \leftarrow Q_1(S,A) + \alpha [R + \gamma  Q_2(S', argmax_a Q_1(S',a)) - Q_1(S,A)]$$
+    	Else:
+    	$$Q_2(S,A) \leftarrow Q_2(S,A) + \alpha [R + \gamma Q_1(S', argmax_a Q_2(S',a)) - Q_2(S,A)]$$
+    \caption{Double Q-learning update function}
+    \label{algo:DQL}
+\end{figure}
+Double Q-learning is a variant of Q-learning that uses two action-value functions to estimate the value of each action. The two functions are updated independently, and the final action-value estimate is the average of the two estimates. This helps to reduce the bias introduced by the greedy policy used in Q-learning.

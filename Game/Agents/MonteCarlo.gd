@@ -24,12 +24,12 @@ func move(state, score, num_of_ticks):
     if last_state == state:
         return last_action    
     
-    last_action = choose_action(.best_action(state), num_of_ticks)
+    last_action = choose_action(.best_action(state))
                    
     # remember relevant infromation
     last_state = state
     episode_steps.append(Step.new(
-        get_state_action(last_state, last_action), score, (num_of_ticks * 33)/1000.0, epsilon_action))
+        get_state_action(last_state, last_action), score, num_of_ticks, epsilon_action))
 
     return last_action
 

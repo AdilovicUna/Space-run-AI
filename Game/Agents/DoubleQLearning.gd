@@ -12,13 +12,13 @@ func move(state, score, num_of_ticks):
     if last_state == state:
         return last_action    
    
-    last_action = choose_action(.best_action(state), num_of_ticks)     
+    last_action = choose_action(.best_action(state))     
     
     # update q
     if last_state != null and last_action != null:      
         var state_action = get_state_action(last_state,last_action)
         var R = score - last_score
-        update_dicts(state_action, state, R, (num_of_ticks * 33) / 1000.0)
+        update_dicts(state_action, state, R, num_of_ticks)
             
     last_state = state
     last_score = score

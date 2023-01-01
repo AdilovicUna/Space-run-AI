@@ -10,14 +10,14 @@ func move(state, score, num_of_ticks):
     if last_state == state:
         return last_action    
     
-    new_action = choose_action(.best_action(state), num_of_ticks)     
+    new_action = choose_action(.best_action(state))     
     
     # update q
     if last_state != null and last_action != null:      
         var state_action = get_state_action(last_state,last_action)
         var new_state_action = get_update(state, new_action, .best_action(state))
         var R = score - last_score
-        update_dicts(state_action, new_state_action, R, (num_of_ticks * 33) / 1000.0 )
+        update_dicts(state_action, new_state_action, R, num_of_ticks)
     
     last_state = state
     last_action = new_action
@@ -62,9 +62,6 @@ func update_dicts(state_action, new_state_action, R, curr_time, terminal = false
     var alpha = 1.0 / visits[state_action]
     var new_state_val = 0 if terminal else new_state_action
     var new_gamma = pow(GAMMA,curr_time - prev_time)
-    print(curr_time)
-    print(prev_time)
-    print('----')
     q[state_action] += alpha * (new_gamma * (R + new_state_val) - q[state_action])
     
 func get_update(_state, _new_action, _best_action):
