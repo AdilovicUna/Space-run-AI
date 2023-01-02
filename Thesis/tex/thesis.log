@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.12) (preloaded format=pdflatex 2022.12.18)  1 JAN 2023 21:57
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.12) (preloaded format=pdflatex 2022.12.18)  2 JAN 2023 22:00
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -623,7 +623,7 @@ Package hyperref Info: Link coloring OFF on input line 132.
 
  (title.tex
 Package hyperref Info: Option `pageanchor' set `false' on input line 6.
-<../img/logo-en.pdf, id=150, 506.4591pt x 156.49065pt>
+<../img/logo-en.pdf, id=166, 506.4591pt x 156.49065pt>
 File: ../img/logo-en.pdf Graphic file (type pdf)
 <use ../img/logo-en.pdf>
 Package pdftex.def Info: ../img/logo-en.pdf  used on input line 9.
@@ -674,17 +674,17 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 3.
 
 (C:\Users\Una\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-))
-\tf@toc=\write6
-\openout6 = `thesis.toc'.
-
-
+)
 [1
 
 
 
 
-] [2]
+])
+\tf@toc=\write6
+\openout6 = `thesis.toc'.
+
+ [2]
 \openout2 = `Introduction.aux'.
 
  (Introduction.tex) [3
@@ -695,12 +695,12 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
  (GameDesign.tex
 Chapter 1.
-<../img//second_tunnel.png, id=238, 761.09344pt x 447.17062pt>
+<../img//second_tunnel.png, id=258, 761.09344pt x 447.17062pt>
 File: ../img//second_tunnel.png Graphic file (type png)
 <use ../img//second_tunnel.png>
 Package pdftex.def Info: ../img//second_tunnel.png  used on input line 10.
 (pdftex.def)             Requested size: 412.56496pt x 242.40332pt.
-<../img//hans.jpg, id=241, 106.89937pt x 167.12437pt>
+<../img//hans.jpg, id=261, 106.89937pt x 167.12437pt>
 File: ../img//hans.jpg Graphic file (type jpg)
 <use ../img//hans.jpg>
 Package pdftex.def Info: ../img//hans.jpg  used on input line 18.
@@ -711,12 +711,12 @@ Package pdftex.def Info: ../img//hans.jpg  used on input line 18.
 
 
  <../img//second_tunnel.png>]
-<../img//traps.pdf, id=250, 1150.2975pt x 386.94562pt>
+<../img//traps.pdf, id=270, 1150.2975pt x 386.94562pt>
 File: ../img//traps.pdf Graphic file (type pdf)
 <use ../img//traps.pdf>
 Package pdftex.def Info: ../img//traps.pdf  used on input line 30.
 (pdftex.def)             Requested size: 412.56496pt x 138.78073pt.
-<../img//bugs.pdf, id=252, 564.60938pt x 133.24782pt>
+<../img//bugs.pdf, id=272, 564.60938pt x 133.24782pt>
 File: ../img//bugs.pdf Graphic file (type pdf)
 <use ../img//bugs.pdf>
 Package pdftex.def Info: ../img//bugs.pdf  used on input line 40.
@@ -726,12 +726,12 @@ Package pdftex.def Info: ../img//bugs.pdf  used on input line 40.
 pdfTeX warning: pdflatex (file ../img//bugs.pdf): PDF inclusion: multiple pdfs 
 with page group included in a single page
 >]
-<../img//viruses.pdf, id=268, 526.96875pt x 165.61874pt>
+<../img//viruses.pdf, id=288, 526.96875pt x 165.61874pt>
 File: ../img//viruses.pdf Graphic file (type pdf)
 <use ../img//viruses.pdf>
 Package pdftex.def Info: ../img//viruses.pdf  used on input line 49.
 (pdftex.def)             Requested size: 412.56496pt x 129.66983pt.
-<../img//first_tunnel.jpg, id=270, 767.11594pt x 447.92343pt>
+<../img//first_tunnel.jpg, id=290, 767.11594pt x 447.92343pt>
 File: ../img//first_tunnel.jpg Graphic file (type jpg)
 <use ../img//first_tunnel.jpg>
 Package pdftex.def Info: ../img//first_tunnel.jpg  used on input line 60.
@@ -746,7 +746,7 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 
 (GameImplementation.tex
 Chapter 2.
-<../img//game_tree.png, id=296, 563.10374pt x 402.50375pt>
+<../img//game_tree.png, id=316, 563.10374pt x 402.50375pt>
 File: ../img//game_tree.png Graphic file (type png)
 <use ../img//game_tree.png>
 Package pdftex.def Info: ../img//game_tree.png  used on input line 11.
@@ -776,7 +776,7 @@ File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 ) [9]
 LaTeX Font Info:    Font shape `OT1/lmtt/bx/n' in size <10.95> not available
 (Font)              Font shape `OT1/lmtt/b/n' tried instead on input line 41.
-<../img//third_tunnel.jpg, id=334, 769.37437pt x 450.18187pt>
+<../img//third_tunnel.jpg, id=354, 769.37437pt x 450.18187pt>
 File: ../img//third_tunnel.jpg Graphic file (type jpg)
 <use ../img//third_tunnel.jpg>
 Package pdftex.def Info: ../img//third_tunnel.jpg  used on input line 72.
@@ -827,17 +827,45 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 
  (AgentsImplementation.tex
 Chapter 5.
-) [23
+<../img//agents_tree.png, id=589, 703.62875pt x 222.8325pt>
+File: ../img//agents_tree.png Graphic file (type png)
+<use ../img//agents_tree.png>
+Package pdftex.def Info: ../img//agents_tree.png  used on input line 8.
+(pdftex.def)             Requested size: 412.56496pt x 130.65399pt.
+[23
 
 
 
 
-]
+ <../img//agents_tree.png>]
+Overfull \hbox (31.92134pt too wide) detected at line 35
+\OML/lmm/m/it/12 q\OT1/lmr/m/n/12 [\OML/lmm/m/it/12 state[]action\OT1/lmr/m/n/1
+2 ] = \OML/lmm/m/it/12 q\OT1/lmr/m/n/12 [\OML/lmm/m/it/12 state[]action\OT1/lmr
+/m/n/12 ] + \OML/lmm/m/it/12 alpha \OMS/lmsy/m/n/12 ^^C \OT1/lmr/m/n/12 (\OML/l
+mm/m/it/12 gamma \OMS/lmsy/m/n/12 ^^C \OT1/lmr/m/n/12 (\OML/lmm/m/it/12 R \OT1/
+lmr/m/n/12 + \OML/lmm/m/it/12 new[]state[]val\OT1/lmr/m/n/12 ) \OMS/lmsy/m/n/12
+ ^^@ \OML/lmm/m/it/12 q\OT1/lmr/m/n/12 [\OML/lmm/m/it/12 state[]action\OT1/lmr/
+m/n/12 ])|
+ []
+
+[24]
+LaTeX Font Info:    Trying to load font information for OML+lmr on input line 5
+2.
+ (C:\Users\Una\AppData\Local\Programs\MiKTeX\tex/latex/lm\omllmr.fd
+File: omllmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+LaTeX Font Info:    Font shape `OML/lmr/m/n' in size <12> not available
+(Font)              Font shape `OML/lmm/m/it' tried instead on input line 52.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+) [25] [26]
 \openout2 = `Experiments.aux'.
 
  (Experiments.tex
 Chapter 6.
-) [24
+) [27
 
 
 
@@ -845,7 +873,7 @@ Chapter 6.
 ]
 \openout2 = `Conclusion.aux'.
 
- (Conclusion.tex) [25
+ (Conclusion.tex) [28
 
 
 
@@ -853,7 +881,7 @@ Chapter 6.
 ]
 \openout2 = `bibliography.aux'.
 
- (bibliography.tex (thesis.bbl)) [26
+ (bibliography.tex (thesis.bbl)) [29
 
 
 
@@ -863,7 +891,7 @@ Chapter 6.
 \openout7 = `thesis.lof'.
 
 
-[27
+[30
 
 
 
@@ -871,26 +899,26 @@ Chapter 6.
 \tf@lot=\write8
 \openout8 = `thesis.lot'.
 
- [28
+ [31
 
-] [29
+] [32
 
 ]
 Appendix A.
-[30
+[33
 
 ] (thesis.aux (title.aux) (Introduction.aux) (GameDesign.aux)
 (GameImplementation.aux) (StructureOfTheExperimentalSetting.aux)
 (AlgorithmsUsed.aux) (AgentsImplementation.aux) (Experiments.aux)
 (Conclusion.aux) (bibliography.aux))
 Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 388E00B19C700C23A6E759B0B73FD657;5548.
+(rerunfilecheck)             Checksum: EF8BE050493AFFB6FE2DF9034756A6DB;5667.
  ) 
 Here is how much of TeX's memory you used:
- 17582 strings out of 475281
- 274691 string characters out of 2775008
+ 17633 strings out of 475281
+ 275564 string characters out of 2775008
  833089 words of memory out of 3000000
- 38427 multiletter control sequences out of 15000+600000
+ 38462 multiletter control sequences out of 15000+600000
  547838 words of font info for 93 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  89i,9n,93p,1155b,3619s stack positions out of 10000i,1000n,20000p,200000b,80000s
@@ -916,9 +944,9 @@ pe1/public/lm/lmtk10.pfb><C:/Users/Una/AppData/Local/Programs/MiKTeX/fonts/type
 1/public/lm/lmtt10.pfb><C:/Users/Una/AppData/Local/Programs/MiKTeX/fonts/type1/
 public/lm/lmtt12.pfb><C:/Users/Una/AppData/Local/Programs/MiKTeX/fonts/type1/pu
 blic/lm/lmtti10.pfb>
-Output written on thesis.pdf (34 pages, 2184450 bytes).
+Output written on thesis.pdf (37 pages, 2215165 bytes).
 PDF statistics:
- 753 PDF objects out of 1000 (max. 8388607)
- 247 named destinations out of 1000 (max. 500000)
- 346 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 810 PDF objects out of 1000 (max. 8388607)
+ 260 named destinations out of 1000 (max. 500000)
+ 383 words of extra memory for PDF output out of 10000 (max. 10000000)
 
