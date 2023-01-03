@@ -26,46 +26,45 @@ The style file: plainnat.bst
 Reallocating 'name_of_file' (item size: 1) to 13 items.
 Database file #1: bibliography.bib
 Warning--to sort, need author or key in tunnelrush
-Warning--to sort, need author or key in blender
 You've used 6 entries,
             2773 wiz_defined-function locations,
-            632 strings with 5531 characters,
-and the built_in function-call counts, 1784 in all, are:
+            632 strings with 5539 characters,
+and the built_in function-call counts, 1831 in all, are:
 = -- 159
-> -- 51
-< -- 4
-+ -- 21
-- -- 15
-* -- 105
-:= -- 246
+> -- 61
+< -- 5
++ -- 24
+- -- 18
+* -- 104
+:= -- 269
 add.period$ -- 17
 call.type$ -- 6
-change.case$ -- 23
+change.case$ -- 24
 chr.to.int$ -- 6
-cite$ -- 16
+cite$ -- 14
 duplicate$ -- 95
-empty$ -- 199
-format.name$ -- 21
-if$ -- 393
+empty$ -- 196
+format.name$ -- 25
+if$ -- 395
 int.to.chr$ -- 1
 int.to.str$ -- 1
 missing$ -- 2
 newline$ -- 37
-num.names$ -- 16
-pop$ -- 73
+num.names$ -- 20
+pop$ -- 72
 preamble$ -- 1
-purify$ -- 17
+purify$ -- 18
 quote$ -- 0
-skip$ -- 85
+skip$ -- 86
 stack$ -- 0
-substring$ -- 14
+substring$ -- 13
 swap$ -- 6
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 61
-warning$ -- 2
-while$ -- 12
+warning$ -- 1
+while$ -- 15
 width$ -- 0
 write$ -- 79
-(There were 2 warnings)
+(There was 1 warning)

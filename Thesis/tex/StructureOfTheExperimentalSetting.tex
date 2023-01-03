@@ -1,15 +1,17 @@
 \chapter{Structure of the Experimental Setting}
 \label{agent_code_chapter}
-To train the agent on a specific environment, the user must utilize a command line interface. There are various options available to cater to the user's needs. This chapter will outline all of the provided options and how they are encoded. However, firstly we need to look into a concept called \texttt{State} and its usage for this thesis.
+To train an agent on a specific environment, the user must utilize a command-line interface. There are various options available to cater to the user's needs. This chapter will outline all of the provided options and how they are encoded. However, firstly we need to look into a concept called State and its usage for this thesis.
 
 \section{State}
-The majority of the implemented agents in the game utilize the concept of state to facilitate learning. The agent will determine its next action based on the current state in which it finds itself. By dividing the game into discrete states, we are able to utilize tabular method algorithms to train an agent to play this continuous game. Once one obstacle is passed, the value of the state indicated refers to the next one. Each state is represented by a triplet consisting of distance, rotation, and type. 
+The majority of the implemented agents in the game utilize the concept of state to facilitate learning. The agent will determine its next action based on the current state in which it finds itself. By dividing the game into discrete states, we are able to utilize tabular method algorithms to train an agent to play this continuous game. Once one obstacle is passed, the value of the state indicated refers to the next one. Each state is represented by a triplet consisting of distance, rotation, and obstacle type. 
 
-The distance value indicates the distance of the agent from the next obstacle in meters\footnote{In Godot, a "meter" is a unit of distance measurement. It is used to represent the size, position, and movement of objects in the game world. In Godot, one meter is equal to the size of a standard cube.}. For example, if we set the dists parameter (indicated by the user, see \ref{opt:dists}) to 2, there are two possible distance values for the state: >50 >0, indicating that the agent is at least 50 meters away from the obstacle and at least 0 meters away from the obstacle, respectively. If the dists parameter is set to 1, the distance value remains constant at >0. 
+Before further explaining this notion, lets look at the standard unit of distance measurement in Godot - a "meter" .It is used to represent the size, position, and movement of objects in the game world. In Godot, one meter is equal to the size of a standard cube. To better understand the notion, it would be useful to note that Hans is approximately 12m tall and his starting speed is 35 meters per second, while each tunnel has width and height of 12m and depth 2800m.
 
-The rotation parameter divides the rotation of the obstacle into rots intervals (see \ref{opt:rots}). As the tunnel rotates, the state label will indicate the rotation value to which Hans is aligned at the moment. If the rots parameter is set to 360, this would correspond to the number of degrees in a circle and result in 360 possible rotations. However, the obstacles in this game do not require such a high number of rotations and most can be trained with fewer than 10. 
+The distance value indicates the distance of the agent from the next obstacle in meters. For example, if we set the \texttt{dists} parameter (indicated by the user, see \ref{opt:dists}) to 2, there are two possible distance values for the state: \textless 50, \textless 0, indicating that the agent is 0-49 meters away from the obstacle and at least 0 meters away from the obstacle, respectively. If the \texttt{dists} parameter is set to 1, the distance value remains constant at >0. 
 
-Finally, the type parameter indicates the type of obstacle that Hans must avoid. With this information, the agent can learn to recognize the safe rotation for different types of obstacles and, along with the distance parameter, decide whether to move left, right, forward, or shoot in combination with any of these actions.
+The rotation parameter divides the rotation of the obstacle into \texttt{rots} intervals (see \ref{opt:rots}). As the tunnel rotates, the state label will indicate the rotation value to which Hans is aligned at the moment. If the \texttt{rots} parameter is set to 360, this would correspond to the number of degrees in a circle and result in 360 possible rotations. However, the obstacles in this game do not require such a high number of rotations and agents can be trained to avoid most obstacles using fewer than 10 rotations. 
+
+Finally, the type parameter indicates the type of obstacle that Hans must avoid. Each obstacle has its own string representation. With this information, the agent can learn to recognize the safe rotation for different types of obstacles and, along with the distance parameter, decide whether to move left, right, forward, or shoot in combination with any of these actions.
 
 \section{Command line options}
 \label{commOpt}
@@ -44,15 +46,17 @@ Finally, the type parameter indicates the type of obstacle that Hans must avoid.
 Note: any of these options can be omitted as they all have default values. If no options are specified, a normal game with the \texttt{Keyboard} agent will be run.
 \subsection{Command line option descriptions}
 \begin{description}
-\item[n] - Number of games the agent will train on in this session \label{opt:n}
+\item[n] - Number of games the agent will train on in this session. The default is 100. \label{opt:n}
 \item[agent] - Name of the desired agent \label{opt:agent}\\
 Options: [\texttt{Keyboard}, \texttt{Static}, \texttt{Random}, \texttt{MonteCarlo}, \texttt{SARSA}, \texttt{QLearning}, \\ \texttt{ExpectedSARSA}, \texttt{DoubleQLearning}]\\
 Sub-options (only for the listed agents):
 \texttt{MonteCarlo}, \texttt{SARSA}, \texttt{QLearning}, \texttt{ExpectedSARSA}, \texttt{DoubleQLearning}
 =[float, float, float, float] :
-[\texttt{gam} (range [0,1]), \texttt{eps} (range [0,1]), \texttt{epsFinal} (range [0,1]), \texttt{initOptVal} [0,$\infty$)]\\
-Example usage: \texttt{``MonteCarlo:eps=0.1,gam=0.2''}
-\item[level] - Number of the level to start from \label{opt:level}\\
+
+[\texttt{gam} (range [0,1]), \texttt{eps} (range [0,1]), \texttt{epsFinal} (range [0,1]), \texttt{initOptVal} (range [0,$\infty$))]\\
+Example usage: ``\texttt{agent=MonteCarlo:eps=0.1,gam=0.2}''\\
+The meaning of the suboptions will be explain in the later section.
+\item[level] - Number of the level to start from. Default value is 1. \label{opt:level}\\
 Options: \texttt{[1, ... , 10]}\\
 Note: after the 10th level, the agent is considered to have won the game
 \item[env] - List of obstacles that will be chosen in the game \label{opt:env}\\
@@ -61,7 +65,8 @@ Options (any subset of): [\texttt{Traps}, \texttt{Bugs}, \texttt{Viruses}, \text
 \texttt{HexO}, \texttt{Balls}, \texttt{Triangles}, \texttt{HalfHex},
 \texttt{Worm}, \texttt{LadybugFlying}, \texttt{LadybugWalking},
 \texttt{Rotavirus}, \texttt{Bacteriophage}]\\
-Note: if this parameter is not included, the environment will contain all available options (i.e. the full game).
+Note: if this parameter is not included, the environment will contain all available obstacles (i.e. the full game).
+Example usage: ``\texttt{env=HexO,I,Bugs}''\\
 \item[shooting] - Enable or disable shooting \label{opt:shooting}\\
 Options: [\texttt{enabled}, \texttt{disabled}]\\
 Note: this option is disabled by default.
@@ -71,24 +76,24 @@ This parameter is part of the state label and typical options range from 1 to 3.
 This parameter is part of the state label and the minimum viable option is 6. This is also the default value.
 \item[database] - Read or write data for this command from/to a file \label{opt:database}\\
 Options: [\texttt{read}, \texttt{write}, \texttt{read\_write}]\\
-Note: these files are typically used to start another session of the agent's training from the last point of the previous session, to run a game with visuals and observe the agent's performance, or for plotting the results. This option does not affect the Keyboard, Static, or Random agents.
+Note: these files are typically used to start another session of the agent's training from the last point of the previous session, to run a game with visuals and observe the agent's performance, or for plotting the results. This option does not affect the Keyboard, Static, or Random agents. Default option for this parameter is to neither read nor write.
 \item[ceval] - Performs continuous evaluation \label{opt:ceval}\\
 This parameter indicates that after each training game, a test game will be played using only the policy(s) learned thus far. For example, if the user specifies ``n=100'', a total of 200 games will be executed, with 100 of them being training games and the remaining 100 being test games. This allows for the assessment of the agent's progress and performance during the training process. 
-Options: [\texttt{true},\texttt{false}]
+Options: [\texttt{true},\texttt{false} (default)]
 \item[debug] - Display debug print statements \label{opt:debug}\\
-Options: [\texttt{true},\texttt{false}]
+Options: [\texttt{true},\texttt{false} (default)]
 \item[options] - Displays all of the mentioned options \label{opt:options}\\
 \end{description}
 
 \subsection{Running the program}
-There are several options for running the game from the command line. In addition to various combinations of the options listed above, the user has the choice of running an experiment with or without the graphical interface. If they opt for the first option, the window will open and the game will be played at its normal speed. On the other hand, if the experiment is run internally, it will be over 200 times faster and the output will only be displayed in the terminal.
+There are several possibilities for running the game from the command line. In addition to various combinations of the options listed above, the user has the choice of running an experiment with or without the graphical interface. If they opt for the first possibility, the window will open and the game will be played at its normal speed. On the other hand, if the experiment is run without graphics, it will be over 200 times faster and the output will only be displayed in the terminal.
 It should also be noted that the experiments are fully reproducible since the seed values for all random variables are predetermined.
 
-To run the program in the command line, the user may benefit from adding the Godot executable to their path variables. This will allow them to start the application from the command line simply by entering the command \texttt{godot} while inside the same directory as the \texttt{project.godot} file.
+To run the program in the command line, the user may benefit from adding the Godot executable to PATH environment variable. This will allow them to start the application from the command line simply by entering the command \texttt{godot} while inside the same directory as the \texttt{project.godot} file.
 
 By default, running the program in this manner will launch a normal game with the graphical interface and the \texttt{Keyboard} agent. However, the user can customize their experiment by using a combination of the options listed above. For example, the command:
 \begin{lstlisting}
-godot database=write agent=SARSA:initOptVal=100.0,eps=0.3 env=HexO n=10 dists=1 rots=8} could be used to specify certain parameters
+godot database=write agent=SARSA:initOptVal=100.0,eps=0.3 env=HexO n=10 dists=1 rots=8
 \end{lstlisting}
 
 Alternatively, the user may choose to train the agent faster by disabling the graphical interface and increasing the speed of the program. This can be achieved by modifying the previous command as follows:
@@ -100,7 +105,7 @@ godot --no-window --fixed-fps 1 --disable-render-loop database=write agent=SARSA
 To view a list of available options, the user can simply enter the command \texttt{godot options}.
 
 \section{Main}
-The \texttt{Main.tscn} scene is the top level scene in the game and consists of a single Node type node. The script attached to this node, Main.gd, is responsible for ensuring that all options specified in the command line (as discussed in Section \ref{commOpt}) are executed correctly. This script is the starting point of the training and handles the initialization and execution of ore or more game sessions.
+The \texttt{Main.tscn} scene is the top level scene in the game and consists of a single Node type node. The script attached to this node, \texttt{Main.gd}, is responsible for ensuring that all options specified in the command line (as discussed in Section \ref{commOpt}) are executed correctly. This script is the starting point of the training and handles the initialization and execution of ore or more game sessions.
 There are several key functions within the \texttt{Main.gd} script that are worth discussing in more detail.
 
 \begin{lstlisting}
@@ -111,7 +116,7 @@ func _ready():
     if unparsed_args.size() == 1 and unparsed_args[0] == "options":
         display_options()
         
-    # parse agrs
+    # parse args
     		...
             
     # set param, if something went wrong, show options

@@ -1,9 +1,9 @@
 \chapter{Implementation of the Game}
-``Space-run'' was developed using the Godot Engine (version v3.2.3.stable) , an open-source game engine licensed under the MIT license. It is a cross-platform tool that offers a range of features for game development, including a visual scripting language, 2D and 3D graphics support, and a powerful physics engine. The Godot Engine utilizes a node-based architecture, where nodes are organized within scenes that can be reused, instanced, inherited, and nested. This structure allows for efficient project management and development within the engine. The game was written entirely in GDScript, the primary scripting language of the Godot Engine (\cite{GodotDocs}).
+``Space-run'' was developed using the Godot Engine (version v3.2.3.stable) , an open-source game engine licensed under the MIT License. It is a cross-platform tool that offers a range of features for game development, including a visual scripting language, 2D and 3D graphics support, and a powerful physics engine. The Godot Engine utilizes a node-based architecture, where nodes are organized within scenes that can be reused, instanced, inherited, and nested. This structure allows for efficient project management and development within the engine. The game was written entirely in GDScript, the primary scripting language of the Godot Engine (\cite{GodotDocs}).
 
-In addition to using the Godot Engine, I also utilized Blender (version 6.2.0) \cite{blender} for creating and animating the characters in the game. Blender is a popular open-source 3D modeling and animation software that offers a range of features for creating detailed and realistic characters. The characters were then imported into the Godot Engine using the .glTF 2.0 \cite{gltf} file format, which is a widely supported file format for exchanging 3D graphics data.
+In addition to using the Godot Engine, I also utilized Blender (version 6.2.0) \cite{blender} for creating and animating the characters in the game. Blender is popular open-source 3D modeling and animation software that offers a range of features for creating detailed and realistic characters. The characters were then imported into the Godot Engine using the .glTF 2.0 \cite{gltf} file format, which is a widely supported file format for exchanging 3D graphics data.
 
-The source code for the game, and for the whole thesis can be found at the following repository \cite{spacerunai}.
+The source code for the game, and for the whole thesis can be found at the following repository online (\cite{spacerunai}).
 
 \section{The top-level organization}
 \begin{figure}[h]
@@ -13,7 +13,7 @@ The source code for the game, and for the whole thesis can be found at the follo
     \label{fig:game_tree}
 \end{figure}
 
-The main scene for the game, referred to as \texttt{Game.tscn}, is depicted in Figure \ref{fig:game_tree}. It includes several nodes, including Ground, UI, Sound, Game, Hans, and Tunnels. The Ground node is a CSGBox\footnote{CSGBox is a 3D object that represents a box with a Constructive Solid Geometry (CSG) shape.} that serves as the ground in the game, while the UI and Sounds nodes handle the user interface and audio aspects, respectively. The Game, Hans, and Tunnels nodes contain the majority of the game's functionality. Specifically, the Game node manages the overall gameplay, the Hans node controls the player character, and the Tunnels node manages the movement and appearance of the tunnels.
+The main scene for the game, referred to as \texttt{Game.tscn}, is depicted in Figure \ref{fig:game_tree}. It includes several nodes, including Ground, UI, Sounds, Game, Hans, and Tunnels. The Ground node is a CSGBox\footnote{A CSGBox is a 3D object that represents a box with a Constructive Solid Geometry (CSG) shape.} that serves as the ground in the game, while the UI and Sounds nodes handle the user interface and audio aspects, respectively. The Game, Hans, and Tunnels nodes contain the majority of the game's functionality. Specifically, the Game node manages the overall gameplay, the Hans node controls the player character, and the Tunnels node manages the movement and appearance of the tunnels.
 
 For a more in-depth understanding, let us examine some of the core aspects of the game in the following sections.
 
@@ -22,9 +22,9 @@ The script for the Game node is the initial point of the game session and includ
 
 The following text describes the core functionalities of the main methods within \texttt{Game.gd}:
 \begin{itemize}
-\item The ready function is called at the start of the game's execution and, after setting up the environment, it triggers the start function. This function initiates the gameplay and sets the necessary conditions for the game to proceed.
-\item As described in more detail in Chapter \ref{agent_code_chapter}, the user can specify environment parameters and a starting level for the agent through the command line. These parameters determine the obstacles that the player will face and the starting position of the player character, Hans. The start function incorporates these parameters into the obstacle arrays and positions Hans accordingly. The function also generates the obstacles for the designated starting level. The creation and deletion of obstacles during gameplay is discussed in Section \ref{tunnel_script} of this chapter.
-\item The game over function manages the end of the game and sends a signal to the top-level script, \texttt{Main.gd} (described in Chapter \ref{agent_code_chapter}), indicating that the game has ended. It also provides \texttt{Main.gd} with the necessary information about the game's status and outcome.
+\item The \texttt{\_ready()} function is called at the start of the game's execution and, after setting up the environment, it triggers the start function. This function initiates the gameplay and sets the necessary conditions for the game to proceed.
+\item As described in more detail in Chapter \ref{agent_code_chapter}, the user can specify environment parameters and a starting level for the agent through the command line. These parameters determine the obstacles that the player will face and the starting position of the player character, Hans. The \texttt{\_start} function incorporates these parameters into the obstacle arrays and positions Hans accordingly. The function also generates the obstacles for the designated starting level. The creation and deletion of obstacles during gameplay is discussed in Section \ref{tunnel_script} of this chapter.
+\item The \texttt{\_game\_over} function manages the end of the game and sends a signal to the top-level script, \texttt{Main.gd} (described in Chapter \ref{agent_code_chapter}), indicating that the game has ended. It also provides \texttt{Main.gd} with the necessary information about the game's status and outcome.
 \end{itemize}
 
 \section{Hans}
@@ -48,7 +48,7 @@ func _physics_process(delta):
     var velocity = Vector3.LEFT * speed
     velocity = move_and_slide(velocity)
     
-    # in case Hans colided with somehting, handle it properly
+    # in case Hans collided with something, handle it properly
     check_collisions()
     
     # bugs and viruses need to move torwards Hans    
@@ -76,7 +76,7 @@ It is also worth noting that this script handles the movement of the tunnels to 
 
 \section{Tunnels}
 \label{tunnel_script}
-The Tunnels node, which is a child of the main scene in the game tree, contains three child nodes of the Spatial type\footnote{Spatial node is a type of node that represents a 3D object or transformation in the game world. It is a versatile node that can be used to create and manipulate 3D objects, including meshes, materials, and lighting. Spatial nodes are often used as the root node for 3D objects in a scene, and they can be nested inside other Spatial nodes to create hierarchical transformations.} (level1, level2, and level3) and each of these nodes includes a CSGTorus\footnote{ CSGTorus node is a type of 3D object that represents a torus shape in the game world.} node, which represents the physical appearance of the tunnels. Obstacles are added to the appropriate level node as instances. The \texttt{Tunnels.gd} script, which is attached to the Tunnels node, handles many of the previously mentioned functions such as obstacle creation and deletion and tunnel rotation. In the following code snippets, we will examine the \texttt{Tunnels.gd} script in greater detail.
+The Tunnels node, which is a child of the main scene in the game tree, contains three child nodes of the Spatial type\footnote{A Spatial node is a type of node that represents a 3D object or transformation in the game world. It is a versatile node that can be used to create and manipulate 3D objects, including meshes, materials, and lighting. Spatial nodes are often used as the root node for 3D objects in a scene, and they can be nested inside other Spatial nodes to create hierarchical transformations.} (level1, level2, and level3) and each of these nodes includes a CSGTorus\footnote{ A CSGTorus node is a type of 3D object that represents a torus shape in the game world.} node, which represents the physical appearance of the tunnels. Obstacles are added to the appropriate level node as instances. The \texttt{Tunnels.gd} script, which is attached to the Tunnels node, handles many of the previously mentioned functions such as obstacle creation and deletion and tunnel rotation. In the following code snippets, we will examine the \texttt{Tunnels.gd} script in greater detail.
 
 \begin{lstlisting}
 func _physics_process(delta):   
@@ -128,7 +128,7 @@ func create_one_obstacle(level,x):
 
 The tunnels are positioned along the x axis, and this function allows for the creation of obstacles within them at specific x positions and a random rotation.
 
-\begin{lstlisting}           
+\begin{lstlisting}         
 func delete_obstacle_until_x(level,x):
     tunnel <- get current tunnel
 
@@ -140,4 +140,4 @@ func delete_obstacle_until_x(level,x):
                 return
 \end{lstlisting}
 
-As previously mentioned, by dynamically deleting passed obstacles, the game is able to maintain a stable performance and avoid overloading the system. The provided code demonstrates the implementation of this function.
+As previously mentioned, by dynamically deleting passed obstacles, the game is able to maintain a stable performance and avoid overloading the system.
