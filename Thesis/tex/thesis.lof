@@ -23,4 +23,16 @@
 \contentsline {figure}{\numberline {5.4}{\ignorespaces new\_state\_val variable for individual TD Agents}}{25}{figure.5.4}%
 \contentsline {figure}{\numberline {5.5}{\ignorespaces Policy update for Double Q-Learning}}{26}{figure.5.5}%
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {6.1}{\ignorespaces \texttt {rots} value used for each trap type}}{27}{figure.6.1}%
+\contentsline {figure}{\numberline {6.2}{\ignorespaces Average performance of the agents on individual traps, initOptVal=20}}{28}{figure.6.2}%
+\contentsline {figure}{\numberline {6.3}{\ignorespaces Average performance of the agents on individual traps, initOptVal=100}}{29}{figure.6.3}%
+\contentsline {figure}{\numberline {6.4}{\ignorespaces Double Q-Learning trained with 200 games on I-type trap}}{30}{figure.6.4}%
+\contentsline {figure}{\numberline {6.5}{\ignorespaces Triangle-type trap with Expected SARSA algorithm}}{31}{figure.6.5}%
+\contentsline {figure}{\numberline {6.6}{\ignorespaces Average performance of the agents with Bugs environment}}{31}{figure.6.6}%
+\contentsline {figure}{\numberline {6.7}{\ignorespaces Policy of the Expected SARSA algorithm on the Bugs environment}}{32}{figure.6.7}%
+\contentsline {figure}{\numberline {6.8}{\ignorespaces Policy of the SARSA algorithm on the Bugs environment}}{33}{figure.6.8}%
+\contentsline {figure}{\numberline {6.9}{\ignorespaces Average performance of the agents with Viruses environment}}{33}{figure.6.9}%
+\contentsline {figure}{\numberline {6.10}{\ignorespaces Policy of the Q-Learning algorithm on the Viruses environment}}{34}{figure.6.10}%
+\contentsline {figure}{\numberline {6.11}{\ignorespaces Policy of the Expected SARSA algorithm on the Viruses environment without shooting}}{35}{figure.6.11}%
+\contentsline {figure}{\numberline {6.12}{\ignorespaces Policy of the Expected SARSA algorithm on the Viruses environment with shooting}}{36}{figure.6.12}%
 \addvspace {10\p@ }
