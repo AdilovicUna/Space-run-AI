@@ -1,9 +1,9 @@
 \chapter{Implementation of the Game}
-``Space-run'' was developed using the Godot Engine (version v3.2.3.stable) , an open-source game engine licensed under the MIT License. It is a cross-platform tool that offers a range of features for game development, including a visual scripting language, 2D and 3D graphics support, and a powerful physics engine. The Godot Engine utilizes a node-based architecture, where nodes are organized within scenes that can be reused, instanced, inherited, and nested. This structure allows for efficient project management and development within the engine. The game was written entirely in GDScript, the primary scripting language of the Godot Engine (\cite{GodotDocs}).
+``Space-run'' was developed using the Godot Engine (version v3.2.3.stable), an open-source game engine licensed under the MIT License. It is a cross-platform tool that offers a range of features for game development, including a visual scripting language, 2D and 3D graphics support, and a powerful physics engine. The Godot Engine utilizes a node-based architecture, where nodes are organized within scenes that can be reused, instanced, inherited, and nested. This structure allows for efficient project management and development within the engine. The game was written entirely in GDScript, the primary scripting language of the Godot Engine (\cite{GodotDocs}).
 
-In addition to using the Godot Engine, I also utilized Blender (version 6.2.0) \cite{blender} for creating and animating the characters in the game. Blender is popular open-source 3D modeling and animation software that offers a range of features for creating detailed and realistic characters. The characters were then imported into the Godot Engine using the .glTF 2.0 \cite{gltf} file format, which is a widely supported file format for exchanging 3D graphics data.
+In addition to using the Godot Engine, I also utilized Blender (version 6.2.0) (\cite{blender}) for creating and animating the characters in the game. Blender is popular open-source 3D modeling and animation software that offers a range of features for creating detailed and realistic characters. The characters were then imported into the Godot Engine using the .glTF 2.0 \cite{gltf} file format, which is a widely supported file format for exchanging 3D graphics data.
 
-The game can be run on any platform (e.g. Linux, macOS, Windows) provided within the Godot engine, and its source code, and the source code for the whole thesis can be found at the following repository online (\cite{spacerunai}).
+The game can be run on any platform provided within the Godot engine, and its source code, and the source code for the whole thesis can be found online (\cite{spacerunai}).
 
 \section{The top-level organization}
 \begin{figure}[h]
@@ -22,8 +22,8 @@ The script for the Game node is the initial point of the game session and includ
 
 The following text describes the core functionalities of the main methods within \texttt{Game.gd}:
 \begin{itemize}
-\item The \texttt{\_ready()} function is called at the start of the game's execution and, after setting up the environment, it triggers the start function. This function initiates the gameplay and sets the necessary conditions for the game to proceed.
-\item As described in more detail in Chapter \ref{agent_code_chapter}, the user can specify environment parameters and a starting level for the agent through the command line. These parameters determine the obstacles that the player will face and the starting position of the player character, Hans. The \texttt{\_start} function incorporates these parameters into the obstacle arrays and positions Hans accordingly. The function also generates the obstacles for the designated starting level. The creation and deletion of obstacles during gameplay is discussed in Section \ref{tunnel_script} of this chapter.
+\item The \texttt{\_ready()} function is called at the start of the game's execution and, after setting up the environment, it triggers the \texttt{\_start()} function. This function initiates the gameplay and sets the necessary conditions for the game to proceed.
+\item As described in more detail in Chapter \ref{agent_code_chapter}, the user can specify environment parameters and a starting level for the agent through the command line. These parameters determine the obstacles that the player will face and the starting position of the player character, Hans. The \texttt{\_start()} function incorporates these parameters into the obstacle arrays and positions Hans accordingly. The function also generates the obstacles for the designated starting level. The creation and deletion of obstacles during gameplay is discussed in Section \ref{tunnel_script} of this chapter.
 \item The \texttt{\_game\_over} function manages the end of the game and sends a signal to the top-level script, \texttt{Main.gd} (described in Chapter \ref{agent_code_chapter}), indicating that the game has ended. It also provides \texttt{Main.gd} with the necessary information about the game's status and outcome.
 \end{itemize}
 
@@ -100,7 +100,7 @@ func _physics_process(delta):
 
 The \texttt{\_physics\_process()} function within the \texttt{Tunnels.gd} script serves as the primary connection between the agent and the game. As shown in the provided code, the function retrieves the next move from the agent and rotates the tunnel accordingly, potentially including shooting as well.
 
-\begin{lstlisting} 
+\begin{verbatim}
 func create_first_level_traps(tunnel):
     level <- level we are making traps for
     num_of_traps <- randomly pick number of traps to be added
@@ -112,11 +112,11 @@ func create_first_level_traps(tunnel):
             break
         # create one trap at x
         create_one_obstacle(level, x) 
-\end{lstlisting}
+\end{verbatim}
 
 The function depicted in the code above serves to generate obstacles in the starting tunnel. By periodically creating traps in the tunnel ahead, the game is able to prevent lag caused by an excessive number of objects existing simultaneously. For that reason, this function is used only once, at the beginning of the game.
 
-\begin{lstlisting} 
+\begin{verbatim} 
 func create_one_obstacle(level,x):
     scene <- pick which kind of obstacle will be added
     tunnel <- get the level we are making traps for
@@ -124,11 +124,11 @@ func create_one_obstacle(level,x):
     
     using previous information, make an instance of the obstacle
     set its position at x and rotate it randomly by n * 60 degrees  
-\end{lstlisting}
+\end{verbatim}
 
 The tunnels are positioned along the x axis, and this function allows for the creation of obstacles within them at specific x positions and a random rotation.
 
-\begin{lstlisting}         
+\begin{verbatim}         
 func delete_obstacle_until_x(level,x):
     tunnel <- get current tunnel
 
@@ -138,6 +138,6 @@ func delete_obstacle_until_x(level,x):
                 remove it
             else:
                 return
-\end{lstlisting}
+\end{verbatim}
 
 As previously mentioned, by dynamically deleting passed obstacles, the game is able to maintain a stable performance and avoid overloading the system.

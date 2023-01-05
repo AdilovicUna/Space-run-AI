@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.12) (preloaded format=pdflatex 2022.12.18)  5 JAN 2023 10:52
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.12) (preloaded format=pdflatex 2022.12.18)  5 JAN 2023 22:19
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -626,7 +626,7 @@ Package hyperref Info: Link coloring OFF on input line 132.
 
  (title.tex
 Package hyperref Info: Option `pageanchor' set `false' on input line 6.
-<../img/logo-en.pdf, id=190, 506.4591pt x 156.49065pt>
+<../img/logo-en.pdf, id=194, 506.4591pt x 156.49065pt>
 File: ../img/logo-en.pdf Graphic file (type pdf)
 <use ../img/logo-en.pdf>
 Package pdftex.def Info: ../img/logo-en.pdf  used on input line 9.
@@ -698,12 +698,12 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
  (GameDesign.tex
 Chapter 1.
-<../img//second_tunnel.png, id=288, 761.09344pt x 447.17062pt>
+<../img//second_tunnel.png, id=293, 761.09344pt x 447.17062pt>
 File: ../img//second_tunnel.png Graphic file (type png)
 <use ../img//second_tunnel.png>
 Package pdftex.def Info: ../img//second_tunnel.png  used on input line 10.
 (pdftex.def)             Requested size: 412.56496pt x 242.40332pt.
-<../img//hans.jpg, id=291, 106.89937pt x 167.12437pt>
+<../img//hans.jpg, id=296, 106.89937pt x 167.12437pt>
 File: ../img//hans.jpg Graphic file (type jpg)
 <use ../img//hans.jpg>
 Package pdftex.def Info: ../img//hans.jpg  used on input line 18.
@@ -714,12 +714,12 @@ Package pdftex.def Info: ../img//hans.jpg  used on input line 18.
 
 
  <../img//second_tunnel.png>]
-<../img//traps.pdf, id=300, 1150.2975pt x 386.94562pt>
+<../img//traps.pdf, id=305, 1150.2975pt x 386.94562pt>
 File: ../img//traps.pdf Graphic file (type pdf)
 <use ../img//traps.pdf>
 Package pdftex.def Info: ../img//traps.pdf  used on input line 30.
 (pdftex.def)             Requested size: 412.56496pt x 138.78073pt.
-<../img//bugs.pdf, id=302, 564.60938pt x 133.24782pt>
+<../img//bugs.pdf, id=307, 564.60938pt x 133.24782pt>
 File: ../img//bugs.pdf Graphic file (type pdf)
 <use ../img//bugs.pdf>
 Package pdftex.def Info: ../img//bugs.pdf  used on input line 40.
@@ -729,12 +729,12 @@ Package pdftex.def Info: ../img//bugs.pdf  used on input line 40.
 pdfTeX warning: pdflatex (file ../img//bugs.pdf): PDF inclusion: multiple pdfs 
 with page group included in a single page
 >]
-<../img//viruses.pdf, id=318, 526.96875pt x 165.61874pt>
+<../img//viruses.pdf, id=323, 526.96875pt x 165.61874pt>
 File: ../img//viruses.pdf Graphic file (type pdf)
 <use ../img//viruses.pdf>
 Package pdftex.def Info: ../img//viruses.pdf  used on input line 49.
 (pdftex.def)             Requested size: 412.56496pt x 129.66983pt.
-<../img//first_tunnel.jpg, id=320, 767.11594pt x 447.92343pt>
+<../img//first_tunnel.jpg, id=325, 767.11594pt x 447.92343pt>
 File: ../img//first_tunnel.jpg Graphic file (type jpg)
 <use ../img//first_tunnel.jpg>
 Package pdftex.def Info: ../img//first_tunnel.jpg  used on input line 60.
@@ -749,7 +749,7 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 
 (GameImplementation.tex
 Chapter 2.
-<../img//game_tree.png, id=346, 563.10374pt x 402.50375pt>
+<../img//game_tree.png, id=351, 563.10374pt x 402.50375pt>
 File: ../img//game_tree.png Graphic file (type png)
 <use ../img//game_tree.png>
 Package pdftex.def Info: ../img//game_tree.png  used on input line 11.
@@ -779,7 +779,7 @@ File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 ) [9]
 LaTeX Font Info:    Font shape `OT1/lmtt/bx/n' in size <10.95> not available
 (Font)              Font shape `OT1/lmtt/b/n' tried instead on input line 41.
-<../img//third_tunnel.jpg, id=384, 769.37437pt x 450.18187pt>
+<../img//third_tunnel.jpg, id=388, 769.37437pt x 450.18187pt>
 File: ../img//third_tunnel.jpg Graphic file (type jpg)
 <use ../img//third_tunnel.jpg>
 Package pdftex.def Info: ../img//third_tunnel.jpg  used on input line 72.
@@ -788,7 +788,7 @@ Package pdftex.def Info: ../img//third_tunnel.jpg  used on input line 72.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[10] [11 <../img//third_tunnel.jpg>] [12]) [13]
+[10] [11 <../img//third_tunnel.jpg>]) [12]
 \openout2 = `StructureOfTheExperimentalSetting.aux'.
 
 
@@ -801,54 +801,95 @@ File: omllmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Font shape `OML/lmr/m/n' in size <12> not available
 (Font)              Font shape `OML/lmm/m/it' tried instead on input line 10.
- [14
+<../img//circumference.jpg, id=455, 764.10469pt x 443.40656pt>
+File: ../img//circumference.jpg Graphic file (type jpg)
+<use ../img//circumference.jpg>
+Package pdftex.def Info: ../img//circumference.jpg  used on input line 16.
+(pdftex.def)             Requested size: 412.56496pt x 239.4089pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[13
 
 
 
 
-]
-Overfull \hbox (1.3469pt too wide) in paragraph at lines 62--70
+] [14 <../img//circumference.jpg>]
+Overfull \hbox (1.3469pt too wide) in paragraph at lines 69--77
 \OT1/lmr/m/n/12 avail-able ob-sta-cles (i.e. the full game). Ex-am-ple us-age: 
 ``\OT1/lmtt/m/n/12 env=HexO,I,Bugs\OT1/lmr/m/n/12 '' |
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 62--70
+Underfull \hbox (badness 10000) in paragraph at lines 69--77
 
  []
 
-[15]
-Underfull \hbox (badness 10000) in paragraph at lines 85--86
+
+Underfull \hbox (badness 10000) in paragraph at lines 92--93
 
  []
 
-[16] [17]) [18]
+[15] [16] [17]) [18]
 \openout2 = `AlgorithmsUsed.aux'.
 
  (AlgorithmsUsed.tex
 Chapter 4.
+LaTeX Font Info:    Trying to load font information for OMS+lmr on input line 6
+.
+(C:\Users\Una\AppData\Local\Programs\MiKTeX\tex/latex/lm\omslmr.fd
+File: omslmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+LaTeX Font Info:    Font shape `OMS/lmr/m/n' in size <12> not available
+(Font)              Font shape `OMS/lmsy/m/n' tried instead on input line 6.
+ [19
 
-Overfull \hbox (29.54657pt too wide) in paragraph at lines 6--7
-\OT1/lmr/m/n/12 [\OT1/lmtt/m/n/12 left, right, forward, left + shoot, right + s
-hoot, and forward + shoot\OT1/lmr/m/n/12 ]. |
+
+
+
+]
+Overfull \hbox (13.51025pt too wide) in paragraph at lines 42--42
+[]     \OT1/lmtt/m/n/12 Initialize action-value function for all state-action p
+airs to a[] |
  []
 
-[19
+
+Overfull \hbox (25.86026pt too wide) in paragraph at lines 42--42
+[]\OT1/lmtt/m/n/12 If the state has not been visited before in this episode (fi
+rst visit):[] |
+ []
 
 
+Overfull \hbox (81.43529pt too wide) in paragraph at lines 42--42
+[]\OT1/lmtt/m/n/12 policy[state_action ] = value_function[state_action]\num_of_
+visits[state_action][] |
+ []
 
 
-] [20]) [21] [22]
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+Overfull \hbox (69.08528pt too wide) in paragraph at lines 65--65
+[]    \OT1/lmtt/m/n/12 Initialize Q(s,a) for all states s and actions a, except
+ Q(terminal,a) = 0[] |
+ []
+
+[20] [21])
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[22] [23]
 \openout2 = `AgentsImplementation.aux'.
 
  (AgentsImplementation.tex
 Chapter 5.
-<../img//agents_tree.png, id=630, 703.62875pt x 222.8325pt>
+<../img//agents_tree.png, id=596, 703.62875pt x 222.8325pt>
 File: ../img//agents_tree.png Graphic file (type png)
 <use ../img//agents_tree.png>
 Package pdftex.def Info: ../img//agents_tree.png  used on input line 9.
 (pdftex.def)             Requested size: 412.56496pt x 130.65399pt.
-[23
+[24
 
 
 
@@ -864,40 +905,40 @@ lmr/m/n/12 + \OML/lmm/m/it/12 new[]state[]val\OT1/lmr/m/n/12 ) \OMS/lmsy/m/n/12
 m/n/12 ])|
  []
 
-[24]
+[25]
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-) [25] [26]
+) [26] [27]
 \openout2 = `Experiments.aux'.
 
  (Experiments.tex
 Chapter 6.
-<../img//rot_values.png, id=660, 241.90375pt x 96.36pt>
+<../img//rot_values.png, id=627, 241.90375pt x 96.36pt>
 File: ../img//rot_values.png Graphic file (type png)
 <use ../img//rot_values.png>
-Package pdftex.def Info: ../img//rot_values.png  used on input line 7.
+Package pdftex.def Info: ../img//rot_values.png  used on input line 10.
 (pdftex.def)             Requested size: 165.02345pt x 65.73859pt.
-<../img//eps=0.2_initOptVal=20_.png, id=662, 435.7881pt x 330.9966pt>
+<../img//eps=0.2_initOptVal=20_.png, id=629, 435.7881pt x 330.9966pt>
 File: ../img//eps=0.2_initOptVal=20_.png Graphic file (type png)
 <use ../img//eps=0.2_initOptVal=20_.png>
 Package pdftex.def Info: ../img//eps=0.2_initOptVal=20_.png  used on input line
- 16.
-(pdftex.def)             Requested size: 330.05322pt x 250.68626pt.
+ 19.
+(pdftex.def)             Requested size: 247.54149pt x 188.01848pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<../img//eps=0.2_initOptVal=100_.png, id=663, 435.7881pt x 330.9966pt>
+<../img//eps=0.2_initOptVal=100_.png, id=630, 435.7881pt x 330.9966pt>
 File: ../img//eps=0.2_initOptVal=100_.png Graphic file (type png)
 <use ../img//eps=0.2_initOptVal=100_.png>
 Package pdftex.def Info: ../img//eps=0.2_initOptVal=100_.png  used on input lin
-e 23.
-(pdftex.def)             Requested size: 330.05322pt x 250.68626pt.
+e 26.
+(pdftex.def)             Requested size: 247.54149pt x 188.01848pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 <../img//agent=DoubleQLearning,agentSpecParam=[eps=0.2,epsFinal=0.0001,gam=1,in
-itOptVal=100],level=1,env=[I],shooting=False,dists=1,rots=6_0.png, id=664, 435.
+itOptVal=100],level=1,env=[I],shooting=False,dists=1,rots=6_0.png, id=631, 435.
 7881pt x 474.8139pt>
 File: ../img//agent=DoubleQLearning,agentSpecParam=[eps=0.2,epsFinal=0.0001,gam
 =1,initOptVal=100],level=1,env=[I],shooting=False,dists=1,rots=6_0.png Graphic 
@@ -906,13 +947,13 @@ file (type png)
 1,initOptVal=100],level=1,env=[I],shooting=False,dists=1,rots=6_0.png>
 Package pdftex.def Info: ../img//agent=DoubleQLearning,agentSpecParam=[eps=0.2,
 epsFinal=0.0001,gam=1,initOptVal=100],level=1,env=[I],shooting=False,dists=1,ro
-ts=6_0.png  used on input line 30.
+ts=6_0.png  used on input line 33.
 (pdftex.def)             Requested size: 330.05322pt x 359.60892pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 <../img//agent=ExpectedSARSA,agentSpecParam=[eps=0.2,epsFinal=0.0001,gam=1,init
-OptVal=100],level=1,env=[Triangles],shooting=False,dists=1,rots=6_0.png, id=669
+OptVal=100],level=1,env=[Triangles],shooting=False,dists=1,rots=6_0.png, id=636
 , 465.4188pt x 474.8139pt>
 File: ../img//agent=ExpectedSARSA,agentSpecParam=[eps=0.2,epsFinal=0.0001,gam=1
 ,initOptVal=100],level=1,env=[Triangles],shooting=False,dists=1,rots=6_0.png Gr
@@ -921,28 +962,28 @@ aphic file (type png)
 initOptVal=100],level=1,env=[Triangles],shooting=False,dists=1,rots=6_0.png>
 Package pdftex.def Info: ../img//agent=ExpectedSARSA,agentSpecParam=[eps=0.2,ep
 sFinal=0.0001,gam=1,initOptVal=100],level=1,env=[Triangles],shooting=False,dist
-s=1,rots=6_0.png  used on input line 40.
-(pdftex.def)             Requested size: 330.05322pt x 336.72176pt.
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[27
+s=1,rots=6_0.png  used on input line 43.
+(pdftex.def)             Requested size: 288.7942pt x 294.62791pt.
+[28
 
 
 
 
  <../img//rot_values.png>]
-<../img//env=bugs.png, id=684, 413.3844pt x 312.9291pt>
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[29 <../img//eps=0.2_initOptVal=20_.png> <../img//eps=0.2_initOptVal=100_.png>]
+<../img//env=bugs.png, id=657, 413.3844pt x 312.9291pt>
 File: ../img//env=bugs.png Graphic file (type png)
 <use ../img//env=bugs.png>
-Package pdftex.def Info: ../img//env=bugs.png  used on input line 52.
-(pdftex.def)             Requested size: 330.05322pt x 249.85178pt.
-
+Package pdftex.def Info: ../img//env=bugs.png  used on input line 55.
+(pdftex.def)             Requested size: 247.54149pt x 187.38644pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 <../img//agent=ExpectedSARSA,agentSpecParam=[eps=0.4,epsFinal=0.0001,gam=1,init
-OptVal=100],level=1,env=[Bugs],shooting=False,dists=1,rots=6_0.png, id=685, 437
+OptVal=100],level=1,env=[Bugs],shooting=False,dists=1,rots=6_0.png, id=658, 437
 .9562pt x 487.8225pt>
 File: ../img//agent=ExpectedSARSA,agentSpecParam=[eps=0.4,epsFinal=0.0001,gam=1
 ,initOptVal=100],level=1,env=[Bugs],shooting=False,dists=1,rots=6_0.png Graphic
@@ -951,13 +992,13 @@ File: ../img//agent=ExpectedSARSA,agentSpecParam=[eps=0.4,epsFinal=0.0001,gam=1
 initOptVal=100],level=1,env=[Bugs],shooting=False,dists=1,rots=6_0.png>
 Package pdftex.def Info: ../img//agent=ExpectedSARSA,agentSpecParam=[eps=0.4,ep
 sFinal=0.0001,gam=1,initOptVal=100],level=1,env=[Bugs],shooting=False,dists=1,r
-ots=6_0.png  used on input line 59.
-(pdftex.def)             Requested size: 330.05322pt x 367.64499pt.
+ots=6_0.png  used on input line 62.
+(pdftex.def)             Requested size: 288.7942pt x 321.68843pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 <../img//agent=SARSA,agentSpecParam=[eps=0.2,epsFinal=0.0001,gam=1,initOptVal=1
-00],level=1,env=[Bugs],shooting=True,dists=1,rots=6_0.png, id=686, 437.9562pt x
+00],level=1,env=[Bugs],shooting=True,dists=1,rots=6_0.png, id=659, 437.9562pt x
  487.8225pt>
 File: ../img//agent=SARSA,agentSpecParam=[eps=0.2,epsFinal=0.0001,gam=1,initOpt
 Val=100],level=1,env=[Bugs],shooting=True,dists=1,rots=6_0.png Graphic file (ty
@@ -966,21 +1007,21 @@ pe png)
 al=100],level=1,env=[Bugs],shooting=True,dists=1,rots=6_0.png>
 Package pdftex.def Info: ../img//agent=SARSA,agentSpecParam=[eps=0.2,epsFinal=0
 .0001,gam=1,initOptVal=100],level=1,env=[Bugs],shooting=True,dists=1,rots=6_0.p
-ng  used on input line 66.
-(pdftex.def)             Requested size: 330.05322pt x 367.64499pt.
+ng  used on input line 69.
+(pdftex.def)             Requested size: 288.7942pt x 321.68843pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<../img//env=viruses.png, id=687, 413.3844pt x 312.9291pt>
+<../img//env=viruses.png, id=660, 413.3844pt x 312.9291pt>
 File: ../img//env=viruses.png Graphic file (type png)
 <use ../img//env=viruses.png>
-Package pdftex.def Info: ../img//env=viruses.png  used on input line 74.
-(pdftex.def)             Requested size: 330.05322pt x 249.85178pt.
+Package pdftex.def Info: ../img//env=viruses.png  used on input line 78.
+(pdftex.def)             Requested size: 247.54149pt x 187.38644pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 <../img//agent=QLearning,agentSpecParam=[eps=0.4,epsFinal=0.0001,gam=1,initOptV
-al=100],level=1,env=[Viruses],shooting=True,dists=1,rots=6_0.png, id=692, 435.7
+al=100],level=1,env=[Viruses],shooting=True,dists=1,rots=6_0.png, id=665, 435.7
 881pt x 481.3182pt>
 File: ../img//agent=QLearning,agentSpecParam=[eps=0.4,epsFinal=0.0001,gam=1,ini
 tOptVal=100],level=1,env=[Viruses],shooting=True,dists=1,rots=6_0.png Graphic f
@@ -989,13 +1030,13 @@ ile (type png)
 OptVal=100],level=1,env=[Viruses],shooting=True,dists=1,rots=6_0.png>
 Package pdftex.def Info: ../img//agent=QLearning,agentSpecParam=[eps=0.4,epsFin
 al=0.0001,gam=1,initOptVal=100],level=1,env=[Viruses],shooting=True,dists=1,rot
-s=6_0.png  used on input line 84.
-(pdftex.def)             Requested size: 330.05322pt x 364.53506pt.
+s=6_0.png  used on input line 88.
+(pdftex.def)             Requested size: 288.7942pt x 318.97095pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 <../img//agent=ExpectedSARSA,agentSpecParam=[eps=0.4,epsFinal=0.0001,gam=1,init
-OptVal=100],level=1,env=[Viruses],shooting=False,dists=1,rots=6_0.png, id=693, 
+OptVal=100],level=1,env=[Viruses],shooting=False,dists=1,rots=6_0.png, id=666, 
 435.7881pt x 481.3182pt>
 File: ../img//agent=ExpectedSARSA,agentSpecParam=[eps=0.4,epsFinal=0.0001,gam=1
 ,initOptVal=100],level=1,env=[Viruses],shooting=False,dists=1,rots=6_0.png Grap
@@ -1004,13 +1045,13 @@ hic file (type png)
 initOptVal=100],level=1,env=[Viruses],shooting=False,dists=1,rots=6_0.png>
 Package pdftex.def Info: ../img//agent=ExpectedSARSA,agentSpecParam=[eps=0.4,ep
 sFinal=0.0001,gam=1,initOptVal=100],level=1,env=[Viruses],shooting=False,dists=
-1,rots=6_0.png  used on input line 91.
-(pdftex.def)             Requested size: 330.05322pt x 364.53506pt.
+1,rots=6_0.png  used on input line 95.
+(pdftex.def)             Requested size: 288.7942pt x 318.97095pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 <../img//agent=ExpectedSARSA,agentSpecParam=[eps=0.4,epsFinal=0.0001,gam=1,init
-OptVal=100],level=1,env=[Viruses],shooting=True,dists=1,rots=6_0.png, id=694, 4
+OptVal=100],level=1,env=[Viruses],shooting=True,dists=1,rots=6_0.png, id=667, 4
 35.7881pt x 481.3182pt>
 File: ../img//agent=ExpectedSARSA,agentSpecParam=[eps=0.4,epsFinal=0.0001,gam=1
 ,initOptVal=100],level=1,env=[Viruses],shooting=True,dists=1,rots=6_0.png Graph
@@ -1019,22 +1060,24 @@ ic file (type png)
 initOptVal=100],level=1,env=[Viruses],shooting=True,dists=1,rots=6_0.png>
 Package pdftex.def Info: ../img//agent=ExpectedSARSA,agentSpecParam=[eps=0.4,ep
 sFinal=0.0001,gam=1,initOptVal=100],level=1,env=[Viruses],shooting=True,dists=1
-,rots=6_0.png  used on input line 99.
-(pdftex.def)             Requested size: 330.05322pt x 364.53506pt.
+,rots=6_0.png  used on input line 103.
+(pdftex.def)             Requested size: 288.7942pt x 318.97095pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<../img//env=Tokens.png, id=696, 413.3844pt x 312.9291pt>
+[30 <../img//agent=DoubleQLearning,agentSpecParam=[eps=0.2,epsFinal=0.0001,gam=
+1,initOptVal=100],level=1,env=[I],shooting=False,dists=1,rots=6_0.png>]
+<../img//env=Tokens.png, id=681, 413.3844pt x 312.9291pt>
 File: ../img//env=Tokens.png Graphic file (type png)
 <use ../img//env=Tokens.png>
-Package pdftex.def Info: ../img//env=Tokens.png  used on input line 109.
-(pdftex.def)             Requested size: 330.05322pt x 249.85178pt.
-[28 <../img//eps=0.2_initOptVal=20_.png>]
+Package pdftex.def Info: ../img//env=Tokens.png  used on input line 113.
+(pdftex.def)             Requested size: 288.7942pt x 218.61911pt.
+
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 <../img//agent=ExpectedSARSA,agentSpecParam=[eps=0.2,epsFinal=0.0001,gam=1,init
-OptVal=100],level=1,env=[Traps],shooting=False,dists=1,rots=22_0.png, id=711, 4
+OptVal=100],level=1,env=[Traps],shooting=False,dists=1,rots=22_0.png, id=684, 4
 42.2924pt x 534.798pt>
 File: ../img//agent=ExpectedSARSA,agentSpecParam=[eps=0.2,epsFinal=0.0001,gam=1
 ,initOptVal=100],level=1,env=[Traps],shooting=False,dists=1,rots=22_0.png Graph
@@ -1043,13 +1086,15 @@ ic file (type png)
 initOptVal=100],level=1,env=[Traps],shooting=False,dists=1,rots=22_0.png>
 Package pdftex.def Info: ../img//agent=ExpectedSARSA,agentSpecParam=[eps=0.2,ep
 sFinal=0.0001,gam=1,initOptVal=100],level=1,env=[Traps],shooting=False,dists=1,
-rots=22_0.png  used on input line 121.
-(pdftex.def)             Requested size: 330.05322pt x 399.09007pt.
+rots=22_0.png  used on input line 125.
+(pdftex.def)             Requested size: 412.56496pt x 498.8585pt.
+[31 <../img//agent=ExpectedSARSA,agentSpecParam=[eps=0.2,epsFinal=0.0001,gam=1,
+initOptVal=100],level=1,env=[Triangles],shooting=False,dists=1,rots=6_0.png>]
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 <../img//agent=MonteCarlo,agentSpecParam=[eps=0.2,epsFinal=0.0001,gam=1,initOpt
-Val=30],level=1,env=[Traps],shooting=False,dists=1,rots=30_0.png, id=712, 435.7
+Val=30],level=1,env=[Traps],shooting=False,dists=1,rots=30_0.png, id=691, 435.7
 881pt x 534.798pt>
 File: ../img//agent=MonteCarlo,agentSpecParam=[eps=0.2,epsFinal=0.0001,gam=1,in
 itOptVal=30],level=1,env=[Traps],shooting=False,dists=1,rots=30_0.png Graphic f
@@ -1058,34 +1103,64 @@ ile (type png)
 tOptVal=30],level=1,env=[Traps],shooting=False,dists=1,rots=30_0.png>
 Package pdftex.def Info: ../img//agent=MonteCarlo,agentSpecParam=[eps=0.2,epsFi
 nal=0.0001,gam=1,initOptVal=30],level=1,env=[Traps],shooting=False,dists=1,rots
-=30_0.png  used on input line 129.
-(pdftex.def)             Requested size: 330.05322pt x 405.03896pt.
+=30_0.png  used on input line 133.
+(pdftex.def)             Requested size: 412.56496pt x 506.30074pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-) [29 <../img//eps=0.2_initOptVal=100_.png>] [30 <../img//agent=DoubleQLearning
-,agentSpecParam=[eps=0.2,epsFinal=0.0001,gam=1,initOptVal=100],level=1,env=[I],
-shooting=False,dists=1,rots=6_0.png>] [31 <../img//agent=ExpectedSARSA,agentSpe
-cParam=[eps=0.2,epsFinal=0.0001,gam=1,initOptVal=100],level=1,env=[Triangles],s
-hooting=False,dists=1,rots=6_0.png> <../img//env=bugs.png>] [32 <../img//agent=
-ExpectedSARSA,agentSpecParam=[eps=0.4,epsFinal=0.0001,gam=1,initOptVal=100],lev
-el=1,env=[Bugs],shooting=False,dists=1,rots=6_0.png>] [33 <../img//agent=SARSA,
-agentSpecParam=[eps=0.2,epsFinal=0.0001,gam=1,initOptVal=100],level=1,env=[Bugs
-],shooting=True,dists=1,rots=6_0.png> <../img//env=viruses.png>] [34 <../img//a
-gent=QLearning,agentSpecParam=[eps=0.4,epsFinal=0.0001,gam=1,initOptVal=100],le
-vel=1,env=[Viruses],shooting=True,dists=1,rots=6_0.png>] [35 <../img//agent=Exp
-ectedSARSA,agentSpecParam=[eps=0.4,epsFinal=0.0001,gam=1,initOptVal=100],level=
-1,env=[Viruses],shooting=False,dists=1,rots=6_0.png>] [36 <../img//agent=Expect
-edSARSA,agentSpecParam=[eps=0.4,epsFinal=0.0001,gam=1,initOptVal=100],level=1,e
-nv=[Viruses],shooting=True,dists=1,rots=6_0.png> <../img//env=Tokens.png>]
-[37 <../img//agent=ExpectedSARSA,agentSpecParam=[eps=0.2,epsFinal=0.0001,gam=1,
-initOptVal=100],level=1,env=[Traps],shooting=False,dists=1,rots=22_0.png>]
-[38 <../img//agent=MonteCarlo,agentSpecParam=[eps=0.2,epsFinal=0.0001,gam=1,ini
-tOptVal=30],level=1,env=[Traps],shooting=False,dists=1,rots=30_0.png>]
+<../img//agent=ExpectedSARSA,agentSpecParam=[eps=0.8,epsFinal=0.0001,gam=1,init
+OptVal=500],level=1,env=[Bugs,Tokens,Viruses],shooting=False,dists=1,rots=6_0.p
+ng, id=693, 437.9562pt x 508.0581pt>
+File: ../img//agent=ExpectedSARSA,agentSpecParam=[eps=0.8,epsFinal=0.0001,gam=1
+,initOptVal=500],level=1,env=[Bugs,Tokens,Viruses],shooting=False,dists=1,rots=
+6_0.png Graphic file (type png)
+<use ../img//agent=ExpectedSARSA,agentSpecParam=[eps=0.8,epsFinal=0.0001,gam=1,
+initOptVal=500],level=1,env=[Bugs,Tokens,Viruses],shooting=False,dists=1,rots=6
+_0.png>
+Package pdftex.def Info: ../img//agent=ExpectedSARSA,agentSpecParam=[eps=0.8,ep
+sFinal=0.0001,gam=1,initOptVal=500],level=1,env=[Bugs,Tokens,Viruses],shooting=
+False,dists=1,rots=6_0.png  used on input line 143.
+(pdftex.def)             Requested size: 412.56496pt x 478.62125pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<../img//agent=ExpectedSARSA,agentSpecParam=[eps=0.6,epsFinal=0.0001,gam=1,init
+OptVal=200],level=1,env=all,shooting=False,dists=1,rots=22_0.png, id=695, 442.2
+924pt x 575.2692pt>
+File: ../img//agent=ExpectedSARSA,agentSpecParam=[eps=0.6,epsFinal=0.0001,gam=1
+,initOptVal=200],level=1,env=all,shooting=False,dists=1,rots=22_0.png Graphic f
+ile (type png)
+<use ../img//agent=ExpectedSARSA,agentSpecParam=[eps=0.6,epsFinal=0.0001,gam=1,
+initOptVal=200],level=1,env=all,shooting=False,dists=1,rots=22_0.png>
+Package pdftex.def Info: ../img//agent=ExpectedSARSA,agentSpecParam=[eps=0.6,ep
+sFinal=0.0001,gam=1,initOptVal=200],level=1,env=all,shooting=False,dists=1,rots
+=22_0.png  used on input line 153.
+(pdftex.def)             Requested size: 412.56496pt x 536.60995pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+) [32 <../img//env=bugs.png>] [33 <../img//agent=ExpectedSARSA,agentSpecParam=[
+eps=0.4,epsFinal=0.0001,gam=1,initOptVal=100],level=1,env=[Bugs],shooting=False
+,dists=1,rots=6_0.png>] [34 <../img//agent=SARSA,agentSpecParam=[eps=0.2,epsFin
+al=0.0001,gam=1,initOptVal=100],level=1,env=[Bugs],shooting=True,dists=1,rots=6
+_0.png> <../img//env=viruses.png>] [35 <../img//agent=QLearning,agentSpecParam=
+[eps=0.4,epsFinal=0.0001,gam=1,initOptVal=100],level=1,env=[Viruses],shooting=T
+rue,dists=1,rots=6_0.png>] [36 <../img//agent=ExpectedSARSA,agentSpecParam=[eps
+=0.4,epsFinal=0.0001,gam=1,initOptVal=100],level=1,env=[Viruses],shooting=False
+,dists=1,rots=6_0.png>] [37 <../img//agent=ExpectedSARSA,agentSpecParam=[eps=0.
+4,epsFinal=0.0001,gam=1,initOptVal=100],level=1,env=[Viruses],shooting=True,dis
+ts=1,rots=6_0.png> <../img//env=Tokens.png>] [38 <../img//agent=ExpectedSARSA,a
+gentSpecParam=[eps=0.2,epsFinal=0.0001,gam=1,initOptVal=100],level=1,env=[Traps
+],shooting=False,dists=1,rots=22_0.png>] [39 <../img//agent=MonteCarlo,agentSpe
+cParam=[eps=0.2,epsFinal=0.0001,gam=1,initOptVal=30],level=1,env=[Traps],shooti
+ng=False,dists=1,rots=30_0.png>] [40 <../img//agent=ExpectedSARSA,agentSpecPara
+m=[eps=0.8,epsFinal=0.0001,gam=1,initOptVal=500],level=1,env=[Bugs,Tokens,Virus
+es],shooting=False,dists=1,rots=6_0.png>] [41 <../img//agent=ExpectedSARSA,agen
+tSpecParam=[eps=0.6,epsFinal=0.0001,gam=1,initOptVal=200],level=1,env=all,shoot
+ing=False,dists=1,rots=22_0.png>]
 \openout2 = `Conclusion.aux'.
 
-
-(Conclusion.tex) [39
+ (Conclusion.tex) [42
 
 
 
@@ -1093,7 +1168,8 @@ tOptVal=30],level=1,env=[Traps],shooting=False,dists=1,rots=30_0.png>]
 ]
 \openout2 = `bibliography.aux'.
 
- (bibliography.tex (thesis.bbl)) [40
+ (bibliography.tex
+(thesis.bbl)) [43
 
 
 
@@ -1102,22 +1178,21 @@ tOptVal=30],level=1,env=[Traps],shooting=False,dists=1,rots=30_0.png>]
 \tf@lof=\write7
 \openout7 = `thesis.lof'.
 
-
-[41
-
+ [44
 
 
-] (thesis.lot)
+
+] [45] (thesis.lot)
 \tf@lot=\write8
 \openout8 = `thesis.lot'.
 
- [42
+ [46
 
-] [43
+] [47
 
 ]
 Appendix A.
-[44
+[48
 
 ] (thesis.aux (title.aux) (Introduction.aux) (GameDesign.aux)
 (GameImplementation.aux) (StructureOfTheExperimentalSetting.aux)
@@ -1127,16 +1202,16 @@ Appendix A.
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: EBB0031967BBC77125C45A886A06896E;5898.
+(rerunfilecheck)             Checksum: A7C150AE57791363BF66C48626BA4BD0;6008.
  ) 
 Here is how much of TeX's memory you used:
- 17866 strings out of 475281
- 293541 string characters out of 2775008
- 833089 words of memory out of 3000000
- 38643 multiletter control sequences out of 15000+600000
+ 17794 strings out of 475281
+ 296259 string characters out of 2775008
+ 828089 words of memory out of 3000000
+ 38607 multiletter control sequences out of 15000+600000
  547838 words of font info for 93 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 89i,9n,93p,2156b,3619s stack positions out of 10000i,1000n,20000p,200000b,80000s
+ 89i,9n,93p,1373b,3619s stack positions out of 10000i,1000n,20000p,200000b,80000s
 {C:/Users/Una/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rm.enc}{C:/
 Users/Una/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathex.enc}{C:/Us
 ers/Una/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathit.enc}{C:/User
@@ -1146,22 +1221,24 @@ AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ts1.enc}<C:/Users/Una/AppDa
 ta/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/Una/AppData
 /Local/Programs/MiKTeX/fonts/type1/public/lm/lmex10.pfb><C:/Users/Una/AppData/L
 ocal/Programs/MiKTeX/fonts/type1/public/lm/lmmi12.pfb><C:/Users/Una/AppData/Loc
-al/Programs/MiKTeX/fonts/type1/public/lm/lmmi8.pfb><C:/Users/Una/AppData/Local/
-Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/Una/AppData/Local/Pro
-grams/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users/Una/AppData/Local/Progra
-ms/MiKTeX/fonts/type1/public/lm/lmr17.pfb><C:/Users/Una/AppData/Local/Programs/
-MiKTeX/fonts/type1/public/lm/lmr7.pfb><C:/Users/Una/AppData/Local/Programs/MiKT
-eX/fonts/type1/public/lm/lmr8.pfb><C:/Users/Una/AppData/Local/Programs/MiKTeX/f
-onts/type1/public/lm/lmri12.pfb><C:/Users/Una/AppData/Local/Programs/MiKTeX/fon
-ts/type1/public/lm/lmsy10.pfb><C:/Users/Una/AppData/Local/Programs/MiKTeX/fonts
-/type1/public/lm/lmsy8.pfb><C:/Users/Una/AppData/Local/Programs/MiKTeX/fonts/ty
-pe1/public/lm/lmtk10.pfb><C:/Users/Una/AppData/Local/Programs/MiKTeX/fonts/type
-1/public/lm/lmtt10.pfb><C:/Users/Una/AppData/Local/Programs/MiKTeX/fonts/type1/
-public/lm/lmtt12.pfb><C:/Users/Una/AppData/Local/Programs/MiKTeX/fonts/type1/pu
-blic/lm/lmtti10.pfb>
-Output written on thesis.pdf (48 pages, 2735426 bytes).
+al/Programs/MiKTeX/fonts/type1/public/lm/lmmi6.pfb><C:/Users/Una/AppData/Local/
+Programs/MiKTeX/fonts/type1/public/lm/lmmi8.pfb><C:/Users/Una/AppData/Local/Pro
+grams/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/Una/AppData/Local/Progra
+ms/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users/Una/AppData/Local/Programs/
+MiKTeX/fonts/type1/public/lm/lmr17.pfb><C:/Users/Una/AppData/Local/Programs/MiK
+TeX/fonts/type1/public/lm/lmr6.pfb><C:/Users/Una/AppData/Local/Programs/MiKTeX/
+fonts/type1/public/lm/lmr7.pfb><C:/Users/Una/AppData/Local/Programs/MiKTeX/font
+s/type1/public/lm/lmr8.pfb><C:/Users/Una/AppData/Local/Programs/MiKTeX/fonts/ty
+pe1/public/lm/lmri12.pfb><C:/Users/Una/AppData/Local/Programs/MiKTeX/fonts/type
+1/public/lm/lmsy10.pfb><C:/Users/Una/AppData/Local/Programs/MiKTeX/fonts/type1/
+public/lm/lmsy8.pfb><C:/Users/Una/AppData/Local/Programs/MiKTeX/fonts/type1/pub
+lic/lm/lmtk10.pfb><C:/Users/Una/AppData/Local/Programs/MiKTeX/fonts/type1/publi
+c/lm/lmtt10.pfb><C:/Users/Una/AppData/Local/Programs/MiKTeX/fonts/type1/public/
+lm/lmtt12.pfb><C:/Users/Una/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm
+/lmtti10.pfb>
+Output written on thesis.pdf (52 pages, 2903962 bytes).
 PDF statistics:
- 983 PDF objects out of 1000 (max. 8388607)
- 295 named destinations out of 1000 (max. 500000)
- 506 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 972 PDF objects out of 1000 (max. 8388607)
+ 252 named destinations out of 1000 (max. 500000)
+ 529 words of extra memory for PDF output out of 10000 (max. 10000000)
 

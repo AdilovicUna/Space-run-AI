@@ -1,17 +1,24 @@
 \chapter{Structure of the Experimental Setting}
 \label{agent_code_chapter}
-To train an agent on a specific environment, the user must utilize a command-line interface. There are various options available to cater to the user's needs. This chapter will outline all of the provided options and how they are encoded. However, firstly we need to look into a concept called State and its usage for this thesis.
+To train an agent on a specific environment, the user must utilize a command-line interface. There are various options available to cater to the user's needs. This chapter will outline all of the provided options and how they are encoded. However, we will first consider how the game represents discrete states.
 
 \section{State}
-The majority of the implemented agents in the game utilize the concept of state to facilitate learning. The agent will determine its next action based on the current state in which it finds itself. By dividing the game into discrete states, we are able to utilize tabular method algorithms to train an agent to play this continuous game. Once one obstacle is passed, the value of the state indicated refers to the next one. Each state is represented by a triplet consisting of distance, rotation, and obstacle type. 
+The majority of the implemented agents in the game utilize the concept of state to facilitate learning. The agent will determine its next action based on the current state in which it finds itself. By dividing the game into discrete states, we are able to utilize tabular method algorithms to train an agent to play this continuous game. Once one obstacle is passed, the value of the state indicated refers to the next one. Each state is represented by a triplet consisting of distance, rotation, and next obstacle type. 
 
-Before further explaining this notion, lets look at the standard unit of distance measurement in Godot - a "meter" .It is used to represent the size, position, and movement of objects in the game world. In Godot, one meter is equal to the size of a standard cube. To better understand the notion, it would be useful to note that Hans is approximately 12m tall and his starting speed is 35 meters per second, while each tunnel has width and height of 12m and depth 2800m.
+Before further explaining this notion, lets look at the standard unit of distance measurement in Godot - a ``meter'' .It is used to represent the size, position, and movement of objects in the game world. In Godot, one meter is equal to the size of a standard cube. To better understand the notion, it would be useful to note that Hans is approximately 12m tall and his starting speed is 35 meters per second, while each tunnel has width and height of approximately 45m and depth 2800m.
 
-The distance value indicates the distance of the agent from the next obstacle in meters. For example, if we set the \texttt{dists} parameter (indicated by the user, see \ref{opt:dists}) to 2, there are two possible distance values for the state: \textless 50, \textless 0, indicating that the agent is 0-49 meters away from the obstacle and at least 0 meters away from the obstacle, respectively. If the \texttt{dists} parameter is set to 1, the distance value remains constant at >0. 
+The distance value indicates the distance of the agent from the next obstacle in meters. For example, if we set the \texttt{dists} parameter (indicated by the user, see \ref{opt:dists}) to 2, there are two possible distance values for the state: \textgreater 50, \textgreater 0, indicating that the agent is 0-49 meters away from the obstacle and at least 0 meters away from the obstacle, respectively. If the \texttt{dists} parameter is set to 1, the distance value remains constant at \textgreater 0. 
 
-The rotation parameter divides the rotation of the obstacle into \texttt{rots} intervals (see \ref{opt:rots}). As the tunnel rotates, the state label will indicate the rotation value to which Hans is aligned at the moment. If the \texttt{rots} parameter is set to 360, this would correspond to the number of degrees in a circle and result in 360 possible rotations. However, the obstacles in this game do not require such a high number of rotations and agents can be trained to avoid most obstacles using fewer than 10 rotations. 
+The rotation parameter divides the obstacle circumference into \texttt{rots} number of intervals (see \ref{opt:rots}). As the tunnel rotates, the state label will indicate the rotation value to which Hans is aligned at the moment (in Figure \ref{fig:circumference} Hans is aligned with rotation value 240). If the \texttt{rots} parameter is set to 360, this would correspond to the number of degrees in a circle and result in 360 possible rotations. However, the obstacles in this game do not require such a high number of rotations and agents can be trained to avoid most obstacles using fewer than 10 rotations. 
 
-Finally, the type parameter indicates the type of obstacle that Hans must avoid. Each obstacle has its own string representation. With this information, the agent can learn to recognize the safe rotation for different types of obstacles and, along with the distance parameter, decide whether to move left, right, forward, or shoot in combination with any of these actions.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{circumference}
+    \caption{Rotations when \texttt{rots = 6}}
+    \label{fig:circumference}
+\end{figure}
+
+Finally, the type parameter indicates the type of obstacle that Hans must avoid. Each obstacle has its own string representation. With this information, the agent can learn to recognize the safe rotation for different types of obstacles and, along with the distance parameter, decide whether to move left, right, forward, or shoot in combination with any of these actions. To further explain this notion lets look back at the Figure \ref{fig:circumference}. Here, seemingly the 240 rotation value should be the way to go and Hans can easily pass through the obstacle. However, with closer observation, it is visible that in fact, not the whole of rotation 240 is safe. The agent does not know the difference between being at any point of the 240 rotation and thus can easily die. For this obstacle, indeed, there would be more \texttt{rots} needed in order for Hans to have at least one safe rotation value (meaning that the whole piece of the obstacle that rotation value covers is considered safe).
 
 \section{Command line options}
 \label{commOpt}
@@ -55,7 +62,7 @@ Sub-options (only for the listed agents):
 
 [\texttt{gam} (range [0,1]), \texttt{eps} (range [0,1]), \texttt{epsFinal} (range [0,1]), \texttt{initOptVal} (range [0,$\infty$))]\\
 Example usage: ``\texttt{agent=MonteCarlo:eps=0.1,gam=0.2}''\\
-The meaning of the suboptions will be explain in the later section.
+The meaning of the suboptions will be explained in a later section.
 \item[level] - Number of the level to start from. Default value is 1. \label{opt:level}\\
 Options: \texttt{[1, ... , 10]}\\
 Note: after the 10th level, the agent is considered to have won the game
@@ -86,12 +93,12 @@ Options: [\texttt{true},\texttt{false} (default)]
 \end{description}
 
 \subsection{Running the program}
-There are several possibilities for running the game from the command line. In addition to various combinations of the options listed above, the user has the choice of running an experiment with or without the graphical interface. If they opt for the first possibility, the window will open and the game will be played at its normal speed. On the other hand, if the experiment is run without graphics, it will be over 200 times faster and the output will only be displayed in the terminal.
+There are several possibilities for running the game from the command line. In addition to various combinations of the options listed above, the user has the choice of running an experiment with or without the graphical interface. If they opt for the first possibility, the window will open and the game will be played at its normal speed. On the other hand, if the experiment is run without graphics, it will be over 200 times faster and the output will only be displayed in the terminal. This is achieved by a few things, mainly hiding the CSG geometry in every node. The computational power required to perform union, intersection, etc. on the CSG shapes is quite high and thus by not performing those calculations a game can run much faster. Of course, these shapes are not necessary for the experiments run without graphics, since the collision shapes are the ones that play a role in determining what happened in the game\footnote{The collision shapes refer to the shapes that are used to define the physical bounds of an object for the purpose of collision detection.}.
 It should also be noted that the experiments are fully reproducible since the seed values for all random variables are predetermined.
 
-To run the program in the command line, the user may benefit from adding the Godot executable to PATH environment variable. This will allow them to start the application from the command line simply by entering the command \texttt{godot} while inside the same directory as the \texttt{project.godot} file.
+To run the program in the command line, the user may benefit from adding the Godot executable to the PATH environment variable. This will allow them to start the application from the command line simply by entering the command \texttt{godot} while inside the same directory as the \texttt{project.godot} file.
 
-By default, running the program in this manner will launch a normal game with the graphical interface and the \texttt{Keyboard} agent. However, the user can customize their experiment by using a combination of the options listed above. For example, the command:
+By default, running the program in this manner will launch a normal game with the graphical interface and the \texttt{Keyboard} agent. However, the user can customize their experiment by using a combination of the options listed above. For example:
 \begin{lstlisting}
 godot database=write agent=SARSA:initOptVal=100.0,eps=0.3 env=HexO n=10 dists=1 rots=8
 \end{lstlisting}

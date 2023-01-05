@@ -16,14 +16,14 @@ To start off let us analize each individual type of trap and how the agents perf
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.8\textwidth]{eps=0.2_initOptVal=20_}
+    \includegraphics[width=0.6\textwidth]{eps=0.2_initOptVal=20_}
     \caption{Average performance of the agents on individual traps, initOptVal=20}
     \label{fig:avgiop20}
 \end{figure}
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.8\textwidth]{eps=0.2_initOptVal=100_}
+    \includegraphics[width=0.6\textwidth]{eps=0.2_initOptVal=100_}
     \caption{Average performance of the agents on individual traps, initOptVal=100}
     \label{fig:avgiop100}
 \end{figure}
@@ -39,7 +39,7 @@ In the Figures \ref{fig:avgiop20} and \ref{fig:avgiop100}, we can observe the av
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.8\textwidth]{agent=ExpectedSARSA,agentSpecParam=[eps=0.2,epsFinal=0.0001,gam=1,initOptVal=100],level=1,env=[Triangles],shooting=False,dists=1,rots=6_0
+    \includegraphics[width=0.7\textwidth]{agent=ExpectedSARSA,agentSpecParam=[eps=0.2,epsFinal=0.0001,gam=1,initOptVal=100],level=1,env=[Triangles],shooting=False,dists=1,rots=6_0
 }
     \caption{Triangle-type trap with Expected SARSA algorithm}
     \label{fig:dqli}
@@ -52,29 +52,30 @@ In this section, we will analyze how the Bugs environment responded to training 
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.8\textwidth]{env=bugs}
+    \includegraphics[width=0.6\textwidth]{env=bugs}
     \caption{Average performance of the agents with Bugs environment}
     \label{fig:avgbugs}
 \end{figure}
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.8\textwidth]{agent=ExpectedSARSA,agentSpecParam=[eps=0.4,epsFinal=0.0001,gam=1,initOptVal=100],level=1,env=[Bugs],shooting=False,dists=1,rots=6_0}
+    \includegraphics[width=0.7\textwidth]{agent=ExpectedSARSA,agentSpecParam=[eps=0.4,epsFinal=0.0001,gam=1,initOptVal=100],level=1,env=[Bugs],shooting=False,dists=1,rots=6_0}
     \caption{Policy of the Expected SARSA algorithm on the Bugs environment}
     \label{fig:polexps}
 \end{figure}
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.8\textwidth]{agent=SARSA,agentSpecParam=[eps=0.2,epsFinal=0.0001,gam=1,initOptVal=100],level=1,env=[Bugs],shooting=True,dists=1,rots=6_0}
+    \includegraphics[width=0.7\textwidth]{agent=SARSA,agentSpecParam=[eps=0.2,epsFinal=0.0001,gam=1,initOptVal=100],level=1,env=[Bugs],shooting=True,dists=1,rots=6_0}
     \caption{Policy of the SARSA algorithm on the Bugs environment}
     \label{fig:pols}
 \end{figure}
 
 \section{Viruses}
+
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.8\textwidth]{env=viruses}
+    \includegraphics[width=0.6\textwidth]{env=viruses}
     \caption{Average performance of the agents with Viruses environment}
     \label{fig:avgviruses}
 \end{figure}
@@ -84,14 +85,14 @@ The results of the experiments on the viruses environment indicate that the Expe
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=1\textwidth]{agent=QLearning,agentSpecParam=[eps=0.4,epsFinal=0.0001,gam=1,initOptVal=100],level=1,env=[Viruses],shooting=True,dists=1,rots=6_0}
+    \includegraphics[width=0.7\textwidth]{agent=QLearning,agentSpecParam=[eps=0.4,epsFinal=0.0001,gam=1,initOptVal=100],level=1,env=[Viruses],shooting=True,dists=1,rots=6_0}
     \caption{Policy of the Q-Learning algorithm on the Viruses environment}
     \label{fig:qvir}
 \end{figure}
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=1\textwidth]{agent=ExpectedSARSA,agentSpecParam=[eps=0.4,epsFinal=0.0001,gam=1,initOptVal=100],level=1,env=[Viruses],shooting=False,dists=1,rots=6_0}
+    \includegraphics[width=0.7\textwidth]{agent=ExpectedSARSA,agentSpecParam=[eps=0.4,epsFinal=0.0001,gam=1,initOptVal=100],level=1,env=[Viruses],shooting=False,dists=1,rots=6_0}
     \caption{Policy of the Expected SARSA algorithm on the Viruses environment without shooting}
     \label{fig:esvir}
 \end{figure}
@@ -99,7 +100,7 @@ The results of the experiments on the viruses environment indicate that the Expe
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.8\textwidth]{agent=ExpectedSARSA,agentSpecParam=[eps=0.4,epsFinal=0.0001,gam=1,initOptVal=100],level=1,env=[Viruses],shooting=True,dists=1,rots=6_0}
+    \includegraphics[width=0.7\textwidth]{agent=ExpectedSARSA,agentSpecParam=[eps=0.4,epsFinal=0.0001,gam=1,initOptVal=100],level=1,env=[Viruses],shooting=True,dists=1,rots=6_0}
     \caption{Policy of the Expected SARSA algorithm on the Viruses environment with shooting}
     \label{fig:esvirShooting}
 \end{figure}
@@ -109,7 +110,7 @@ The results of the experiments conducted in the token environment show that all 
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.8\textwidth]{env=Tokens}
+    \includegraphics[width=0.7\textwidth]{env=Tokens}
     \caption{Performance comparison of the algorithms on the Token environment}
     \label{fig:compTok}
 \end{figure}
@@ -121,7 +122,7 @@ As previously discussed, the algorithms generally demonstrated satisfactory perf
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.8\textwidth]{agent=ExpectedSARSA,agentSpecParam=[eps=0.2,epsFinal=0.0001,gam=1,initOptVal=100],level=1,env=[Traps],shooting=False,dists=1,rots=22_0}
+    \includegraphics[width=1\textwidth]{agent=ExpectedSARSA,agentSpecParam=[eps=0.2,epsFinal=0.0001,gam=1,initOptVal=100],level=1,env=[Traps],shooting=False,dists=1,rots=22_0}
     \caption{Policy of the Expected SARSA algorithm on the Traps environment}
     \label{fig:estraps}
 \end{figure}
@@ -129,7 +130,7 @@ As previously discussed, the algorithms generally demonstrated satisfactory perf
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.8\textwidth]{agent=MonteCarlo,agentSpecParam=[eps=0.2,epsFinal=0.0001,gam=1,initOptVal=30],level=1,env=[Traps],shooting=False,dists=1,rots=30_0}
+    \includegraphics[width=1\textwidth]{agent=MonteCarlo,agentSpecParam=[eps=0.2,epsFinal=0.0001,gam=1,initOptVal=30],level=1,env=[Traps],shooting=False,dists=1,rots=30_0}
     \caption{Policy of the Monte Carlo algorithm on the Traps environment}
     \label{fig:mctraps}
 \end{figure}
@@ -139,11 +140,18 @@ As previously demonstrated, the Bugs, Viruses, and Tokens agents individually ex
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.8\textwidth]{agent=ExpectedSARSA,agentSpecParam=[eps=0.8,epsFinal=0.0001,gam=1,initOptVal=500],level=1,env=[Bugs,Tokens,Viruses],shooting=False,dists=1,rots=6_0}
+    \includegraphics[width=1\textwidth]{agent=ExpectedSARSA,agentSpecParam=[eps=0.8,epsFinal=0.0001,gam=1,initOptVal=500],level=1,env=[Bugs,Tokens,Viruses],shooting=False,dists=1,rots=6_0}
 	\caption{Policy of the Expected SARSA algorithm on the Bugs, Viruses and Tokens environment combined}    
     \label{fig:esbvt}
 \end{figure}
 
 \section{All obstacles}
+Despite its strong performance in previous experiments, the Expected SARSA algorithm did not successfully learn the optimal policy for the whole game during this experimentation. While the policy it developed did win some games, it was not a significant amount. It is possible that different parameters may have resulted in a different outcome, but further research would be necessary to confirm this. The results of this experiment can be seen in Figure \ref{fig:all}.
 
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{agent=ExpectedSARSA,agentSpecParam=[eps=0.6,epsFinal=0.0001,gam=1,initOptVal=200],level=1,env=all,shooting=False,dists=1,rots=22_0}
+	\caption{Policy of the Expected SARSA algorithm on the whole game}    
+    \label{fig:all}
+\end{figure}
 

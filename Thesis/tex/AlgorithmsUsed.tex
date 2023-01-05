@@ -1,34 +1,50 @@
 \chapter{Applied Algorithms}
-The algorithms utilized in this thesis fall under the categories of Monte Carlo methods and Temporal Difference (TD) Learning. These methods involve the selection of actions by an agent over time in order to maximize a reward signal. The agents are unaware of the environment dynamics of the game and are only provided with information regarding the current state and score. In this chapter, we will discuss the specific algorithms implemented in the project. Firstly, however, a few key concepts need to be introduced:
+The algorithms utilized in this thesis fall under the categories of Monte Carlo methods and Temporal Difference (TD) Learning. These methods involve the selection of actions by an agent over time in order to maximize a reward signal. The agents are unaware of the environment dynamics of the game and are only provided with information regarding the current state and score. In this chapter, we will discuss the specific algorithms implemented in the project. Firstly, however, a few key concepts need to be introduced.
 
-A \textbf{state} is a representation of the current situation of the environment, and an \textbf{action} is a decision made by the agent in response to the current state. A \textbf{reward} is a scalar value that represents the immediate feedback received by the agent for its action in a given state. A \textbf{policy}, then is a mapping from states to actions that determines the actions an agent takes in each state. An \textbf{$\epsilon$-greedy policy} is a type of policy in which the agent takes the action that maximizes the expected reward with probability \\ (1 - $\epsilon$), and takes a random action with probability $\epsilon$. The \texttt{eps} and \texttt{epsFinal} were discussed in Chapter \ref{agent_code_chapter}. With these parameters, the user can indicate starting and ending value of the $\epsilon$ which will then adequately decrease after each played game. The \textbf{value function} is a measure of the long-term expected return of a given policy. It represents the expected sum of future rewards that the agent will receive when following that policy. The value function is used to evaluate the relative effectiveness of different actions or states in an RL problem.
+A \textbf{state} is a representation of the current situation of the environment, and an \textbf{action} is a decision made by the agent in response to the current state. A \textbf{reward} is a scalar value that represents the immediate feedback received by the agent for its action in a given state. A \textbf{policy} is a mapping from states to actions that determines the actions an agent takes in each state. An \textbf{$\epsilon$-greedy policy} is a type of policy in which the agent takes the action that maximizes the expected reward with probability (1 - $\epsilon$), and takes a random action with probability $\epsilon$. There are two kinds of the \textbf{value functions}. The state-value functions, which map a state to the long-term expected return after starting in that state, and action-value functions, which map a state and an action to the long-term expected return after starting in that state and taking that action. The value function is used to evaluate the relative effectiveness of different actions or states in a reinforcement learning problem. A \textbf{value of a state} is defined differently between each algorithm. It serves as a measurement to determine which action is better to be taken in a particular state, and will be further discussed in Chapter \ref{implOfAgents}.  
 
-In the previous chapter, the representation of the state in the game was discussed, and it was briefly mentioned that the set of actions an agent can take are [\texttt{left, right, forward, left + shoot, right + shoot, and forward + shoot}].\\ As for the reward, the most natural choice is the score variable from the game.
+In the previous chapter, we also discussed the representation of the state in the game. It was briefly mentioned that the set of actions an agent can take are \{\texttt{left, right, forward, left + shoot, right + shoot, forward + shoot}\}.\\ As for the reward, the most natural choice is the score variable from the game, specifically the difference between of the scores between two consecutive steps.
 
 Before looking into individual algorithms, there is one more key concept to introduce: \textbf{exploration vs exploitation}. In the field of reinforcement learning, the exploration-exploitation trade-off refers to the balancing act between discovering new information or strategies and utilizing existing knowledge to maximize reward. Exploration involves trying out different actions or strategies in order to gather more information about the environment and its rewards, while exploitation involves utilizing the information gathered to maximize reward. Finding the right balance between exploration and exploitation is crucial in reinforcement learning, as excessive exploration or exploitation can result in suboptimal results.
 
+
+The \texttt{eps} and \texttt{epsFinal} were discussed in Chapter \ref{agent_code_chapter}. With these parameters, the user can indicate starting and ending value of the $\epsilon$ which will then adequately decrease after each played game. The formula for the decrease is the following:
+
+$$decrease = (\frac{epsFinal}{eps})^{\frac{1.0}{n}}$$
+
+Here, n represents the number of games being played. The reason behind this epsilon decrease is to change the ratio between the exploration and exploitation over time. In the beginning of the experiment, the \texttt{eps} value is higher and thus random moves happen more often, causing the agent to try actions it would otherwise oversee. Later, then the policy is a bit stabilized, the \texttt{eps} value becomes smaller so it would allow the agent to play longer games and possibly win (if the \texttt{eps} value was high throughout the whole experiment, the agent would have a bigger chance of choosing an inadequate move and thus untimely ending the game).
+
 \section{Monte Carlo}
-The Monte Carlo method is a type of reinforcement learning algorithm that uses a sample of the past experiences of the agent to estimate the value function. It can be used with either on-policy or off-policy learning, depending on how the samples\footnote{A sample refers to a single experience or transition that the agent encounters as it interacts with the environment. A sample typically consists of the current state of the environment, the action taken by the agent, and the resulting reward and next state.} are collected. On-policy learning means that the agent is using the same behavior policy to collect samples as it is using to improve the value function. First visit Monte Carlo is a variant of on-policy Monte Carlo that only considers the first time a state is visited in an episode\footnote{In this project, an episode is a whole duration of one game being played.}, as opposed to all visits. Optimistic initial values are a technique used in Monte Carlo methods to encourage exploration by setting the initial value of all state action pairs to a high number, encouraging the agent to visit as many states as possible in order to learn their true value \citep{RLSuttonBarto}. A value of the state is defined differently between each algorithm. It serves as a measurement to determine which action is better to be taken in a particular state, and will be further discussed in Chapter \ref{implOfAgents}.  For the purpose of this thesis, we have used on-policy first visit Monte Carlo algorithm, with both initial optimistic value and an $\epsilon$-greedy policy as tools to enforce exploration. This method is guaranteed to eventually converge to an optimal policy if the limit as the number of samples goes to infinity. This means that, as the number of samples increases, the estimates of the value function produced by Monte Carlo methods will become increasingly accurate. However, the rate at which Monte Carlo methods converge to the true value function can be slow, and the estimates may be quite noisy (i.e., have high variance) if the number of samples is small.
+The Monte Carlo method is a type of reinforcement learning algorithm that uses a sample of the past experiences of the agent to estimate the value function. It can be used with either on-policy or off-policy learning, depending on how the samples\footnote{A sample refers to a single experience or transition that the agent encounters as it interacts with the environment. A sample typically consists of the current state of the environment, the action taken by the agent, and the resulting reward and next state.} are collected. On-policy learning means that the agent is using the same behavior policy to collect samples as it is using to improve the value function. First visit Monte Carlo is a variant of on-policy Monte Carlo that only considers the first time a state is visited in an episode, as opposed to all visits. It should be noted that an episode is a whole duration of one game being played. Optimistic initial values are a technique used in Monte Carlo methods to encourage exploration by setting the initial value of all state action pairs to a high number, encouraging the agent to visit as many states as possible in order to learn their true value \citep{RLSuttonBarto}. 
+
+For the purpose of this thesis, we have used on-policy first visit Monte Carlo algorithm, with both initial optimistic value and an $\epsilon$-greedy policy as tools to enforce exploration. This method is guaranteed to eventually converge to an optimal policy in the limit as the number of samples goes to infinity \citep{RLSuttonBarto}. This means that, as the number of samples increases, the estimates of the value function produced by Monte Carlo methods will become increasingly accurate. However, the rate at which Monte Carlo methods converge to the true value function can be slow, and the estimates may be quite noisy (i.e., have high variance) if the number of samples is small.
 
 \begin{figure}[h]
     \centering
-    \begin{lstlisting}
+    \begin{verbatim}}
     For each episode:
-    		Initialize value function for all states to a high number (optimistic initial value).
-		Loop for each step of episode:
-			Set state and action to their initial value
+    		Initialize action-value function for all state-action pairs to a 
+    					high number (optimistic initial value).
+		Loop for each step of episode (while the game is running):
+			Set state to the first state in the game
+			Choose the next action using the epsilon-greedy policy.
 			Take the action and observe the next state and reward.
+			
+		Loop for each step of episode (after the game has finished):
 			If the state has not been visited before in this episode (first visit):
 				update the value function using the reward.
-			Choose the next action using the epsilon-greedy policy.
+				
+		Update the epsilon-greedy policy 
+					based on the results of the learning process:
+		For each state_action pair in policy:
+			policy[state_action ] = value_function[state_action]\num_of_visits[state_action]
 		
-		Update the epsilon-greedy policy based on the results of the learning process.
-	\end{lstlisting}	
+	\end{verbatim}	
     \caption{On-policy first-visit Monte Carlo control (for $\epsilon$-greedy policy)}
-    \label{algo:MC}
+    \label{algo:MC} 
 \end{figure}
 
-As seen in Figure \ref{algo:MC}, Monte Carlo algorithm behaves in a way that the policy is being update only after one episode has finished. During the episode, moves are chosen based on the currently known policy. The update for this algorithm discussed in detail in Chapter \ref{implOfAgents}.
+As seen in Figure \ref{algo:MC}, Monte Carlo algorithm behaves in a way that the policy is being update only after one episode has finished. During the episode, moves are chosen based on the currently known policy. 
 
 \section{Temporal Difference Learning}
 Temporal difference (TD) learning is a type of reinforcement learning algorithm that estimates the value function using the difference between the immediate reward and the expected future reward. It can be used with either on-policy or off-policy learning, depending on how the samples are collected.
@@ -36,7 +52,7 @@ On the other hand, as previously mentioned, Monte Carlo methods require a comple
 
 \begin{figure}[h]
     \centering
-    \begin{lstlisting}
+    \begin{verbatim}
     Initialize Q(s,a) for all states s and actions a, except Q(terminal,a) = 0
     Loop through each episode:
     		Initialize state S
@@ -46,7 +62,7 @@ On the other hand, as previously mentioned, Monte Carlo methods require a comple
     			Update the policy depending on the algorithm
     			S <- S'
     		Until S is terminal
-	\end{lstlisting}
+	\end{verbatim}
     \caption{Tabular TD learning}
     \label{algo:TD}
 \end{figure}
