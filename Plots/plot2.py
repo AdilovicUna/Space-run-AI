@@ -31,6 +31,9 @@ def main(window):
     ES_count = 0
     DQL_count = 0
     c = 0
+
+    used_eps = 0
+    used_iov = 100
     # files have the same names in both folders
     for filename in os.listdir(command_outputs_path):
         print(filename)
@@ -59,7 +62,7 @@ def main(window):
             env = 'all' if '=all' in env else env[5:env.find(']')]
             print('env: ', env)
 
-            if (env in ['Viruses']):
+            if (env in ['Bugs']):
                 c += 1
                 match agent:
                     case 'MonteCarlo':
@@ -75,7 +78,6 @@ def main(window):
                             S = [x + y for x, y in zip(S, co_data)]
                         S_count += 1
                     case 'QLearning':
-                        print('*************************************************************')
                         if QL == []:
                             QL = co_data
                         else:
@@ -117,18 +119,20 @@ def main(window):
     DQL = [np.mean(DQL[i:i + window]) if i <= len(DQL) -
               window else np.mean(DQL[i:]) for i in range(len(DQL))]
 
-    plt.plot(MC, label='MonteCarlo')
-    plt.plot(S, label='SARSA')
-    plt.plot(QL, label='QLearning')
-    plt.plot(ES, label='ExpectedSARSA')
-    plt.plot(DQL, label='DoubleQLearning')
+    plt.plot(MC, color='red', label='MonteCarlo')
+    plt.plot(S, color='green', label='SARSA')
+    plt.plot(QL, color='blue', label='QLearning')
+    plt.plot(ES, color='cyan', label='ExpectedSARSA')
+    plt.plot(DQL, color='magenta', label='DoubleQLearning')
 
     plt.legend()
+    spaces = '    '
+    #plt.figtext(x=0.02, y=0.91, s='ε: ' + str(used_eps) + spaces + 'Final-ε: 0.0001' + spaces + 'γ: 1' + spaces + 'Initial optimistic value: ' + str(used_iov))
 
     if not os.path.isdir('plots/combo/'):
         os.makedirs('plots/combo/')
 
-    plt.savefig('plots/combo/env=' + 'viruses' +'.png', bbox_inches='tight', pad_inches=0.2, dpi=100)
+    plt.savefig('plots/combo/env=bugs' + '.png', bbox_inches='tight', pad_inches=0.2, dpi=100)
 
 if __name__ == "__main__":
 

@@ -32,14 +32,15 @@
 \contentsline {section}{\numberline {6.1}Individual Traps}{27}{section.6.1}%
 \contentsline {section}{\numberline {6.2}Bugs}{28}{section.6.2}%
 \contentsline {section}{\numberline {6.3}Viruses}{28}{section.6.3}%
-\contentsline {section}{\numberline {6.4}Combinations}{29}{section.6.4}%
-\contentsline {subsection}{\numberline {6.4.1}Traps and Tokens}{29}{subsection.6.4.1}%
-\contentsline {subsection}{\numberline {6.4.2}Bugs, Viruses and Tokens}{29}{subsection.6.4.2}%
-\contentsline {section}{\numberline {6.5}All obstacles}{29}{section.6.5}%
-\contentsline {chapter}{Conclusion}{37}{chapter*.3}%
-\contentsline {chapter}{Bibliography}{38}{chapter*.4}%
-\contentsline {chapter}{List of Figures}{39}{chapter*.5}%
-\contentsline {chapter}{List of Tables}{40}{chapter*.6}%
-\contentsline {chapter}{List of Abbreviations}{41}{chapter*.7}%
-\contentsline {chapter}{\numberline {A}Attachments}{42}{appendix.A}%
-\contentsline {section}{\numberline {A.1}First Attachment}{42}{section.A.1}%
+\contentsline {section}{\numberline {6.4}Tokens}{28}{section.6.4}%
+\contentsline {section}{\numberline {6.5}Combinations}{29}{section.6.5}%
+\contentsline {subsection}{\numberline {6.5.1}Traps}{29}{subsection.6.5.1}%
+\contentsline {subsection}{\numberline {6.5.2}Bugs, Viruses and Tokens}{29}{subsection.6.5.2}%
+\contentsline {section}{\numberline {6.6}All obstacles}{29}{section.6.6}%
+\contentsline {chapter}{Conclusion}{39}{chapter*.3}%
+\contentsline {chapter}{Bibliography}{40}{chapter*.4}%
+\contentsline {chapter}{List of Figures}{41}{chapter*.5}%
+\contentsline {chapter}{List of Tables}{42}{chapter*.6}%
+\contentsline {chapter}{List of Abbreviations}{43}{chapter*.7}%
+\contentsline {chapter}{\numberline {A}Attachments}{44}{appendix.A}%
+\contentsline {section}{\numberline {A.1}First Attachment}{44}{section.A.1}%

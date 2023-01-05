@@ -35,4 +35,7 @@
 \contentsline {figure}{\numberline {6.10}{\ignorespaces Policy of the Q-Learning algorithm on the Viruses environment}}{34}{figure.6.10}%
 \contentsline {figure}{\numberline {6.11}{\ignorespaces Policy of the Expected SARSA algorithm on the Viruses environment without shooting}}{35}{figure.6.11}%
 \contentsline {figure}{\numberline {6.12}{\ignorespaces Policy of the Expected SARSA algorithm on the Viruses environment with shooting}}{36}{figure.6.12}%
+\contentsline {figure}{\numberline {6.13}{\ignorespaces Performance comparison of the algorithms on the Token environment}}{36}{figure.6.13}%
+\contentsline {figure}{\numberline {6.14}{\ignorespaces Policy of the Expected SARSA algorithm on the Traps environment}}{37}{figure.6.14}%
+\contentsline {figure}{\numberline {6.15}{\ignorespaces Policy of the Monte Carlo algorithm on the Traps environment}}{38}{figure.6.15}%
 \addvspace {10\p@ }

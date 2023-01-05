@@ -1,6 +1,9 @@
 \chapter{Experiments}
 In this chapter, we will evaluate the performance of the various agents when confronted with different combinations of obstacles. One of the key questions we aim to answer is whether any of the agents are able to successfully learn to play the entire game.
 
+\section{Discounting}
+Before diving into the results of the experiments, it is important to note that the discount factor was found to be inconsequential during the experimentation process. Specifically, the agents demonstrated better performance when the discount factor, represented by the variable gamma, was set to 1 (indicating that each step carries equal weight) as opposed to a value less than 1. This outcome is surprising as it would be intuitive to assume that the obstacle in the final step of the episode, which resulted in the agent's death, should be met with a more severe punishment compared to the obstacles encountered earlier in the episode.
+
 \section{Individual Traps}
 \begin{figure}[h]
     \centering
@@ -81,14 +84,14 @@ The results of the experiments on the viruses environment indicate that the Expe
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.8\textwidth]{agent=QLearning,agentSpecParam=[eps=0.4,epsFinal=0.0001,gam=1,initOptVal=100],level=1,env=[Viruses],shooting=True,dists=1,rots=6_0}
+    \includegraphics[width=1\textwidth]{agent=QLearning,agentSpecParam=[eps=0.4,epsFinal=0.0001,gam=1,initOptVal=100],level=1,env=[Viruses],shooting=True,dists=1,rots=6_0}
     \caption{Policy of the Q-Learning algorithm on the Viruses environment}
     \label{fig:qvir}
 \end{figure}
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.8\textwidth]{agent=ExpectedSARSA,agentSpecParam=[eps=0.4,epsFinal=0.0001,gam=1,initOptVal=100],level=1,env=[Viruses],shooting=False,dists=1,rots=6_0}
+    \includegraphics[width=1\textwidth]{agent=ExpectedSARSA,agentSpecParam=[eps=0.4,epsFinal=0.0001,gam=1,initOptVal=100],level=1,env=[Viruses],shooting=False,dists=1,rots=6_0}
     \caption{Policy of the Expected SARSA algorithm on the Viruses environment without shooting}
     \label{fig:esvir}
 \end{figure}
@@ -101,9 +104,46 @@ The results of the experiments on the viruses environment indicate that the Expe
     \label{fig:esvirShooting}
 \end{figure}
 
+\section{Tokens}
+The results of the experiments conducted in the token environment show that all of the agents had a high success rate in winning the game. Experiments themselves have been performed on 20 games only, since this is the simplest environment we can observe in this project. The comparison of the performance of the different algorithms can be seen in Figure \ref{fig:compTok}.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{env=Tokens}
+    \caption{Performance comparison of the algorithms on the Token environment}
+    \label{fig:compTok}
+\end{figure}
+
 \section{Combinations}
+In this section, we will examine the performance of the agents in a more complex environment with a larger group of obstacles. This analysis will provide a transition between the simpler experiments and the most challenging task of training on a full game.
 \subsection{Traps}
+As previously discussed, the algorithms generally demonstrated satisfactory performance when facing individual traps. However, when confronted with all trap types simultaneously, only two algorithms were able to successfully find an optimal policy. It is plausible that with more training or alternate parameters, all algorithms would be capable of reaching an optimal policy. Nonetheless, in these experiments, Monte Carlo and Expected SARSA demonstrated particularly strong performance. For visual representations of the policies developed by these algorithms, see Figures \ref{fig:estraps} and \ref{fig:mctraps}.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{agent=ExpectedSARSA,agentSpecParam=[eps=0.2,epsFinal=0.0001,gam=1,initOptVal=100],level=1,env=[Traps],shooting=False,dists=1,rots=22_0}
+    \caption{Policy of the Expected SARSA algorithm on the Traps environment}
+    \label{fig:estraps}
+\end{figure}
+
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{agent=MonteCarlo,agentSpecParam=[eps=0.2,epsFinal=0.0001,gam=1,initOptVal=30],level=1,env=[Traps],shooting=False,dists=1,rots=30_0}
+    \caption{Policy of the Monte Carlo algorithm on the Traps environment}
+    \label{fig:mctraps}
+\end{figure}
+
 \subsection{Bugs, Viruses and Tokens}
+As previously demonstrated, the Bugs, Viruses, and Tokens agents individually exhibited excellent performance. However, when these agents were combined in our experiments, only the Expected SARSA agent was able to determine an optimal policy for this environment. This policy, depicted in Figure \ref{fig:esbvt}, prioritizes avoiding obstacles rather than shooting them down. The agent appears to prioritize safety over the potential for a higher score by shooting down a bug or virus, as this strategy carries the risk of energy depletion. This preference for a risk-averse approach is consistent with the agent's previous behavior.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{agent=ExpectedSARSA,agentSpecParam=[eps=0.8,epsFinal=0.0001,gam=1,initOptVal=500],level=1,env=[Bugs,Tokens,Viruses],shooting=False,dists=1,rots=6_0}
+	\caption{Policy of the Expected SARSA algorithm on the Bugs, Viruses and Tokens environment combined}    
+    \label{fig:esbvt}
+\end{figure}
 
 \section{All obstacles}
+
 
