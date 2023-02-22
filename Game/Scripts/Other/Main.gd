@@ -6,12 +6,14 @@ var options = """
 argument options:
     - n=int :               number of games
     
+    - stoppingPoint=int :   stop after the agent wins this many consecutive games 
+    
     - agent=string :        name of the agent
                             options: [Keyboard, Static, Random, MonteCarlo, SARSA, QLearning, ExpectedSARSA, DoubleQLearning]
                             sub-options (only for the agents listed below):
                                 MonteCarlo, SARSA, QLearning, ExpectedSARSA, DoubleQLearning
                                 =[float, float, float, float] : 
-                                [gam (range [0,1]), eps (range [0,1]), epsFinal (range [0,1]), initOptVal [0,~)]
+                                [gam (range [0,1]), eps (range [0,1]), epsFinal (range [0,1]), initOptVal (range [0,~))]
                                 eg. use: "MonteCarlo:eps=0.1,gam=0.2"
             
     - level=int :           number of the level to start from 
@@ -30,6 +32,8 @@ argument options:
     - dists=int :           number of states in a 100-meter interval
     
     - rots=int :            number of states in 360 degrees rotation
+    
+    - agentSeedVal=int :    seed value for the random moves the agent takes
     
     - database=string:      read = read the data for this command from an existing file 
                             write = update the data after the command is executed 
@@ -70,6 +74,8 @@ var agent_specific_param = []
 var ceval = false
 var debug = false
 var ad_ver = 0
+var agent_seed_val = 0
+var stopping_point = 10
 
 var agent_inst = Keyboard.new()
 
@@ -84,6 +90,8 @@ var end
 var num_of_ticks = 0.0
 var wins = 0
 var winning_score = 0.0
+
+var consecutive_games_won = 0
 
 var file = File.new()
 var command = ""
@@ -113,7 +121,7 @@ func _ready():
         build_filename()
         rename_files()
         # set seed val for an agent
-        agent_inst.set_seed_val(seed_val)
+        agent_inst.set_seed_val(agent_seed_val)
         if not agent_inst.init(actions, read, write, command, n, debug):
             print("Something went wrong, please try again")
             print(options)
@@ -137,7 +145,7 @@ func play_game():
         game = game_scene.instance()
         set_param_in_game()
         add_child(game)
-    elif n > 0:
+    elif n > 0 and consecutive_games_won < stopping_point:
         n -= 1
         game = game_scene.instance()
         set_param_in_game()
@@ -203,7 +211,7 @@ func build_filename():
     sorted_agent_specific_param.sort()
     
     command = PoolStringArray(["agent=" + String(agent), "agentSpecParam=" + String(sorted_agent_specific_param), "level=" + String(level), "env=" + String(sorted_env), 
-                            "shooting=" + String(shooting), "dists=" + String(dists), "rots=" + String(rots)]
+                            "shooting=" + String(shooting), "dists=" + String(dists), "rots=" + String(rots), "agentSeedVal=" + String(agent_seed_val)]
                                 ).join(",").replace(' ','')    
    
 func set_param(param):
@@ -263,15 +271,19 @@ func set_param(param):
                             debug = false
                         _: # invalid param value
                             return false
+                "agentSeedVal":
+                    agent_seed_val = int(param[key])   
+                "stoppingPoint":
+                    stopping_point = int(param[key])     
                 _: # invalid param value
                     return false
                         
-        #check if everything is valid
+        # check if everything is valid
         if (n < 0 or not agent in all_agents or 
             level < 0 or level > MAX_LEVEL or not check_env() or
-            dists < 0 or rots < 0):
+            dists < 0 or rots < 0 or stopping_point < 1):
             return false 
-              
+        
         # we don't need actions that have shooting if it was specified in the command line
         # or it is not necessary (there is nothing in the env to shoot)
         if not shooting or (not env.empty() and not "bugs" in env and not "viruses" in env):
@@ -346,6 +358,7 @@ func print_and_write_score(score, win):
     
     if not ceval or is_eval_game:
         write_data("%.1f" % score)
+        
     
     if win:  
         data += " Game won!"  
@@ -370,6 +383,7 @@ func write_agent_databases():
         ad_file.close()
 
 func print_and_write_ending():
+    
     var ratio_of_wins = "Games won: %d/%d" % [wins, num_of_games]    
     var avg_score = "Average score: %.1f" % [scores_sum / num_of_games]
     # Note: we have to turn the microseconds to seconds, thus we devide by 1_000_000
@@ -405,6 +419,8 @@ func on_game_finished(score, ticks, win, time):
     if not ceval or is_eval_game:
         wins += int(win)
         add_score(score)
+        # count how many games in a row have been won
+        consecutive_games_won = (consecutive_games_won + 1) * int(win)
     # finish up
     print_and_write_score(score, win)
     agent_inst.end_game(score, time)        

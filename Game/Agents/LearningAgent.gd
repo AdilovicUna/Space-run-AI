@@ -45,9 +45,6 @@ var prev_msec = 0
 var epsilon_action = false # needed in MonteCarlo but is changed in this class
 
 func init_agent(actions, read, write, filename, curr_n, debug):
-     # so that we can replicate experiments
-    rand.seed = 0
-    
     DEBUG = debug
     
     ACTIONS = actions
@@ -71,7 +68,6 @@ func init_agent(actions, read, write, filename, curr_n, debug):
     if not write: 
         # we just want to check how good agent is without any randomness
         EPSILON = 0
-        
     var file = File.new()
     file.open("res://Agent_databases/" + FILENAME + ".txt", File.READ)
     if file.is_open():
@@ -187,8 +183,8 @@ func all_state_actions():
     pass # subclass must implement
 
 const MOVES_MAP = {
-    '[-1, 0]': '←', '[0, 0]': '↑', '[1, 0]': '→',
-    '[-1, 1]': '←*', '[0, 1]': '↑*', '[1, 1]': '→*'
+    '[-1, 0]': '<', '[0, 0]': '^', '[1, 0]': '>',
+    '[-1, 1]': '<*', '[0, 1]': '^*', '[1, 1]': '>*'
 }
 
 var last_policy = null

@@ -1,11 +1,38 @@
-from email.policy import default
-from genericpath import exists
 import subprocess
 import sys
-from turtle import goto
+import os
+
+# min distance for any env is assumed to be dists=1
+rotsDict = {
+    'O': 13,
+    'X': 11,
+    'I': 6,
+    'MovingI': 6,
+    'Triangles': 6,
+    'Hex': 22,
+    'HexO': 7,
+    'HalfHex': 6,
+    'Walls': 22,
+    'Balls': 15,
+    'Traps': 22,
+
+    'Worm': 6, 
+    'LadybugFlying': 6, 
+    'LadybugWalking': 6, 
+    'Bugs': 6,
+
+    'Rotavirus': 6, 
+    'Bacteriophage': 6,
+    'Viruses': 6
+}
+
+POSSIBLE_TRAPS = ["I","O", "MovingI", "X", "Walls", 
+                        "Hex", "HexO", "Balls", "Triangles", "HalfHex"]
+POSSIBLE_BUGS = ["Worm", "LadybugFlying", "LadybugWalking"]
+POSSIBLE_VIRUSES = ["Rotavirus", "Bacteriophage"]
 
 
-def build_filename(agent, agent_spec_param, level, env, shooting, dists, rots):
+def build_filename(agent, agent_spec_param, level, env, shooting, dists, rots, agent_seed_val):
     sorted_env = sorted(env)
     sorted_agent_spec_param = sorted(agent_spec_param)
 
@@ -13,207 +40,220 @@ def build_filename(agent, agent_spec_param, level, env, shooting, dists, rots):
         sorted_env = 'all'
 
     command = ['agent=' + str(agent), 'agentSpecParam=' + str(sorted_agent_spec_param), 'level=' + str(level), 'env=' + str(sorted_env),
-               'shooting=' + str(shooting == 'enabled'), 'dists=' + str(dists), 'rots=' + str(rots)]
+               'shooting=' + str(shooting == 'enabled'), 'dists=' + str(dists), 'rots=' + str(rots),  'agentSeedVal=' + str(agent_seed_val)]
 
     return ','.join(command).replace(' ', '').replace('\'', '')
 
 
-def run_with_one_env(database, agent, agent_spec_param, n, env, shooting, level, path, curr_env,
-                    dists_from, dists_to, rots_from, rots_to, win_rate_minimum, debug):
+def run(path, command, filename):
+    print('command: ', command)
 
-    dists = dists_from
-    rots = rots_from
+    directory = 'Tests_output/'
+    if not os.path.isdir(directory):
+        os.makedirs(directory)
 
-    win_rate = 0
-    command_outputs_path = '../Game/Command_outputs/'
+    # write results in a file so that they can be inspected later
+    with open('Tests_output/' + filename + '.txt', 'w') as f:
+        subprocess.run(command, cwd=path, stdout=f,
+                       stderr=subprocess.STDOUT, text=True)
 
-    agent_spec_param_str = ','.join(agent_spec_param)
 
-    while True:
-        if (win_rate >= win_rate_minimum or 
-            (dists == dists_to and rots == rots_to)):
-            return
-
-        command = ['godot', '--no-window', '--fixed-fps', '1', '--disable-render-loop',
-                   'database=' + database,
-                   'level=' + str(level),
-                   'agent=' + agent + ':' + agent_spec_param_str,
-                   'n=' + str(n),
-                   'env=' + env,
-                   'rots=' + str(rots),
-                   'dists=' + str(dists),
-                   'shooting=' + shooting,
-                   'debug=' + debug]
-        subprocess.run(command, cwd=path)
-
-        filename = build_filename(
-            agent,  agent_spec_param, level, curr_env, shooting, dists, rots)
-        co_f = open(command_outputs_path + filename + '.txt', 'r')
-        co_data = co_f.read().strip().split('\n')
-        win_rate = co_data[-3].split()[1].split('/')
-        win_rate = int(win_rate[0]) / int(win_rate[1])
-
-        if rots == rots_to:
-            dists += 1
-            rots = rots_from
-        else:
-            rots += 1
-
-def find_minimum_param(agent, level, curr_env,shooting):
-    result_d = 1
-    result_r = 6
-    command_outputs_path = '../Game/Command_outputs/'
-    for env in curr_env:
-        dists = 10
-        rots = 100
-        for d in range(dists, 0, -1):
-            for r in range(rots, 0, -1):
-                filename = build_filename(agent, level, [env], 
-                                            shooting, d, r)
-                if exists(command_outputs_path + filename + '.txt'):
-                    result_d = max(result_d, d)
-                    result_r = max(result_r, r)
-                    break
-            else:
-                continue
-            break
-
-    return [result_d, result_r]
-
-def run(curr_env, games_per_env, 
-        len_traps, len_bugs, len_viruses, len_tokens,
-        database, agent, agent_spec_param, level, path,
-        dists_from, dists_to, rots_from, rots_to, win_rate_minimum, subsets, debug):
-    
-    n = (games_per_env * len(curr_env) + 
-        games_per_env * len_traps * int('traps' in curr_env) + 
-        games_per_env * len_bugs * int('bugs' in curr_env) + 
-        games_per_env * len_viruses * int('viruses' in curr_env) + 
-        games_per_env * len_tokens * int('tokens' in curr_env) +
-        games_per_env * int(dists_to > 4) + 
-        games_per_env * int(rots_to > 12))
-
-    env = ','.join(curr_env)
-
-    if subsets:
-        dists_from, rots_from = find_minimum_param(agent, level, curr_env,'disabled')
-    
-    run_with_one_env(database, agent, agent_spec_param, n, env,
-                        'disabled', level, path, curr_env,
-                         dists_from, dists_to, rots_from, rots_to, win_rate_minimum, debug)
-
-    if 'bugs' in curr_env or 'viruses' in curr_env:
-        if subsets:
-            dists_from, rots_from = find_minimum_param(agent, level, curr_env,'enabled')
-        run_with_one_env(database, agent, agent_spec_param, n, env,
-                            'enabled', level, path, curr_env,
-                            dists_from, dists_to, rots_from, rots_to, win_rate_minimum, debug)
-
-def main(all_env, subsets, dists_from, dists_to, rots_from, rots_to, 
-            games_per_env, win_rate_minimum,
-            gam, eps, initOptVal, debug):
-
-    agent_spec_param =['gam=' + str(gam), 'eps=' + str(eps), 'initOptVal=' + str(initOptVal)]
+def main(n, m, env, agent, shooting, level, database, ceval, debug,
+         gam, eps, epsFinal, initOptVal, stoppingPoint, individual_env):
 
     path = '../Game'
+    dists = 1
+    # note: for sub-options while loops are used to loop
+    #       because range() does not accept floats
 
-    len_traps = 10
-    len_bugs = 3
-    len_viruses = 2
-    len_tokens = 1
-    
-    env_powerset = [[]]
+    # loop seeds
+    for seed in range(m):
+        # loop agents
+        for one_agent in agent:
+            # loop shooting
+            for one_shooting in shooting:
+                gam_value = round(gam[0], 2)
+                # loop gamma
+                while gam_value < gam[1]:
+                    eps_value = round(eps[0], 2)
+                    # loop epsilon
+                    while eps_value < eps[1]:
+                        epsFinal_value = round(epsFinal[0], 5)
+                        # loop final epsilon
+                        while epsFinal_value < epsFinal[1]:
+                            initOptVal_value = round(initOptVal[0], 1)
+                            # loop initial optimistic value
+                            while initOptVal_value < initOptVal[1]:
+                                agent_spec_param = ['gam=' + '{:.2f}'.format(round(gam_value, 2)), 
+                                                    'eps=' + '{:.2f}'.format(round(eps_value, 2)), 
+                                                    'epsFinal=' + '{:.5f}'.format(round(epsFinal_value, 5)), 
+                                                    'initOptVal=' + '{:.1f}'.format(round(initOptVal_value, 1))]
+                                command = ['godot', '--no-window', '--fixed-fps', '1', '--disable-render-loop',
+                                           'level=' + str(level),
+                                           'n=' + str(n),
+                                           'agentSeedVal=' + str(seed),
+                                           'stoppingPoint=' +
+                                           str(stoppingPoint),
+                                           'dists=' + str(dists),
+                                           'agent=' + one_agent + ':' +
+                                           ','.join(agent_spec_param),
+                                           'shooting=' + one_shooting,
+                                           'debug=' + debug,
+                                           'ceval=' + ceval,
+                                           'database=' + database]
+                                if individual_env:
+                                    # loop environment
+                                    for e in env:
+                                        rots = rotsDict[e]
+                                        command.append('env=' + e)
+                                        command.append('rots=' + str(rots))
+                                        filename = build_filename(
+                                            one_agent, agent_spec_param, level, e, one_shooting, dists, rots, seed)
+                                        run(path, command, filename)
+                                else:  # only 1 environment
+                                    rots = minRots(env)
+                                    command.append('env=' + ','.join(env))
+                                    command.append('rots=' + str(rots))
+                                    filename = build_filename(
+                                        one_agent, agent_spec_param, level, env, one_shooting, dists, rots, seed)
+                                    run(path, command, filename)
 
-    agent = 'MonteCarlo'
-    database = 'write'
-    level = 1
+                                initOptVal_value += initOptVal[2]
+                            epsFinal_value += epsFinal[2]
+                        eps_value += eps[2]
+                    gam_value += gam[2]
 
-    if subsets:
-        special_env = ['traps', 'bugs', 'viruses', 'tokens']
-        if 'traps' in all_env:
-            all_env = [env for env in all_env if env in special_env]
 
-        for i in all_env:
-            for j in range(len(env_powerset)):
-                curr_env = env_powerset[j]+[i]
-                print('curr_env: ', curr_env)
+def getSubOptVals(param):
+    param = param[1:-1].split(',')
+    return [float(param[0]), float(param[1]), float(param[2])]
 
-                env_powerset += [curr_env]
-                if env_powerset == []:
-                    return
-                
-                run(curr_env, games_per_env,
-                    len_traps, len_bugs, len_viruses, len_tokens,
-                    database, agent, agent_spec_param, level, path, 
-                    dists_from, dists_to, rots_from, rots_to, win_rate_minimum, subsets, debug)
-    else:
-        for i in all_env:
-            curr_env = [i]
-            run(curr_env, games_per_env,
-                len_traps, len_bugs, len_viruses, len_tokens,
-                database, agent, agent_spec_param, level, path,
-                dists_from, dists_to, rots_from, rots_to, win_rate_minimum, subsets, debug)
+
+def getDescription():
+    try:
+        with open('testingDescription.txt', 'r') as f:
+            return f.read()
+    except FileNotFoundError:
+        print('File not found')
+        raise SystemExit
+    except PermissionError:
+        print('Permission denied')
+        raise SystemExit
+
+
+def minRots(env):
+    temp_env = [e for e in env
+                if e != 'Traps' and e != 'Bugs' and e != 'Viruses' and e != 'Tokens']
+    return min([rotsDict[e]] for e in temp_env)[0]
+
 
 if __name__ == '__main__':
+    # read description content from the txt file
+    description = getDescription()
 
-    # arg format: env=I,MovingI,bugs,... subsets=False (or True)
-    #             dists=1,4 rots=6,12 win_rate_minimum=0.3 games_per_env=250
+    if len(sys.argv) == 2 and sys.argv[1] == '-description':
+        print(description)
+        raise SystemExit
 
-    #all_env = ['traps', 'bugs', 'viruses', 'tokens', 'I', 'O', 'MovingI', 'X', 'Walls', 'Hex', 'HexO', 'Balls', 'Triangles', 'HalfHex']
-    #all_env = ['I', 'O', 'MovingI', 'X', 'Walls', 'Hex', 'HexO', 'Balls', 'Triangles', 'HalfHex']
-    all_env = ['I', 'O', 'MovingI', 'X', 'Walls', 'Hex', 'Triangles']
-    #all_env = ['HexO', 'Balls', 'HalfHex']
-    
-    # indicates if the program should test only individual elements of the all_env
-    # or all of the subsets (powerset)
-    subsets = True
-
-    games_per_env = 250
-
-    dists_from = 1
-    dists_to = 4
-
-    rots_from = 6
-    rots_to = 24
-
-    gam = 1
-    eps = 0
-    initOptVal = 100
-
+    # default values for agrs:
+    n = 100
+    m = 10
+    env = ['Traps', 'Bugs', 'Viruses', 'Tokens']  # all
+    agent = ['MonteCarlo']
+    shooting = 'disabled'
+    level = 1
+    database = 'write'
+    ceval = 'true'  # Space-run indicates bool vals with lowercase
     debug = 'false'
+    stoppingPoint = 10
 
-    win_rate_minimum = 0.3
+    gam = [1.0, 2.0, 1.0]  # essentially there is only 1 gam value
+    eps = [0.2, 0.3, 0.1]
+    epsFinal = [0.0001, 0.0002, 0.0001]
+    initOptVal = [100.0, 200.0, 100.0]
 
-    for i in range(1,len(sys.argv)):
-        i = sys.argv[i]
-        temp = i.split('=')
-        match temp[0]:
-            case 'env':
-                all_env = temp[1].split(',')
-            case 'subsets':
-                subsets = temp[1] == 'True'
-            case 'dists':
-                d = temp[1].split(',')
-                dists_from = int(d[0])
-                dists_to = int(d[1])
-            case 'rots':
-                r = temp[1].split(',')
-                rots_from = int(r[0])
-                rots_to = int(r[1])
-            case 'win_rate_minimum':
-                win_rate_minimum = int(temp[1])
-            case 'games_per_env':
-                games_per_env = int(temp[1])
-            case 'gam':
-                gam = float(temp[1])
-            case 'eps':
-                eps = float(temp[1])
-            case 'initOptVal':
-                initOptVal = float(temp[1])
-            case 'debug':
-                debug = 'true' if temp[1] == 'True' else 'false'
-            case _:
-                print('Invalid arguments')
-                exit 
-            
-    main(all_env, subsets, dists_from, dists_to, rots_from, rots_to, games_per_env, win_rate_minimum, gam, eps, initOptVal, debug)
+    all_traps = False
+    all_bugs = False
+    all_viruses = False
+    all_agents = False
+    all_shooting = False
+
+    # read all args and overwrite default values if needed
+    try:
+        print('sys.argv: ', sys.argv)
+        for i in range(1, len(sys.argv)):
+            i = sys.argv[i][2:]  # [2:] to remove --
+            temp = i.split('=')
+            match temp[0]:
+                case 'n':
+                    n = int(temp[1])
+                case 'm':
+                    m = int(temp[1])
+                case 'level':
+                    level = int(temp[1])
+                case 'stoppingPoint':
+                    stoppingPoint = int(temp[1])
+                case 'env':
+                    env = [a for a in temp[1][1:-1].split(',')]
+                case 'agent':
+                    agent = [a for a in temp[1][1:-1].split(',')]
+                case 'shooting':
+                    shooting = temp[1]
+                case 'database':
+                    database = temp[1]
+                case 'ceval':
+                    ceval = temp[1]
+                case 'debug':
+                    debug = temp[1]
+
+                case 'gam':
+                    gam = getSubOptVals(temp[1])
+                case 'eps':
+                    eps = getSubOptVals(temp[1])
+                case 'epsFinal':
+                    epsFinal = getSubOptVals(temp[1])
+                case 'initOptVal':
+                    initOptVal = getSubOptVals(temp[1])
+
+                case 'all_traps':
+                    all_traps = True
+                case 'all_bugs':
+                    all_bugs = True
+                case 'all_viruses':
+                    all_viruses = True
+                case 'all_agents':
+                    all_agents = True
+                case 'all_shooting':
+                    all_shooting = True
+                case _:
+                    print(f'Invalid argument {i}')
+                    print('Run with `-description` parameter for more infromation')
+                    raise SystemExit
+    except Exception:
+        print('Invalid argument')
+        print('Run with `-description` parameter for more infromation')
+        raise SystemExit
+
+    # customize and overwrite immutable variables if needed
+    # env
+    individual_env = all_traps or all_bugs or all_viruses
+    if individual_env:
+        env = []
+        if all_traps:
+            env += POSSIBLE_TRAPS
+        if all_bugs:
+             env += POSSIBLE_BUGS
+        if all_viruses:
+             env += POSSIBLE_VIRUSES
+    # agent
+    if all_agents:
+        agent = ['MonteCarlo', 'SARSA', 'QLearning',
+                 'ExpectedSARSA', 'DoubleQLearning']
+    # shooting
+    if all_shooting and (all_bugs or all_viruses):
+        shooting = ['enabled', 'disabled']
+    else:
+        shooting = ['enabled'] if shooting else ['disabled']
+
+    main(n, m, env, agent, shooting, level, database, ceval, debug,
+         gam, eps, epsFinal, initOptVal, stoppingPoint, individual_env)

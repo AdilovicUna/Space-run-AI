@@ -130,7 +130,3 @@ enter={
 [physics]
 
 common/physics_fps=30
-
-[rendering]
-
-environment/default_environment="res://Other/default_env.tres"

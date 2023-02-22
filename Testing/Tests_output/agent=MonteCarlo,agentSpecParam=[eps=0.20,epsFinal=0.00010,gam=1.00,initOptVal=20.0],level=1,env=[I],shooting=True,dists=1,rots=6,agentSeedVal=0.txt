@@ -1,0 +1,306 @@
+Godot Engine v3.4.4.stable.official.419e713a2 - https://godotengine.org
+OpenGL ES 3.0 Renderer: AMD Radeon(TM) RX Vega 10 Graphics
+OpenGL ES Batching: ON
+ 
+
+learning game:
+died on level 1, rot = 120
+Game 0 score: 7.7
+  last actions: [0,240,I]_[1,0] *[0,300,I]_[-1,0] [0,240,I]_[1,0] [0,300,I]_[1,0] [0,360,I]_[1,0] [0,60,I]_[1,0] *[0,120,I]_[1,0] 
+epsilon = 0.1854
+          60 120 180 240 300 360
+  (0, I)  <   ^   ^   ^   >   ^ 
+
+evaluation game:
+died on level 1, rot = 120
+Game 1 score: 12.7
+  last actions: [0,180,I]_[0,0] [0,240,I]_[0,0] [0,360,I]_[0,0] [0,180,I]_[0,0] [0,360,I]_[0,0] [0,120,I]_[0,0] 
+
+learning game:
+died on level 1, rot = 360
+Game 1 score: 2.5
+  last actions: [0,300,I]_[1,0] *[0,360,I]_[-1,0] [0,300,I]_[1,0] [0,360,I]_[0,0] 
+epsilon = 0.1718
+          60 120 180 240 300 360
+  (0, I)  <   ^   ^   ^  (^) (>)
+
+evaluation game:
+died on level 1, rot = 180
+Game 2 score: 6.2
+  last actions: [0,360,I]_[1,0] [0,60,I]_[-1,0] [0,360,I]_[1,0] [0,60,I]_[-1,0] [0,360,I]_[1,0] [0,300,I]_[0,0] [0,180,I]_[0,0] 
+
+learning game:
+died on level 1, rot = 120
+Game 2 score: 2.5
+  last actions: [0,120,I]_[0,0] 
+epsilon = 0.1592
+          60 120 180 240 300 360
+  (0, I)  <   ^   ^   ^   ^   > 
+
+evaluation game:
+died on level 1, rot = 120
+Game 3 score: 2.6
+  last actions: [0,120,I]_[0,0] 
+
+learning game:
+died on level 1, rot = 180
+Game 3 score: 7.8
+  last actions: [0,240,I]_[0,0] *[0,60,I]_[1,0] [0,120,I]_[0,0] [0,240,I]_[0,0] [0,180,I]_[0,0] 
+epsilon = 0.1476
+          60 120 180 240 300 360
+  (0, I)  <  (<) (<)  ^   ^   > 
+
+evaluation game:
+died on level 2, rot = 300
+Game 4 score: 59.5
+  last actions: [0,360,I]_[1,0] [0,60,I]_[-1,0] [0,360,I]_[1,0] [0,60,I]_[-1,0] [0,360,I]_[1,0] [0,60,I]_[-1,0] [0,300,I]_[0,0] 
+
+learning game:
+died on level 1, rot = 300
+Game 4 score: 2.7
+  last actions: [0,120,I]_[-1,0] [0,60,I]_[-1,0] [0,360,I]_[1,0] [0,60,I]_[-1,0] *[0,360,I]_[-1,0] [0,300,I]_[0,0] 
+epsilon = 0.1368
+          60 120 180 240 300 360
+  (0, I) (^) (>)  <   ^  (<) (^)
+
+evaluation game:
+died on level 1, rot = 180
+Game 5 score: 4.3
+  last actions: [0,180,I]_[-1,0] [0,120,I]_[1,0] [0,180,I]_[-1,0] [0,120,I]_[1,0] [0,180,I]_[-1,0] [0,120,I]_[1,0] [0,180,I]_[-1,0] 
+
+learning game:
+died on level 1, rot = 180
+Game 5 score: 2.7
+  last actions: [0,180,I]_[-1,0] [0,120,I]_[1,0] [0,180,I]_[-1,0] [0,120,I]_[1,0] [0,180,I]_[-1,0] [0,120,I]_[1,0] *[0,180,I]_[0,0] 
+epsilon = 0.1268
+          60 120 180 240 300 360
+  (0, I)  ^  (^) (>)  ^   <   ^ 
+
+evaluation game:
+died on level 1, rot = 120
+Game 6 score: 16.1
+  last actions: [0,60,I]_[0,0] [0,360,I]_[0,0] [0,240,I]_[0,0] [0,300,I]_[-1,0] [0,240,I]_[0,0] [0,60,I]_[0,0] [0,120,I]_[0,0] 
+
+learning game:
+died on level 1, rot = 120
+Game 6 score: 6.1
+  last actions: [0,240,I]_[0,0] [0,120,I]_[0,0] 
+epsilon = 0.1175
+          60 120 180 240 300 360
+  (0, I)  ^  (<)  >  (<)  <   ^ 
+
+evaluation game:
+died on level 2, rot = 360
+Game 7 score: 57.9
+  last actions: [0,240,I]_[-1,0] [0,180,I]_[1,0] [0,240,I]_[-1,0] [0,180,I]_[1,0] [0,240,I]_[-1,0] [0,180,I]_[1,0] [0,360,I]_[0,0] 
+
+learning game:
+died on level 1, rot = 360
+Game 7 score: 23.6
+  last actions: [0,180,I]_[1,0] [0,240,I]_[-1,0] [0,180,I]_[1,0] [0,240,I]_[-1,0] *[0,180,I]_[0,0] [0,60,I]_[0,0] [0,360,I]_[0,0] 
+epsilon = 0.1089
+          60 120 180 240 300 360
+  (0, I)  ^   <   >   <   <   ^ 
+
+evaluation game:
+died on level 1, rot = 360
+Game 8 score: 9.6
+  last actions: [0,240,I]_[-1,0] [0,180,I]_[1,0] [0,240,I]_[-1,0] [0,180,I]_[1,0] [0,240,I]_[-1,0] [0,180,I]_[1,0] [0,360,I]_[0,0] 
+
+learning game:
+died on level 1, rot = 360
+Game 8 score: 13.3
+  last actions: [0,180,I]_[1,0] [0,240,I]_[-1,0] [0,180,I]_[1,0] [0,240,I]_[-1,0] *[0,180,I]_[1,0] *[0,240,I]_[0,0] [0,360,I]_[0,0] 
+epsilon = 0.1009
+          60 120 180 240 300 360
+  (0, I)  ^  (>)  >  (>)  <   ^ 
+
+evaluation game:
+died on level 1, rot = 360
+Game 9 score: 12.6
+  last actions: [0,300,I]_[-1,0] [0,240,I]_[1,0] [0,300,I]_[-1,0] [0,240,I]_[1,0] [0,300,I]_[-1,0] [0,240,I]_[1,0] [0,360,I]_[0,0] 
+
+learning game:
+died on level 1, rot = 360
+Game 9 score: 2.3
+  last actions: [0,240,I]_[1,0] [0,300,I]_[-1,0] [0,240,I]_[1,0] [0,300,I]_[-1,0] *[0,240,I]_[1,0] *[0,300,I]_[1,0] *[0,360,I]_[0,0] 
+epsilon = 0.0935
+          60 120 180 240 300 360
+  (0, I)  ^   >   >  (<)  <   ^ 
+
+evaluation game:
+died on level 1, rot = 360
+Game 10 score: 21.3
+  last actions: [0,240,I]_[-1,0] [0,180,I]_[1,0] [0,240,I]_[-1,0] [0,180,I]_[1,0] [0,240,I]_[-1,0] [0,180,I]_[1,0] [0,360,I]_[0,0] 
+
+learning game:
+died on level 1, rot = 360
+Game 10 score: 8.0
+  last actions: [0,180,I]_[1,0] [0,240,I]_[-1,0] [0,180,I]_[1,0] *[0,240,I]_[1,0] [0,300,I]_[-1,0] [0,240,I]_[-1,0] [0,360,I]_[0,0] 
+epsilon = 0.0867
+          60 120 180 240 300 360
+  (0, I)  ^  (<)  >   <   <   ^ 
+
+evaluation game:
+died on level 1, rot = 360
+Game 11 score: 8.9
+  last actions: [0,240,I]_[-1,0] [0,180,I]_[1,0] [0,240,I]_[-1,0] [0,180,I]_[1,0] [0,240,I]_[-1,0] [0,180,I]_[1,0] [0,360,I]_[0,0] 
+
+learning game:
+died on level 1, rot = 360
+Game 11 score: 7.6
+  last actions: *[0,180,I]_[0,0] [0,300,I]_[-1,0] [0,240,I]_[-1,0] [0,180,I]_[1,0] *[0,240,I]_[1,0] *[0,300,I]_[1,0] [0,360,I]_[0,0] 
+epsilon = 0.0803
+          60 120 180 240 300 360
+  (0, I)  ^   <   >   <   <  (>)
+
+evaluation game:
+died on level 11, rot = 240
+Game 12 score: 371.2 Game won!
+  last actions: [0,240,I]_[-1,0] [0,180,I]_[1,0] [0,240,I]_[-1,0] [0,180,I]_[1,0] [0,240,I]_[-1,0] [0,180,I]_[1,0] [0,240,I]_[-1,0] 
+
+learning game:
+died on level 7, rot = 180
+Game 12 score: 255.4
+  last actions: [0,180,I]_[1,0] [0,240,I]_[-1,0] [0,180,I]_[1,0] [0,240,I]_[-1,0] [0,180,I]_[1,0] [0,240,I]_[-1,0] *[0,180,I]_[-1,0] 
+epsilon = 0.0745
+          60 120 180 240 300 360
+  (0, I) (>) (>) (<) (^)  <   > 
+
+evaluation game:
+died on level 1, rot = 180
+Game 13 score: 4.1
+  last actions: [0,180,I]_[-1,0] [0,120,I]_[1,0] [0,180,I]_[-1,0] [0,120,I]_[1,0] [0,180,I]_[-1,0] [0,120,I]_[1,0] [0,180,I]_[-1,0] 
+
+learning game:
+died on level 1, rot = 180
+Game 13 score: 2.6
+  last actions: [0,180,I]_[-1,0] [0,120,I]_[1,0] [0,180,I]_[-1,0] [0,120,I]_[1,0] [0,180,I]_[-1,0] [0,120,I]_[1,0] *[0,180,I]_[0,0] 
+epsilon = 0.0690
+          60 120 180 240 300 360
+  (0, I)  >  (<)  <   ^   <   > 
+
+evaluation game:
+died on level 11, rot = 240
+Game 14 score: 371.2 Game won!
+  last actions: [0,60,I]_[1,0] [0,120,I]_[-1,0] [0,60,I]_[1,0] [0,120,I]_[-1,0] [0,60,I]_[1,0] [0,300,I]_[-1,0] [0,240,I]_[0,0] 
+
+learning game:
+died on level 1, rot = 180
+Game 14 score: 9.9
+  last actions: *[0,60,I]_[-1,0] [0,360,I]_[1,0] [0,60,I]_[1,0] *[0,120,I]_[-1,0] [0,60,I]_[1,0] *[0,120,I]_[1,0] [0,180,I]_[-1,0] 
+epsilon = 0.0640
+          60 120 180 240 300 360
+  (0, I) (^)  <   <   ^   <   > 
+
+evaluation game:
+died on level 11, rot = 60
+Game 15 score: 371.2 Game won!
+  last actions: [0,120,I]_[-1,0] [0,60,I]_[0,0] [0,120,I]_[-1,0] [0,60,I]_[0,0] [0,300,I]_[-1,0] [0,240,I]_[0,0] [0,60,I]_[0,0] 
+
+learning game:
+died on level 1, rot = 120
+Game 15 score: 40.0
+  last actions: [0,120,I]_[-1,0] [0,60,I]_[0,0] [0,180,I]_[-1,0] [0,120,I]_[-1,0] [0,60,I]_[0,0] [0,180,I]_[-1,0] *[0,120,I]_[0,0] 
+epsilon = 0.0593
+          60 120 180 240 300 360
+  (0, I)  ^   <   <   ^   <   > 
+
+evaluation game:
+died on level 11, rot = 240
+Game 16 score: 371.2 Game won!
+  last actions: [0,180,I]_[-1,0] [0,120,I]_[-1,0] [0,60,I]_[0,0] [0,120,I]_[-1,0] [0,60,I]_[0,0] [0,300,I]_[-1,0] [0,240,I]_[0,0] 
+
+learning game:
+died on level 6, rot = 120
+Game 16 score: 218.2
+  last actions: [0,180,I]_[-1,0] [0,120,I]_[-1,0] [0,60,I]_[0,0] [0,120,I]_[-1,0] [0,60,I]_[0,0] [0,240,I]_[0,0] *[0,120,I]_[0,0] 
+epsilon = 0.0549
+          60 120 180 240 300 360
+  (0, I)  ^   <   <   ^   <   > 
+
+evaluation game:
+died on level 11, rot = 240
+Game 17 score: 371.2 Game won!
+  last actions: [0,60,I]_[0,0] [0,180,I]_[-1,0] [0,120,I]_[-1,0] [0,60,I]_[0,0] [0,360,I]_[1,0] [0,60,I]_[0,0] [0,240,I]_[0,0] 
+
+learning game:
+died on level 1, rot = 120
+Game 17 score: 22.9
+  last actions: [0,240,I]_[0,0] [0,300,I]_[-1,0] [0,240,I]_[0,0] [0,180,I]_[-1,0] [0,120,I]_[-1,0] [0,60,I]_[0,0] *[0,120,I]_[0,0] 
+epsilon = 0.0509
+          60 120 180 240 300 360
+  (0, I)  ^  (>)  <   ^   <   > 
+
+evaluation game:
+died on level 1, rot = 120
+Game 18 score: 2.5
+  last actions: [0,120,I]_[1,0] [0,180,I]_[-1,0] [0,120,I]_[1,0] [0,180,I]_[-1,0] [0,120,I]_[1,0] [0,180,I]_[-1,0] [0,120,I]_[1,0] 
+
+learning game:
+died on level 1, rot = 120
+Game 18 score: 2.7
+  last actions: [0,120,I]_[1,0] [0,180,I]_[-1,0] [0,120,I]_[1,0] [0,180,I]_[-1,0] [0,120,I]_[1,0] [0,180,I]_[-1,0] *[0,120,I]_[0,0] 
+epsilon = 0.0472
+          60 120 180 240 300 360
+  (0, I)  ^  (<) (>)  ^   <   > 
+
+evaluation game:
+died on level 11, rot = 60
+Game 19 score: 371.2 Game won!
+  last actions: [0,60,I]_[0,0] [0,180,I]_[1,0] [0,240,I]_[0,0] [0,60,I]_[0,0] [0,240,I]_[0,0] [0,120,I]_[-1,0] [0,60,I]_[0,0] 
+
+learning game:
+died on level 11, rot = 240
+Game 19 score: 371.2 Game won!
+  last actions: [0,180,I]_[1,0] [0,240,I]_[0,0] [0,180,I]_[1,0] [0,240,I]_[0,0] [0,60,I]_[0,0] [0,300,I]_[-1,0] [0,240,I]_[0,0] 
+epsilon = 0.0437
+          60 120 180 240 300 360
+  (0, I)  ^   <   >   ^   <   > 
+
+evaluation game:
+died on level 11, rot = 240
+Game 20 score: 371.2 Game won!
+  last actions: [0,360,I]_[1,0] [0,60,I]_[0,0] [0,360,I]_[1,0] [0,60,I]_[0,0] [0,240,I]_[0,0] [0,300,I]_[-1,0] [0,240,I]_[0,0] 
+
+learning game:
+died on level 11, rot = 60
+Game 20 score: 371.2 Game won!
+  last actions: [0,180,I]_[1,0] [0,240,I]_[0,0] [0,60,I]_[0,0] [0,300,I]_[-1,0] [0,240,I]_[0,0] [0,360,I]_[1,0] [0,60,I]_[0,0] 
+epsilon = 0.0405
+          60 120 180 240 300 360
+  (0, I)  ^   <   >   ^   <  (<)
+
+evaluation game:
+died on level 11, rot = 240
+Game 21 score: 371.2 Game won!
+  last actions: [0,120,I]_[-1,0] [0,60,I]_[0,0] [0,360,I]_[-1,0] [0,300,I]_[-1,0] [0,240,I]_[0,0] [0,180,I]_[1,0] [0,240,I]_[0,0] 
+
+learning game:
+died on level 2, rot = 360
+Game 21 score: 77.1
+  last actions: [0,60,I]_[0,0] [0,120,I]_[-1,0] [0,60,I]_[0,0] [0,180,I]_[1,0] [0,240,I]_[0,0] [0,60,I]_[0,0] *[0,360,I]_[0,0] 
+epsilon = 0.0376
+          60 120 180 240 300 360
+  (0, I)  ^   <   >   ^   <   < 
+
+evaluation game:
+died on level 11, rot = 240
+Game 22 score: 371.2 Game won!
+  last actions: [0,120,I]_[-1,0] [0,60,I]_[0,0] [0,240,I]_[0,0] [0,60,I]_[0,0] [0,360,I]_[-1,0] [0,300,I]_[-1,0] [0,240,I]_[0,0] 
+
+learning game:
+died on level 11, rot = 240
+Game 22 score: 371.2 Game won!
+  last actions: [0,240,I]_[0,0] [0,180,I]_[1,0] [0,240,I]_[0,0] [0,300,I]_[-1,0] [0,240,I]_[0,0] [0,180,I]_[1,0] [0,240,I]_[0,0] 
+epsilon = 0.0348
+          60 120 180 240 300 360
+  (0, I)  ^   <   >   ^   <   < 
+
+evaluation game:
+died on level 11, rot = 60
+Game 23 score: 371.2 Game won!
+  last actions: [0,240,I]_[0,0] [0,180,I]_[1,0] [0,240,I]_[0,0] [0,180,I]_[1,0] [0,240,I]_[0,0] [0,120,I]_[-1,0] [0,60,I]_[0,0] 
+Games won: 10/23
+Average score: 170.9
+Average time per tick: 0.000141

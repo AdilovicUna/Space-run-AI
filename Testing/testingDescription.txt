@@ -1,0 +1,100 @@
+- Runs multiple experiments with specified parameters
+- By 1 experiment we take an average of n*m games 
+    (with n games run with 1 seed m times)
+- Immutable and mutable parameters:
+    immutable - 
+        each experiment is runs with the same value
+        options:
+            n - number of games (positive int)
+                (default: 100)
+            
+            stoppingPoint - stop after the agent wins this many consecutive games 
+                            (default: 10)
+
+            m - number of different seeds used for one experiment 
+                (default: 10)
+
+            env -   list of obstacles that will be chosen in the game 
+                    Any subset of: [Traps, Bugs, Viruses, Tokens, 
+                                    I, O, MovingI, X, Walls, Hex, 
+                                    HexO, Balls, Triangles, HalfHex,
+                                    Worm, LadybugFlying, LadybugWalking,
+                                    Rotavirus, Bacteriophage]
+                    (default: all)
+            
+            agent - name of the agent
+                    Any subset of: [MonteCarlo, SARSA, QLearning, 
+                                    ExpectedSARSA, DoubleQLearning]
+                    (default: MonteCarlo)   
+
+            shooting -  enable or disable shooting   (enabled,disabled)   
+                        (default: disabled)    
+
+            level - number of the level to start from 
+                    One of: [1, ... , 10] 
+                    (default: 1)   
+
+            database -  read = read the data for this command from an existing file 
+                        write = update the data after the command is executed 
+                        One of: [read, write, read_write] 
+                        (default: write)   
+        
+            ceval - performs continuous evaluation  (true,false)   
+                    (default: true) 
+                            
+            debug - display debug print statements  (true,false)   
+                    (default: false)               
+    
+    mutable - 
+        the value changes (typically within a range) btw experiments
+        these are sub-options parameters for each agent:
+            gam - range [0,1] (default: 1.0)        
+            eps - range [0,1] (default: 0.2)  
+            epsFinal - range [0,1] (default: 0.0001)  
+            initOptVal - range [0,~) (default: 100.0)  
+        they are passed in the form: [min,max(not inclusive),step] (look at example usages below)
+
+- Top level experiment options:
+    all_traps, all_bugs, all_viruses - 
+        run experiments for each individual trap, bug or virus respectively
+    all_agents - run experiments with each learning agent
+    all_shooting - runs experiments with both shooting on and off
+    note: these options overwrite equivalent env, agent, shooting immutable options
+
+note: rots and dists vals for each env are hardcoded and cannot be changed
+    
+example usages:
+    - 'test.py --description': 
+                    writes these options
+    - 'test.py' :   
+                    10 times runs a 100 full games 
+                    with MonteCarlo agent
+                    performs continuous evaluation
+                    and writes the output to the database
+    - 'test.py --m=20 --n=1000 --all_agents --env=[I,O] --ceval=true' :
+                    for each agent
+                    20 times runs 1000 games
+                    with I and O traps
+                    performs continuous evaluation
+                    and writes the output to the database
+    - 'test.py --m=20 --n=1000 --all_agents --env=[I,O] --all_traps --all_bugs' :
+                    for each agent
+                    20 times runs 1000 games
+                    with each trap and bug individually
+                    (shooting is disabled)
+                    and writes the output to the database
+    - 'test.py --n=100 --all_traps --all_bugs --all_shooting --stoppingPoint=20' :
+                    10 times runs 100 games
+                    stop if 20 games in a row are won
+                    with each trap and bug individually
+                    for each env that has a bug, 
+                    experiment is run with and without shooting
+                    and writes the output to the database
+    - 'test.py --m=20 --agent=[DoubleQLearning,SARSA] --env=[I,O] --eps=[0.2,0.5,0.1] --initOptVal=[20.0,100.0,80.0]' :
+                    for each eps value
+                    for each initOptVal value
+                    for DoubleQLearning and SARSA
+                    20 times runs 100 games
+                    with I and O traps
+                    performs continuous evaluation
+                    and writes the output to the database
