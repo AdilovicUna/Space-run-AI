@@ -253,7 +253,7 @@ if __name__ == '__main__':
     if all_shooting and (all_bugs or all_viruses):
         shooting = ['enabled', 'disabled']
     else:
-        shooting = ['enabled'] if shooting else ['disabled']
+        shooting = [shooting] 
 
     main(n, m, env, agent, shooting, level, database, ceval, debug,
          gam, eps, epsFinal, initOptVal, stoppingPoint, individual_env)
