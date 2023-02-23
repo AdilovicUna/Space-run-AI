@@ -26,10 +26,10 @@ rotsDict = {
     'Viruses': 6
 }
 
-POSSIBLE_TRAPS = ["I","O", "MovingI", "X", "Walls", 
-                        "Hex", "HexO", "Balls", "Triangles", "HalfHex"]
-POSSIBLE_BUGS = ["Worm", "LadybugFlying", "LadybugWalking"]
-POSSIBLE_VIRUSES = ["Rotavirus", "Bacteriophage"]
+POSSIBLE_TRAPS = ['I','O', 'MovingI', 'X', 'Walls', 
+                        'Hex', 'HexO', 'Balls', 'Triangles', 'HalfHex']
+POSSIBLE_BUGS = ['Worm', 'LadybugFlying', 'LadybugWalking']
+POSSIBLE_VIRUSES = ['Rotavirus', 'Bacteriophage']
 
 
 def build_filename(agent, agent_spec_param, level, env, shooting, dists, rots, agent_seed_val):
@@ -108,7 +108,7 @@ def main(n, m, env, agent, shooting, level, database, ceval, debug,
                                         command.append('env=' + e)
                                         command.append('rots=' + str(rots))
                                         filename = build_filename(
-                                            one_agent, agent_spec_param, level, e, one_shooting, dists, rots, seed)
+                                            one_agent, agent_spec_param, level, [e], one_shooting, dists, rots, seed)
                                         run(path, command, filename)
                                 else:  # only 1 environment
                                     rots = minRots(env)
@@ -240,11 +240,11 @@ if __name__ == '__main__':
     if individual_env:
         env = []
         if all_traps:
-            env += POSSIBLE_TRAPS
+            env.extend(POSSIBLE_TRAPS)
         if all_bugs:
-             env += POSSIBLE_BUGS
+            env.extend(POSSIBLE_BUGS)
         if all_viruses:
-             env += POSSIBLE_VIRUSES
+            env.extend(POSSIBLE_VIRUSES)
     # agent
     if all_agents:
         agent = ['MonteCarlo', 'SARSA', 'QLearning',
