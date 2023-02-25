@@ -155,7 +155,7 @@ if __name__ == '__main__':
         print(description)
         raise SystemExit
 
-    # default values for agrs:
+    # default values for args:
     n = 100
     m = 10
     env = ['Traps', 'Bugs', 'Viruses', 'Tokens']  # all

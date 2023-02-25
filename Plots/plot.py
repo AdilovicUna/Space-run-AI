@@ -45,7 +45,7 @@ def main(window):
             env = filename[filename.find('env'):]
             env = 'all' if '=all' in env else env[5:env.find(']')]
 
-            path = 'plots/' + env + '/win=' + str(window) + '/no_disc,iov=100.00/'
+            path = 'plots/' + env + '/win=' + str(window) + '/'
             if not os.path.isdir(path):
                 os.makedirs(path)
             
