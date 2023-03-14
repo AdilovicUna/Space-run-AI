@@ -1,6 +1,6 @@
 extends Node
 
-const MAX_LEVEL = 10
+const MAX_LEVEL = 15
 
 var options = """
 argument options:
@@ -14,7 +14,7 @@ argument options:
                                 MonteCarlo, SARSA, QLearning, ExpectedSARSA, DoubleQLearning
                                 =[float, float, float, float] : 
                                 [gam (range [0,1]), eps (range [0,1]), epsFinal (range [0,1]), initOptVal (range [0,~))]
-                                eg. use: "MonteCarlo:eps=0.1,gam=0.2"
+                                eg. use: \"MonteCarlo:eps=0.1,gam=0.2\"
             
     - level=int :           number of the level to start from 
                             options: [1, ... , 10]
@@ -194,8 +194,6 @@ func instance_agent():
             agent_inst = DoubleQLearning.new()
             
             
-
-
 func display_options():
     get_tree().quit() 
     print(options)

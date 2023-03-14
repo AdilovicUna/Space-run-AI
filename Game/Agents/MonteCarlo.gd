@@ -5,18 +5,6 @@ class_name MonteCarlo
 
 extends "res://Agents/LearningAgent.gd"
 
-class Step:
-    var state_action
-    var score
-    var time
-    var epsilon_action
-
-    func _init(sa, s, t, e):
-        state_action = sa
-        score = s
-        time = t
-        epsilon_action = e
-
 
 # move and remember  
 func move(state, score, num_of_ticks):
@@ -52,6 +40,8 @@ func end_game(final_score, final_sec):
                 s += "*"
             s += String(step.state_action) + " "
         print(s)
+        print("Agents database:")
+        print(store_data())
 
     var G = 0
     episode_steps.append(Step.new("", final_score, final_sec, false))
@@ -95,7 +85,7 @@ func parse_line(line):
     total_return[line[0]] = float(line2[0])
     visits[line[0]] = int(line2[1])
 
-func store_data(data):
+func store_data(data = ""):
     for elem in total_return:
         var avg = total_return[elem] / visits[elem]
         data += "%s:%s/%s:%.1f\n" % [elem, total_return[elem], visits[elem], avg]

@@ -6,6 +6,18 @@ class_name LearningAgent
 # - first element indicates the movement : -1 - left, 0 - just go forward, 1 - right
 # - second element decides if Hans should shoot : 1 - yes, 0 - no
 
+class Step:
+    var state_action
+    var score
+    var time
+    var epsilon_action
+
+    func _init(sa, s, t, e):
+        state_action = sa
+        score = s
+        time = t
+        epsilon_action = e
+        
 var rand = RandomNumberGenerator.new()
 
 # variables to write to a text file
@@ -169,7 +181,7 @@ func get_and_set_agent_specific_parameters(agent_specific_param):
 func get_state_action(state, action):
     return ("[%d,%d,%s]_[%d,%d]" %
                         [state[0], state[1], state[2], action[0], action[1]])
-                        
+
 func get_n():
     return String(n)
 

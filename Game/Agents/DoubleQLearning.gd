@@ -19,7 +19,10 @@ func move(state, score, num_of_ticks):
         var state_action = get_state_action(last_state,last_action)
         var R = score - last_score
         update_dicts(state_action, state, R, num_of_ticks)
-            
+    
+        episode_steps.append(Step.new(
+            get_state_action(last_state, last_action), score, num_of_ticks, epsilon_action))
+
     last_state = state
     last_score = score
     prev_time = (num_of_ticks * 33) / 1000.0
@@ -35,6 +38,18 @@ func start_game(eval):
 
 # update 
 func end_game(final_score, final_time):
+    if DEBUG:
+        var n_steps = len(episode_steps)
+        var s = "  last actions: "
+        for i in range(max(n_steps - 7, 0), n_steps):
+            var step = episode_steps[i]
+            if step.epsilon_action:
+                s += "*"
+            s += String(step.state_action) + " "
+        print(s)
+        print("Agents database:")
+        print(store_data())
+
     if not is_eval_game:
         var state_action = get_state_action(last_state,last_action)
         var R = final_score - last_score
@@ -57,7 +72,7 @@ func parse_line(line):
         
     visits[line[0]] = float(line[3])
 
-func store_data(data):
+func store_data(data = ""):
     for elem in visits.keys():
         var q1_elem = '' if not elem in q.keys() else q[elem]
         var q2_elem = '' if not elem in q2.keys() else q2[elem]
