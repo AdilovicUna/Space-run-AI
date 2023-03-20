@@ -232,7 +232,15 @@ func show_level_label():
 func translate_tunnel_and_ground(prev_tunnel):
     # making tunnels (and ground) infinite by moving them forward
     # after Hans passes them	
-    tunnels_children[prev_tunnel].translation.x -= 7500    # move tunnel ahead (3x2500)
+
+    # firstly remove any remaining obstacles from the tunnel
+    for obstacle in tunnels_children[prev_tunnel].get_children():
+        if not "light" in obstacle.name and not "torus" in obstacle.name:
+            print(obstacle.name)
+            obstacle.queue_free()
+
+    # move tunnel ahead (3x2500)
+    tunnels_children[prev_tunnel].translation.x -= 7500    
     if translation.x < ground.translation.x - 2000:
         ground.translation.x -= 3000 # move ground ahead
 

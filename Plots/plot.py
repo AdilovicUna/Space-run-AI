@@ -18,7 +18,10 @@ loop through all the files from Command_outputs, plot the data and save the plot
 
 def main(window):
     command_outputs_path = '../Game/Command_outputs/'
-
+    total_plots = 0
+    new_plots = 0
+    existing_plots = 0
+    error_plots = 0
     # files have the same names in both folders
     for filename in os.listdir(command_outputs_path):
         # filename format: f_c1_c2.txt
@@ -27,6 +30,7 @@ def main(window):
         filename = filename[:-4]
         print('----------------------------')
         print('filename: ', filename)
+        total_plots += 1
         try:
             split_filename = filename.split('_')
             filename = split_filename[0]
@@ -38,20 +42,36 @@ def main(window):
             co_data = co_f[:index]
 
             agent = filename.split(',')[0].split('=')[1]
+           
             ad_data = get_table(co_f[index+1:], agent)
-            plot(window, co_data, ad_data, agent, filename)
 
             # create path so that we can sort out the plots nicely
             env = filename[filename.find('env'):]
             env = 'all' if '=all' in env else env[5:env.find(']')]
 
-            path = 'plots/' + env + '/win=' + str(window) + '/'
+            path = 'plots/' + env + '/win=' + str(window) + '/' + agent + '/'
             if not os.path.isdir(path):
                 os.makedirs(path)
             
-            plt.savefig(path + filename + '_' + co_ver + '.png', bbox_inches='tight', pad_inches=0.2, dpi=100)
+            full_plot_filename = path + filename + '_' + co_ver + '.png'
+            if os.path.isfile(full_plot_filename):
+                existing_plots += 1
+                print('EXISTING PLOT')
+                continue
+            
+            plot(window, co_data, ad_data, agent, filename)
+            plt.savefig(full_plot_filename, bbox_inches='tight', pad_inches=0.2, dpi=100)
+            new_plots += 1
         except Exception:
+            error_plots += 1
             print("FILE ERROR")
+            
+    print('----------------------------')
+    print('Total plots: ', total_plots)
+    print('New plots: ', new_plots)
+    print('Existing plots: ', existing_plots)
+    print('Error plots: ', error_plots)
+    print('----------------------------')
 
 def plot(window, co_data, ad_data, agent, filename):
     scores = [float(i) for i in co_data[:-4]]

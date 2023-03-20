@@ -11,17 +11,17 @@ func move(state, score, num_of_ticks):
     # we are still in the previous state
     if last_state == state:
         return last_action    
-   
+
     last_action = choose_action(.best_action(state))     
     
     # update q
     if last_state != null and last_action != null:      
-        var state_action = get_state_action(last_state,last_action)
+        var last_state_action = get_state_action(last_state,last_action)
         var R = score - last_score
-        update_dicts(state_action, state, R, num_of_ticks)
-    
+        update_dicts(last_state_action, state, R, num_of_ticks)
+
         episode_steps.append(Step.new(
-            get_state_action(last_state, last_action), score, num_of_ticks, epsilon_action))
+            get_state_action(state, last_action), score, num_of_ticks, epsilon_action))
 
     last_state = state
     last_score = score
@@ -60,6 +60,32 @@ func end_game(final_score, final_time):
 func save(write):
     ad_write(write)
     
+func Q(state, action):
+    var state_action = get_state_action(state, action)
+    add_state_action(state_action)
+
+    return q[state_action] + q2[state_action]
+
+func update_dicts(last_state_action, state, R, curr_time, terminal = false):        
+    add_state_action(last_state_action)
+    visits[last_state_action] += 1
+    
+    var alpha = 1.0 / visits[last_state_action]
+    var new_gamma = pow(GAMMA,curr_time - prev_time)
+
+    if rand.randf_range(0,1) < 0.5:
+        var new_state_val = 0 if terminal else q2[get_state_action(state,.best_action(state,q))]
+        q[last_state_action] += alpha * (new_gamma * (R + new_state_val) - q[last_state_action])
+    else:
+        var new_state_val = 0 if terminal else q[get_state_action(state,.best_action(state,q2))]
+        q2[last_state_action] += alpha * (new_gamma * (R + new_state_val) - q2[last_state_action])
+    
+func add_state_action(state_action):
+    if not (state_action in q.keys()):
+        q[state_action] = INITIAL_OPTIMISTIC_VALUE
+        q2[state_action] = INITIAL_OPTIMISTIC_VALUE
+        visits[state_action] = 0
+
 func parse_line(line):   
     #state_action:q1:q2:visits
     line = line.split(':')
@@ -74,48 +100,9 @@ func parse_line(line):
 
 func store_data(data = ""):
     for elem in visits.keys():
-        var q1_elem = '' if not elem in q.keys() else q[elem]
-        var q2_elem = '' if not elem in q2.keys() else q2[elem]
-        data += "%s:%s:%s:%s\n" % [elem, q1_elem, q2_elem, visits[elem]]
+        data += "%s:%s:%s:%s\n" % [elem, q[elem], q2[elem], visits[elem]]
     return data
     
 func all_state_actions():
     return visits.keys()
-
-func Q(state, action):
-    var state_action = get_state_action(state, action)
-    
-    if not (state_action in q.keys()):
-        q[state_action] = INITIAL_OPTIMISTIC_VALUE
         
-    if not (state_action in visits.keys()):
-        visits[state_action] = 0
-        
-    if not (state_action in q2.keys()):
-        q2[state_action] = INITIAL_OPTIMISTIC_VALUE
-    
-    return q[state_action] + q2[state_action]
-
-func update_dicts(state_action, state, R, curr_time, terminal = false):        
-    if not (state_action in visits.keys()):
-        visits[state_action] = 0
-    
-    visits[state_action] += 1
-    
-    var alpha = 1.0 / visits[state_action]
-    var new_gamma = pow(GAMMA,curr_time - prev_time)
-        
-    if rand.randf_range(0,1) < 0.5:
-        if not (state_action in q.keys()):
-            q[state_action] = INITIAL_OPTIMISTIC_VALUE
-        
-        var new_state_val = 0 if terminal else q2[get_state_action(state,.best_action(state,q))]
-        q[state_action] += alpha * (new_gamma * (R + new_state_val) - q[state_action])
-        
-    else:
-        if not (state_action in q2.keys()):
-            q2[state_action] = INITIAL_OPTIMISTIC_VALUE
-            
-        var new_state_val = 0 if terminal else q[get_state_action(state,.best_action(state,q2   ))]
-        q2[state_action] += alpha * (new_gamma * (R + new_state_val) - q2[state_action])
-    

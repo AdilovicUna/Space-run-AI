@@ -14,13 +14,13 @@ func move(state, score, num_of_ticks):
     
     # update q
     if last_state != null and last_action != null:      
-        var state_action = get_state_action(last_state,last_action)
+        var last_state_action = get_state_action(last_state,last_action)
         var new_state_action = get_update(state, new_action, .best_action(state))
         var R = score - last_score
-        update_dicts(state_action, new_state_action, R, num_of_ticks)
+        update_dicts(last_state_action, new_state_action, R, num_of_ticks)
     
         episode_steps.append(Step.new(
-                get_state_action(last_state, last_action), score, num_of_ticks, epsilon_action))
+                get_state_action(state, last_action), score, num_of_ticks, epsilon_action))
 
     last_state = state
     last_action = new_action
@@ -62,23 +62,24 @@ func save(write):
 
 func Q(state, action):
     var state_action = get_state_action(state, action)
-    if not (state_action in q.keys()):
-        q[state_action] = INITIAL_OPTIMISTIC_VALUE
-        visits[state_action] = 0
+    add_state_action(state_action)
+
     return q[state_action]
     
-func update_dicts(state_action, new_state_action, R, curr_time, terminal = false):
+func update_dicts(last_state_action, new_state_action, R, curr_time, terminal = false):
+    add_state_action(last_state_action)
+    visits[last_state_action] += 1
+    
+    var alpha = 1.0 / visits[last_state_action]
+    var new_state_val = 0 if terminal else new_state_action
+    var new_gamma = pow(GAMMA,curr_time - prev_time)
+    q[last_state_action] += alpha * (new_gamma * (R + new_state_val) - q[last_state_action])
+
+func add_state_action(state_action):
     if not (state_action in q.keys()):
         q[state_action] = INITIAL_OPTIMISTIC_VALUE
         visits[state_action] = 0
-    
-    visits[state_action] += 1
-    
-    var alpha = 1.0 / visits[state_action]
-    var new_state_val = 0 if terminal else new_state_action
-    var new_gamma = pow(GAMMA,curr_time - prev_time)
-    q[state_action] += alpha * (new_gamma * (R + new_state_val) - q[state_action])
-    
+
 func get_update(_state, _new_action, _best_action):
     pass # subclass must implement
     
@@ -95,3 +96,5 @@ func store_data(data = ""):
 func all_state_actions():
     return q.keys()
     
+
+        
