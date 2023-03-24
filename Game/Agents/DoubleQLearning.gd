@@ -12,7 +12,7 @@ func move(state, score, num_of_ticks):
     if last_state == state:
         return last_action    
 
-    last_action = choose_action(.best_action(state))     
+    new_action = choose_action(.best_action(state))     
     
     # update q
     if last_state != null and last_action != null:      
@@ -21,9 +21,10 @@ func move(state, score, num_of_ticks):
         update_dicts(last_state_action, state, R, num_of_ticks)
 
         episode_steps.append(Step.new(
-            get_state_action(state, last_action), score, num_of_ticks, epsilon_action))
+            get_state_action(state, new_action), score, num_of_ticks, epsilon_action))
 
     last_state = state
+    last_action = new_action
     last_score = score
     prev_time = (num_of_ticks * 33) / 1000.0
     return last_action

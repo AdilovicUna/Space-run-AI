@@ -236,7 +236,6 @@ func translate_tunnel_and_ground(prev_tunnel):
     # firstly remove any remaining obstacles from the tunnel
     for obstacle in tunnels_children[prev_tunnel].get_children():
         if not "light" in obstacle.name and not "torus" in obstacle.name:
-            print(obstacle.name)
             obstacle.queue_free()
 
     # move tunnel ahead (3x2500)

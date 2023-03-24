@@ -5,19 +5,25 @@ const MAX_LEVEL = 15
 var options = """
 argument options:
     - n=int :               number of games
+                            default=100
     
     - stoppingPoint=int :   stop after the agent wins this many consecutive games 
+                            default=10
     
     - agent=string :        name of the agent
                             options: [Keyboard, Static, Random, MonteCarlo, SARSA, QLearning, ExpectedSARSA, DoubleQLearning]
+                            default=\"Keyboard\" (or \"Static\" if the program is run without the window)
+                            
                             sub-options (only for the agents listed below):
                                 MonteCarlo, SARSA, QLearning, ExpectedSARSA, DoubleQLearning
                                 =[float, float, float, float] : 
                                 [gam (range [0,1]), eps (range [0,1]), epsFinal (range [0,1]), initOptVal (range [0,~))]
                                 eg. use: \"MonteCarlo:eps=0.1,gam=0.2\"
-            
+                                default:[gam=1.0,eps=0.2,epsFinal=0.0001,initOptVal=100.0]
+                                
     - level=int :           number of the level to start from 
                             options: [1, ... , 10]
+                            default=1
                         
     - env=[string] :        list of obstacles that will be chosen in the game 
                             options (any subset of): [Traps, Bugs, Viruses, Tokens, 
@@ -25,26 +31,34 @@ argument options:
                                                       HexO, Balls, Triangles, HalfHex,
                                                       Worm, LadybugFlying, LadybugWalking,
                                                       Rotavirus, Bacteriophage]
+                            default=[Traps,Bugs,Viruses,Tokens]
                                             
     - shooting=string :     enable or disable shooting 
                             options: [enabled, disabled]
+                            default=disabled
                         
     - dists=int :           number of states in a 100-meter interval
+                            default=1
     
     - rots=int :            number of states in 360 degrees rotation
+                            default=6
     
     - agentSeedVal=int :    seed value for the random moves the agent takes
+                            default=0
     
     - database=string:      read = read the data for this command from an existing file 
                             write = update the data after the command is executed 
                             options: [read, write, read_write]
                             Note: will not influence the following agents: Keyboard, Static, Random
+                            default=none
 
     - ceval=bool :          performs continuous evaluation
                             options: [true,false]
+                            default=false
                                 
     - debug=bool :          display debug print statements
                             options: [true,false]
+                            default=false
              
     - options :             displays options
 """
@@ -73,9 +87,9 @@ var write = false
 var agent_specific_param = []
 var ceval = false
 var debug = false
-var ad_ver = 0
 var agent_seed_val = 0
 var stopping_point = 10
+var ad_ver = 0
 
 var agent_inst = Keyboard.new()
 

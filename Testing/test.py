@@ -8,7 +8,7 @@ rotsDict = {
     'X': 11,
     'I': 6,
     'MovingI': 6,
-    'Triangles': 6,
+    'Triangles': 7,
     'Hex': 22,
     'HexO': 7,
     'HalfHex': 6,
