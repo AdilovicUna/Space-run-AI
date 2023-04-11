@@ -23,7 +23,9 @@ rotsDict = {
 
     'Rotavirus': 6, 
     'Bacteriophage': 6,
-    'Viruses': 6
+    'Viruses': 6,
+
+    'Tokens': 6
 }
 
 POSSIBLE_TRAPS = ['I','O', 'MovingI', 'X', 'Walls', 
@@ -67,7 +69,7 @@ def main(n, m, env, agent, shooting, level, database, ceval, debug,
     #       because range() does not accept floats
 
     # loop seeds
-    for seed in range(m):
+    for seed in range(m[0],m[1] + 1):      
         # loop agents
         for one_agent in agent:
             # loop shooting
@@ -142,9 +144,7 @@ def getDescription():
 
 
 def minRots(env):
-    temp_env = [e for e in env
-                if e != 'Traps' and e != 'Bugs' and e != 'Viruses' and e != 'Tokens']
-    return min([rotsDict[e]] for e in temp_env)[0]
+    return max([rotsDict[e]] for e in env)[0]
 
 
 if __name__ == '__main__':
@@ -157,7 +157,7 @@ if __name__ == '__main__':
 
     # default values for args:
     n = 100
-    m = 10
+    m = [0,9]
     env = ['Traps', 'Bugs', 'Viruses', 'Tokens']  # all
     agent = ['MonteCarlo']
     shooting = 'disabled'
@@ -188,7 +188,8 @@ if __name__ == '__main__':
                 case 'n':
                     n = int(temp[1])
                 case 'm':
-                    m = int(temp[1])
+                    m = temp[1][1:-1].split(',')
+                    m = [int(m[0]), int(m[1])]
                 case 'level':
                     level = int(temp[1])
                 case 'stoppingPoint':
@@ -250,10 +251,12 @@ if __name__ == '__main__':
         agent = ['MonteCarlo', 'SARSA', 'QLearning',
                  'ExpectedSARSA', 'DoubleQLearning']
     # shooting
-    if all_shooting and (all_bugs or all_viruses):
-        shooting = ['enabled', 'disabled']
+    if all_shooting and (any(elem in env for elem in POSSIBLE_BUGS) or 
+                         any(elem in env for elem in POSSIBLE_VIRUSES) or 
+                         'Bugs' in env or 'Viruses' in env):
+        shooting = ['enabled', 'disabled', 'forced']
     else:
         shooting = [shooting] 
-
+    print(shooting)
     main(n, m, env, agent, shooting, level, database, ceval, debug,
          gam, eps, epsFinal, initOptVal, stoppingPoint, individual_env)

@@ -48,7 +48,9 @@ def main(window):
             # create path so that we can sort out the plots nicely
             env = filename[filename.find('env'):]
             env = 'all' if '=all' in env else env[5:env.find(']')]
-
+            if env == 'Bugs,Tokens,Traps,Viruses':
+                env = 'all'
+                
             path = 'plots/' + env + '/win=' + str(window) + '/' + agent + '/'
             if not os.path.isdir(path):
                 os.makedirs(path)

@@ -34,7 +34,7 @@ argument options:
                             default=[Traps,Bugs,Viruses,Tokens]
                                             
     - shooting=string :     enable or disable shooting 
-                            options: [enabled, disabled]
+                            options: [enabled, disabled, forced]
                             default=disabled
                         
     - dists=int :           number of states in a 100-meter interval
@@ -79,6 +79,7 @@ var agent = "Keyboard"
 var level = 1
 var env = []
 var shooting = false
+var forced = false
 var actions = [[-1,0], [0,0], [1,0], [-1,1], [0,1], [1,1]] # depend on shooting parameter
 var dists = 1
 var rots = 6
@@ -249,6 +250,9 @@ func set_param(param):
                             shooting = true
                         "disabled" :
                             shooting = false
+                        "forced":
+                            forced = true
+                            shooting = false
                         _: # invalid param value
                             return false
                 "dists":
@@ -296,11 +300,14 @@ func set_param(param):
             dists < 0 or rots < 0 or stopping_point < 1):
             return false 
         
+        # we only allow shooting actions
+        if forced:
+            actions = actions.slice(3,5)    
         # we don't need actions that have shooting if it was specified in the command line
         # or it is not necessary (there is nothing in the env to shoot)
-        if not shooting or (not env.empty() and not "bugs" in env and not "viruses" in env):
+        elif not shooting or (not env.empty() and not "Bugs" in env and not "Viruses" in env):
             actions = actions.slice(0,2)
-        
+            
         # create necessary directories
         var directory = Directory.new()        
         if not directory.dir_exists("res://Command_outputs"):

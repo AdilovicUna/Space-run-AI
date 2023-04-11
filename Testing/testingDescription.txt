@@ -11,8 +11,8 @@
             stoppingPoint - stop after the agent wins this many consecutive games 
                             (default: 10)
 
-            m - number of different seeds used for one experiment 
-                (default: 10)
+            m - range of the different seeds used for one experiment 
+                (default: [0,9] inclusive)
 
             env -   list of obstacles that will be chosen in the game 
                     Any subset of: [Traps, Bugs, Viruses, Tokens, 
