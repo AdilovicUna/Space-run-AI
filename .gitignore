@@ -12,5 +12,4 @@ Game/Agent_databases
 Game/Command_outputs 
 Testing/Tests_output
 Plots/plots
-*.png
 *.import

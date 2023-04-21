@@ -23,7 +23,7 @@ func move(state, score, num_of_ticks):
                 get_state_action(state, last_action), score, num_of_ticks, epsilon_action))
 
     last_state = state
-    last_action = new_action
+    last_action = new_action    
     last_score = score
     prev_time = (num_of_ticks * 33) / 1000.0
     return last_action

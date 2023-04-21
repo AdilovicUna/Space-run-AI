@@ -1,109 +1,138 @@
 \chapter{Applied Algorithms}
-The algorithms utilized in this thesis fall under the categories of Monte Carlo methods and Temporal Difference (TD) Learning. These methods involve the selection of actions by an agent over time in order to maximize a reward signal. The agents are unaware of the environment dynamics of the game and are only provided with information regarding the current state and score. In this chapter, we will discuss the specific algorithms implemented in the project. Firstly, however, a few key concepts need to be introduced.
+In this chapter, we will discuss the algorithms employed to create agents for the game, which broadly fall into the categories of Monte Carlo methods and Temporal Difference (TD) Learning. In essence, the agents aim to maximize their reward by selecting actions that yield the greatest possible benefit. To comprehend the functioning of these algorithms, it is necessary to introduce several fundamental concepts. 
 
-A \textbf{state} is a representation of the current situation of the environment, and an \textbf{action} is a decision made by the agent in response to the current state. A \textbf{reward} is a scalar value that represents the immediate feedback received by the agent for its action in a given state. A \textbf{policy} is a mapping from states to actions that determines the actions an agent takes in each state. An \textbf{$\epsilon$-greedy policy} is a type of policy in which the agent takes the action that maximizes the expected reward with probability (1 - $\epsilon$), and takes a random action with probability $\epsilon$. There are two kinds of the \textbf{value functions}. The state-value functions, which map a state to the long-term expected return after starting in that state, and action-value functions, which map a state and an action to the long-term expected return after starting in that state and taking that action. The value function is used to evaluate the relative effectiveness of different actions or states in a reinforcement learning problem. A \textbf{value of a state} is defined differently between each algorithm. It serves as a measurement to determine which action is better to be taken in a particular state, and will be further discussed in Chapter \ref{implOfAgents}.  
+A \textbf{state} represents the current status of the environment, while an \textbf{action} denotes a decision made by the agent in response to the current state. A \textbf{reward} is a scalar value that reflects the immediate feedback received by the agent for its action in a given state. The \textbf{discount factor}, usually denoted as $\bm{\gamma}$, is a value between 0 and 1 that represents how much the agent values future rewards compared to immediate rewards. An \textbf{episode} refers to a sequence of states, actions, and rewards that begins with an initial state and ends when a terminal state is reached. It represents one run or iteration of the agent interacting with the environment. The length of an episode can vary depending on the problem and the algorithm being used (eg. in a game, an episode may correspond to a single game). A \textbf{policy} is a mapping from states to actions that determines the actions an agent takes in each state. An \textbf{$\bm{\epsilon}$-greedy policy} is a policy in which the agent selects the action that maximizes the expected reward with a probability of (1 - $\epsilon$), while taking a random action with a probability of $\epsilon$. Two types of value functions exist, namely \textbf{state-value} functions and \textbf{action-value} functions. The former predict the expected long-term reward of being in a particular state, while the latter predict the expected long-term reward of taking a specific action in a particular state and always following the optimal policy thereafter. The value function evaluates the relative effectiveness of different actions or states, serving as a measure to determine the optimal action in a particular state. The \textbf{value of a state} varies between algorithms, and it is used to select the best action to be taken in that state. 
 
-In the previous chapter, we also discussed the representation of the state in the game. It was briefly mentioned that the set of actions an agent can take are \{\texttt{left, right, forward, left + shoot, right + shoot, forward + shoot}\}.\\ As for the reward, the most natural choice is the score variable from the game, specifically the difference between of the scores between two consecutive steps.
-
-Before looking into individual algorithms, there is one more key concept to introduce: \textbf{exploration vs exploitation}. In the field of reinforcement learning, the exploration-exploitation trade-off refers to the balancing act between discovering new information or strategies and utilizing existing knowledge to maximize reward. Exploration involves trying out different actions or strategies in order to gather more information about the environment and its rewards, while exploitation involves utilizing the information gathered to maximize reward. Finding the right balance between exploration and exploitation is crucial in reinforcement learning, as excessive exploration or exploitation can result in suboptimal results.
-
-
-The \texttt{eps} and \texttt{epsFinal} were discussed in Chapter \ref{agent_code_chapter}. With these parameters, the user can indicate starting and ending value of the $\epsilon$ which will then adequately decrease after each played game. The formula for the decrease is the following:
-
-$$decrease = (\frac{epsFinal}{eps})^{\frac{1.0}{n}}$$
-
-Here, n represents the number of games being played. The reason behind this epsilon decrease is to change the ratio between the exploration and exploitation over time. In the beginning of the experiment, the \texttt{eps} value is higher and thus random moves happen more often, causing the agent to try actions it would otherwise oversee. Later, then the policy is a bit stabilized, the \texttt{eps} value becomes smaller so it would allow the agent to play longer games and possibly win (if the \texttt{eps} value was high throughout the whole experiment, the agent would have a bigger chance of choosing an inadequate move and thus untimely ending the game).
+Before looking into individual algorithms, there is one more key concept to introduce: \textbf{exploration vs exploitation}. In the field of reinforcement learning, the exploration-exploitation trade-off refers to the balancing act between discovering new information or strategies and utilizing existing knowledge to maximize reward. Exploration involves trying out different actions or strategies in order to gather more information about the environment and its rewards, while exploitation involves utilizing the information gathered to maximize reward. Finding the right balance between exploration and exploitation is crucial in reinforcement learning, as excessive use of either can result in suboptimal results. To balance out these two concepts within these algorithms two methods are used: the formerly mentioned \textbf{$\bm{\epsilon}$-greedy policy} as well as the \textbf{optimistic initial values} which is a technique which sets the initial value of all state action pairs to a high number, encouraging the agent to visit as many states as possible in order to learn their true value \citep{RLSuttonBarto}.
 
 \section{Monte Carlo}
-The Monte Carlo method is a type of reinforcement learning algorithm that uses a sample of the past experiences of the agent to estimate the value function. It can be used with either on-policy or off-policy learning, depending on how the samples\footnote{A sample refers to a single experience or transition that the agent encounters as it interacts with the environment. A sample typically consists of the current state of the environment, the action taken by the agent, and the resulting reward and next state.} are collected. On-policy learning means that the agent is using the same behavior policy to collect samples as it is using to improve the value function. First visit Monte Carlo is a variant of on-policy Monte Carlo that only considers the first time a state is visited in an episode, as opposed to all visits. It should be noted that an episode is a whole duration of one game being played. Optimistic initial values are a technique used in Monte Carlo methods to encourage exploration by setting the initial value of all state action pairs to a high number, encouraging the agent to visit as many states as possible in order to learn their true value \citep{RLSuttonBarto}. 
+Monte Carlo (MC) methods are a type of reinforcement learning algorithm that estimate the value of a state or action by averaging the total reward received from sample episodes. Unlike some other methods, such as dynamic programming, MC methods do not require knowledge of the transition probabilities between states or the reward function. Instead, they learn from experience by directly observing the outcomes of sample episodes.
 
-For the purpose of this thesis, we have used on-policy first visit Monte Carlo algorithm, with both initial optimistic value and an $\epsilon$-greedy policy as tools to enforce exploration. This method is guaranteed to eventually converge to an optimal policy in the limit as the number of samples goes to infinity \citep{RLSuttonBarto}. This means that, as the number of samples increases, the estimates of the value function produced by Monte Carlo methods will become increasingly accurate. However, the rate at which Monte Carlo methods converge to the true value function can be slow, and the estimates may be quite noisy (i.e., have high variance) if the number of samples is small.
+During each episode, the agent follows its policy to select actions, receives rewards from the environment, and transitions to the next state. Once an episode terminates, the total reward received from that episode is recorded. This total reward is used to update the value estimates for each state and action that were encountered during the episode.
 
-\begin{figure}[h]
-    \centering
-    \begin{verbatim}}
-    For each episode:
-    		Initialize action-value function for all state-action pairs to a 
-    					high number (optimistic initial value).
-		Loop for each step of episode (while the game is running):
-			Set state to the first state in the game
-			Choose the next action using the epsilon-greedy policy.
-			Take the action and observe the next state and reward.
-			
-		Loop for each step of episode (after the game has finished):
-			If the state has not been visited before in this episode (first visit):
-				update the value function using the reward.
-				
-		Update the epsilon-greedy policy 
-					based on the results of the learning process:
-		For each state_action pair in policy:
-			policy[state_action ] = value_function[state_action]\num_of_visits[state_action]
-		
-	\end{verbatim}	
-    \caption{On-policy first-visit Monte Carlo control (for $\epsilon$-greedy policy)}
-    \label{algo:MC} 
-\end{figure}
+There are two types of MC learning: on-policy and off-policy. On-policy learning means that the agent is using the same behavior policy to collect samples as it is using to improve the value function. Off-policy learning, on the other hand, means that the agent is using a different policy to collect samples than the policy it is using to improve the value function.
 
-As seen in Figure \ref{algo:MC}, Monte Carlo algorithm behaves in a way that the policy is being update only after one episode has finished. During the episode, moves are chosen based on the currently known policy. 
+One variant of on-policy MC learning is first visit Monte Carlo. This method only considers the first time a state is visited in an episode, as opposed to all visits. The goal of using this method is to reduce variance in the value estimates and improve learning efficiency.
+
+To ensure exploration during learning, the $\epsilon$-greedy policy is often used in conjunction with MC methods. Additionally, setting an initial optimistic value can encourage the agent to visit more states to learn their true values. While Monte Carlo methods are guaranteed to converge to an optimal policy with an infinite number of samples, convergence can be slow and estimates can be noisy (i.e., have high variance) with a small number of samples.
+
+The pseudocode for the first-visit Monte Carlo can be seen in Algorithm \ref{algo:MC} \citep{RLSuttonBarto}.
+
+\begin{algorithm}
+\caption{On-policy first-visit Monte Carlo}\label{algo:MC}
+\begin{algorithmic}[1]
+\State Initialize
+\State $\quad$ $V(s) \gets$ an arbitrary value for all $s \in \mathcal{S}$
+\State $\quad$ $Returns(s) \gets 0$ for all $s \in \mathcal{S}$
+\State Loop forever (for each episode):
+\State $\quad$ Generate an episode following policy $\pi$
+\State $\quad$ $G \gets 0$
+\State $\quad$ Loop for each step of episode, $t=T-1,T-2,\ldots,0$:
+\State $\qquad$ $G \gets \gamma G + R_{t+1}$
+\State $\qquad$ If $S_t$ not in $S_0,S_1,\ldots,S_{t-1}$:
+\State $\qquad\quad$ $Returns(S_t) \gets Returns(S_t) + 1$
+\State $\qquad\quad$ $V(S_t) \gets V(S_t) + \frac{(G-V(S_t))}{Returns(S_t)}$
+\end{algorithmic}
+\end{algorithm}
+
+To clarify the algorithm above, here are further explanations to some of the elements mentioned:
+\begin{itemize}
+\item S - The set of all possible states.
+\item V(s) - The estimated value of a state s, i.e., the expected return that the agent will receive by starting from state s and following the current policy thereafter. In other words, V(s) is the agent's prediction of how good it is to be in state s.
+\item Returns(s) - The list of returns that the agent has observed from state s during the course of multiple episodes. Each element in the list represents the total reward that the agent received from a single episode that started in state s.
+\item G - The actual total return that the agent received from a single episode that started in state s. In other words, it is the sum of all the rewards that the agent received from the start state until the end of the episode.
+\end{itemize}
+
+In Chapter \ref{implOfAgents} of this work, we will provide a detailed discussion of the specific Monte Carlo algorithm implementation employed. Furthermore, we will explain how  the initial optimistic value and $\epsilon$-greedy policy have been utilized in the algorithm.
 
 \section{Temporal Difference Learning}
-Temporal difference (TD) learning is a type of reinforcement learning algorithm that estimates the value function using the difference between the immediate reward and the expected future reward. It can be used with either on-policy or off-policy learning, depending on how the samples are collected.
-On the other hand, as previously mentioned, Monte Carlo methods require a complete episode to finish before the value function can be updated, whereas TD learning can update the value function incrementally as the agent takes actions. This means that TD learning can start learning and adapting to the environment much earlier than Monte Carlo methods.
+Temporal Difference (TD) learning is another type of reinforcement learning algorithm that is also model-free. The main idea behind it is to update the estimated value of a state or action based on the difference between the expected return and the actual return obtained from that state or action. 
 
-\begin{figure}[h]
-    \centering
-    \begin{verbatim}
-    Initialize Q(s,a) for all states s and actions a, except Q(terminal,a) = 0
-    Loop through each episode:
-    		Initialize state S
-    		For each step of the episode
-    			Pick an action A using epsilon-greedy policy
-    			Take action A and observe the reward R and the next state S' 
-    			Update the policy depending on the algorithm
-    			S <- S'
-    		Until S is terminal
-	\end{verbatim}
-    \caption{Tabular TD learning}
-    \label{algo:TD}
-\end{figure}
+TD learning is similar to Monte Carlo methods in that it learns from experience by interacting with the environment and observing the rewards received. However, these methods update their estimates after every time step, rather than waiting for an entire episode to complete like in MC methods. This makes Temporal Difference learning more efficient in terms of the amount of data needed to learn a good estimate of the value function.
 
-In this section we will introduce four temporal difference learning algorithms: SARSA, Q-learning, expected SARSA, and double Q-learning.  The main difference between SARSA, Q-learning, expected SARSA, and double Q-learning is the way in which they estimate the value of the action-value function\footnote{The action value function is a measure of the long-term expected return of taking a particular action in a given state. It represents the expected sum of future rewards that the agent will receive when starting from the given state and taking the specified action. The action value function is used to evaluate the relative effectiveness of different actions i}. The pseudocode above shows us the common core idea for all the TD learning algorithms used in this thesis. Now, we can look at them individually, based on their update functions.
+Like Monte Carlo methods, TD methods can also be on-policy or off-policy. In on-policy learning, the agent learns about the value of the policy it is currently following, whereas in off-policy learning, the agent learns about the value of a different policy. 
 
-To gain a deeper understanding of the update functions used in temporal difference (TD) learning algorithms, it is helpful to introduce several variables that are commonly used. The variable \texttt{Q(S,A)} denotes the action value function, which represents the expected return of taking a particular action in a given state. \texttt{R} represents the reward parameter, while the variables \texttt{S'} and \texttt{A'} denote the next state and next action, respectively, following the current state and action. The variable $\gamma$ is a discount factor that determines the importance of future rewards relative to immediate rewards. The variable $\alpha$ is a learning rate that determines the degree to which the agent updates its estimates based on new information (for further explanation see Chapter \ref{implOfAgents}).
+One important parameter in TD learning is the \textbf{step size} or \textbf{learning rate} (usually denoted by the symbol $\bm{\alpha}$), which determines the size of the update to the value estimates. A larger step size will result in faster learning, but may also make the learning process more unstable.
 
-\begin{figure}[h]
-    \centering
-   $$Q(S,A) \leftarrow Q(S,A) + \alpha [R + \gamma Q(S',A') - Q(S,A)$$
-    \caption{SARSA update function}
-    \label{algo:S}
-\end{figure}
+In this chapter, we shall introduce four distinct TD learning algorithms, namely SARSA, Q-Learning, Expected SARSA and Double Q-Learning. We shall illustrate that while SARSA and Q-Learning are prominent algorithms for control problems, Expected SARSA and Double Q-Learning are variations that cater to specific limitations of the original algorithms. The objective is to highlight both the commonalities and differences among them.
 
-SARSA stands for ``state-action-reward-state-action'', and is an on-policy TD learning algorithm. This means that it uses the same behavior policy to collect samples as it is using to evaluate the action-value function. In SARSA, the action-value function is updated using the current state, current action, reward, next state, and next action.
-\begin{figure}[h]
-    \centering
-    $$Q(S,A) \leftarrow Q(S,A) + \alpha [R + \gamma {max}_a Q(S',a) - Q(S,A)]$$
-    \caption{Q-learning update function}
-    \label{algo:QL}
-\end{figure}
-\\
-Q-learning is an off-policy TD learning algorithm. The policy being learned about is called the target policy, and the policy used to generate behavior is called the
-behavior policy. In this case we say that learning is from data ``off'' the target policy, and
-the overall process is termed off-policy learning. In Q-learning, the action-value function is updated using the current state, current action, reward, and next state, with the next action chosen using the greedy policy.
-\begin{figure}[h]
-    \centering
-    $$Q(S,A) \leftarrow Q(S,A) + \alpha [R + \sum_a \pi (a|S') Q(S',a) - Q(S,A)]$$
-    \caption{Expected SARSA update function}
-    \label{algo:ES}
-\end{figure}
-\\
-Expected SARSA is an off-policy variant of SARSA algorithm that uses the expected value of the next action, rather than the actual next action, to update the action-value function. This allows the algorithm to take into account the probability of each possible next action, rather than just the action chosen by the behavior policy.
-\begin{figure}[h]
-    With 0.5 probability:
-    $$Q_1(S,A) \leftarrow Q_1(S,A) + \alpha [R + \gamma  Q_2(S', argmax_a Q_1(S',a)) - Q_1(S,A)]$$
-    	Else:
-    	$$Q_2(S,A) \leftarrow Q_2(S,A) + \alpha [R + \gamma Q_1(S', argmax_a Q_2(S',a)) - Q_2(S,A)]$$
-    \caption{Double Q-learning update function}
-    \label{algo:DQL}
-\end{figure}
-\\
-Double Q-learning is a variant of Q-learning that uses two action-value functions to estimate the value of each action. The two functions are updated independently, and the final action-value estimate is the average of the two estimates. In Q-learning, the greedy policy is biased because it always chooses the action with the highest estimated value at each time step, regardless of the uncertainty of the estimates. This can lead to a suboptimal behavior in some cases, however, updating the functions independently helps us reduce this bias.
+\subsection{SARSA}
+SARSA stands for State-Action-Reward-State-Action. With this algorithm, the agent learns the value of a state-action pair Q(s,a) by estimating the expected return of starting from state s, taking action a, and then following the current policy. SARSA is an on-policy algorithm, meaning it learns the value of state-action pairs while following the same policy used to select actions. This makes it well-suited for control problems, where the goal is to find an optimal policy.
+\begin{algorithm}
+\caption{SARSA}\label{algo:S}
+\begin{algorithmic}[1]
+\State Initialize $Q(s,a)$ arbitrarily for all $s\in S$ and $a\in A(s)$
+\Repeat
+\State Choose $A$ from $S$ using policy derived from $Q$ (e.g., $\epsilon$-greedy)
+\Repeat
+\State Take action $A$, observe $R$, $S'$
+\State Choose $A'$ from $S'$ using policy derived from $Q$ (e.g., $\epsilon$-greedy)
+\State $Q(S,A) \gets Q(S,A) + \alpha \big[ R + \gamma Q(S',A') - Q(S,A) \big]$
+\State $S \gets S'$
+\State $A \gets A'$
+\Until $S$ is terminal
+\Until convergence
+\end{algorithmic}
+\end{algorithm}
+
+\subsection{Q-learning}
+Q-learning, unlike SARSA, is an off-policy algorithm that learns the value of a state-action pair Q(s,a) by estimating the maximum expected return over all possible actions from state s. In other words, it learns the value of the best action in each state. Since Q-learning is an off-policy algorithm that learns the optimal action-value function regardless of the current policy being followed. This makes Q-learning more flexible in terms of exploration and can result in faster convergence to the optimal policy. However, Q-learning tends to overestimate the value of actions in environments with high variance, which can lead to suboptimal policies. On the other hand, SARSA is more stable and less prone to overestimating the value of actions. Nevertheless, it can converge to suboptimal policies if the exploration is insufficient, and it can take longer to converge to the optimal policy compared to Q-learning.
+\begin{algorithm}
+\caption{Q-learning}\label{algo:QL}
+\begin{algorithmic}[1]
+\State Initialize $Q(s,a)$ arbitrarily for all $s \in S$ and $a \in A(s)$.
+\Repeat
+\Repeat
+\State Choose $A$ from $S$ using policy derived from $Q$ (e.g., $\epsilon$-greedy).
+\State Take action $A$, observe $R$, $S'$
+\State $Q(S,A) \gets Q(S,A) + \alpha \left[R + \gamma \max_a Q(S',a) - Q(S,A)\right]$
+\State $S \gets S'$
+\Until $S$ is terminal
+\Until convergence
+\end{algorithmic}
+\end{algorithm}
+
+\subsection{Expected SARSA}
+Expected SARSA is another off-policy TD algorithm that learns the value of a state-action pair Q(s,a) by estimating the expected return over all possible actions from state s, taking into account the probabilities of selecting each action according to the current policy. Expected SARSA can be seen as a compromise between SARSA and Q-learning, as it considers the value of both the current and the best action in each state. This algorithm considers all possible actions and their expected values, which makes it more robust to noisy or uncertain rewards. 
+\begin{algorithm}
+\caption{Expected SARSA}\label{algo:ES}
+\begin{algorithmic}[1]
+\State Initialize $Q(s,a)$ arbitrarily for all $s \in S$ and $a \in A(s)$
+\Repeat \textbf{for each episode:}
+\State Initialize $S$
+\Repeat \textbf{for each step of episode:}
+\State Choose $A$ from $S$ using policy derived from $Q$ (e.g., $\epsilon$-greedy)
+\State Take action $A$, observe $R$, $S'$
+\State $\text{expected}Q \gets \sum{a} \pi(S',a) Q(S',a)$
+\State $Q(S,A) \gets Q(S,A) + \alpha \cdot [R + \gamma \cdot \text{expected}_Q - Q(S,A)]$
+\State $S \gets S'$
+\Until $S$ is terminal
+\Until convergence
+\end{algorithmic}
+\end{algorithm}
+
+
+\subsection{Double Q-learning}
+Double Q-learning is a variant of Q-learning that uses two action-value functions to estimate the value of each action. The two functions are updated independently, and the final action-value estimate is the average of the two estimates. In Q-Learning, a single estimate of the action values is used to update the policy and make decisions. This can lead to overestimation of the action values, particularly in situations where the policy is still exploring the environment. Double Q-Learning addresses the overestimation issue in Q-Learning which can lead to more accurate value estimates and better performance in some cases.
+\begin{algorithm}
+\caption{Double Q-learning}\label{algo:DQL}
+\begin{algorithmic}[1]
+\State Initialize $Q_1(s,a)$ and $Q_2(s,a)$ arbitrarily for all $s \in S$ and $a \in A(s)$
+\For {each episode}
+\State Initialize $S$
+\For {each step of episode}
+\State Choose $A$ from $S$ using policy derived from $Q_1+Q_2$ (e.g., epsilon-greedy)
+\State Take action $A$, observe $R$, $S'$
+\If {rand() $<$ 0.5}
+\State $A' \gets \text{argmax}_a Q_1(S',a)$
+\State $Q_1(S,A) \gets Q_1(S,A) + \alpha [R + \gamma Q_2(S',A') - Q_1(S,A)]$
+\Else
+\State $A' \gets \text{argmax}_a Q_2(S',a)$
+\State $Q_2(S,A) \gets Q_2(S,A) + \alpha [R + \gamma Q_1(S',A') - Q_2(S,A)]$
+\EndIf
+\State $S \gets S'$
+\EndFor
+\State until $S$ is terminal
+\EndFor
+\end{algorithmic}
+\end{algorithm}

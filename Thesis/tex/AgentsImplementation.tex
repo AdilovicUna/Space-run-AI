@@ -1,4 +1,12 @@
 \chapter{Implementation of the Agents}
+ADDED FROM 4
+
+The \texttt{eps} and \texttt{epsFinal} were discussed in Chapter \ref{agent_code_chapter}. With these parameters, the user can indicate starting and ending value of the $\epsilon$ which will then adequately decrease after each played game. The formula for the decrease is the following:
+
+$$decrease = (\frac{epsFinal}{eps})^{\frac{1.0}{n}}$$
+
+Here, n represents the number of games being played. The reason behind this epsilon decrease is to change the ratio between the exploration and exploitation over time. In the beginning of the experiment, the \texttt{eps} value is higher and thus random moves happen more often, causing the agent to try actions it would otherwise oversee. Later, then the policy is a bit stabilized, the \texttt{eps} value becomes smaller so it would allow the agent to play longer games and possibly win (if the \texttt{eps} value was high throughout the whole experiment, the agent would have a bigger chance of choosing an inadequate move and thus untimely ending the game).
+
 \label{implOfAgents}
 In this project, the RL agents are designed such that their functionality is encapsulated within a top-level scene called \texttt{Main.tscn}. Within this scene, there is an instance of the selected agent, and the code makes use of several functions implemented by the agent in order to interact with the environment. Specifically, the required functions are: \texttt{move()}, \texttt{init()}, \texttt{start\_game()}, \texttt{end\_game()}, \texttt{save()}, \texttt{set\_seed\_val()}, \texttt{get\_and\_set\_agent\_specific\_parameters()}, and \texttt{get\_n()}.
 

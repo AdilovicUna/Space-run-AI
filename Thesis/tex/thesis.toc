@@ -20,28 +20,32 @@
 \contentsline {section}{\numberline {3.3}Main}{16}{section.3.3}%
 \contentsline {chapter}{\numberline {4}Applied Algorithms}{19}{chapter.4}%
 \contentsline {section}{\numberline {4.1}Monte Carlo}{20}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Temporal Difference Learning}{20}{section.4.2}%
-\contentsline {chapter}{\numberline {5}Implementation of the Agents}{24}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Hierarchy}{24}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Simple Agents}{24}{section.5.2}%
-\contentsline {section}{\numberline {5.3}Learning Agent}{25}{section.5.3}%
-\contentsline {subsection}{\numberline {5.3.1}Monte Carlo Agent}{25}{subsection.5.3.1}%
-\contentsline {subsection}{\numberline {5.3.2}TD Agent}{26}{subsection.5.3.2}%
-\contentsline {subsection}{\numberline {5.3.3}Double Q-Learning Agent}{26}{subsection.5.3.3}%
-\contentsline {chapter}{\numberline {6}Experiments}{28}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Discounting}{28}{section.6.1}%
-\contentsline {section}{\numberline {6.2}Individual Traps}{28}{section.6.2}%
-\contentsline {section}{\numberline {6.3}Bugs}{29}{section.6.3}%
-\contentsline {section}{\numberline {6.4}Viruses}{30}{section.6.4}%
-\contentsline {section}{\numberline {6.5}Tokens}{31}{section.6.5}%
-\contentsline {section}{\numberline {6.6}Combinations}{31}{section.6.6}%
-\contentsline {subsection}{\numberline {6.6.1}Traps}{31}{subsection.6.6.1}%
-\contentsline {subsection}{\numberline {6.6.2}Bugs, Viruses and Tokens}{32}{subsection.6.6.2}%
-\contentsline {section}{\numberline {6.7}All obstacles}{32}{section.6.7}%
-\contentsline {chapter}{Conclusion}{42}{chapter*.3}%
-\contentsline {chapter}{Bibliography}{43}{chapter*.4}%
-\contentsline {chapter}{List of Figures}{44}{chapter*.5}%
-\contentsline {chapter}{List of Tables}{46}{chapter*.6}%
-\contentsline {chapter}{List of Abbreviations}{47}{chapter*.7}%
-\contentsline {chapter}{\numberline {A}Attachments}{48}{appendix.A}%
-\contentsline {section}{\numberline {A.1}First Attachment}{48}{section.A.1}%
+\contentsline {section}{\numberline {4.2}Temporal Difference Learning}{21}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}SARSA}{22}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Q-learning}{22}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.2.3}Expected SARSA}{22}{subsection.4.2.3}%
+\contentsline {subsection}{\numberline {4.2.4}Double Q-learning}{23}{subsection.4.2.4}%
+\contentsline {chapter}{\numberline {5}Implementation of the Agents}{25}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Hierarchy}{25}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Simple Agents}{26}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Learning Agent}{26}{section.5.3}%
+\contentsline {subsection}{\numberline {5.3.1}Monte Carlo Agent}{26}{subsection.5.3.1}%
+\contentsline {subsection}{\numberline {5.3.2}TD Agent}{27}{subsection.5.3.2}%
+\contentsline {subsection}{\numberline {5.3.3}Double Q-Learning Agent}{28}{subsection.5.3.3}%
+\contentsline {chapter}{\numberline {6}Experiments}{29}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Discounting}{29}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Individual Traps}{29}{section.6.2}%
+\contentsline {section}{\numberline {6.3}Bugs}{30}{section.6.3}%
+\contentsline {section}{\numberline {6.4}Viruses}{31}{section.6.4}%
+\contentsline {section}{\numberline {6.5}Tokens}{32}{section.6.5}%
+\contentsline {section}{\numberline {6.6}Combinations}{32}{section.6.6}%
+\contentsline {subsection}{\numberline {6.6.1}Traps}{32}{subsection.6.6.1}%
+\contentsline {subsection}{\numberline {6.6.2}Bugs, Viruses and Tokens}{33}{subsection.6.6.2}%
+\contentsline {section}{\numberline {6.7}All obstacles}{33}{section.6.7}%
+\contentsline {chapter}{Conclusion}{42}{chapter*.34}%
+\contentsline {chapter}{Bibliography}{43}{chapter*.35}%
+\contentsline {chapter}{List of Figures}{44}{chapter*.36}%
+\contentsline {chapter}{List of Tables}{45}{chapter*.37}%
+\contentsline {chapter}{List of Abbreviations}{46}{chapter*.38}%
+\contentsline {chapter}{\numberline {A}Attachments}{47}{appendix.A}%
+\contentsline {section}{\numberline {A.1}First Attachment}{47}{section.A.1}%
