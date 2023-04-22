@@ -139,8 +139,7 @@ func _ready():
         agent_inst.set_seed_val(agent_seed_val)
         if not agent_inst.init(actions, read, write, command, n, debug):
             print("Something went wrong, please try again")
-            print(options)
-            get_tree().quit()
+            display_options()
 
         if ceval:
             n *= 2      # play n learning games + n evaluation games
@@ -210,8 +209,8 @@ func instance_agent():
             
             
 func display_options():
-    get_tree().quit() 
     print(options)
+    get_tree().quit() 
 
 func build_filename():
     # we sort it so that we would always get the same filename in build_filename()    

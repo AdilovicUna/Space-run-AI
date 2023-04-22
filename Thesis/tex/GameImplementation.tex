@@ -30,38 +30,26 @@ The following text describes the core functionalities of the main methods within
 \section{Hans}
 The next node we want to examine is Hans. While \texttt{Hans.tscn} is a scene with the main character and its necessary animations, what interests us more is the \texttt{Hans.gd} and its key components.
 
-\begin{lstlisting}
-func _physics_process(delta): 
-	# code used to update the variables and UI
-		...
-			
-    tunnels.delete_obstacle_until_x(curr_tunnel,translation.x - tunnels_children[curr_tunnel].translation.x + 50)
-    
-    # create a trap in the next tunnel every 50 meters
-    if translation.x < new_trap:
-        create_new_trap()
-    
-    # updating score 
-    score._on_Meter_Passed()
-    
-    # Hans's movement
-    var velocity = Vector3.LEFT * speed
-    velocity = move_and_slide(velocity)
-    
-    # in case Hans collided with something, handle it properly
-    check_collisions()
-    
-    # bugs and viruses need to move torwards Hans    
-    tunnels.bug_virus_movement(delta, curr_tunnel)
-    
-    if isShootingButtonPressed:
-        shoot()
-        
-    # type needs to be calculated before 
-    # so we know where the next trap is on x axis
-    var type = calc_type()
-    state.update_state(calc_dist(),calc_rot(),type)
-\end{lstlisting}
+\begin{algorithm}
+\begin{algorithmic}[1]
+\Function{physics\_Process}{$delta$}
+\State $tunnels.\text{deleteObstacleUntilX}(\dots)$
+\If{$translation.\text{x} < new\_trap$} \Comment{create a trap in the next tunnel every 50 meters}
+\State \Call{createNewTrap}{}
+\EndIf
+\State $score.\text{\_on\_Meter\_Passed}()$\Comment{update score}
+\State $velocity \gets Vector3.\text{LEFT} * speed$
+\State $velocity \gets \Call{moveAndSlide}{velocity}$
+\State \Call{checkCollisions}{}
+\State $tunnels.\text{bugVirusMovement}(delta, curr\_tunnel)$
+\If{isShootingButtonPressed}
+\State \Call{shoot}{}
+\EndIf
+\State $type \gets \Call{calcType}{}$
+\State $state.\text{updateState}(\text{calcDist}(),\text{calcRot}(),type)$
+\EndFunction
+\end{algorithmic}
+\end{algorithm}
 
 The primary function within \texttt{Hans.gd} is the \texttt{\_physics\_process()}, which is called on every tick of the game. It handles the main aspects of the player character through the use of various methods and functions. These include deleting passed obstacles, creating new obstacles every 50 meters, updating the score, handling the movement of the player character, bugs and viruses, and determining the current state of the player. The state label, which is displayed on the upper right corner of the screen (as shown in Figure \ref{fig:third_tunnel}), is the primary information that agents receive when making decisions about their next move, as described in Chapter \ref{agent_code_chapter}. The \texttt{\_physics\_process()} function also handles collisions and shooting if the player chooses to do so. Overall, this function plays a crucial role in the gameplay and management of the player character.
 
@@ -78,66 +66,75 @@ It is also worth noting that this script handles the movement of the tunnels to 
 \label{tunnel_script}
 The Tunnels node, which is a child of the main scene in the game tree, contains three child nodes of the Spatial type\footnote{A Spatial node is a type of node that represents a 3D object or transformation in the game world. It is a versatile node that can be used to create and manipulate 3D objects, including meshes, materials, and lighting. Spatial nodes are often used as the root node for 3D objects in a scene, and they can be nested inside other Spatial nodes to create hierarchical transformations.} (level1, level2, and level3) and each of these nodes includes a CSGTorus\footnote{ A CSGTorus node is a type of 3D object that represents a torus shape in the game world.} node, which represents the physical appearance of the tunnels. Obstacles are added to the appropriate level node as instances. The \texttt{Tunnels.gd} script, which is attached to the Tunnels node, handles many of the previously mentioned functions such as obstacle creation and deletion and tunnel rotation. In the following code snippets, we will examine the \texttt{Tunnels.gd} script in greater detail.
 
-\begin{lstlisting}
-func _physics_process(delta):   
-	# gets move from the agent
-	# in case we chose the Keyboard agent 
-	#this will just return input from the keyboard
-    var move = game.agent.move(game.state.get_state(), game.score.get_score(), game.num_of_ticks)
-    
-    #rotates the tunnel
-    if move[0] == 1:
-        var tunnel = get_child(hans.get_current_tunnel())
-        tunnel.rotate_object_local(Vector3.RIGHT,-ROTATE_SPEED * delta)
-    elif move[0] == -1:
-        var tunnel = get_child(hans.get_current_tunnel())
-        tunnel.rotate_object_local(Vector3.LEFT,-ROTATE_SPEED * delta)
-        
-    # shoot if necesarry
-    if not hans == null: # if it is not instanced we can't call the function       
-        hans.switch_animation(move[1] == 1)
-\end{lstlisting}
+\begin{algorithm}
+\begin{algorithmic}[1]
+\Function{physics\_process}{$delta$}
+\State $move \gets game.agent.\text{move}(\dots)$
+\If{$move[0] = 1$}
+	\State $tunnel \gets \text{get\_child}(hans.\text{get\_current\_tunnel}())$
+	\State $tunnel.\text{rotate\_object\_local}(Vector3.\text{RIGHT},-ROTATE\_SPEED * delta)$
+\ElsIf{$move[0] = -1$}
+	\State $tunnel \gets \text{get\_child}(hans.\text{get\_current\_tunnel}())$
+	\State $tunnel.\text{rotate\_object\_local}(Vector3.\text{LEFT},-ROTATE\_SPEED * delta)$
+\EndIf
 
-The \texttt{\_physics\_process()} function within the \texttt{Tunnels.gd} script serves as the primary connection between the agent and the game. As shown in the provided code, the function retrieves the next move from the agent and rotates the tunnel accordingly, potentially including shooting as well.
+\If{$\neg hans = \text{null}$}\Comment{If it is not instanced we can't call the function}
+	\State $hans.\text{switch\_animation}(move[1] = 1)$\Comment{Shoot if necessary}
+\EndIf
+\EndFunction
+\end{algorithmic}
+\end{algorithm}
 
-\begin{verbatim}
-func create_first_level_traps(tunnel):
-    level <- level we are making traps for
-    num_of_traps <- randomly pick number of traps to be added
-    x <- x position of the first trap
-    
-    for n in num_of_traps:
-        x <- update x to next position
-        if x is outside the tunnel:
-            break
-        # create one trap at x
-        create_one_obstacle(level, x) 
-\end{verbatim}
+The \texttt{\_physics\_process()} function within the \texttt{Tunnels.gd} script serves as the primary connection between the agent and the game. As shown in the provided code, the function retrieves the next move from the agent and rotates the tunnel accordingly, potentially including shooting as well. It should be noted that, in the case of the \texttt{Keyboard} agent, function move returns users input from the keyboard.
+
+\begin{algorithm}
+\begin{algorithmic}[1]
+\Function{create\_first\_level\_traps}{$tunnel$}
+\State $level \gets$ level we are making traps for
+\State $num\_of\_traps \gets$ randomly pick number of traps to be added
+\State $x \gets$ x position of the first trap
+\For{$n$ in $num\_of\_traps$}
+    \State $x \gets$ update $x$ to next position
+    \If{$x$ is outside the tunnel}
+        \State \textbf{break}
+    \EndIf
+    \State create\_one\_obstacle($level, x$)
+\EndFor
+\EndFunction
+\end{algorithmic}
+\end{algorithm}
 
 The function depicted in the code above serves to generate obstacles in the starting tunnel. By periodically creating traps in the tunnel ahead, the game is able to prevent lag caused by an excessive number of objects existing simultaneously. For that reason, this function is used only once, at the beginning of the game.
 
-\begin{verbatim} 
-func create_one_obstacle(level,x):
-    scene <- pick which kind of obstacle will be added
-    tunnel <- get the level we are making traps for
-    i <- randomly pick an obstacle
-    
-    using previous information, make an instance of the obstacle
-    set its position at x and rotate it randomly by n * 60 degrees  
-\end{verbatim}
+\begin{algorithm}
+\begin{algorithmic}[1]
+\Function{CreateOneObstacle}{$level, x$}
+\State $scene \gets $ pick which kind of obstacle will be added
+\State $tunnel \gets$ get the level we are making traps for
+\State $i \gets$ randomly pick an obstacle
+\State make an instance of the obstacle using previous information
+\State set its position at $x$ and rotate it randomly by $n \cdot 60$ degrees
+\EndFunction\
+\end{algorithmic}
+\end{algorithm}
 
 The tunnels are positioned along the x axis, and this function allows for the creation of obstacles within them at specific x positions and a random rotation.
 
-\begin{verbatim}         
-func delete_obstacle_until_x(level,x):
-    tunnel <- get current tunnel
-
-    for child in children of the tunnel:
-        if child is an obstacle:
-            if we passed the child:
-                remove it
-            else:
-                return
-\end{verbatim}
+\begin{algorithm}
+\begin{algorithmic}[1]
+\Function{delete\_obstacle\_until\_x}{$level, x$}
+\State $tunnel \gets$ get current tunnel
+\For{$child$ \textbf{in} children of the $tunnel$}
+\If{$child$ is an obstacle}
+\If{$x$ is less than the $child$'s position}
+\State remove $child$
+\Else
+\State \textbf{return}
+\EndIf
+\EndIf
+\EndFor
+\EndFunction
+\end{algorithmic}
+\end{algorithm}
 
 As previously mentioned, by dynamically deleting passed obstacles, the game is able to maintain a stable performance and avoid overloading the system.

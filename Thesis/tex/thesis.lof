@@ -7,12 +7,12 @@
 \contentsline {figure}{\numberline {1.6}{\ignorespaces Battery and Energy Token\relax }}{7}{figure.caption.8}%
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {2.1}{\ignorespaces Structure of Game.tscn\relax }}{8}{figure.caption.9}%
-\contentsline {figure}{\numberline {2.2}{\ignorespaces State\relax }}{11}{figure.caption.10}%
+\contentsline {figure}{\numberline {2.2}{\ignorespaces State\relax }}{10}{figure.caption.10}%
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {3.1}{\ignorespaces Rotations when \texttt {rots = 6}\relax }}{14}{figure.caption.11}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Agents hierarchy inside the project\relax }}{25}{figure.caption.12}%
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Agents hierarchy inside the project\relax }}{26}{figure.caption.12}%
 \contentsline {figure}{\numberline {5.2}{\ignorespaces Total return update for Monte Carlo\relax }}{26}{figure.caption.13}%
 \contentsline {figure}{\numberline {5.3}{\ignorespaces Policy update for Temporal Difference Learning\relax }}{27}{figure.caption.14}%
 \contentsline {figure}{\numberline {5.4}{\ignorespaces new\_state\_val variable for individual TD Agents\relax }}{27}{figure.caption.15}%

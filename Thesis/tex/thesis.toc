@@ -22,8 +22,8 @@
 \contentsline {section}{\numberline {4.1}Monte Carlo}{20}{section.4.1}%
 \contentsline {section}{\numberline {4.2}Temporal Difference Learning}{21}{section.4.2}%
 \contentsline {subsection}{\numberline {4.2.1}SARSA}{22}{subsection.4.2.1}%
-\contentsline {subsection}{\numberline {4.2.2}Q-learning}{22}{subsection.4.2.2}%
-\contentsline {subsection}{\numberline {4.2.3}Expected SARSA}{22}{subsection.4.2.3}%
+\contentsline {subsection}{\numberline {4.2.2}Q-learning}{23}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.2.3}Expected SARSA}{23}{subsection.4.2.3}%
 \contentsline {subsection}{\numberline {4.2.4}Double Q-learning}{23}{subsection.4.2.4}%
 \contentsline {chapter}{\numberline {5}Implementation of the Agents}{25}{chapter.5}%
 \contentsline {section}{\numberline {5.1}Hierarchy}{25}{section.5.1}%
