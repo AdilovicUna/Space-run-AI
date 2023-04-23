@@ -1,16 +1,9 @@
 \chapter{Implementation of the Agents}
-ADDED FROM 4
-
-The \texttt{eps} and \texttt{epsFinal} were discussed in Chapter \ref{agent_code_chapter}. With these parameters, the user can indicate starting and ending value of the $\epsilon$ which will then adequately decrease after each played game. The formula for the decrease is the following:
-
-$$decrease = (\frac{epsFinal}{eps})^{\frac{1.0}{n}}$$
-
-Here, n represents the number of games being played. The reason behind this epsilon decrease is to change the ratio between the exploration and exploitation over time. In the beginning of the experiment, the \texttt{eps} value is higher and thus random moves happen more often, causing the agent to try actions it would otherwise oversee. Later, then the policy is a bit stabilized, the \texttt{eps} value becomes smaller so it would allow the agent to play longer games and possibly win (if the \texttt{eps} value was high throughout the whole experiment, the agent would have a bigger chance of choosing an inadequate move and thus untimely ending the game).
-
 \label{implOfAgents}
 In this project, the RL agents are designed such that their functionality is encapsulated within a top-level scene called \texttt{Main.tscn}. Within this scene, there is an instance of the selected agent, and the code makes use of several functions implemented by the agent in order to interact with the environment. Specifically, the required functions are: \texttt{move()}, \texttt{init()}, \texttt{start\_game()}, \texttt{end\_game()}, \texttt{save()}, \texttt{set\_seed\_val()}, \texttt{get\_and\_set\_agent\_specific\_parameters()}, and \texttt{get\_n()}.
 
 The purpose of most of these functions is self-explanatory. \texttt{init()} and \texttt{save()} are used to initialize and save the agent's internal state, respectively, and are called only once per experiment. \texttt{start\_game()} and \texttt{end\_game()} are called at the beginning and end of each episode, while \texttt{move()} is called by the \texttt{Tunnels.gd} script, and it is in this function that the agent makes a decision about which action to take based on the current state and score. The remaining functions pertain to the internal structure of the agent and are not relevant to the reader.
+
 \section{Hierarchy}
 \begin{figure}[h]
     \centering
@@ -26,11 +19,24 @@ To facilitate testing of the game environment, several simple agents were implem
 
 \section{Learning Agent}
 The Learning Agent class serves as a base class for all the reinforcement learning agents in this project. It provides a set of shared functions and features that are used by all agents, such as reading and writing data to a file and debugging statements. In terms of decision-making, these agents all follow an epsilon-greedy policy, whereby they select the action with the highest value for a given state with a certain probability, or randomly choose any action with the remaining probability. Each of the subclasses of the Learning Agent class then implements specific code that is unique to that particular agent.
+\subsection{Common parameters and behaviours}
+In regards to the present implementation of the reinforcement learning algorithms for the 3D tunnel game, certain aspects of the game learning step and parameter implementation are unique to this project and merit discussion. For instance, we should look into the learning step in the game. The agent will not request a new move until the state has changed, despite the fact that it may seem more natural for a new decision to be made on every game tick. This has the effect of reducing the number of decisions that the agent must make in a given episode, but also results in intriguing policy behaviours that are elaborated upon in Chapter \ref{experiments_chapter}.
+
+Furthermore, there are several parameters that are common to all learning agents, some of which were briefly discussed in the preceding chapter. In this section, we will examine in more detail how these parameters were integrated into this particular project. The initial optimistic value parameter is the simplest one to explain, as it is implemented in a straightforward manner. In particular, each time a state-action pair is added to the policy, its value is set to a predetermined number. This number (\texttt{initOptVal}), along with other parameters mentioned subsequently in this subsection, are part of the sub-options agent's parameter that is specified through the command line (see \ref{commOpt}).
+
+The following two parameters worth noting are \texttt{eps} and \texttt{epsFinal}, which are responsible for the random moves executed by the $\epsilon$-greedy policy. These parameters allow the user to specify the starting and ending values of $\epsilon$, which are then suitably decreased after each game played. The formula for this decrease is as follows: $$decrease = (\frac{epsFinal}{eps})^{\frac{1.0}{n}}$$
+
+Here, \texttt{n} represents the number of games being played. The reason behind this epsilon decrease is to change the ratio between exploration and exploitation over time. At the beginning of the experiment, the \texttt{eps} value is higher, and thus random moves happen more often, causing the agent to try actions it would otherwise oversee. Later, when the policy is a bit stabilized, the \texttt{eps} value becomes smaller so it would allow the agent to play longer games and possibly win (if the \texttt{eps} value was high throughout the whole experiment, the agent would have a bigger chance of choosing an inadequate move and thus untimely ending the game).
+
+Finally, it is pertinent to discuss the discounting value gamma (defined by \texttt{gam}). In this project, discounting is used in the following manner: $$\gamma^{next\_step.time - curr\_step.time}$$
+
+Normally, the gamma value grows by one power on each step. However, as previously stated, learning steps in this implementation do not occur on every tick, but instead occur when the state changes. As a result, they may vary in size. To avoid uneven discounting, the time is calculated for each new decision made by the agent using the formula provided:  $$(game.num\_of\_ticks * 33) / 1000.0$$
+
 \subsection{Monte Carlo Agent}
 \begin{figure}[h]
     $$ R = next\_step.score - curr\_step.score $$
     	$$ G = \gamma^{next\_step.time - curr\_step.time} * (R + G) $$
-    	$$ total\_retun[state\_action] = total\_retun[state\_action] + G $$
+    	$$ total\_retun[state\_action] = total\_return[state\_action] + G $$
     \caption{Total return update for Monte Carlo}
     \label{mcUpdate}
 \end{figure}

@@ -12,27 +12,27 @@
 \contentsline {figure}{\numberline {3.1}{\ignorespaces Rotations when \texttt {rots = 6}\relax }}{14}{figure.caption.11}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Agents hierarchy inside the project\relax }}{26}{figure.caption.12}%
-\contentsline {figure}{\numberline {5.2}{\ignorespaces Total return update for Monte Carlo\relax }}{26}{figure.caption.13}%
-\contentsline {figure}{\numberline {5.3}{\ignorespaces Policy update for Temporal Difference Learning\relax }}{27}{figure.caption.14}%
-\contentsline {figure}{\numberline {5.4}{\ignorespaces new\_state\_val variable for individual TD Agents\relax }}{27}{figure.caption.15}%
-\contentsline {figure}{\numberline {5.5}{\ignorespaces Policy update for Double Q-Learning\relax }}{28}{figure.caption.16}%
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Agents hierarchy inside the project\relax }}{25}{figure.caption.12}%
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Total return update for Monte Carlo\relax }}{27}{figure.caption.13}%
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Policy update for Temporal Difference Learning\relax }}{28}{figure.caption.14}%
+\contentsline {figure}{\numberline {5.4}{\ignorespaces new\_state\_val variable for individual TD Agents\relax }}{28}{figure.caption.15}%
+\contentsline {figure}{\numberline {5.5}{\ignorespaces Policy update for Double Q-Learning\relax }}{29}{figure.caption.16}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {6.1}{\ignorespaces \texttt {rots} value used for each trap type\relax }}{29}{figure.caption.17}%
-\contentsline {figure}{\numberline {6.2}{\ignorespaces Average performance of the agents on individual traps, initOptVal=20\relax }}{30}{figure.caption.18}%
-\contentsline {figure}{\numberline {6.3}{\ignorespaces Average performance of the agents on individual traps, initOptVal=100\relax }}{30}{figure.caption.19}%
-\contentsline {figure}{\numberline {6.4}{\ignorespaces Double Q-Learning trained with 200 games on I-type trap\relax }}{31}{figure.caption.20}%
-\contentsline {figure}{\numberline {6.5}{\ignorespaces Triangle-type trap with Expected SARSA algorithm\relax }}{32}{figure.caption.21}%
-\contentsline {figure}{\numberline {6.6}{\ignorespaces Average performance of the agents with Bugs environment\relax }}{33}{figure.caption.22}%
-\contentsline {figure}{\numberline {6.7}{\ignorespaces Policy of the Expected SARSA algorithm on the Bugs environment\relax }}{34}{figure.caption.23}%
-\contentsline {figure}{\numberline {6.8}{\ignorespaces Policy of the SARSA algorithm on the Bugs environment\relax }}{34}{figure.caption.24}%
-\contentsline {figure}{\numberline {6.9}{\ignorespaces Average performance of the agents with Viruses environment\relax }}{35}{figure.caption.25}%
-\contentsline {figure}{\numberline {6.10}{\ignorespaces Policy of the Q-Learning algorithm on the Viruses environment\relax }}{35}{figure.caption.26}%
-\contentsline {figure}{\numberline {6.11}{\ignorespaces Policy of the Expected SARSA algorithm on the Viruses environment without shooting\relax }}{36}{figure.caption.27}%
-\contentsline {figure}{\numberline {6.12}{\ignorespaces Policy of the Expected SARSA algorithm on the Viruses environment with shooting\relax }}{37}{figure.caption.28}%
-\contentsline {figure}{\numberline {6.13}{\ignorespaces Performance comparison of the algorithms on the Token environment\relax }}{37}{figure.caption.29}%
-\contentsline {figure}{\numberline {6.14}{\ignorespaces Policy of the Expected SARSA algorithm on the Traps environment\relax }}{38}{figure.caption.30}%
-\contentsline {figure}{\numberline {6.15}{\ignorespaces Policy of the Monte Carlo algorithm on the Traps environment\relax }}{39}{figure.caption.31}%
-\contentsline {figure}{\numberline {6.16}{\ignorespaces Policy of the Expected SARSA algorithm on the Bugs, Viruses and Tokens environment combined\relax }}{40}{figure.caption.32}%
-\contentsline {figure}{\numberline {6.17}{\ignorespaces Policy of the Expected SARSA algorithm on the whole game\relax }}{41}{figure.caption.33}%
+\contentsline {figure}{\numberline {6.1}{\ignorespaces \texttt {rots} value used for each trap type\relax }}{30}{figure.caption.17}%
+\contentsline {figure}{\numberline {6.2}{\ignorespaces Average performance of the agents on individual traps, initOptVal=20\relax }}{31}{figure.caption.18}%
+\contentsline {figure}{\numberline {6.3}{\ignorespaces Average performance of the agents on individual traps, initOptVal=100\relax }}{31}{figure.caption.19}%
+\contentsline {figure}{\numberline {6.4}{\ignorespaces Double Q-Learning trained with 200 games on I-type trap\relax }}{32}{figure.caption.20}%
+\contentsline {figure}{\numberline {6.5}{\ignorespaces Triangle-type trap with Expected SARSA algorithm\relax }}{33}{figure.caption.21}%
+\contentsline {figure}{\numberline {6.6}{\ignorespaces Average performance of the agents with Bugs environment\relax }}{34}{figure.caption.22}%
+\contentsline {figure}{\numberline {6.7}{\ignorespaces Policy of the Expected SARSA algorithm on the Bugs environment\relax }}{35}{figure.caption.23}%
+\contentsline {figure}{\numberline {6.8}{\ignorespaces Policy of the SARSA algorithm on the Bugs environment\relax }}{35}{figure.caption.24}%
+\contentsline {figure}{\numberline {6.9}{\ignorespaces Average performance of the agents with Viruses environment\relax }}{36}{figure.caption.25}%
+\contentsline {figure}{\numberline {6.10}{\ignorespaces Policy of the Q-Learning algorithm on the Viruses environment\relax }}{36}{figure.caption.26}%
+\contentsline {figure}{\numberline {6.11}{\ignorespaces Policy of the Expected SARSA algorithm on the Viruses environment without shooting\relax }}{37}{figure.caption.27}%
+\contentsline {figure}{\numberline {6.12}{\ignorespaces Policy of the Expected SARSA algorithm on the Viruses environment with shooting\relax }}{38}{figure.caption.28}%
+\contentsline {figure}{\numberline {6.13}{\ignorespaces Performance comparison of the algorithms on the Token environment\relax }}{38}{figure.caption.29}%
+\contentsline {figure}{\numberline {6.14}{\ignorespaces Policy of the Expected SARSA algorithm on the Traps environment\relax }}{39}{figure.caption.30}%
+\contentsline {figure}{\numberline {6.15}{\ignorespaces Policy of the Monte Carlo algorithm on the Traps environment\relax }}{40}{figure.caption.31}%
+\contentsline {figure}{\numberline {6.16}{\ignorespaces Policy of the Expected SARSA algorithm on the Bugs, Viruses and Tokens environment combined\relax }}{41}{figure.caption.32}%
+\contentsline {figure}{\numberline {6.17}{\ignorespaces Policy of the Expected SARSA algorithm on the whole game\relax }}{42}{figure.caption.33}%
 \addvspace {10\p@ }
