@@ -5,7 +5,7 @@ To train an agent on a specific environment, the user must utilize a command-lin
 \section{State}
 The majority of the implemented agents in the game utilize the concept of state to facilitate learning. The agent will determine its next action based on the current state in which it finds itself. By dividing the game into discrete states, we are able to utilize tabular method algorithms to train an agent to play this continuous game. Once one obstacle is passed, the value of the state indicated refers to the next one. Each state is represented by a triplet consisting of distance, rotation, and next obstacle type. 
 
-Before further explaining this notion, lets look at the standard unit of distance measurement in Godot - a ``meter'' .It is used to represent the size, position, and movement of objects in the game world. In Godot, one meter is equal to the size of a standard cube. To better understand the notion, it would be useful to note that Hans is approximately 12m tall and his starting speed is 35 meters per second, while each tunnel has width and height of approximately 45m and depth 2800m.
+It is important to note that the game uses meters as the standard unit of distance measurement in Godot. This unit is used to represent the size, position, and movement of objects in the game world. It is worth mentioning that one meter in Godot is equal to the size of a standard cube. With that in mind, players can visualize Hans' approximate height of 12 meters and starting speed of 35 meters per second. Additionally, each tunnel in the game has a width and height of approximately 45 meters and a depth of 2800 meters.
 
 The distance value indicates the distance of the agent from the next obstacle in meters. For example, if we set the \texttt{dists} parameter (indicated by the user, see \ref{opt:dists}) to 2, there are two possible distance values for the state: \textgreater 50, \textgreater 0, indicating that the agent is more than 50 meters away from the obstacle and at least 1-50 meter away from the obstacle, respectively. If the \texttt{dists} parameter is set to 1, the distance value remains constant at \textgreater 0. In the Chapter \ref{experiments_chapter} we will see that all types of environments in this game are able to learn when the \texttt{dists} parameter is equal to 1.  
 
@@ -18,15 +18,19 @@ The rotation parameter divides the obstacle circumference into \texttt{rots} num
     \label{fig:circumference}
 \end{figure}
 
-Finally, the type parameter indicates the type of obstacle that Hans must avoid. Each obstacle has its own string representation. With this information, the agent can learn to recognize the safe rotation for different types of obstacles and, along with the distance parameter, decide whether to move left, right, forward, or shoot in combination with any of these actions. To further explain this notion lets look back at the Figure \ref{fig:circumference}. Here, seemingly the 240 rotation value should be the way to go and Hans can easily pass through the obstacle. However, with closer observation, it is visible that in fact, not the whole of rotation 240 is safe. The agent does not know the difference between being at any point of the 240 rotation and thus can easily die. For this obstacle, indeed, there would be more \texttt{rots} needed in order for Hans to have at least one safe rotation value (meaning that the whole piece of the obstacle that rotation value covers is considered safe).
+Finally, the type parameter indicates the type of obstacle that Hans must avoid. Each obstacle has its own unique string representation, which allows the agent to learn to recognize the safe rotation for different types of obstacles. Using this information, along with the distance parameter, the agent can decide whether to move left, right, forward, or shoot in combination with any of these actions. To further explain this notion lets look back at the Figure \ref{fig:circumference}. At first glance, it may seem that a rotation of 240 would allow Hans to easily pass through the obstacle. However, upon closer inspection, it becomes clear that only a specific portion of the 240 rotation value is safe. The agent does not know the difference between being at any point of the 240 rotation and thus can easily make a fatal mistake. For this obstacle, indeed, there would be more \texttt{rots} needed in order for Hans to have at least one safe rotation value (meaning that the whole piece of the obstacle that rotation value covers is considered safe).
+
+In Chapter \ref{experiments_chapter}, a noteworthy concept is presented where the agent can recognize a safe edge between two rotations, even if it is not provided with a completely safe rotation. By quickly shifting between these rotations, the agent is able to successfully navigate through the obstacle.
 
 \section{Command line options}
 \label{commOpt}
 \begin{center}
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{ | p{4cm}|p{10cm} | } 
-  \hline+
+  \hline
   \hyperref[opt:n]{n=int} & number of games\\ 
+  \hline
+  \hyperref[opt:stoppingPoint]{stoppingPoint=int} & stop after the agent wins this many consecutive games\\ 
   \hline
   \hyperref[opt:agent]{agent=string} & name of the agent\\ 
   \hline
@@ -40,6 +44,8 @@ Finally, the type parameter indicates the type of obstacle that Hans must avoid.
   \hline
   \hyperref[opt:rots]{rots=int} & number of states in 360 degrees rotation \\ 
   \hline
+  \hyperref[opt:agentSeedVal]{agentSeedVal=int} & seed value for the random moves the agent takes\\ 
+  \hline
   \hyperref[opt:database]{database=string} & read the data for this command from an existing file and/or update the data after the command is executed  \\ 
   \hline
   \hyperref[opt:ceval]{ceval=bool} & performs continuous evaluation \\ 
@@ -50,23 +56,39 @@ Finally, the type parameter indicates the type of obstacle that Hans must avoid.
   \hline
 \end{tabular}}
 \end{center}
-Note: any of these options can be omitted as they all have default values. If no options are specified, a normal game with the \texttt{Keyboard} agent will be run.
+
+
 \subsection{Command line option descriptions}
-\begin{description}
-\item[n] - Number of games the agent will train on in this session. The default is 100. \label{opt:n}
-\item[agent] - Name of the desired agent \label{opt:agent}\\
+In this section, a more comprehensive clarification for the table presented earlier is provided. It is important to note that any of the options listed can be left out, as they all have default values assigned to them. In the event that no options are specified, a regular game with the \texttt{Keyboard} agent will be executed.
+
+\subsubsection*{n}
+\label{opt:n}
+Number of games the agent will train on in this session. The default is 100.
+
+\subsubsection*{stoppingPoint}
+\label{opt:stoppingPoint}
+If the agents manages to win this many consecutive games, the experiment is stopped. This is used to avoid long experiments if the agent has already learned the right policy and would simply keep winning. The default value is 25.
+
+\subsubsection*{agent}
+\label{opt:agent}
+Name of the desired agent. \\
 Options: [\texttt{Keyboard}, \texttt{Static}, \texttt{Random}, \texttt{MonteCarlo}, \texttt{SARSA}, \texttt{QLearning}, \\ \texttt{ExpectedSARSA}, \texttt{DoubleQLearning}]\\
 Sub-options (only for the listed agents):
 \texttt{MonteCarlo}, \texttt{SARSA}, \texttt{QLearning}, \texttt{ExpectedSARSA}, \texttt{DoubleQLearning}
 =[float, float, float, float] :
-
 [\texttt{gam} (range [0,1]), \texttt{eps} (range [0,1]), \texttt{epsFinal} (range [0,1]), \texttt{initOptVal} (range [0,$\infty$))]\\
 Example usage: ``\texttt{agent=MonteCarlo:eps=0.1,gam=0.2}''\\
 The meaning of the suboptions will be explained in a later section.
-\item[level] - Number of the level to start from. Default value is 1. \label{opt:level}\\
-Options: \texttt{[1, ... , 10]}\\
-Note: after the 10th level, the agent is considered to have won the game
-\item[env] - List of obstacles that will be chosen in the game \label{opt:env}\\
+
+\subsubsection*{level}
+\label{opt:level}
+Number of the level to start from. Default value is 1.\\
+Options: \texttt{[1, ... , 15]}\\
+Note: after the 15th level, the agent is considered to have won the game.
+
+\subsubsection*{env}
+\label{opt:env}
+List of obstacles that will be chosen in the game,\\
 Options (any subset of): [\texttt{Traps}, \texttt{Bugs}, \texttt{Viruses}, \texttt{Tokens},
 \texttt{I}, \texttt{O}, \texttt{MovingI}, \texttt{X}, \texttt{Walls}, \texttt{Hex},
 \texttt{HexO}, \texttt{Balls}, \texttt{Triangles}, \texttt{HalfHex},
@@ -74,27 +96,53 @@ Options (any subset of): [\texttt{Traps}, \texttt{Bugs}, \texttt{Viruses}, \text
 \texttt{Rotavirus}, \texttt{Bacteriophage}]\\
 Note: if this parameter is not included, the environment will contain all available obstacles (i.e. the full game).\\
 Example usage: ``\texttt{env=HexO,I,Bugs}''\\
-\item[shooting] - Enable or disable shooting \label{opt:shooting}\\
-Options: [\texttt{enabled}, \texttt{disabled}]\\
-Note: this option is disabled by default.
-\item[dists] - Number of states in a 100-meter interval \label{opt:dists}\\
+
+\subsubsection*{shooting}
+\label{opt:shooting}
+Enable or disable shooting.\\
+Options: [\texttt{enabled}, \texttt{disabled}, \texttt{forced}]\\
+This option is disabled by default or if the environment does not have any bugs or viruses.
+
+\subsubsection*{dists}
+\label{opt:dists}
+Number of states in a 100-meter interval.\\
 This parameter is part of the state label and typical options range from 1 to 3. Default value is 1.
-\item[rots] - Number of states in 360 degrees rotation \label{opt:rots}\\
+
+\subsubsection*{rots}
+\label{opt:rots}
+Number of states in 360 degrees rotation.
 This parameter is part of the state label and the minimum viable option is 6. This is also the default value.
-\item[database] - Read or write data for this command from/to a file \label{opt:database}\\
+
+\subsubsection*{agentSeedVal}
+\label{opt:agentSeedVal}
+Seed value for the agent.\\
+This parameter is used to produce multiple experiments with different random actions to verify if the agent can really learn under certain conditions or if it simply "to lucky" with the random moves.
+
+\subsubsection*{database}
+\label{opt:database}
+Read or write data for this command from/to a file.\\
 Options: [\texttt{read}, \texttt{write}, \texttt{read\_write}]\\
 Note: these files are typically used to start another session of the agent's training from the last point of the previous session, to run a game with visuals and observe the agent's performance, or for plotting the results. This option does not affect the Keyboard, Static, or Random agents. Default option for this parameter is to neither read nor write.
-\item[ceval] - Performs continuous evaluation \label{opt:ceval}\\
+
+\subsubsection*{ceval}
+\label{opt:ceval}
+Performs continuous evaluation.\\
 This parameter indicates that after each training game, a test game will be played using only the policy(s) learned thus far. For example, if the user specifies ``n=100'', a total of 200 games will be executed, with 100 of them being training games and the remaining 100 being test games. This allows for the assessment of the agent's progress and performance during the training process. 
 Options: [\texttt{true},\texttt{false} (default)]
-\item[debug] - Display debug print statements \label{opt:debug}\\
+
+\subsubsection*{debug}
+\label{opt:debug}
+Display debug print statements.
 Options: [\texttt{true},\texttt{false} (default)]
-\item[options] - Displays all of the mentioned options \label{opt:options}\\
-\end{description}
+
+\subsubsection*{options}
+\label{opt:options}
+Displays all of the mentioned options.
+
 
 \subsection{Running the program}
 There are several possibilities for running the game from the command line. In addition to various combinations of the options listed above, the user has the choice of running an experiment with or without the graphical interface. If they opt for the first possibility, the window will open and the game will be played at its normal speed. On the other hand, if the experiment is run without graphics, it will be over 200 times faster and the output will only be displayed in the terminal. This is achieved by a few things, mainly hiding the CSG geometry in every node. The computational power required to perform union, intersection, etc. on the CSG shapes is quite high and thus by not performing those calculations a game can run much faster. Of course, these shapes are not necessary for the experiments run without graphics, since the collision shapes are the ones that play a role in determining what happened in the game\footnote{The collision shapes refer to the shapes that are used to define the physical bounds of an object for the purpose of collision detection.}.
-It should also be noted that the experiments are fully reproducible since the seed values for all random variables are predetermined.
+It is important to acknowledge that the experiments conducted in this study are entirely reproducible owing to the predetermined seed values for all the random variables. However, it should be noted that the values produced by a seed can differ across different versions of the Godot Engine. In order to obtain identical results to the experiments detailed in Chapter \ref{experiments_chapter}, it is recommended to use Godot Engine v3.2.3.stable.
 
 To run the program in the command line, the user may benefit from adding the Godot executable to the PATH environment variable. This will allow them to start the application from the command line simply by entering the command \texttt{godot} while inside the same directory as the \texttt{project.godot} file.
 

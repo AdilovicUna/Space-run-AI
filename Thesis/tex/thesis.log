@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.12) (preloaded format=pdflatex 2022.12.18)  23 APR 2023 23:40
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.12) (preloaded format=pdflatex 2022.12.18)  29 APR 2023 23:14
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -620,13 +620,7 @@ x.def
 File: l3backend-pdftex.def 2022-10-26 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count314
 \l__pdf_internal_box=\box61
-) (thesis.aux (title.aux) (Introduction.aux) (GameDesign.aux)
-(GameImplementation.aux) (StructureOfTheExperimentalSetting.aux)
-(AlgorithmsUsed.aux) (AgentsImplementation.aux) (Experiments.aux
-
-LaTeX Warning: Label `fig:dqli' multiply defined.
-
-) (Conclusion.aux) (bibliography.aux))
+) (thesis.aux)
 \openout1 = `thesis.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 125.
@@ -683,7 +677,7 @@ Package caption Info: End \AtBeginDocument code.
 
  (title.tex
 Package hyperref Info: Option `pageanchor' set `false' on input line 6.
-<../img/logo-en.pdf, id=214, 506.4591pt x 156.49065pt>
+<../img/logo-en.pdf, id=130, 506.4591pt x 156.49065pt>
 File: ../img/logo-en.pdf Graphic file (type pdf)
 <use ../img/logo-en.pdf>
 Package pdftex.def Info: ../img/logo-en.pdf  used on input line 9.
@@ -700,54 +694,24 @@ Package hyperref Info: Option `pageanchor' set `true' on input line 55.
 ]
 [3
 
-]) (thesis.toc
-LaTeX Font Info:    Trying to load font information for OML+lmm on input line 3
-.
-
-(C:\Users\Una\AppData\Local\Programs\MiKTeX\tex/latex/lm\omllmm.fd
-File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-)
-LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
-3.
-
-(C:\Users\Una\AppData\Local\Programs\MiKTeX\tex/latex/lm\omslmsy.fd
-File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-)
-LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 
-3.
-
-(C:\Users\Una\AppData\Local\Programs\MiKTeX\tex/latex/lm\omxlmex.fd
-File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-)
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 3.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 3.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 3.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 3.
-
-(C:\Users\Una\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
-File: umsa.fd 2013/01/14 v3.01 AMS symbols A
-)
-LaTeX Font Info:    Trying to load font information for U+msb on input line 3.
-
-(C:\Users\Una\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
-File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-)
-[1
-
-
-
-
-])
+]) (thesis.toc)
 \tf@toc=\write6
 \openout6 = `thesis.toc'.
 
- [2]
+ [1
+
+
+
+
+]
 \openout2 = `Introduction.aux'.
 
- (Introduction.tex) [3
+ (Introduction.tex
+
+Package natbib Warning: Citation `RLSuttonBarto' on page 2 undefined on input l
+ine 4.
+
+) [2
 
 
 ]
@@ -755,58 +719,112 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
  (GameDesign.tex
 Chapter 1.
-<../img//second_tunnel.png, id=318, 761.09344pt x 447.17062pt>
+
+Package natbib Warning: Citation `tunnelrush' on page 3 undefined on input line
+ 4.
+
+<../img//second_tunnel.png, id=172, 761.09344pt x 447.17062pt>
 File: ../img//second_tunnel.png Graphic file (type png)
 <use ../img//second_tunnel.png>
 Package pdftex.def Info: ../img//second_tunnel.png  used on input line 10.
 (pdftex.def)             Requested size: 412.56496pt x 242.40332pt.
-<../img//hans.jpg, id=321, 106.89937pt x 167.12437pt>
+
+LaTeX Warning: Reference `fig:hans' on page 3 undefined on input line 15.
+
+
+LaTeX Warning: Reference `fig:snd_tunnel' on page 3 undefined on input line 15.
+
+
+<../img//hans.jpg, id=173, 106.89937pt x 167.12437pt>
 File: ../img//hans.jpg Graphic file (type jpg)
 <use ../img//hans.jpg>
 Package pdftex.def Info: ../img//hans.jpg  used on input line 18.
 (pdftex.def)             Requested size: 64.1401pt x 100.27538pt.
-[4
+[3
 
 
 
 
  <../img//second_tunnel.png>]
-<../img//traps.pdf, id=330, 1150.2975pt x 386.94562pt>
+
+LaTeX Warning: Reference `fig:snd_tunnel' on page 4 undefined on input line 22.
+
+
+<../img//traps.pdf, id=180, 1150.2975pt x 386.94562pt>
 File: ../img//traps.pdf Graphic file (type pdf)
 <use ../img//traps.pdf>
 Package pdftex.def Info: ../img//traps.pdf  used on input line 30.
 (pdftex.def)             Requested size: 412.56496pt x 138.78073pt.
-<../img//bugs.pdf, id=332, 564.60938pt x 133.24782pt>
+
+LaTeX Warning: Reference `fig:traps' on page 4 undefined on input line 34.
+
+<../img//bugs.pdf, id=181, 564.60938pt x 133.24782pt>
 File: ../img//bugs.pdf Graphic file (type pdf)
 <use ../img//bugs.pdf>
 Package pdftex.def Info: ../img//bugs.pdf  used on input line 40.
 (pdftex.def)             Requested size: 412.56496pt x 97.36768pt.
- [5 <../img//hans.jpg> <../img//traps.pdf> <../img//bugs.pdf
+
+LaTeX Warning: Reference `fig:bugs' on page 4 undefined on input line 44.
+
+
+LaTeX Warning: Reference `AdditionalFeatures' on page 4 undefined on input line
+ 44.
+
+[4 <../img//hans.jpg> <../img//traps.pdf> <../img//bugs.pdf
 
 pdfTeX warning: pdflatex (file ../img//bugs.pdf): PDF inclusion: multiple pdfs 
 with page group included in a single page
 >]
-<../img//viruses.pdf, id=348, 526.96875pt x 165.61874pt>
+<../img//viruses.pdf, id=196, 526.96875pt x 165.61874pt>
 File: ../img//viruses.pdf Graphic file (type pdf)
 <use ../img//viruses.pdf>
 Package pdftex.def Info: ../img//viruses.pdf  used on input line 49.
 (pdftex.def)             Requested size: 412.56496pt x 129.66983pt.
-<../img//first_tunnel.jpg, id=350, 767.11594pt x 447.92343pt>
+
+
+LaTeX Warning: Reference `fig:viruses' on page 5 undefined on input line 54.
+
+<../img//first_tunnel.jpg, id=197, 767.11594pt x 447.92343pt>
 File: ../img//first_tunnel.jpg Graphic file (type jpg)
 <use ../img//first_tunnel.jpg>
 Package pdftex.def Info: ../img//first_tunnel.jpg  used on input line 60.
 (pdftex.def)             Requested size: 412.56496pt x 240.90451pt.
 
-
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-) [6 <../img//viruses.pdf>] [7 <../img//first_tunnel.jpg>]
+
+LaTeX Warning: Reference `fig:batteryToken' on page 5 undefined on input line 6
+5.
+
+
+LaTeX Warning: Reference `fig:batteryToken' on page 5 undefined on input line 6
+5.
+
+
+LaTeX Warning: Reference `Bugs' on page 5 undefined on input line 65.
+
+) [5 <../img//viruses.pdf>] [6 <../img//first_tunnel.jpg>]
 \openout2 = `GameImplementation.aux'.
 
 
 (GameImplementation.tex
 Chapter 2.
-<../img//game_tree.png, id=376, 683.55376pt x 332.24126pt>
+
+Package natbib Warning: Citation `GodotDocs' on page 7 undefined on input line 
+2.
+
+
+Package natbib Warning: Citation `blender' on page 7 undefined on input line 4.
+
+
+
+Package natbib Warning: Citation `gltf' on page 7 undefined on input line 4.
+
+
+Package natbib Warning: Citation `spacerunai' on page 7 undefined on input line
+ 6.
+
+<../img//game_tree.png, id=212, 683.55376pt x 332.24126pt>
 File: ../img//game_tree.png Graphic file (type png)
 <use ../img//game_tree.png>
 Package pdftex.def Info: ../img//game_tree.png  used on input line 11.
@@ -816,31 +834,92 @@ LaTeX Font Info:    Trying to load font information for OT1+lmtt on input line
 (C:\Users\Una\AppData\Local\Programs\MiKTeX\tex/latex/lm\ot1lmtt.fd
 File: ot1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
+
+LaTeX Warning: Reference `fig:game_tree' on page 7 undefined on input line 16.
+
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 1
+6.
+(C:\Users\Una\AppData\Local\Programs\MiKTeX\tex/latex/lm\omllmm.fd
+File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
+16.
+
+(C:\Users\Una\AppData\Local\Programs\MiKTeX\tex/latex/lm\omslmsy.fd
+File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 
+16.
+
+(C:\Users\Una\AppData\Local\Programs\MiKTeX\tex/latex/lm\omxlmex.fd
+File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <12> on input line 16.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <8> on input line 16.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <6> on input line 16.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 16.
+
+
+(C:\Users\Una\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Trying to load font information for U+msb on input line 16.
+
+
+(C:\Users\Una\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <10> on input line 16.
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <7> on input line 16.
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <5> on input line 16.
- [8
+
+[7
 
 
 
 
  <../img//game_tree.png>]
+
+LaTeX Warning: Reference `agent_code_chapter' on page 8 undefined on input line
+ 21.
+
 LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 2
 5.
-
 (C:\Users\Una\AppData\Local\Programs\MiKTeX\tex/latex/lm\ts1lmr.fd
 File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-) [9]
-<../img//third_tunnel.jpg, id=408, 769.37437pt x 450.18187pt>
+)
+
+LaTeX Warning: Reference `agent_code_chapter' on page 8 undefined on input line
+ 26.
+
+
+LaTeX Warning: Reference `tunnel_script' on page 8 undefined on input line 26.
+
+
+LaTeX Warning: Reference `agent_code_chapter' on page 8 undefined on input line
+ 27.
+
+
+LaTeX Warning: Reference `fig:third_tunnel' on page 8 undefined on input line 5
+4.
+
+
+LaTeX Warning: Reference `agent_code_chapter' on page 8 undefined on input line
+ 54.
+
+[8]
+<../img//third_tunnel.jpg, id=231, 769.37437pt x 450.18187pt>
 File: ../img//third_tunnel.jpg Graphic file (type jpg)
 <use ../img//third_tunnel.jpg>
 Package pdftex.def Info: ../img//third_tunnel.jpg  used on input line 60.
 (pdftex.def)             Requested size: 412.56496pt x 241.41164pt.
-
-[10 <../img//third_tunnel.jpg>]
+ [9 <../img//third_tunnel.jpg>]
 Underfull \hbox (badness 10000) in paragraph at lines 75--76
 [] $\OML/lmm/m/it/12 tunnel:[]\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 Vector\OT1/lmr/
 m/n/12 3\OML/lmm/m/it/12 :[]; \OMS/lmsy/m/n/12 ^^@\OML/lmm/m/it/12 ROTATE[]SPEE
@@ -854,11 +933,14 @@ m/n/12 3\OML/lmm/m/it/12 :[]; \OMS/lmsy/m/n/12 ^^@\OML/lmm/m/it/12 ROTATE[]SPEE
 D \OMS/lmsy/m/n/12 ^^C
  []
 
-) [11] [12]
+) [10] [11]
 \openout2 = `StructureOfTheExperimentalSetting.aux'.
 
  (StructureOfTheExperimentalSetting.tex
 Chapter 3.
+
+LaTeX Warning: Reference `opt:dists' on page 12 undefined on input line 10.
+
 LaTeX Font Info:    Trying to load font information for OML+lmr on input line 1
 0.
 (C:\Users\Una\AppData\Local\Programs\MiKTeX\tex/latex/lm\omllmr.fd
@@ -866,410 +948,483 @@ File: omllmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Font shape `OML/lmr/m/n' in size <12> not available
 (Font)              Font shape `OML/lmm/m/it' tried instead on input line 10.
-<../img//circumference.jpg, id=432, 764.10469pt x 443.40656pt>
+
+
+LaTeX Warning: Reference `experiments_chapter' on page 12 undefined on input li
+ne 10.
+
+
+LaTeX Warning: Reference `opt:rots' on page 12 undefined on input line 12.
+
+
+LaTeX Warning: Reference `fig:circumference' on page 12 undefined on input line
+ 12.
+
+<../img//circumference.jpg, id=253, 764.10469pt x 443.40656pt>
 File: ../img//circumference.jpg Graphic file (type jpg)
 <use ../img//circumference.jpg>
 Package pdftex.def Info: ../img//circumference.jpg  used on input line 16.
 (pdftex.def)             Requested size: 412.56496pt x 239.4089pt.
 
-
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[13
+
+LaTeX Warning: Reference `fig:circumference' on page 12 undefined on input line
+ 21.
+
+[12
 
 
 
 
-] [14 <../img//circumference.jpg>]
-Underfull \hbox (badness 10000) in paragraph at lines 69--77
+]
+
+LaTeX Warning: Reference `experiments_chapter' on page 13 undefined on input li
+ne 23.
+
+
+LaTeX Warning: Hyper reference `opt:n' on page 13 undefined on input line 57.
+
+
+LaTeX Warning: Hyper reference `opt:stoppingPoint' on page 13 undefined on inpu
+t line 57.
+
+
+LaTeX Warning: Hyper reference `opt:agent' on page 13 undefined on input line 5
+7.
+
+
+LaTeX Warning: Hyper reference `opt:level' on page 13 undefined on input line 5
+7.
+
+
+LaTeX Warning: Hyper reference `opt:env' on page 13 undefined on input line 57.
+
+
+
+LaTeX Warning: Hyper reference `opt:shooting' on page 13 undefined on input lin
+e 57.
+
+
+LaTeX Warning: Hyper reference `opt:dists' on page 13 undefined on input line 5
+7.
+
+
+LaTeX Warning: Hyper reference `opt:rots' on page 13 undefined on input line 57
+.
+
+
+LaTeX Warning: Hyper reference `opt:agentSeedVal' on page 13 undefined on input
+ line 57.
+
+
+LaTeX Warning: Hyper reference `opt:database' on page 13 undefined on input lin
+e 57.
+
+
+LaTeX Warning: Hyper reference `opt:ceval' on page 13 undefined on input line 5
+7.
+
+
+LaTeX Warning: Hyper reference `opt:debug' on page 13 undefined on input line 5
+7.
+
+
+LaTeX Warning: Hyper reference `opt:options' on page 13 undefined on input line
+ 57.
+
+[13 <../img//circumference.jpg>]
+Overfull \hbox (40.20535pt too wide) in paragraph at lines 74--82
+\OT1/lmr/m/n/12 Sub-options (only for the listed agents): \OT1/lmtt/m/n/12 Mont
+eCarlo\OT1/lmr/m/n/12 , \OT1/lmtt/m/n/12 SARSA\OT1/lmr/m/n/12 , \OT1/lmtt/m/n/1
+2 QLearning\OT1/lmr/m/n/12 , \OT1/lmtt/m/n/12 ExpectedSARSA\OT1/lmr/m/n/12 ,|
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 91--99
 
  []
+
+[14]
+
+LaTeX Warning: Reference `experiments_chapter' on page 15 undefined on input li
+ne 145.
 
 [15]
-Underfull \hbox (badness 10000) in paragraph at lines 92--93
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 113--114
+Underfull \hbox (badness 10000) in paragraph at lines 161--162
 []\OT1/lmr/m/n/12 godot --no-window --fixed-fps 1 --disable-render-loop databas
 e=write
  []
+
+
+LaTeX Warning: Reference `commOpt' on page 16 undefined on input line 168.
 
 [16]) [17] [18]
 \openout2 = `AlgorithmsUsed.aux'.
 
  (AlgorithmsUsed.tex
 Chapter 4.
+
+Package natbib Warning: Citation `RLSuttonBarto' on page 19 undefined on input 
+line 6.
+
 [19
 
 
 
 
-] [20]
+]
+
+Package natbib Warning: Citation `RLSuttonBarto' on page 20 undefined on input 
+line 15.
+
+
+LaTeX Warning: Reference `algo:MC' on page 20 undefined on input line 19.
+
+
+Package natbib Warning: Citation `RLSuttonBarto' on page 20 undefined on input 
+line 19.
+
+[20]
 Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
 put line 34.
- [21] [22]) [23] [24]
+
+
+LaTeX Warning: Reference `implOfAgents' on page 21 undefined on input line 62.
+
+[21]
+
+Package natbib Warning: Citation `RLSuttonBarto' on page 22 undefined on input 
+line 73.
+
+[22]) [23] [24]
 \openout2 = `AgentsImplementation.aux'.
 
  (AgentsImplementation.tex
 Chapter 5.
-<../img//agents_tree.png, id=522, 783.92876pt x 452.69125pt>
+<../img//agents_tree.png, id=336, 783.92876pt x 452.69125pt>
 File: ../img//agents_tree.png Graphic file (type png)
 <use ../img//agents_tree.png>
 Package pdftex.def Info: ../img//agents_tree.png  used on input line 10.
 (pdftex.def)             Requested size: 330.05322pt x 190.59874pt.
+
+LaTeX Warning: Reference `fig:agents_tree' on page 25 undefined on input line 1
+5.
+
 [25
 
 
 
 
- <../img//agents_tree.png>] [26]
-Overfull \hbox (31.92134pt too wide) detected at line 50
-\OML/lmm/m/it/12 q\OT1/lmr/m/n/12 [\OML/lmm/m/it/12 state[]action\OT1/lmr/m/n/1
-2 ] = \OML/lmm/m/it/12 q\OT1/lmr/m/n/12 [\OML/lmm/m/it/12 state[]action\OT1/lmr
-/m/n/12 ] + \OML/lmm/m/it/12 alpha \OMS/lmsy/m/n/12 ^^C \OT1/lmr/m/n/12 (\OML/l
-mm/m/it/12 gamma \OMS/lmsy/m/n/12 ^^C \OT1/lmr/m/n/12 (\OML/lmm/m/it/12 R \OT1/
-lmr/m/n/12 + \OML/lmm/m/it/12 new[]state[]val\OT1/lmr/m/n/12 ) \OMS/lmsy/m/n/12
- ^^@ \OML/lmm/m/it/12 q\OT1/lmr/m/n/12 [\OML/lmm/m/it/12 state[]action\OT1/lmr/
-m/n/12 ])|
- []
+ <../img//agents_tree.png>]
 
-[27]
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-) [28] [29]
-\openout2 = `Experiments.aux'.
-
- (Experiments.tex
-Chapter 6.
-<../img//rot_values.png, id=560, 241.90375pt x 96.36pt>
-File: ../img//rot_values.png Graphic file (type png)
-<use ../img//rot_values.png>
-Package pdftex.def Info: ../img//rot_values.png  used on input line 11.
-(pdftex.def)             Requested size: 165.02345pt x 65.73859pt.
-<../img//eps=0.2_initOptVal=20_.png, id=562, 435.7881pt x 330.9966pt>
-File: ../img//eps=0.2_initOptVal=20_.png Graphic file (type png)
-<use ../img//eps=0.2_initOptVal=20_.png>
-Package pdftex.def Info: ../img//eps=0.2_initOptVal=20_.png  used on input line
- 20.
-(pdftex.def)             Requested size: 247.54149pt x 188.01848pt.
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<../img//eps=0.2_initOptVal=100_.png, id=563, 435.7881pt x 330.9966pt>
-File: ../img//eps=0.2_initOptVal=100_.png Graphic file (type png)
-<use ../img//eps=0.2_initOptVal=100_.png>
-Package pdftex.def Info: ../img//eps=0.2_initOptVal=100_.png  used on input lin
-e 27.
-(pdftex.def)             Requested size: 247.54149pt x 188.01848pt.
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<../img//agent=DoubleQLearning,agentSpecParam=[eps=0.2,epsFinal=0.0001,gam=1,in
-itOptVal=100],level=1,env=[I],shooting=False,dists=1,rots=6_0.png, id=564, 435.
-7881pt x 474.8139pt>
-File: ../img//agent=DoubleQLearning,agentSpecParam=[eps=0.2,epsFinal=0.0001,gam
-=1,initOptVal=100],level=1,env=[I],shooting=False,dists=1,rots=6_0.png Graphic 
-file (type png)
-<use ../img//agent=DoubleQLearning,agentSpecParam=[eps=0.2,epsFinal=0.0001,gam=
-1,initOptVal=100],level=1,env=[I],shooting=False,dists=1,rots=6_0.png>
-Package pdftex.def Info: ../img//agent=DoubleQLearning,agentSpecParam=[eps=0.2,
-epsFinal=0.0001,gam=1,initOptVal=100],level=1,env=[I],shooting=False,dists=1,ro
-ts=6_0.png  used on input line 34.
-(pdftex.def)             Requested size: 330.05322pt x 359.60892pt.
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<../img//agent=ExpectedSARSA,agentSpecParam=[eps=0.2,epsFinal=0.0001,gam=1,init
-OptVal=100],level=1,env=[Triangles],shooting=False,dists=1,rots=6_0.png, id=569
-, 465.4188pt x 474.8139pt>
-File: ../img//agent=ExpectedSARSA,agentSpecParam=[eps=0.2,epsFinal=0.0001,gam=1
-,initOptVal=100],level=1,env=[Triangles],shooting=False,dists=1,rots=6_0.png Gr
-aphic file (type png)
-<use ../img//agent=ExpectedSARSA,agentSpecParam=[eps=0.2,epsFinal=0.0001,gam=1,
-initOptVal=100],level=1,env=[Triangles],shooting=False,dists=1,rots=6_0.png>
-Package pdftex.def Info: ../img//agent=ExpectedSARSA,agentSpecParam=[eps=0.2,ep
-sFinal=0.0001,gam=1,initOptVal=100],level=1,env=[Triangles],shooting=False,dist
-s=1,rots=6_0.png  used on input line 44.
-(pdftex.def)             Requested size: 288.7942pt x 294.62791pt.
-[30
+LaTeX Warning: Reference `experiments_chapter' on page 26 undefined on input li
+ne 27.
 
 
+LaTeX Warning: Reference `commOpt' on page 26 undefined on input line 29.
 
+[26]
+! Missing $ inserted.
+<inserted text> 
+                $
+l.42 ...text{var } R \gets (\text{next_step.score}
+                                                   - \text{curr_step.score})$
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
 
- <../img//rot_values.png>]
+! Extra }, or forgotten $.
+\textdef@ ...th {#1}\let \f@size #2\selectfont #3}
+                                                  }
+l.42 ...text{var } R \gets (\text{next_step.score}
+                                                   - \text{curr_step.score})$
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
 
-LaTeX Warning: `h' float specifier changed to `ht'.
+! Extra }, or forgotten $.
+\textdef@ ...h {#1}\let \f@size #2\selectfont #3}}
+                                                  
+l.42 ...text{var } R \gets (\text{next_step.score}
+                                                   - \text{curr_step.score})$
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
 
-[31 <../img//eps=0.2_initOptVal=20_.png> <../img//eps=0.2_initOptVal=100_.png>]
-<../img//env=bugs.png, id=590, 413.3844pt x 312.9291pt>
-File: ../img//env=bugs.png Graphic file (type png)
-<use ../img//env=bugs.png>
-Package pdftex.def Info: ../img//env=bugs.png  used on input line 56.
-(pdftex.def)             Requested size: 247.54149pt x 187.38644pt.
+! Extra }, or forgotten $.
+\text@ ...e {\textdef@ \displaystyle \f@size {#1}}
+                                                  {\textdef@ \textstyle \f@s...
+l.42 ...text{var } R \gets (\text{next_step.score}
+                                                   - \text{curr_step.score})$
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
 
-LaTeX Warning: `h' float specifier changed to `ht'.
+! Missing $ inserted.
+<inserted text> 
+                $
+l.42 ...text{var } R \gets (\text{next_step.score}
+                                                   - \text{curr_step.score})$
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
 
-<../img//agent=ExpectedSARSA,agentSpecParam=[eps=0.4,epsFinal=0.0001,gam=1,init
-OptVal=100],level=1,env=[Bugs],shooting=False,dists=1,rots=6_0.png, id=591, 437
-.9562pt x 487.8225pt>
-File: ../img//agent=ExpectedSARSA,agentSpecParam=[eps=0.4,epsFinal=0.0001,gam=1
-,initOptVal=100],level=1,env=[Bugs],shooting=False,dists=1,rots=6_0.png Graphic
- file (type png)
-<use ../img//agent=ExpectedSARSA,agentSpecParam=[eps=0.4,epsFinal=0.0001,gam=1,
-initOptVal=100],level=1,env=[Bugs],shooting=False,dists=1,rots=6_0.png>
-Package pdftex.def Info: ../img//agent=ExpectedSARSA,agentSpecParam=[eps=0.4,ep
-sFinal=0.0001,gam=1,initOptVal=100],level=1,env=[Bugs],shooting=False,dists=1,r
-ots=6_0.png  used on input line 63.
-(pdftex.def)             Requested size: 288.7942pt x 321.68843pt.
+! Extra }, or forgotten $.
+\textdef@ ...th {#1}\let \f@size #2\selectfont #3}
+                                                  }
+l.42 ...text{var } R \gets (\text{next_step.score}
+                                                   - \text{curr_step.score})$
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
 
-LaTeX Warning: `h' float specifier changed to `ht'.
+! Extra }, or forgotten $.
+\textdef@ ...h {#1}\let \f@size #2\selectfont #3}}
+                                                  
+l.42 ...text{var } R \gets (\text{next_step.score}
+                                                   - \text{curr_step.score})$
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
 
-<../img//agent=SARSA,agentSpecParam=[eps=0.2,epsFinal=0.0001,gam=1,initOptVal=1
-00],level=1,env=[Bugs],shooting=True,dists=1,rots=6_0.png, id=592, 437.9562pt x
- 487.8225pt>
-File: ../img//agent=SARSA,agentSpecParam=[eps=0.2,epsFinal=0.0001,gam=1,initOpt
-Val=100],level=1,env=[Bugs],shooting=True,dists=1,rots=6_0.png Graphic file (ty
-pe png)
-<use ../img//agent=SARSA,agentSpecParam=[eps=0.2,epsFinal=0.0001,gam=1,initOptV
-al=100],level=1,env=[Bugs],shooting=True,dists=1,rots=6_0.png>
-Package pdftex.def Info: ../img//agent=SARSA,agentSpecParam=[eps=0.2,epsFinal=0
-.0001,gam=1,initOptVal=100],level=1,env=[Bugs],shooting=True,dists=1,rots=6_0.p
-ng  used on input line 70.
-(pdftex.def)             Requested size: 288.7942pt x 321.68843pt.
+! Extra }, or forgotten $.
+\text@ ...xtstyle \f@size {\firstchoice@false #1}}
+                                                  {\textdef@ \textstyle \sf@...
+l.42 ...text{var } R \gets (\text{next_step.score}
+                                                   - \text{curr_step.score})$
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
 
-LaTeX Warning: `h' float specifier changed to `ht'.
+! Missing $ inserted.
+<inserted text> 
+                $
+l.42 ...text{var } R \gets (\text{next_step.score}
+                                                   - \text{curr_step.score})$
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
 
-<../img//env=viruses.png, id=593, 413.3844pt x 312.9291pt>
-File: ../img//env=viruses.png Graphic file (type png)
-<use ../img//env=viruses.png>
-Package pdftex.def Info: ../img//env=viruses.png  used on input line 79.
-(pdftex.def)             Requested size: 247.54149pt x 187.38644pt.
+! Extra }, or forgotten $.
+\textdef@ ...th {#1}\let \f@size #2\selectfont #3}
+                                                  }
+l.42 ...text{var } R \gets (\text{next_step.score}
+                                                   - \text{curr_step.score})$
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
 
-LaTeX Warning: `h' float specifier changed to `ht'.
+! Extra }, or forgotten $.
+\textdef@ ...h {#1}\let \f@size #2\selectfont #3}}
+                                                  
+l.42 ...text{var } R \gets (\text{next_step.score}
+                                                   - \text{curr_step.score})$
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
 
-<../img//agent=QLearning,agentSpecParam=[eps=0.4,epsFinal=0.0001,gam=1,initOptV
-al=100],level=1,env=[Viruses],shooting=True,dists=1,rots=6_0.png, id=598, 435.7
-881pt x 481.3182pt>
-File: ../img//agent=QLearning,agentSpecParam=[eps=0.4,epsFinal=0.0001,gam=1,ini
-tOptVal=100],level=1,env=[Viruses],shooting=True,dists=1,rots=6_0.png Graphic f
-ile (type png)
-<use ../img//agent=QLearning,agentSpecParam=[eps=0.4,epsFinal=0.0001,gam=1,init
-OptVal=100],level=1,env=[Viruses],shooting=True,dists=1,rots=6_0.png>
-Package pdftex.def Info: ../img//agent=QLearning,agentSpecParam=[eps=0.4,epsFin
-al=0.0001,gam=1,initOptVal=100],level=1,env=[Viruses],shooting=True,dists=1,rot
-s=6_0.png  used on input line 89.
-(pdftex.def)             Requested size: 288.7942pt x 318.97095pt.
+! Extra }, or forgotten $.
+\text@ ...tstyle \sf@size {\firstchoice@false #1}}
+                                                  {\textdef@ \textstyle \ssf...
+l.42 ...text{var } R \gets (\text{next_step.score}
+                                                   - \text{curr_step.score})$
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
 
-LaTeX Warning: `h' float specifier changed to `ht'.
+! Missing $ inserted.
+<inserted text> 
+                $
+l.42 ...text{var } R \gets (\text{next_step.score}
+                                                   - \text{curr_step.score})$
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
 
-<../img//agent=ExpectedSARSA,agentSpecParam=[eps=0.4,epsFinal=0.0001,gam=1,init
-OptVal=100],level=1,env=[Viruses],shooting=False,dists=1,rots=6_0.png, id=599, 
-435.7881pt x 481.3182pt>
-File: ../img//agent=ExpectedSARSA,agentSpecParam=[eps=0.4,epsFinal=0.0001,gam=1
-,initOptVal=100],level=1,env=[Viruses],shooting=False,dists=1,rots=6_0.png Grap
-hic file (type png)
-<use ../img//agent=ExpectedSARSA,agentSpecParam=[eps=0.4,epsFinal=0.0001,gam=1,
-initOptVal=100],level=1,env=[Viruses],shooting=False,dists=1,rots=6_0.png>
-Package pdftex.def Info: ../img//agent=ExpectedSARSA,agentSpecParam=[eps=0.4,ep
-sFinal=0.0001,gam=1,initOptVal=100],level=1,env=[Viruses],shooting=False,dists=
-1,rots=6_0.png  used on input line 96.
-(pdftex.def)             Requested size: 288.7942pt x 318.97095pt.
+! Extra }, or forgotten $.
+\textdef@ ...th {#1}\let \f@size #2\selectfont #3}
+                                                  }
+l.42 ...text{var } R \gets (\text{next_step.score}
+                                                   - \text{curr_step.score})$
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
 
-LaTeX Warning: `h' float specifier changed to `ht'.
+! Extra }, or forgotten $.
+\textdef@ ...h {#1}\let \f@size #2\selectfont #3}}
+                                                  
+l.42 ...text{var } R \gets (\text{next_step.score}
+                                                   - \text{curr_step.score})$
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
 
-<../img//agent=ExpectedSARSA,agentSpecParam=[eps=0.4,epsFinal=0.0001,gam=1,init
-OptVal=100],level=1,env=[Viruses],shooting=True,dists=1,rots=6_0.png, id=600, 4
-35.7881pt x 481.3182pt>
-File: ../img//agent=ExpectedSARSA,agentSpecParam=[eps=0.4,epsFinal=0.0001,gam=1
-,initOptVal=100],level=1,env=[Viruses],shooting=True,dists=1,rots=6_0.png Graph
-ic file (type png)
-<use ../img//agent=ExpectedSARSA,agentSpecParam=[eps=0.4,epsFinal=0.0001,gam=1,
-initOptVal=100],level=1,env=[Viruses],shooting=True,dists=1,rots=6_0.png>
-Package pdftex.def Info: ../img//agent=ExpectedSARSA,agentSpecParam=[eps=0.4,ep
-sFinal=0.0001,gam=1,initOptVal=100],level=1,env=[Viruses],shooting=True,dists=1
-,rots=6_0.png  used on input line 104.
-(pdftex.def)             Requested size: 288.7942pt x 318.97095pt.
+! Extra }, or forgotten $.
+\text@ ...style \ssf@size {\firstchoice@false #1}}
+                                                  \check@mathfonts }
+l.42 ...text{var } R \gets (\text{next_step.score}
+                                                   - \text{curr_step.score})$
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
 
-LaTeX Warning: `h' float specifier changed to `ht'.
+! Extra }, or forgotten $.
+\text@ ...firstchoice@false #1}}\check@mathfonts }
+                                                  
+l.42 ...text{var } R \gets (\text{next_step.score}
+                                                   - \text{curr_step.score})$
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
 
-[32 <../img//agent=DoubleQLearning,agentSpecParam=[eps=0.2,epsFinal=0.0001,gam=
-1,initOptVal=100],level=1,env=[I],shooting=False,dists=1,rots=6_0.png>]
-<../img//env=Tokens.png, id=614, 413.3844pt x 312.9291pt>
-File: ../img//env=Tokens.png Graphic file (type png)
-<use ../img//env=Tokens.png>
-Package pdftex.def Info: ../img//env=Tokens.png  used on input line 114.
-(pdftex.def)             Requested size: 288.7942pt x 218.61911pt.
+! Missing $ inserted.
+<inserted text> 
+                $
+l.42 ...{next_step.score} - \text{curr_step.score}
+                                                  )$
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
 
+! Extra }, or forgotten $.
+\textdef@ ...th {#1}\let \f@size #2\selectfont #3}
+                                                  }
+l.42 ...{next_step.score} - \text{curr_step.score}
+                                                  )$
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
 
-LaTeX Warning: `h' float specifier changed to `ht'.
+! Extra }, or forgotten $.
+\textdef@ ...h {#1}\let \f@size #2\selectfont #3}}
+                                                  
+l.42 ...{next_step.score} - \text{curr_step.score}
+                                                  )$
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
 
-<../img//agent=ExpectedSARSA,agentSpecParam=[eps=0.2,epsFinal=0.0001,gam=1,init
-OptVal=100],level=1,env=[Traps],shooting=False,dists=1,rots=22_0.png, id=617, 4
-42.2924pt x 534.798pt>
-File: ../img//agent=ExpectedSARSA,agentSpecParam=[eps=0.2,epsFinal=0.0001,gam=1
-,initOptVal=100],level=1,env=[Traps],shooting=False,dists=1,rots=22_0.png Graph
-ic file (type png)
-<use ../img//agent=ExpectedSARSA,agentSpecParam=[eps=0.2,epsFinal=0.0001,gam=1,
-initOptVal=100],level=1,env=[Traps],shooting=False,dists=1,rots=22_0.png>
-Package pdftex.def Info: ../img//agent=ExpectedSARSA,agentSpecParam=[eps=0.2,ep
-sFinal=0.0001,gam=1,initOptVal=100],level=1,env=[Traps],shooting=False,dists=1,
-rots=22_0.png  used on input line 126.
-(pdftex.def)             Requested size: 412.56496pt x 498.8585pt.
+! Extra }, or forgotten $.
+\text@ ...e {\textdef@ \displaystyle \f@size {#1}}
+                                                  {\textdef@ \textstyle \f@s...
+l.42 ...{next_step.score} - \text{curr_step.score}
+                                                  )$
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
 
-LaTeX Warning: `h' float specifier changed to `ht'.
+! Missing $ inserted.
+<inserted text> 
+                $
+l.42 ...{next_step.score} - \text{curr_step.score}
+                                                  )$
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
 
-<../img//agent=MonteCarlo,agentSpecParam=[eps=0.2,epsFinal=0.0001,gam=1,initOpt
-Val=30],level=1,env=[Traps],shooting=False,dists=1,rots=30_0.png, id=618, 435.7
-881pt x 534.798pt>
-File: ../img//agent=MonteCarlo,agentSpecParam=[eps=0.2,epsFinal=0.0001,gam=1,in
-itOptVal=30],level=1,env=[Traps],shooting=False,dists=1,rots=30_0.png Graphic f
-ile (type png)
-<use ../img//agent=MonteCarlo,agentSpecParam=[eps=0.2,epsFinal=0.0001,gam=1,ini
-tOptVal=30],level=1,env=[Traps],shooting=False,dists=1,rots=30_0.png>
-Package pdftex.def Info: ../img//agent=MonteCarlo,agentSpecParam=[eps=0.2,epsFi
-nal=0.0001,gam=1,initOptVal=30],level=1,env=[Traps],shooting=False,dists=1,rots
-=30_0.png  used on input line 134.
-(pdftex.def)             Requested size: 412.56496pt x 506.30074pt.
+! Extra }, or forgotten $.
+\textdef@ ...th {#1}\let \f@size #2\selectfont #3}
+                                                  }
+l.42 ...{next_step.score} - \text{curr_step.score}
+                                                  )$
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
 
-LaTeX Warning: `h' float specifier changed to `ht'.
+! Extra }, or forgotten $.
+\textdef@ ...h {#1}\let \f@size #2\selectfont #3}}
+                                                  
+l.42 ...{next_step.score} - \text{curr_step.score}
+                                                  )$
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
 
-[33 <../img//agent=ExpectedSARSA,agentSpecParam=[eps=0.2,epsFinal=0.0001,gam=1,
-initOptVal=100],level=1,env=[Triangles],shooting=False,dists=1,rots=6_0.png>]
-<../img//agent=ExpectedSARSA,agentSpecParam=[eps=0.8,epsFinal=0.0001,gam=1,init
-OptVal=500],level=1,env=[Bugs,Tokens,Viruses],shooting=False,dists=1,rots=6_0.p
-ng, id=629, 437.9562pt x 508.0581pt>
-File: ../img//agent=ExpectedSARSA,agentSpecParam=[eps=0.8,epsFinal=0.0001,gam=1
-,initOptVal=500],level=1,env=[Bugs,Tokens,Viruses],shooting=False,dists=1,rots=
-6_0.png Graphic file (type png)
-<use ../img//agent=ExpectedSARSA,agentSpecParam=[eps=0.8,epsFinal=0.0001,gam=1,
-initOptVal=500],level=1,env=[Bugs,Tokens,Viruses],shooting=False,dists=1,rots=6
-_0.png>
-Package pdftex.def Info: ../img//agent=ExpectedSARSA,agentSpecParam=[eps=0.8,ep
-sFinal=0.0001,gam=1,initOptVal=500],level=1,env=[Bugs,Tokens,Viruses],shooting=
-False,dists=1,rots=6_0.png  used on input line 144.
-(pdftex.def)             Requested size: 412.56496pt x 478.62125pt.
+! Extra }, or forgotten $.
+\text@ ...xtstyle \f@size {\firstchoice@false #1}}
+                                                  {\textdef@ \textstyle \sf@...
+l.42 ...{next_step.score} - \text{curr_step.score}
+                                                  )$
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
 
+! Missing $ inserted.
+<inserted text> 
+                $
+l.42 ...{next_step.score} - \text{curr_step.score}
+                                                  )$
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
 
-LaTeX Warning: `h' float specifier changed to `ht'.
+! Extra }, or forgotten $.
+\textdef@ ...th {#1}\let \f@size #2\selectfont #3}
+                                                  }
+l.42 ...{next_step.score} - \text{curr_step.score}
+                                                  )$
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
 
-<../img//agent=ExpectedSARSA,agentSpecParam=[eps=0.6,epsFinal=0.0001,gam=1,init
-OptVal=200],level=1,env=all,shooting=False,dists=1,rots=22_0.png, id=631, 442.2
-924pt x 575.2692pt>
-File: ../img//agent=ExpectedSARSA,agentSpecParam=[eps=0.6,epsFinal=0.0001,gam=1
-,initOptVal=200],level=1,env=all,shooting=False,dists=1,rots=22_0.png Graphic f
-ile (type png)
-<use ../img//agent=ExpectedSARSA,agentSpecParam=[eps=0.6,epsFinal=0.0001,gam=1,
-initOptVal=200],level=1,env=all,shooting=False,dists=1,rots=22_0.png>
-Package pdftex.def Info: ../img//agent=ExpectedSARSA,agentSpecParam=[eps=0.6,ep
-sFinal=0.0001,gam=1,initOptVal=200],level=1,env=all,shooting=False,dists=1,rots
-=22_0.png  used on input line 154.
-(pdftex.def)             Requested size: 412.56496pt x 536.60995pt.
+! Extra }, or forgotten $.
+\textdef@ ...h {#1}\let \f@size #2\selectfont #3}}
+                                                  
+l.42 ...{next_step.score} - \text{curr_step.score}
+                                                  )$
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
 
-LaTeX Warning: `h' float specifier changed to `ht'.
+! Extra }, or forgotten $.
+\text@ ...tstyle \sf@size {\firstchoice@false #1}}
+                                                  {\textdef@ \textstyle \ssf...
+l.42 ...{next_step.score} - \text{curr_step.score}
+                                                  )$
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
 
-) [34 <../img//env=bugs.png>] [35 <../img//agent=ExpectedSARSA,agentSpecParam=[
-eps=0.4,epsFinal=0.0001,gam=1,initOptVal=100],level=1,env=[Bugs],shooting=False
-,dists=1,rots=6_0.png> <../img//agent=SARSA,agentSpecParam=[eps=0.2,epsFinal=0.
-0001,gam=1,initOptVal=100],level=1,env=[Bugs],shooting=True,dists=1,rots=6_0.pn
-g>] [36 <../img//env=viruses.png> <../img//agent=QLearning,agentSpecParam=[eps=
-0.4,epsFinal=0.0001,gam=1,initOptVal=100],level=1,env=[Viruses],shooting=True,d
-ists=1,rots=6_0.png>] [37 <../img//agent=ExpectedSARSA,agentSpecParam=[eps=0.4,
-epsFinal=0.0001,gam=1,initOptVal=100],level=1,env=[Viruses],shooting=False,dist
-s=1,rots=6_0.png>] [38 <../img//agent=ExpectedSARSA,agentSpecParam=[eps=0.4,eps
-Final=0.0001,gam=1,initOptVal=100],level=1,env=[Viruses],shooting=True,dists=1,
-rots=6_0.png> <../img//env=Tokens.png>] [39 <../img//agent=ExpectedSARSA,agentS
-pecParam=[eps=0.2,epsFinal=0.0001,gam=1,initOptVal=100],level=1,env=[Traps],sho
-oting=False,dists=1,rots=22_0.png>] [40 <../img//agent=MonteCarlo,agentSpecPara
-m=[eps=0.2,epsFinal=0.0001,gam=1,initOptVal=30],level=1,env=[Traps],shooting=Fa
-lse,dists=1,rots=30_0.png>] [41 <../img//agent=ExpectedSARSA,agentSpecParam=[ep
-s=0.8,epsFinal=0.0001,gam=1,initOptVal=500],level=1,env=[Bugs,Tokens,Viruses],s
-hooting=False,dists=1,rots=6_0.png>] [42 <../img//agent=ExpectedSARSA,agentSpec
-Param=[eps=0.6,epsFinal=0.0001,gam=1,initOptVal=200],level=1,env=all,shooting=F
-alse,dists=1,rots=22_0.png>]
-\openout2 = `Conclusion.aux'.
-
- (Conclusion.tex) [43
-
-
-
-
-]
-\openout2 = `bibliography.aux'.
-
- (bibliography.tex
-(thesis.bbl)) [44
-
-
-
-
-] (thesis.lof)
-\tf@lof=\write7
-\openout7 = `thesis.lof'.
-
- [45
-
-
-
-] (thesis.lot)
-\tf@lot=\write8
-\openout8 = `thesis.lot'.
-
- [46
-
-] [47
-
-]
-Appendix A.
-[48
-
-] (thesis.aux (title.aux) (Introduction.aux) (GameDesign.aux)
-(GameImplementation.aux) (StructureOfTheExperimentalSetting.aux)
-(AlgorithmsUsed.aux) (AgentsImplementation.aux) (Experiments.aux)
-(Conclusion.aux) (bibliography.aux))
-
-LaTeX Warning: There were multiply-defined labels.
-
-Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: DF51529CA7380860DA0B24373D0A7EEF;6728.
- ) 
-Here is how much of TeX's memory you used:
- 19122 strings out of 475281
- 326205 string characters out of 2775008
- 625825 words of memory out of 3000000
- 40021 multiletter control sequences out of 15000+600000
- 552207 words of font info for 92 fonts, out of 8000000 for 9000
- 1141 hyphenation exceptions out of 8191
- 89i,9n,93p,1927b,2379s stack positions out of 10000i,1000n,20000p,200000b,80000s
-{C:/Users/Una/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rm.enc}{C:/
-Users/Una/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathex.enc}{C:/Us
-ers/Una/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathit.enc}{C:/User
-s/Una/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.enc}{C:/Users/
-Una/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rmsc.enc}{C:/Users/Una/
-AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ts1.enc}{C:/Users/Una/AppDa
-ta/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rmtt.enc}<C:/Users/Una/AppData/L
-ocal/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/Una/AppData/Loc
-al/Programs/MiKTeX/fonts/type1/public/lm/lmcsc10.pfb><C:/Users/Una/AppData/Loca
-l/Programs/MiKTeX/fonts/type1/public/lm/lmex10.pfb><C:/Users/Una/AppData/Local/
-Programs/MiKTeX/fonts/type1/public/lm/lmmi12.pfb><C:/Users/Una/AppData/Local/Pr
-ograms/MiKTeX/fonts/type1/public/lm/lmmi6.pfb><C:/Users/Una/AppData/Local/Progr
-ams/MiKTeX/fonts/type1/public/lm/lmmi8.pfb><C:/Users/Una/AppData/Local/Programs
-/MiKTeX/fonts/type1/public/lm/lmmib10.pfb><C:/Users/Una/AppData/Local/Programs/
-MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/Una/AppData/Local/Programs/MiK
-TeX/fonts/type1/public/lm/lmr12.pfb><C:/Users/Una/AppData/Local/Programs/MiKTeX
-/fonts/type1/public/lm/lmr17.pfb><C:/Users/Una/AppData/Local/Programs/MiKTeX/fo
-nts/type1/public/lm/lmr6.pfb><C:/Users/Una/AppData/Local/Programs/MiKTeX/fonts/
-type1/public/lm/lmr7.pfb><C:/Users/Una/AppData/Local/Programs/MiKTeX/fonts/type
-1/public/lm/lmr8.pfb><C:/Users/Una/AppData/Local/Programs/MiKTeX/fonts/type1/pu
-blic/lm/lmri12.pfb><C:/Users/Una/AppData/Local/Programs/MiKTeX/fonts/type1/publ
-ic/lm/lmsy10.pfb><C:/Users/Una/AppData/Local/Programs/MiKTeX/fonts/type1/public
-/lm/lmsy8.pfb><C:/Users/Una/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm
-/lmtt12.pfb>
-Output written on thesis.pdf (52 pages, 2885138 bytes).
-PDF statistics:
- 868 PDF objects out of 1000 (max. 8388607)
- 154 named destinations out of 1000 (max. 500000)
- 569 words of extra memory for PDF output out of 10000 (max. 10000000)
-
+! Missing $ inserted.
+<inserted text> 
+                $
+l.42 ...{next_step.score} - \text{curr_step.score}
+                                               

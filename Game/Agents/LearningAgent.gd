@@ -8,7 +8,7 @@ class_name LearningAgent
 
 class Step:
     var state_action
-    var score
+    var scorep
     var time
     var epsilon_action
 

@@ -22,7 +22,7 @@ argument options:
                                 default:[gam=1.0,eps=0.2,epsFinal=0.0001,initOptVal=100.0]
                                 
     - level=int :           number of the level to start from 
-                            options: [1, ... , 10]
+                            options: [1, ... , 15]
                             default=1
                         
     - env=[string] :        list of obstacles that will be chosen in the game 
@@ -89,7 +89,7 @@ var agent_specific_param = []
 var ceval = false
 var debug = false
 var agent_seed_val = 0
-var stopping_point = 10
+var stopping_point = 25
 var ad_ver = 0
 
 var agent_inst = Keyboard.new()
