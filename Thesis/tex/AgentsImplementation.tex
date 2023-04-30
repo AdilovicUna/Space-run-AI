@@ -57,12 +57,7 @@ Normally, the gamma value grows by one power on each step. However, as previousl
 \begin{algorithm}
 \caption{Updating policy for Monte Carlo}\label{mcUpdate}
 \begin{algorithmic}[1]
-\State $\text{var } R \gets (\text{next_step.score} - \text{curr_step.score})$
-\State $G \gets \text{pow}(\text{GAMMA},\text{next_step.time} - \text{curr_step.time}) \times (R + G)$
-\If{\Call{is_first_occurrence}{$\text{curr_step.state_action}$, $i$}}
-\State $total_return[\text{curr_step.state_action}] \gets total_return[\text{curr_step.state_action}] + G$
-\State $visits[\text{curr_step.state_action}] \gets visits[\text{curr_step.state_action}] + 1$
-\EndIf
+\State abs
 \end{algorithmic}
 \end{algorithm}
 
@@ -75,10 +70,7 @@ Unlike the Monte Carlo methods, which update their policies only after the compl
 \begin{algorithm}
 \caption{Updating policy for TD Agent}\label{tdUpdate}
 \begin{algorithmic}[1]
-\State $ \text{alpha} \gets 1.0 / \text{visits[last_state_action]}$
-\State $\text{new_state_val} \gets 0 \text{ if terminal else new_state_action}$
-\State $\text{new_gamma} \gets \text{pow(GAMMA,curr_time - prev_time)}$
-\State $q[\text{last_state_action}] \gets q[\text{last_state_action}] + \text{alpha} \times (\text{new_gamma} \times (R + \text{new_state_val}) - q[\text{last_state_action}])$
+\State abs
 \end{algorithmic}
 \end{algorithm}
 
@@ -88,9 +80,7 @@ The update of the policy for a specific state value in TD learning involves mult
 \begin{algorithm}
 \caption{Update functions for different algorithms}\label{tdIndivUpdate}
 \begin{algorithmic}
-\State $$ \text{SARSA: } new\_state\_val = q[state new_action] $$ 
-\State $$ \text{Q-Learning: } new\_state\_val = q[state best_action] $$ 
-\State $$ \text{Expected SARSA: } new\_state\_val = \sum_a \pi (action|state) Q(state,action) $$ 
+\State abs
 \end{algorithmic}
 \end{algorithm}
 
@@ -99,15 +89,7 @@ In SARSA, the \texttt{new\_state\_val} is calculated based on the value of the n
 \begin{algorithm}
 \caption{Update functions for Double Q-Learning}\label{dqlUpdate}
 \begin{algorithmic}
-\State $ \text{alpha} \gets 1.0 / \text{visits}[ \text{last_state_action}]$
-\State $ \text{new_gamma} \gets \text{pow}( \text{GAMMA}, \text{curr_time} - \text{prev_time})$
-\If{$\text{rand.randf_range}(0,1) < 0.5$}
-\State $ \text{new_state_val} \gets 0 \text{ if } \text{terminal else } \text{q2}[ \text{get_state_action(state,best_action)}]$
-\State $ \text{q}[ \text{last_state_action}] \gets \text{alpha} * ( \text{new_gamma} * (R + \text{new_state_val}) - \text{q}[ \text{last_state_action}])$
-\Else
-\State $ \text{new_state_val} \gets 0 \text{ if } \text{terminal else } \text{q}[ \text{get_state_action(state,best_action)}]$
-\State $ \text{q2}[ \text{last_state_action}] \gets \text{alpha} * ( \text{new_gamma} * (R + \text{new_state_val}) - \text{q2}[ \text{last_state_action}])$
-\EndIf
+\State abs
 \end{algorithmic}
 \end{algorithm}
 
