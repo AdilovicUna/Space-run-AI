@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.12) (preloaded format=pdflatex 2022.12.18)  30 APR 2023 10:47
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.12) (preloaded format=pdflatex 2022.12.18)  30 APR 2023 12:10
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -622,11 +622,8 @@ File: l3backend-pdftex.def 2022-10-26 L3 backend support: PDF output (pdfTeX)
 \l__pdf_internal_box=\box61
 ) (thesis.aux (title.aux) (Introduction.aux) (GameDesign.aux)
 (GameImplementation.aux) (StructureOfTheExperimentalSetting.aux)
-(AlgorithmsUsed.aux) (AgentsImplementation.aux) (Experiments.aux
-
-LaTeX Warning: Label `fig:dqli' multiply defined.
-
-) (Conclusion.aux) (bibliography.aux))
+(AlgorithmsUsed.aux) (AgentsImplementation.aux) (Experiments.aux)
+(Conclusion.aux) (bibliography.aux))
 \openout1 = `thesis.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 125.
@@ -683,7 +680,7 @@ Package caption Info: End \AtBeginDocument code.
 
  (title.tex
 Package hyperref Info: Option `pageanchor' set `false' on input line 6.
-<../img/logo-en.pdf, id=210, 506.4591pt x 156.49065pt>
+<../img/logo-en.pdf, id=142, 506.4591pt x 156.49065pt>
 File: ../img/logo-en.pdf Graphic file (type pdf)
 <use ../img/logo-en.pdf>
 Package pdftex.def Info: ../img/logo-en.pdf  used on input line 9.
@@ -734,20 +731,20 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 3.
 
 (C:\Users\Una\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-)
+))
+\tf@toc=\write6
+\openout6 = `thesis.toc'.
+
+
 [1
 
 
 
 
-])
-\tf@toc=\write6
-\openout6 = `thesis.toc'.
-
- [2]
+]
 \openout2 = `Introduction.aux'.
 
- (Introduction.tex) [3
+ (Introduction.tex) [2
 
 
 ]
@@ -755,43 +752,43 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
  (GameDesign.tex
 Chapter 1.
-<../img//second_tunnel.png, id=313, 761.09344pt x 447.17062pt>
+<../img//second_tunnel.png, id=223, 761.09344pt x 447.17062pt>
 File: ../img//second_tunnel.png Graphic file (type png)
 <use ../img//second_tunnel.png>
 Package pdftex.def Info: ../img//second_tunnel.png  used on input line 10.
 (pdftex.def)             Requested size: 412.56496pt x 242.40332pt.
-<../img//hans.jpg, id=316, 106.89937pt x 167.12437pt>
+<../img//hans.jpg, id=226, 106.89937pt x 167.12437pt>
 File: ../img//hans.jpg Graphic file (type jpg)
 <use ../img//hans.jpg>
 Package pdftex.def Info: ../img//hans.jpg  used on input line 18.
 (pdftex.def)             Requested size: 64.1401pt x 100.27538pt.
-[4
+[3
 
 
 
 
  <../img//second_tunnel.png>]
-<../img//traps.pdf, id=325, 1150.2975pt x 386.94562pt>
+<../img//traps.pdf, id=236, 1150.2975pt x 386.94562pt>
 File: ../img//traps.pdf Graphic file (type pdf)
 <use ../img//traps.pdf>
 Package pdftex.def Info: ../img//traps.pdf  used on input line 30.
 (pdftex.def)             Requested size: 412.56496pt x 138.78073pt.
-<../img//bugs.pdf, id=327, 564.60938pt x 133.24782pt>
+<../img//bugs.pdf, id=238, 564.60938pt x 133.24782pt>
 File: ../img//bugs.pdf Graphic file (type pdf)
 <use ../img//bugs.pdf>
 Package pdftex.def Info: ../img//bugs.pdf  used on input line 40.
 (pdftex.def)             Requested size: 412.56496pt x 97.36768pt.
- [5 <../img//hans.jpg> <../img//traps.pdf> <../img//bugs.pdf
+ [4 <../img//hans.jpg> <../img//traps.pdf> <../img//bugs.pdf
 
 pdfTeX warning: pdflatex (file ../img//bugs.pdf): PDF inclusion: multiple pdfs 
 with page group included in a single page
 >]
-<../img//viruses.pdf, id=343, 526.96875pt x 165.61874pt>
+<../img//viruses.pdf, id=254, 526.96875pt x 165.61874pt>
 File: ../img//viruses.pdf Graphic file (type pdf)
 <use ../img//viruses.pdf>
 Package pdftex.def Info: ../img//viruses.pdf  used on input line 49.
 (pdftex.def)             Requested size: 412.56496pt x 129.66983pt.
-<../img//first_tunnel.jpg, id=345, 767.11594pt x 447.92343pt>
+<../img//first_tunnel.jpg, id=256, 767.11594pt x 447.92343pt>
 File: ../img//first_tunnel.jpg Graphic file (type jpg)
 <use ../img//first_tunnel.jpg>
 Package pdftex.def Info: ../img//first_tunnel.jpg  used on input line 60.
@@ -800,13 +797,13 @@ Package pdftex.def Info: ../img//first_tunnel.jpg  used on input line 60.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-) [6 <../img//viruses.pdf>] [7 <../img//first_tunnel.jpg>]
+) [5 <../img//viruses.pdf>] [6 <../img//first_tunnel.jpg>]
 \openout2 = `GameImplementation.aux'.
 
 
 (GameImplementation.tex
 Chapter 2.
-<../img//game_tree.png, id=371, 683.55376pt x 332.24126pt>
+<../img//game_tree.png, id=282, 683.55376pt x 332.24126pt>
 File: ../img//game_tree.png Graphic file (type png)
 <use ../img//game_tree.png>
 Package pdftex.def Info: ../img//game_tree.png  used on input line 11.
@@ -822,7 +819,7 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <7> on input line 16.
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <5> on input line 16.
- [8
+ [7
 
 
 
@@ -833,14 +830,14 @@ LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 2
 
 (C:\Users\Una\AppData\Local\Programs\MiKTeX\tex/latex/lm\ts1lmr.fd
 File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-) [9]
-<../img//third_tunnel.jpg, id=403, 769.37437pt x 450.18187pt>
+) [8]
+<../img//third_tunnel.jpg, id=313, 769.37437pt x 450.18187pt>
 File: ../img//third_tunnel.jpg Graphic file (type jpg)
 <use ../img//third_tunnel.jpg>
 Package pdftex.def Info: ../img//third_tunnel.jpg  used on input line 60.
 (pdftex.def)             Requested size: 412.56496pt x 241.41164pt.
 
-[10 <../img//third_tunnel.jpg>]
+[9 <../img//third_tunnel.jpg>]
 Underfull \hbox (badness 10000) in paragraph at lines 75--76
 [] $\OML/lmm/m/it/12 tunnel:[]\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 Vector\OT1/lmr/
 m/n/12 3\OML/lmm/m/it/12 :[]; \OMS/lmsy/m/n/12 ^^@\OML/lmm/m/it/12 ROTATE[]SPEE
@@ -854,7 +851,7 @@ m/n/12 3\OML/lmm/m/it/12 :[]; \OMS/lmsy/m/n/12 ^^@\OML/lmm/m/it/12 ROTATE[]SPEE
 D \OMS/lmsy/m/n/12 ^^C
  []
 
-) [11] [12]
+) [10] [11]
 \openout2 = `StructureOfTheExperimentalSetting.aux'.
 
  (StructureOfTheExperimentalSetting.tex
@@ -866,21 +863,30 @@ File: omllmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Font shape `OML/lmr/m/n' in size <12> not available
 (Font)              Font shape `OML/lmm/m/it' tried instead on input line 10.
-<../img//circumference.jpg, id=427, 764.10469pt x 443.40656pt>
+
+
+LaTeX Warning: Reference `experiments_chapter' on page 12 undefined on input li
+ne 10.
+
+<../img//circumference.jpg, id=337, 764.10469pt x 443.40656pt>
 File: ../img//circumference.jpg Graphic file (type jpg)
 <use ../img//circumference.jpg>
 Package pdftex.def Info: ../img//circumference.jpg  used on input line 16.
 (pdftex.def)             Requested size: 412.56496pt x 239.4089pt.
 
-
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[13
+[12
 
 
 
 
-] [14 <../img//circumference.jpg>]
+]
+
+LaTeX Warning: Reference `experiments_chapter' on page 13 undefined on input li
+ne 23.
+
+[13 <../img//circumference.jpg>]
 Overfull \hbox (40.20535pt too wide) in paragraph at lines 74--82
 \OT1/lmr/m/n/12 Sub-options (only for the listed agents): \OT1/lmtt/m/n/12 Mont
 eCarlo\OT1/lmr/m/n/12 , \OT1/lmtt/m/n/12 SARSA\OT1/lmr/m/n/12 , \OT1/lmtt/m/n/1
@@ -892,51 +898,127 @@ Underfull \hbox (badness 10000) in paragraph at lines 91--99
 
  []
 
-[15] [16]
+[14]
+
+LaTeX Warning: Reference `experiments_chapter' on page 15 undefined on input li
+ne 145.
+
+[15]
 Underfull \hbox (badness 10000) in paragraph at lines 161--162
 []\OT1/lmr/m/n/12 godot --no-window --fixed-fps 1 --disable-render-loop databas
 e=write
  []
 
-[17]) [18] [19]
+[16]) [17] [18]
 \openout2 = `AlgorithmsUsed.aux'.
 
  (AlgorithmsUsed.tex
 Chapter 4.
-[20
+[19
 
 
 
 
-] [21]
+] [20]
 Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
 put line 34.
- [22] [23]) [24] [25]
+ [21] [22]) [23] [24]
 \openout2 = `AgentsImplementation.aux'.
 
  (AgentsImplementation.tex
 Chapter 5.
-<../img//agents_tree.png, id=538, 783.92876pt x 452.69125pt>
+<../img//agents_tree.png, id=446, 783.92876pt x 452.69125pt>
 File: ../img//agents_tree.png Graphic file (type png)
 <use ../img//agents_tree.png>
 Package pdftex.def Info: ../img//agents_tree.png  used on input line 10.
 (pdftex.def)             Requested size: 330.05322pt x 190.59874pt.
-[26
+[25
 
 
 
 
- <../img//agents_tree.png>] [27] [28]) [29] [30]
+ <../img//agents_tree.png>]
+
+LaTeX Warning: Reference `experiments_chapter' on page 26 undefined on input li
+ne 43.
+
+[26]
+! Extra }, or forgotten \endgroup.
+<recently read> }
+                 
+l.62 \If{\Call{is\_first\_occurrence}{\dots}}}
+                                              }
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+! Extra }, or forgotten \endgroup.
+l.62 \If{\Call{is\_first\_occurrence}{\dots}}}}
+                                               
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+
+Overfull \hbox (15.96375pt too wide) in paragraph at lines 63--64
+[] $\OML/lmm/m/it/12 total[]return\OT1/lmr/m/n/12 [\OML/lmm/m/it/12 curr[]step:
+[]\OT1/lmr/m/n/12 ] \OMS/lmsy/m/n/12   \OML/lmm/m/it/12 total[]return\OT1/lmr/m
+/n/12 [\OML/lmm/m/it/12 curr[]step:[]\OT1/lmr/m/n/12 ] +|
+ []
+
+[27]
+Underfull \hbox (badness 5260) in paragraph at lines 84--85
+[]$\OML/lmm/m/it/12 q\OT1/lmr/m/n/12 [\OML/lmm/m/it/12 last[]state[]action\OT1/
+lmr/m/n/12 ] \OMS/lmsy/m/n/12   \OML/lmm/m/it/12 q\OT1/lmr/m/n/12 [\OML/lmm/m/i
+t/12 last[]state[]action\OT1/lmr/m/n/12 ] + \OML/lmm/m/it/12 alpha\OT1/lmr/m/n/
+12 (\OML/lmm/m/it/12 new[]gamma\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 R \OT1/lmr/m/n
+/12 +
+ []
+
+
+LaTeX Warning: Reference `sUpdate' on page 28 undefined on input line 89.
+
+
+LaTeX Warning: Reference `qUpdate' on page 28 undefined on input line 89.
+
+
+LaTeX Warning: Reference `esUpdate' on page 28 undefined on input line 89.
+
+[28]
+Underfull \hbox (badness 10000) in paragraph at lines 138--139
+[] $\OML/lmm/m/it/12 q\OT1/lmr/m/n/12 [\OML/lmm/m/it/12 last[]state[]action\OT1
+/lmr/m/n/12 ] \OMS/lmsy/m/n/12   \OML/lmm/m/it/12 alpha\OT1/lmr/m/n/12 (\OML/lm
+m/m/it/12 new[]gamma\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 R \OT1/lmr/m/n/12 + \OML/
+lmm/m/it/12 new[]state[]val\OT1/lmr/m/n/12 ) \OMS/lmsy/m/n/12 ^^@
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 144--145
+[] $\OML/lmm/m/it/12 q\OT1/lmr/m/n/12 2[\OML/lmm/m/it/12 last[]state[]action\OT
+1/lmr/m/n/12 ] \OMS/lmsy/m/n/12   \OML/lmm/m/it/12 alpha\OT1/lmr/m/n/12 (\OML/l
+mm/m/it/12 new[]gamma\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 R \OT1/lmr/m/n/12 + \OML
+/lmm/m/it/12 new[]state[]val\OT1/lmr/m/n/12 ) \OMS/lmsy/m/n/12 ^^@
+ []
+
+) [29] [30]
 \openout2 = `Experiments.aux'.
 
  (Experiments.tex
 Chapter 6.
-<../img//rot_values.png, id=578, 241.90375pt x 96.36pt>
+<../img//rot_values.png, id=490, 241.90375pt x 96.36pt>
 File: ../img//rot_values.png Graphic file (type png)
 <use ../img//rot_values.png>
 Package pdftex.def Info: ../img//rot_values.png  used on input line 11.
 (pdftex.def)             Requested size: 165.02345pt x 65.73859pt.
-<../img//eps=0.2_initOptVal=20_.png, id=580, 435.7881pt x 330.9966pt>
+
+LaTeX Warning: Reference `fig:rot_values' on page 31 undefined on input line 16
+.
+
+<../img//eps=0.2_initOptVal=20_.png, id=491, 435.7881pt x 330.9966pt>
 File: ../img//eps=0.2_initOptVal=20_.png Graphic file (type png)
 <use ../img//eps=0.2_initOptVal=20_.png>
 Package pdftex.def Info: ../img//eps=0.2_initOptVal=20_.png  used on input line
@@ -945,7 +1027,7 @@ Package pdftex.def Info: ../img//eps=0.2_initOptVal=20_.png  used on input line
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<../img//eps=0.2_initOptVal=100_.png, id=581, 435.7881pt x 330.9966pt>
+<../img//eps=0.2_initOptVal=100_.png, id=492, 435.7881pt x 330.9966pt>
 File: ../img//eps=0.2_initOptVal=100_.png Graphic file (type png)
 <use ../img//eps=0.2_initOptVal=100_.png>
 Package pdftex.def Info: ../img//eps=0.2_initOptVal=100_.png  used on input lin
@@ -955,7 +1037,7 @@ e 27.
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 <../img//agent=DoubleQLearning,agentSpecParam=[eps=0.2,epsFinal=0.0001,gam=1,in
-itOptVal=100],level=1,env=[I],shooting=False,dists=1,rots=6_0.png, id=582, 435.
+itOptVal=100],level=1,env=[I],shooting=False,dists=1,rots=6_0.png, id=493, 435.
 7881pt x 474.8139pt>
 File: ../img//agent=DoubleQLearning,agentSpecParam=[eps=0.2,epsFinal=0.0001,gam
 =1,initOptVal=100],level=1,env=[I],shooting=False,dists=1,rots=6_0.png Graphic 
@@ -969,8 +1051,18 @@ ts=6_0.png  used on input line 34.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
+
+LaTeX Warning: Reference `fig:avgiop20' on page 31 undefined on input line 39.
+
+
+LaTeX Warning: Reference `fig:avgiop100' on page 31 undefined on input line 39.
+
+
+
+LaTeX Warning: Reference `fig:dqli' on page 31 undefined on input line 39.
+
 <../img//agent=ExpectedSARSA,agentSpecParam=[eps=0.2,epsFinal=0.0001,gam=1,init
-OptVal=100],level=1,env=[Triangles],shooting=False,dists=1,rots=6_0.png, id=587
+OptVal=100],level=1,env=[Triangles],shooting=False,dists=1,rots=6_0.png, id=495
 , 465.4188pt x 474.8139pt>
 File: ../img//agent=ExpectedSARSA,agentSpecParam=[eps=0.2,epsFinal=0.0001,gam=1
 ,initOptVal=100],level=1,env=[Triangles],shooting=False,dists=1,rots=6_0.png Gr
@@ -990,8 +1082,17 @@ s=1,rots=6_0.png  used on input line 44.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
+
+LaTeX Warning: Reference `fig:avgbugs' on page 32 undefined on input line 52.
+
+
+LaTeX Warning: Reference `fig:polexps' on page 32 undefined on input line 52.
+
+
+LaTeX Warning: Reference `fig:pols' on page 32 undefined on input line 52.
+
 [32 <../img//eps=0.2_initOptVal=20_.png> <../img//eps=0.2_initOptVal=100_.png>]
-<../img//env=bugs.png, id=608, 413.3844pt x 312.9291pt>
+<../img//env=bugs.png, id=515, 413.3844pt x 312.9291pt>
 File: ../img//env=bugs.png Graphic file (type png)
 <use ../img//env=bugs.png>
 Package pdftex.def Info: ../img//env=bugs.png  used on input line 56.
@@ -1000,7 +1101,7 @@ Package pdftex.def Info: ../img//env=bugs.png  used on input line 56.
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 <../img//agent=ExpectedSARSA,agentSpecParam=[eps=0.4,epsFinal=0.0001,gam=1,init
-OptVal=100],level=1,env=[Bugs],shooting=False,dists=1,rots=6_0.png, id=609, 437
+OptVal=100],level=1,env=[Bugs],shooting=False,dists=1,rots=6_0.png, id=516, 437
 .9562pt x 487.8225pt>
 File: ../img//agent=ExpectedSARSA,agentSpecParam=[eps=0.4,epsFinal=0.0001,gam=1
 ,initOptVal=100],level=1,env=[Bugs],shooting=False,dists=1,rots=6_0.png Graphic
@@ -1015,7 +1116,7 @@ ots=6_0.png  used on input line 63.
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 <../img//agent=SARSA,agentSpecParam=[eps=0.2,epsFinal=0.0001,gam=1,initOptVal=1
-00],level=1,env=[Bugs],shooting=True,dists=1,rots=6_0.png, id=610, 437.9562pt x
+00],level=1,env=[Bugs],shooting=True,dists=1,rots=6_0.png, id=517, 437.9562pt x
  487.8225pt>
 File: ../img//agent=SARSA,agentSpecParam=[eps=0.2,epsFinal=0.0001,gam=1,initOpt
 Val=100],level=1,env=[Bugs],shooting=True,dists=1,rots=6_0.png Graphic file (ty
@@ -1029,7 +1130,7 @@ ng  used on input line 70.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<../img//env=viruses.png, id=611, 413.3844pt x 312.9291pt>
+<../img//env=viruses.png, id=518, 413.3844pt x 312.9291pt>
 File: ../img//env=viruses.png Graphic file (type png)
 <use ../img//env=viruses.png>
 Package pdftex.def Info: ../img//env=viruses.png  used on input line 79.
@@ -1037,8 +1138,22 @@ Package pdftex.def Info: ../img//env=viruses.png  used on input line 79.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
+
+LaTeX Warning: Reference `fig:qvir' on page 33 undefined on input line 84.
+
+
+LaTeX Warning: Reference `fig:esvir' on page 33 undefined on input line 84.
+
+
+LaTeX Warning: Reference `fig:esvirShooting' on page 33 undefined on input line
+ 84.
+
+
+LaTeX Warning: Reference `fig:avgviruses' on page 33 undefined on input line 84
+.
+
 <../img//agent=QLearning,agentSpecParam=[eps=0.4,epsFinal=0.0001,gam=1,initOptV
-al=100],level=1,env=[Viruses],shooting=True,dists=1,rots=6_0.png, id=616, 435.7
+al=100],level=1,env=[Viruses],shooting=True,dists=1,rots=6_0.png, id=519, 435.7
 881pt x 481.3182pt>
 File: ../img//agent=QLearning,agentSpecParam=[eps=0.4,epsFinal=0.0001,gam=1,ini
 tOptVal=100],level=1,env=[Viruses],shooting=True,dists=1,rots=6_0.png Graphic f
@@ -1053,7 +1168,7 @@ s=6_0.png  used on input line 89.
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 <../img//agent=ExpectedSARSA,agentSpecParam=[eps=0.4,epsFinal=0.0001,gam=1,init
-OptVal=100],level=1,env=[Viruses],shooting=False,dists=1,rots=6_0.png, id=617, 
+OptVal=100],level=1,env=[Viruses],shooting=False,dists=1,rots=6_0.png, id=520, 
 435.7881pt x 481.3182pt>
 File: ../img//agent=ExpectedSARSA,agentSpecParam=[eps=0.4,epsFinal=0.0001,gam=1
 ,initOptVal=100],level=1,env=[Viruses],shooting=False,dists=1,rots=6_0.png Grap
@@ -1068,7 +1183,7 @@ sFinal=0.0001,gam=1,initOptVal=100],level=1,env=[Viruses],shooting=False,dists=
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 <../img//agent=ExpectedSARSA,agentSpecParam=[eps=0.4,epsFinal=0.0001,gam=1,init
-OptVal=100],level=1,env=[Viruses],shooting=True,dists=1,rots=6_0.png, id=618, 4
+OptVal=100],level=1,env=[Viruses],shooting=True,dists=1,rots=6_0.png, id=521, 4
 35.7881pt x 481.3182pt>
 File: ../img//agent=ExpectedSARSA,agentSpecParam=[eps=0.4,epsFinal=0.0001,gam=1
 ,initOptVal=100],level=1,env=[Viruses],shooting=True,dists=1,rots=6_0.png Graph
@@ -1082,9 +1197,12 @@ sFinal=0.0001,gam=1,initOptVal=100],level=1,env=[Viruses],shooting=True,dists=1
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
+
+LaTeX Warning: Reference `fig:compTok' on page 33 undefined on input line 110.
+
 [33 <../img//agent=DoubleQLearning,agentSpecParam=[eps=0.2,epsFinal=0.0001,gam=
 1,initOptVal=100],level=1,env=[I],shooting=False,dists=1,rots=6_0.png>]
-<../img//env=Tokens.png, id=633, 413.3844pt x 312.9291pt>
+<../img//env=Tokens.png, id=530, 413.3844pt x 312.9291pt>
 File: ../img//env=Tokens.png Graphic file (type png)
 <use ../img//env=Tokens.png>
 Package pdftex.def Info: ../img//env=Tokens.png  used on input line 114.
@@ -1093,8 +1211,14 @@ Package pdftex.def Info: ../img//env=Tokens.png  used on input line 114.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
+
+LaTeX Warning: Reference `fig:estraps' on page 34 undefined on input line 122.
+
+
+LaTeX Warning: Reference `fig:mctraps' on page 34 undefined on input line 122.
+
 <../img//agent=ExpectedSARSA,agentSpecParam=[eps=0.2,epsFinal=0.0001,gam=1,init
-OptVal=100],level=1,env=[Traps],shooting=False,dists=1,rots=22_0.png, id=636, 4
+OptVal=100],level=1,env=[Traps],shooting=False,dists=1,rots=22_0.png, id=531, 4
 42.2924pt x 534.798pt>
 File: ../img//agent=ExpectedSARSA,agentSpecParam=[eps=0.2,epsFinal=0.0001,gam=1
 ,initOptVal=100],level=1,env=[Traps],shooting=False,dists=1,rots=22_0.png Graph
@@ -1109,7 +1233,7 @@ rots=22_0.png  used on input line 126.
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 <../img//agent=MonteCarlo,agentSpecParam=[eps=0.2,epsFinal=0.0001,gam=1,initOpt
-Val=30],level=1,env=[Traps],shooting=False,dists=1,rots=30_0.png, id=637, 435.7
+Val=30],level=1,env=[Traps],shooting=False,dists=1,rots=30_0.png, id=532, 435.7
 881pt x 534.798pt>
 File: ../img//agent=MonteCarlo,agentSpecParam=[eps=0.2,epsFinal=0.0001,gam=1,in
 itOptVal=30],level=1,env=[Traps],shooting=False,dists=1,rots=30_0.png Graphic f
@@ -1123,11 +1247,14 @@ nal=0.0001,gam=1,initOptVal=30],level=1,env=[Traps],shooting=False,dists=1,rots
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
+
+LaTeX Warning: Reference `fig:esbvt' on page 34 undefined on input line 140.
+
 [34 <../img//agent=ExpectedSARSA,agentSpecParam=[eps=0.2,epsFinal=0.0001,gam=1,
 initOptVal=100],level=1,env=[Triangles],shooting=False,dists=1,rots=6_0.png>]
 <../img//agent=ExpectedSARSA,agentSpecParam=[eps=0.8,epsFinal=0.0001,gam=1,init
 OptVal=500],level=1,env=[Bugs,Tokens,Viruses],shooting=False,dists=1,rots=6_0.p
-ng, id=647, 437.9562pt x 508.0581pt>
+ng, id=542, 437.9562pt x 508.0581pt>
 File: ../img//agent=ExpectedSARSA,agentSpecParam=[eps=0.8,epsFinal=0.0001,gam=1
 ,initOptVal=500],level=1,env=[Bugs,Tokens,Viruses],shooting=False,dists=1,rots=
 6_0.png Graphic file (type png)
@@ -1142,8 +1269,11 @@ False,dists=1,rots=6_0.png  used on input line 144.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
+
+LaTeX Warning: Reference `fig:all' on page 35 undefined on input line 150.
+
 <../img//agent=ExpectedSARSA,agentSpecParam=[eps=0.6,epsFinal=0.0001,gam=1,init
-OptVal=200],level=1,env=all,shooting=False,dists=1,rots=22_0.png, id=649, 442.2
+OptVal=200],level=1,env=all,shooting=False,dists=1,rots=22_0.png, id=543, 442.2
 924pt x 575.2692pt>
 File: ../img//agent=ExpectedSARSA,agentSpecParam=[eps=0.6,epsFinal=0.0001,gam=1
 ,initOptVal=200],level=1,env=all,shooting=False,dists=1,rots=22_0.png Graphic f
@@ -1217,16 +1347,25 @@ Appendix A.
 (AlgorithmsUsed.aux) (AgentsImplementation.aux) (Experiments.aux)
 (Conclusion.aux) (bibliography.aux))
 
-LaTeX Warning: There were multiply-defined labels.
+LaTeX Warning: There were undefined references.
 
-Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 296C67B5E2B0C415302C9927F8154430;6545.
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+
+Package rerunfilecheck Warning: File `thesis.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `thesis.out':
+(rerunfilecheck)             Before: 23F342963BDE798205575D85831BB12D;4585
+(rerunfilecheck)             After:  296C67B5E2B0C415302C9927F8154430;6545.
  ) 
 Here is how much of TeX's memory you used:
- 19140 strings out of 475281
- 326378 string characters out of 2775008
- 625504 words of memory out of 3000000
- 40023 multiletter control sequences out of 15000+600000
+ 19128 strings out of 475281
+ 326203 string characters out of 2775008
+ 625722 words of memory out of 3000000
+ 40009 multiletter control sequences out of 15000+600000
  560649 words of font info for 94 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  89i,9n,93p,1927b,2379s stack positions out of 10000i,1000n,20000p,200000b,80000s
@@ -1254,9 +1393,9 @@ blic/lm/lmri12.pfb><C:/Users/Una/AppData/Local/Programs/MiKTeX/fonts/type1/publ
 ic/lm/lmsy10.pfb><C:/Users/Una/AppData/Local/Programs/MiKTeX/fonts/type1/public
 /lm/lmsy8.pfb><C:/Users/Una/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm
 /lmtt12.pfb>
-Output written on thesis.pdf (53 pages, 2888600 bytes).
+Output written on thesis.pdf (53 pages, 2878117 bytes).
 PDF statistics:
- 883 PDF objects out of 1000 (max. 8388607)
- 168 named destinations out of 1000 (max. 500000)
- 561 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 775 PDF objects out of 1000 (max. 8388607)
+ 170 named destinations out of 1000 (max. 500000)
+ 425 words of extra memory for PDF output out of 10000 (max. 10000000)
 

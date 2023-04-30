@@ -28,7 +28,7 @@ The Learning Agent class serves as a base class for all the reinforcement learni
 \begin{algorithmic}[1]
 \Function{choose\_action}{action}
     \State $\textit{epsilon\_action} \gets \textit{false}$
-    \If{not $\textit{is\_eval\_game}$} \Comment{Used for continunous evaluation}
+    \If{not $\textit{is\_eval\_game}$} \Comment{Used for continuous evaluation}
         \State $\textit{epsilon\_action} \gets rand.\text{randf\_range}(0,1) < EPSILON$
         \If{$\textit{epsilon\_action}$}
             \State $action \gets ACTIONS [rand.\text{randi\_range}(0,len(ACTIONS) - 1)]$  
@@ -57,11 +57,16 @@ Normally, the gamma value grows by one power on each step. However, as previousl
 \begin{algorithm}
 \caption{Updating policy for Monte Carlo}\label{mcUpdate}
 \begin{algorithmic}[1]
-\State abs
+\State $R \gets \text{next\_step.score - curr\_step.score}$
+\State $G \gets $\Call {pow}{GAMMA,next\_step.time - curr\_step.time} $\cdot (R + G)$
+\If{\Call{is\_first\_occurrence}{\dots}}}}
+\State $total\_return[curr\_step.\text{state\_action}] \gets total\_return[curr\_step.\text{state\_action}] + G$
+\State $visits[curr\_step.\text{state\_action}] \gets visits[curr\_step.\text{state\_action}] + 1$
+\EndIf
 \end{algorithmic}
 \end{algorithm}
 
-The Monte Carlo method is a type of reinforcement learning algorithm that updates its policy only after an episode is completed. This is done by iterating through the entire episode and increasing the number of visits and total return for each state-action pair, if this is their first visit inside this episode. The total return is calculated using the formula shown in the code snippet \ref{mcUpdate}, while the number of visits is simply incremented by 1. To determine the optimal action, the agent compares the ratio of total return to number of visits for each possible action at a given state. This calculation is performed at each state transition during the episode \footnote{Instead of calling the move function periodically, the agents will always choose the same action based on the current state. Only once the state has changed, the new action is chosen based on the accumulated score and the new state.}.
+The Monte Carlo method is a type of reinforcement learning algorithm that updates its policy only after an episode is completed. This is done by iterating through the entire episode and increasing the number of visits and total return for each state-action pair, if this is their first visit inside this episode. The total return is calculated using the formula shown in the Algorithm \ref{mcUpdate}, while the number of visits is simply incremented by 1. To determine the optimal action, the agent compares the ratio of total return to number of visits for each possible action at a given state. This calculation is performed at each state transition during the episode \footnote{Instead of calling the move function periodically, the agents will always choose the same action based on the current state. Only once the state has changed, the new action is chosen based on the accumulated score and the new state.}.
 As previously mentioned, the $\gamma$ variable in the equation shown in \ref{mcUpdate} serves as a discount factor, meaning that the last move made, which resulted in the agent's death, will receive the highest penalty. As we move further down the list of moves, their significance decreases. It is important to note that if the value of $\gamma$ is set to 1, all moves are given equal weight. 
 
 \subsection{TD Agent}	
@@ -70,26 +75,74 @@ Unlike the Monte Carlo methods, which update their policies only after the compl
 \begin{algorithm}
 \caption{Updating policy for TD Agent}\label{tdUpdate}
 \begin{algorithmic}[1]
-\State abs
+\State $ alpha \gets 1.0 / visits[last\_state\_action]$
+\State $new\_state\_val \gets new\_state\_action$
+\If {terminal}:
+\State $new\_state\_val \gets0$
+\EndIf
+\State $new\_gamma \gets $\Call {pow}{GAMMA,curr\_time - prev\_time}
+\State $q[last\_state\_action] \gets q[last\_state\_action] + alpha(new\_gamma(R + new\_state\_val) - q[last\_state\_action])$
 \end{algorithmic}
 \end{algorithm}
 
 
-The update of the policy for a specific state value in TD learning involves multiple variables, most of which have been previously discussed. One new variable is $\alpha$, which represents the total number of visits for a given state action pair divided by one. Furthermore, to make this calculation, a variable uniquely computed by each TD algorithm, known as \texttt{new\_state\_action}, is required. Various methods for computing this variable can be found in Figure \ref{tdIndivUpdate}. If the current state is a terminal state, the \texttt{new\_state\_action} will not be utilized and instead, it will be replaced with a value of 0, as indicated in the update code.
+The update of the policy for a specific state value in TD learning involves multiple variables, most of which have been previously discussed. One new variable is $\alpha$, which represents the total number of visits for a given state action pair divided by one. Furthermore, to make this calculation, a variable uniquely computed by each TD algorithm, known as \texttt{new\_state\_action}, is required. Various methods for computing this variable can be found in Algorithms \ref{sUpdate}, \ref{qUpdate} and \ref{esUpdate}. If the current state is a terminal state, the \texttt{new\_state\_action} will not be utilized and instead, it will be replaced with a value of 0, as indicated in the update code.
 
 \begin{algorithm}
-\caption{Update functions for different algorithms}\label{tdIndivUpdate}
-\begin{algorithmic}
-\State abs
+\caption{Update function for SARSA}\label{sUpdate}
+\begin{algorithmic}[1]
+\Function{get\_update}{$state, new\_action, \_best\_action$}
+\State \textbf{return} $q[\text{get\_state\_action}(state, new\_action)]$
+\EndFunction
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}
+\caption{Update function for Q-Learning}\label{qUpdate}
+\begin{algorithmic}[1]
+\Function{get\_update}{$state, \_new\_action, best\_action$}
+\State \textbf{return} $q[\Call{get\_state\_action}{state, best\_action}]$
+\EndFunction
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}
+\caption{Update function for ExpectedSARSA}\label{esUpdate}
+\begin{algorithmic}[1]
+\Function{get\_update}{$state, \_new\_action, best\_action$}
+\State $sum \gets 0.0$
+\For{$action$ \textbf{in} $ACTIONS$}
+\State $probability \gets \frac{EPSILON}{\text{len}(ACTIONS)}$
+\If{$action = best\_action$}
+\State $probability \gets probability + 1 - EPSILON$
+\EndIf
+\State $sum \gets sum + probability \cdot Q(state, action)$
+\EndFor
+\State \Return $sum$
+\EndFunction
 \end{algorithmic}
 \end{algorithm}
 
 In SARSA, the \texttt{new\_state\_val} is calculated based on the value of the next action the agent will take, denoted as \texttt{new\_action}. On the other hand, Q-learning uses the value of the best action possible in the next state, denoted as \texttt{best\_action}. These two variables are equal if greedy policy is implemented. However if we consider $\epsilon$-greedy policy, then they might differ based on weather a random action has been chosen. Expected SARSA combines these two approaches by taking the expected value of all possible actions in the next state. 
 
 \begin{algorithm}
-\caption{Update functions for Double Q-Learning}\label{dqlUpdate}
+\caption{Update function for Double Q-Learning}\label{dqlUpdate}
 \begin{algorithmic}
-\State abs
+\State $ alpha \gets 1.0 / visits[last\_state\_action]$
+\State $ new\_gamma \gets $\Call {pow}{GAMMA,next\_step.time - curr\_step.time}
+\If{$rand.\text{randf\_range}(0,1) < 0.5$}
+\State $new\_state\_val \gets q2[\text{get\_state\_action}(state,best\_action)]$
+\If {terminal}:
+\State $new\_state\_val \gets0$
+\EndIf
+\State $ q[last\_state\_action] \gets alpha(new\_gamma(R + new\_state\_val) - q[last\_state\_action])$
+\Else
+\State $new\_state\_val \gets q[\text{get\_state\_action}(state,best\_action)]$
+\If {terminal}:
+\State $new\_state\_val \gets0$
+\EndIf
+\State $ q2[last\_state\_action] \gets alpha(new\_gamma(R + new\_state\_val) - q2[last\_state\_action])$
+\EndIf
 \end{algorithmic}
 \end{algorithm}
 
