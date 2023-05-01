@@ -59,7 +59,7 @@ Normally, the gamma value grows by one power on each step. However, as previousl
 \begin{algorithmic}[1]
 \State $R \gets \text{next\_step.score - curr\_step.score}$
 \State $G \gets $\Call {pow}{GAMMA,next\_step.time - curr\_step.time} $\cdot (R + G)$
-\If{\Call{is\_first\_occurrence}{\dots}}}}
+\If{\Call{is\_first\_occurrence}{\dots}}
 \State $total\_return[curr\_step.\text{state\_action}] \gets total\_return[curr\_step.\text{state\_action}] + G$
 \State $visits[curr\_step.\text{state\_action}] \gets visits[curr\_step.\text{state\_action}] + 1$
 \EndIf
