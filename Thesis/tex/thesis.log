@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.12) (preloaded format=pdflatex 2022.12.18)  1 MAY 2023 23:05
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.12) (preloaded format=pdflatex 2022.12.18)  5 MAY 2023 01:00
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -970,10 +970,20 @@ Package pdftex.def Info: ../img//rot_values.png  used on input line 11.
 
 
 
- <../img//rot_values.png>]) [33]
+ <../img//rot_values.png>]
+<../img//examplePlot.png, id=597, 462.97969pt x 494.59781pt>
+File: ../img//examplePlot.png Graphic file (type png)
+<use ../img//examplePlot.png>
+Package pdftex.def Info: ../img//examplePlot.png  used on input line 27.
+(pdftex.def)             Requested size: 412.56496pt x 440.74913pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[33] [34 <../img//examplePlot.png>]) [35]
 \openout2 = `Conclusion.aux'.
 
- (Conclusion.tex) [34
+ (Conclusion.tex) [36
 
 
 
@@ -981,8 +991,8 @@ Package pdftex.def Info: ../img//rot_values.png  used on input line 11.
 ]
 \openout2 = `bibliography.aux'.
 
- (bibliography.tex
-(thesis.bbl)) [35
+
+(bibliography.tex (thesis.bbl)) [37
 
 
 
@@ -991,7 +1001,7 @@ Package pdftex.def Info: ../img//rot_values.png  used on input line 11.
 \tf@lof=\write7
 \openout7 = `thesis.lof'.
 
- [36
+ [38
 
 
 
@@ -999,26 +1009,27 @@ Package pdftex.def Info: ../img//rot_values.png  used on input line 11.
 \tf@lot=\write8
 \openout8 = `thesis.lot'.
 
- [37
+ [39
 
-] [38
+]
+[40
 
 ]
 Appendix A.
-[39
+[41
 
 ] (thesis.aux (title.aux) (Introduction.aux) (GameDesign.aux)
 (GameImplementation.aux) (StructureOfTheExperimentalSetting.aux)
 (AlgorithmsUsed.aux) (AgentsImplementation.aux) (Experiments.aux)
 (Conclusion.aux) (bibliography.aux))
 Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: B80C66D3855ECD3AF90E6B8040EEF71C;6934.
+(rerunfilecheck)             Checksum: C7B8B851D1CD78E6809ED893E0999F81;6934.
  ) 
 Here is how much of TeX's memory you used:
- 18906 strings out of 475281
- 305092 string characters out of 2775008
- 626115 words of memory out of 3000000
- 39835 multiletter control sequences out of 15000+600000
+ 18921 strings out of 475281
+ 305411 string characters out of 2775008
+ 626162 words of memory out of 3000000
+ 39847 multiletter control sequences out of 15000+600000
  560649 words of font info for 94 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  89i,9n,93p,1927b,2379s stack positions out of 10000i,1000n,20000p,200000b,80000s
@@ -1046,9 +1057,9 @@ blic/lm/lmri12.pfb><C:/Users/Una/AppData/Local/Programs/MiKTeX/fonts/type1/publ
 ic/lm/lmsy10.pfb><C:/Users/Una/AppData/Local/Programs/MiKTeX/fonts/type1/public
 /lm/lmsy8.pfb><C:/Users/Una/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm
 /lmtt12.pfb>
-Output written on thesis.pdf (43 pages, 2325585 bytes).
+Output written on thesis.pdf (45 pages, 2377537 bytes).
 PDF statistics:
- 758 PDF objects out of 1000 (max. 8388607)
- 143 named destinations out of 1000 (max. 500000)
- 481 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 774 PDF objects out of 1000 (max. 8388607)
+ 146 named destinations out of 1000 (max. 500000)
+ 486 words of extra memory for PDF output out of 10000 (max. 10000000)
 

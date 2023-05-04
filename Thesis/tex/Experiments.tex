@@ -21,6 +21,28 @@ The remaining values to be determined for the experiments were the suboptions fo
 Throughout the months dedicated to conducting experiments, they gradually converged towards checking combinations of the values mentioned above. In some instances, other values were experimented with and will be discussed when exploring various environments in later subsections. However, due to the length of the experiments and the number of parameters requiring adjustment, they were kept systematic towards the end, and most of the results presented in this chapter were obtained from experiments run with different \texttt{env} and value \texttt{n} adjusted according to the environment. Each combination was tested on ten seeds for each agent, with the combinations consisting of \texttt{eps} parameter taking a value of either 0.2 or 0.4, and the \texttt{initOptVal} being either 20.0 or 100.0. Discounting was kept at the value of 1 and \texttt{epsFinal} was 0.0001.
 
 \section{Plotting}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{examplePlot}
+    \caption{Plot example}
+    \label{fig:plt_eg}
+\end{figure}
+
+In this chapter, a lot of plots similar to the one shown in Figure \ref{fig:plt_eg} will be presented. A subsection has been dedicated to explaining the different components of these plots and how to read them. While some plots may differ slightly from the one in Figure \ref{fig:plt_eg}, the meaning behind them can still be easily deduced.
+
+The top part of the figure displays all the necessary information that was used in the experiment. Most of the values have been previously described, except for ``previous game''. This value is meant for experiments that used the \texttt{database=read} option and were performed on an agent that had trained for some number of games. This number specifies the how many of games the agent had previously trained on.
+
+Moving further down, there is a plot with three lines and a legend in the top right corner. The data line, as indicated on the figure, represents the score that the agent achieved on a particular episode. However, some plots may show the average value of the agent's score for that episode over several different seeds used for the random action. Additionally, there may be multiple data lines on the plot, each representing a different agent. In these cases, each line is averaged between many seeds. Each agent is labelled with their respective color inside the legend.
+
+The mean line represents the average score value for the entire experiment, while the winning score represents the winning threshold. It should be noted that if the agent did not win any games, the winning score line will be omitted. Furthermore, the data line is averaged to appear smoother. This is why even though the winning rate is 62/150, the data line doesn't touch the winning score threshold at any point.
+
+As mentioned in the Section \ref{commOpt}, it is possible to perform continuous evaluation on experiments, meaning one learning game is played with random actions, followed immediately by an evaluation game using only the current policy that the agent is performing. In all experiments conducted, the data line only represents the evaluation games.
+
+At the very bottom of the figure, there is a table which only appears in plots that contain a single data line that is not averaged over different seeds and has only one seed value. In the table, all rotation values for this experiment define the columns, while each row has a tuple of distance value and type of the obstacle. Since all experiments are performed on \texttt{dists=1}, the number of rows will match only the number of different obstacles used in the experiment.
+
+It should be emphasized that parameters such as the number of seeds in the averaged data line or the size of the smoothing window will be clearly specified for each plot mentioned in the rest of the chapter. This prevents any form of ambiguity or confusion regarding the details of the experiment.
+
 \section{Interesting behaviours}
 \section{Individual traps environment}
 \section{Traps environment}
