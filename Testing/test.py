@@ -151,7 +151,7 @@ if __name__ == '__main__':
     # read description content from the txt file
     description = getDescription()
 
-    if len(sys.argv) == 2 and sys.argv[1] == '-description':
+    if len(sys.argv) == 2 and sys.argv[1] == '--description':
         print(description)
         raise SystemExit
 

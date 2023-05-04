@@ -1,0 +1,10 @@
+- Plots the experiments in a few different ways using command_outputs files placed in inside ./Game
+- There are 3 different types of plots:
+    1. Plot each experiment separately - 1 file to 1 plot
+        Only option that shows the policy that the agent uses
+        If a file is not correct it will simply skip it
+    2. Plot each experiment by taking the average of all different seeds for that experiment - numOfSeeds files to 1 plot
+        All files of the specified seeds need to be correct and all have to contain the same number of games
+    3. Plots the same thing as the 2nd option, but it does so for each learning agent - numOfSeeeds * numOfLearningAgents files to 1 Plot
+
+- To run either of the options simply add --option=<OPTION_NUMBER>
