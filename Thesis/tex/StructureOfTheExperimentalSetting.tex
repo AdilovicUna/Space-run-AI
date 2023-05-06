@@ -168,59 +168,62 @@ To view a list of available options, the user can simply enter the command \text
 The \texttt{Main.tscn} scene is the top level scene in the game and consists of a single Node type node. The script attached to this node, \texttt{Main.gd}, is responsible for ensuring that all options specified in the command line (as discussed in Section \ref{commOpt}) are executed correctly. This script is the starting point of the training and handles the initialization and execution of ore or more game sessions.
 There are several key functions within the \texttt{Main.gd} script that are worth discussing in more detail.
 
-\begin{algorithm}
-\begin{algorithmic}[1]
-\Function{\_ready}{}
-\State $unparsed\_args \gets OS.\text{get\_cmdline\_args()}$
-\If{$unparsed\_args.size() = 1$ and $unparsed\_args[0] = "options"$}
-\State \Call{display\_options}{}
-\EndIf
-\State $\dots$ \Comment{parse args}
-\If{\Call{set\_param}{args} $= \text{false}$}
-\State \Call{display\_options}{}
-\Else
-\State \Call{instance\_agent}{}
-\State \Call{build\_filename}{}
-\If{\textbf{not} $agent\_inst.\text{init}(actions, read, write, command, n, debug)$}
-\State \Call{print}{``Something went wrong, please try again''}
-\State \Call{display\_options}{}
-\EndIf
-\State \Call{play\_game}{}
-\EndIf
-\EndFunction
-\end{algorithmic}
-\end{algorithm}
+\begin{center}
+\line(1,0){400}
+\begin{lstlisting}
+func _ready():
+	var unparsed_args = OS.get_cmdline_args()
+	if unparsed_args.size() == 1 and unparsed_args[0] == "options":
+		display_options()
+		
+	...	# parse args
+	
+	if set_param(args) == false:
+    		display_options()
+	else:
+    		instance_agent()
+    		build_filename()
+    		if not agent_inst.init(...):
+        		print("Something went wrong, please try again")
+        		display_options()
+    		play_game()
+\end{lstlisting}
+\line(1,0){400}
+\end{center}
 
 The \texttt{\_ready()} function is the starting point of the program when run from the command line. It is responsible for parsing all of the arguments and checking their validity. If any issues are encountered, the program will display options and terminate. If the arguments are valid, an agent will be instantiated and initialized. In cases where everything is in order, first game will be played by calling the \texttt{play\_game()} function.
 
-\begin{algorithm}
-\begin{algorithmic}[1]
-\Function{play\_game}{}
-\If{agent $=$ "Keyboard" and VisualServer.render\_loop\_enabled}
-\State $\dots$ \Comment{play a regular game}
-\ElsIf{$n > 0$}
-\State $n \gets n - 1$
-\State $game \gets$ $game\_scene.\text{instance}()$
-\State \Call{set\_param\_in\_game()}{}
-\State $agent\_inst.\text{start\_game}(is\_eval\_game)$
-\Else
-\State $agent\_inst.\text{save}(write)$
-\State \Call{print\_and\_write\_ending()}{}
-\EndIf
-\EndFunction
-\end{algorithmic}
-\end{algorithm}
+\begin{center}
+\line(1,0){400}
+\begin{lstlisting}
+func play_game():
+	if agent == "Keyboard" and VisualServer.render_loop_enabled:
+		... # play a regular game
+	elif n > 0:
+		n -= 1
+		game = game_scene.instance()
+		set_param_in_game()
+		agent_inst.start_game(is_eval_game)
+	else:
+		agent_inst.save(write)
+		print_and_write_ending()
+\end{lstlisting}
+\line(1,0){400}
+\end{center}
 
 The \texttt{play\_game()} function is called each time a game is played.Firstly, it will check if the agent selected was the \texttt{Keyboard} agent, and if so, the program will start one game session where the user has controls of Hans. Otherwise, one of the remaining agents will take over and play specified number of games (defined by the "n" parameter). If n games have already been played, the program will terminate after performing the last few tasks needed to save all of the knowledge gained form this particular session. Otherwise, a single game will be executed and number of games left decreased.
 
-\begin{algorithm}
-\begin{algorithmic}[1]
-\Function{on\_game\_finished}{$score, ticks, win, time$}
-    \State \Call{print\_and\_write\_score}{score, win}
-    \State $agent\_inst.\text{end\_game}(score, time)$
-    \State \Call{play\_game()}{}
-\EndFunction
-\end{algorithmic}
-\end{algorithm}
+\begin{center}
+\line(1,0){400}
+\begin{lstlisting}
+func on_game_finished(score, ticks, win, time):
+	print_and_write_score(score, win)
+	agent_inst.end_game(score, time)
+	play_game()
+\end{lstlisting}
+\line(1,0){400}
+\end{center}
+
+
 
 The \texttt{game\_over()} function is called when the game emits a signal indicating that it has finished. Upon execution, this function outputs the necessary information, updates the agent through the \texttt{end\_game()} function, and then calls the \texttt{play\_game()} function to continue the game session.

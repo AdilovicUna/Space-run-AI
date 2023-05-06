@@ -65,6 +65,22 @@
 \graphicspath{ {../img/} }
 \DeclareGraphicsExtensions{.jpg,.png,.pdf}
 
+\usepackage{xcolor}
+
+\usepackage{listings}
+\definecolor{mygreen}{RGB}{0,128,0}
+
+\lstset{
+  language=Python,
+  basicstyle=\ttfamily,
+  keywordstyle=\color{blue},
+  stringstyle=\color{red},
+  commentstyle=\color{gray},
+  morekeywords={func,var,const,onready,if,elif,else,while,for,in,match,return},
+  showstringspaces=false,
+  breaklines=true
+}
+
 %%% Basic information on the thesis
 
 % Thesis title in English (exactly as in the formal assignment)
