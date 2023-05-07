@@ -16,7 +16,7 @@ command_outputs_path = '../Game/Command_outputs/'
 class Group:
     def __init__(self, name, scores, env, filename):
         self.name = name
-        self.data = [0 * len(scores)]
+        self.data = [0] * len(scores)
         self.env = env
         self.filename = filename
         self.count = 0
@@ -25,11 +25,13 @@ class Group:
 class AgentGroup:
     def __init__(self, name, scores, env, filename):
         self.name = name
+        self.env = env
+        self.filename = filename
         self.MC = Group('MC.' + name, scores, env, filename)
         self.S = Group('scores.' + name, scores, env, filename)
         self.QL = Group('QL.' + name, scores, env, filename)
         self.ES = Group('ES.' + name, scores, env, filename)
-        self.dql = Group('dql.' + name, scores, env, filename)
+        self.DQL = Group('DQL.' + name, scores, env, filename)
 
 def parse_state(state):
     state = state.split(',')
@@ -135,7 +137,7 @@ def get_table(ad_data, agent):
             if (row,col) in chosen_moves:
                 cell.append(chosen_moves[row,col])
             else:
-                cell.append("_")
+                cell.append('_')
         cell_text.append(cell)
 
     return (cell_text, row_labels, col_labels)
@@ -160,13 +162,13 @@ def plotOption1(window, co_data, ad_data, agent, filename):
 
     # text above the plot
     spaces = '    '
-    plt.figtext(x=0.02, y=0.95, S='Winning rate: ' + win_rate + spaces + 'Previous games: ' + num_of_prev_games+ spaces + 'Agent: ' + agent)
+    plt.figtext(x=0.02, y=0.95, s='Winning rate: ' + win_rate + spaces + 'Previous games: ' + num_of_prev_games+ spaces + 'Agent: ' + agent)
     agentSpecParam ='='.join(','.join(filename.split(',')[1:5]).split('=')[1:]).split(',')
     eps = agentSpecParam[0].split('=')[1]
     finalEps = agentSpecParam[1].split('=')[1]
     gam = agentSpecParam[2].split('=')[1]
     initOptVal = agentSpecParam[3].split('=')[1][:-1]
-    plt.figtext(x=0.02, y=0.91, S='ε: ' + eps + spaces + 'Final-ε: ' + finalEps + spaces + 'γ: ' + gam + spaces + 'Initial optimistic value: ' + initOptVal)
+    plt.figtext(x=0.02, y=0.91, s='ε: ' + eps + spaces + 'Final-ε: ' + finalEps + spaces + 'γ: ' + gam + spaces + 'Initial optimistic value: ' + initOptVal)
 
     plt.xlabel('Episodes')
     plt.ylabel('Scores')
@@ -181,7 +183,7 @@ def plotOption1(window, co_data, ad_data, agent, filename):
                 bbox=[0, -0.5 - (len(ad_data[1]) + 1) * 0.025, 1, 0.3 + (len(ad_data[1]) + 1) * 0.025])
 
 def option1(window):
-    f = open("option1.txt", "w")
+    f = open('Plots_log/option1.txt', 'w')
     total_plots = 0
     new_plots = 0
     existing_plots = 0
@@ -192,19 +194,17 @@ def option1(window):
         # c1 = agent_databases counter
         # c2 = command_outputs counter
         filename = filename[:-4]
-        f.write('----------------------------')
-        f.write('filename: ', filename)
+        f.write('----------------------------' + '\n')
+        f.write('filename: ' + filename + '\n')
         total_plots += 1
         try:
             split_filename = filename.split('_')
             filename = split_filename[0]
             co_ver = split_filename[1]
-
             co_f = open(command_outputs_path + filename + '_' + co_ver + '.txt', 'r')
             co_f = co_f.read().strip().split('\n')
             index = co_f.index('')
             co_data = co_f[:index]
-
             agent = filename.split(',')[0].split('=')[1]
            
             ad_data = get_table(co_f[index+1:], agent)
@@ -222,26 +222,27 @@ def option1(window):
             full_plot_filename = path + filename + '_' + co_ver + '.png'
             if os.path.isfile(full_plot_filename):
                 existing_plots += 1
-                f.write('EXISTING PLOT')
+                f.write('EXISTING PLOT' + '\n')
                 continue
             
             plotOption1(window, co_data, ad_data, agent, filename)
+
             plt.savefig(full_plot_filename, bbox_inches='tight', pad_inches=0.2, dpi=100)
             new_plots += 1
         except Exception:
             error_plots += 1
-            f.write("FILE ERROR")
+            f.write('FILE ERROR' + '\n')
             
-    f.write('----------------------------')
-    f.write('Total plots: ', total_plots)
-    f.write('New plots: ', new_plots)
-    f.write('Existing plots: ', existing_plots)
-    f.write('Error plots: ', error_plots)
-    f.write('----------------------------')
+    f.write('----------------------------' + '\n')
+    f.write('Total plots: ' + str(total_plots) + '\n')
+    f.write('New plots: ' + str(new_plots) + '\n')
+    f.write('Existing plots: ' + str(existing_plots) + '\n')
+    f.write('Error plots: ' + str(error_plots) + '\n')
+    f.write('----------------------------' + '\n')
     f.close()
 
 def plotOption2(window, scores, agent, filename, winning_score):
-    avg_score = sum(scores) / len(scores)
+    avg_score = [sum(scores) / len(scores)] * len(scores)
     scores = [np.mean(scores[i:i + window]) if i <= len(scores) -
               window else np.mean(scores[i:]) for i in range(len(scores))]
     episodes = [i for i in range(1, len(scores)+1)]
@@ -256,19 +257,19 @@ def plotOption2(window, scores, agent, filename, winning_score):
 
     # text above the plot
     spaces = '    '
-    plt.figtext(x=0.02, y=0.95, S='Agent: ' + agent)
+    plt.figtext(x=0.02, y=0.95, s='Agent: ' + agent)
     agentSpecParam ='='.join(','.join(filename.split(',')[1:5]).split('=')[1:]).split(',')
     eps = agentSpecParam[0].split('=')[1]
     finalEps = agentSpecParam[1].split('=')[1]
     gam = agentSpecParam[2].split('=')[1]
     initOptVal = agentSpecParam[3].split('=')[1][:-1]
-    plt.figtext(x=0.02, y=0.91, S='ε: ' + eps + spaces + 'Final-ε: ' + finalEps + spaces + 'γ: ' + gam + spaces + 'Initial optimistic value: ' + initOptVal)
+    plt.figtext(x=0.02, y=0.91, s='ε: ' + eps + spaces + 'Final-ε: ' + finalEps + spaces + 'γ: ' + gam + spaces + 'Initial optimistic value: ' + initOptVal)
 
     plt.xlabel('Episodes')
     plt.ylabel('Scores')
 
 def option2(window):
-    f = open("option2.txt", "w")
+    f = open('Plots_log/option2.txt', 'w')
     groups = {}
     # files have the same names in both folders
     for filename in os.listdir(command_outputs_path):
@@ -276,8 +277,8 @@ def option2(window):
         # c1 = agent_databases counter
         # c2 = command_outputs counter
         filename = filename[:-4]
-        f.write('----------------------------')
-        f.write('filename: ', filename)
+        f.write('----------------------------' + '\n')
+        f.write('filename: ' + filename + '\n')
         commonParam = ''
         try:
             split_filename = filename.split('_')
@@ -308,12 +309,12 @@ def option2(window):
                 groups[commonParam].win_score = [float(co_data[-4].split()[1])] * len(scores) if co_data[-4].split()[1] != 'unknown' else -1
                 
         except Exception:
-            f.write("FILE ERROR: remove or replace incorrect files for the group: " + commonParam)
+            f.write('FILE ERROR: remove or replace incorrect files for the group: ' + str(commonParam) + '\n')
             continue
-        
+
     for key in groups.keys():
         groups[key].data = [x / groups[key].count for x in groups[key].data]
-        agent = groups[key].filename.split(',').split('=')[1]
+        agent = groups[key].filename.split(',')[0].split('=')[1]
         
         plotOption2(window, groups[key].data, agent, groups[key].filename, groups[key].win_score)
 
@@ -337,6 +338,8 @@ def plotOption3(window, MC, S, QL, ES, DQL, filename):
     DQL = [np.mean(DQL[i:i + window]) if i <= len(DQL) -
               window else np.mean(DQL[i:]) for i in range(len(DQL))]
 
+    _, ax = plt.subplots()
+
     plt.plot(MC, color='red', label='MonteCarlo')
     plt.plot(S, color='green', label='SARSA')
     plt.plot(QL, color='blue', label='QLearning')
@@ -352,13 +355,13 @@ def plotOption3(window, MC, S, QL, ES, DQL, filename):
     finalEps = agentSpecParam[1].split('=')[1]
     gam = agentSpecParam[2].split('=')[1]
     initOptVal = agentSpecParam[3].split('=')[1][:-1]
-    plt.figtext(x=0.02, y=0.91, S='ε: ' + eps + spaces + 'Final-ε: ' + finalEps + spaces + 'γ: ' + gam + spaces + 'Initial optimistic value: ' + initOptVal)
+    plt.figtext(x=0.02, y=0.91, s='ε: ' + eps + spaces + 'Final-ε: ' + finalEps + spaces + 'γ: ' + gam + spaces + 'Initial optimistic value: ' + initOptVal)
 
     plt.xlabel('Episodes')
     plt.ylabel('Scores')
 
 def option3(window):
-    f = open("option3.txt", "w")
+    f = open('Plots_log/option3.txt', 'w')
     groups = {}
     # files have the same names in both folders
     for filename in os.listdir(command_outputs_path):
@@ -366,14 +369,13 @@ def option3(window):
         # c1 = agent_databases counter
         # c2 = command_outputs counter
         filename = filename[:-4]
-        f.write('----------------------------')
-        f.write('filename: ', filename)
+        f.write('----------------------------' + '\n')
+        f.write('filename: ' + filename + '\n')
         commonParam = ''
         try:
             split_filename = filename.split('_')
             filename = split_filename[0]
             co_ver = split_filename[1]
-
             co_f = open(command_outputs_path + filename + '_' + co_ver + '.txt', 'r')
             co_f = co_f.read().strip().split('\n')
             index = co_f.index('')
@@ -391,27 +393,29 @@ def option3(window):
 
             commonParam = str(filenameFragments[1:9])
             if not commonParam in groups.keys():
-                groups[commonParam] = AgentGroup(commonParam, scores, env)
+                groups[commonParam] = AgentGroup(commonParam, scores, env, filename)
 
             match(agent):
-                case "MonteCarlo":
+                case 'MonteCarlo':
                     groups[commonParam].MC.data = [x + y for x, y in zip(scores, groups[commonParam].MC.data)]
                     groups[commonParam].MC.count += 1
-                case "SARSA":
+                case 'SARSA':
                     groups[commonParam].S.data = [x + y for x, y in zip(scores, groups[commonParam].S.data)]
                     groups[commonParam].S.count += 1
-                case "QLearning":
+                case 'QLearning':
                     groups[commonParam].QL.data = [x + y for x, y in zip(scores, groups[commonParam].QL.data)]
                     groups[commonParam].QL.count += 1
-                case "ExpectedSARSA":
+                case 'ExpectedSARSA':
                     groups[commonParam].ES.data = [x + y for x, y in zip(scores, groups[commonParam].ES.data)]
                     groups[commonParam].ES.count += 1
-                case "DoubleQLearning":
-                    groups[commonParam].dql.data = [x + y for x, y in zip(scores, groups[commonParam].dql.data)]
-                    groups[commonParam].dql.count += 1
+                case 'DoubleQLearning':
+                    groups[commonParam].DQL.data = [x + y for x, y in zip(scores, groups[commonParam].DQL.data)]
+                    groups[commonParam].DQL.count += 1
+                case _:
+                    raise Exception
                 
         except Exception:
-            f.write("FILE ERROR: remove or replace incorrect files for the group: " + commonParam)
+            f.write('FILE ERROR: remove or replace incorrect files for the group: ' + str(commonParam) + '\n')
             continue
         
     for key in groups.keys():
@@ -419,9 +423,10 @@ def option3(window):
         groups[key].S.data = [x / groups[key].S.count for x in groups[key].S.data]
         groups[key].QL.data = [x / groups[key].QL.count for x in groups[key].QL.data]
         groups[key].ES.data = [x / groups[key].ES.count for x in groups[key].ES.data]
-        groups[key].DQL.data = [x / groups[key].dql.count for x in groups[key].dql.data]
+        groups[key].DQL.data = [x / groups[key].DQL.count for x in groups[key].DQL.data]
         
-        plotOption3(groups[key].MC.data, groups[key].S.data, groups[key].QL.data, groups[key].ES.data, groups[key].dql.data, groups[key].dql.filename)
+        plotOption3(window, groups[key].MC.data, groups[key].S.data, groups[key].QL.data,
+                     groups[key].ES.data, groups[key].DQL.data, groups[key].filename)
         
         # create path so that we can sort out the plots nicely
         path = 'Plots/option3/' + groups[key].env + '/win=' + str(window) + '/'
@@ -447,6 +452,10 @@ def main(option, window):
             option2(window)
         case 3:
             option3(window)
+        case _:
+            print('Invalid arguments')
+            return
+
 
 def getDescription():
     try:
@@ -459,7 +468,7 @@ def getDescription():
         print('Permission denied')
         raise SystemExit
     
-if __name__ == "__main__":
+if __name__ == '__main__':
     # read description content from the txt file
     description = getDescription()
 
@@ -471,16 +480,17 @@ if __name__ == "__main__":
     window = 10
     option = 1
     if len(sys.argv) == 2 or len(sys.argv) == 3:
-        temp = sys.argv[1][2:].split('=')
-        if temp[0] == "option":
-            option = int(temp[1])
-        elif temp[0] == "window":
-            window = int(temp[1])
-        else:
-            print("Invalid arguments")
-            exit 
+        for arg in sys.argv[1:]:
+            temp = arg[2:].split('=')
+            if temp[0] == 'option':
+                option = int(temp[1])
+            elif temp[0] == 'window':
+                window = int(temp[1])
+            else:
+                print('Invalid arguments')
+                exit 
     elif len(sys.argv) > 3:
-        print("Invalid number of arguments")
+        print('Invalid number of arguments')
         exit
-    
+
     main(option, window)

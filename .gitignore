@@ -11,5 +11,6 @@ data_*/
 Game/Agent_databases
 Game/Command_outputs 
 Testing/Tests_output
-Plots/plots
+Plots/Plots
+Plots/Plots_log
 *.import
