@@ -7,7 +7,7 @@ The majority of the implemented agents in the game utilize the concept of state 
 
 It is important to note that the game uses meters as the standard unit of distance measurement in Godot. This unit is used to represent the size, position, and movement of objects in the game world. It is worth mentioning that one meter in Godot is equal to the size of a standard cube. With that in mind, players can visualize Hans' approximate height of 12 meters and starting speed of 35 meters per second. Additionally, each tunnel in the game has a width and height of approximately 45 meters and a depth of 2800 meters.
 
-The distance value indicates the distance of the agent from the next obstacle in meters. For example, if we set the \texttt{dists} parameter (indicated by the user, see \ref{opt:dists}) to 2, there are two possible distance values for the state: \textgreater 50, \textgreater 0, indicating that the agent is more than 50 meters away from the obstacle and at least 1-50 meter away from the obstacle, respectively. If the \texttt{dists} parameter is set to 1, the distance value remains constant at \textgreater 0. In the Chapter \ref{experiments_chapter} we will see that all types of environments in this game are able to learn when the \texttt{dists} parameter is equal to 1.  
+The distance value indicates the distance of the agent from the next obstacle in meters. For example, if we set the \texttt{dists} parameter (indicated by the user, see \ref{opt:dists}) to 2, there are two possible distance values for the state: \textgreater 50, \textgreater 0, indicating that the agent is more than 50 meters away from the obstacle and somewhere between 1 and 50 meters away from the obstacle, respectively. If the \texttt{dists} parameter is set to 1, the distance value remains constant at \textgreater 0. In the Chapter \ref{experiments_chapter} we will see that all types of environments in this game are able to learn when the \texttt{dists} parameter is equal to 1.  
 
 The rotation parameter divides the obstacle circumference into \texttt{rots} number of intervals (see \ref{opt:rots}). As the tunnel rotates, the state label will indicate the rotation value to which Hans is aligned at the moment (in Figure \ref{fig:circumference} Hans is aligned with rotation value 240). If the \texttt{rots} parameter is set to 360, this would correspond to the number of degrees in a circle and result in 360 possible rotations. However, the obstacles in this game do not require such a high number of rotations and agents can be trained to avoid most obstacles using fewer than 10 rotations. 
 
@@ -18,11 +18,11 @@ The rotation parameter divides the obstacle circumference into \texttt{rots} num
     \label{fig:circumference}
 \end{figure}
 
-Finally, the type parameter indicates the type of obstacle that Hans must avoid. Each obstacle has its own unique string representation, which allows the agent to learn to recognize the safe rotation for different types of obstacles. Using this information, along with the distance parameter, the agent can decide whether to move left, right, forward, or shoot in combination with any of these actions. To further explain this notion lets look back at the Figure \ref{fig:circumference}. At first glance, it may seem that a rotation of 240 would allow Hans to easily pass through the obstacle. However, upon closer inspection, it becomes clear that only a specific portion of the 240 rotation value is safe. The agent does not know the difference between being at any point of the 240 rotation and thus can easily make a fatal mistake. For this obstacle, indeed, there would be more \texttt{rots} needed in order for Hans to have at least one safe rotation value (meaning that the whole piece of the obstacle that rotation value covers is considered safe).
+Finally, the type parameter indicates the type of obstacle that Hans must avoid. Each obstacle has its own unique string representation, which allows the agent to learn to recognize the safe rotation for different types of obstacles. Using this information, along with the distance parameter, the agent can decide whether to move left, right, forward, or shoot in combination with any of these actions. To further explain this notion let's look back at Figure \ref{fig:circumference}. At first glance, it may seem that a rotation of 240 would allow Hans to easily pass through the obstacle. However, upon closer inspection, it becomes clear that only a specific portion of the 240 rotation value is safe. The agent does not know the difference between being at any point of the 240 rotation and thus can easily make a fatal mistake. For this obstacle, indeed, there would be more \texttt{rots} needed in order for Hans to have at least one safe rotation value (meaning that the whole piece of the obstacle that rotation value covers is considered safe).
 
 In Chapter \ref{experiments_chapter}, a noteworthy concept is presented where the agent can recognize a safe edge between two rotations, even if it is not provided with a completely safe rotation. By quickly shifting between these rotations, the agent is able to successfully navigate through the obstacle.
 
-\section{Command line options}
+\section{Command-line options}
 \label{commOpt}
 \begin{center}
 \resizebox{\textwidth}{!}{%
@@ -58,7 +58,7 @@ In Chapter \ref{experiments_chapter}, a noteworthy concept is presented where th
 \end{center}
 
 
-\subsection{Command line option descriptions}
+\subsection{Command-line option descriptions}
 In this section, a more comprehensive clarification for the table presented earlier is provided. It is important to note that any of the options listed can be left out, as they all have default values assigned to them. In the event that no options are specified, a regular game with the \texttt{Keyboard} agent will be executed.
 
 \subsubsection*{n}
@@ -73,10 +73,8 @@ If the agents manages to win this many consecutive games, the experiment is stop
 \label{opt:agent}
 Name of the desired agent. \\
 Options: [\texttt{Keyboard}, \texttt{Static}, \texttt{Random}, \texttt{MonteCarlo}, \texttt{SARSA}, \texttt{QLearning}, \\ \texttt{ExpectedSARSA}, \texttt{DoubleQLearning}]\\
-Sub-options (only for the listed agents):
-\texttt{MonteCarlo}, \texttt{SARSA}, \texttt{QLearning}, \texttt{ExpectedSARSA}, \texttt{DoubleQLearning}
-=[float, float, float, float] :
-[\texttt{gam} (range [0,1]), \texttt{eps} (range [0,1]), \texttt{epsFinal} (range [0,1]), \texttt{initOptVal} (range [0,$\infty$))]\\
+\textbf{Sub-options} (only for the learning agents):\\
+$[$\texttt{gam} (range [0,1]), \texttt{eps} (range [0,1]), \texttt{epsFinal} (range [0,1]), \\ \texttt{initOptVal} (range [0,$\infty$))$]$\\
 Example usage: ``\texttt{agent=MonteCarlo:eps=0.1,gam=0.2}''\\
 The meaning of the suboptions is explained in Chapter \ref{applied_algo_chapter}.
 
@@ -116,7 +114,7 @@ This parameter is part of the state label and the minimum viable option is 6. Th
 \subsubsection*{agentSeedVal}
 \label{opt:agentSeedVal}
 Seed value for the agent.\\
-This parameter is used to produce multiple experiments with different random actions to verify if the agent can really learn under certain conditions or if it simply "to lucky" with the random moves.
+This parameter is used to produce multiple experiments with different random actions to verify if the agent can really learn under certain conditions or or if it has simply been ``luck'' with the random moves.
 
 \subsubsection*{database}
 \label{opt:database}
@@ -141,26 +139,31 @@ Displays all of the mentioned options.
 
 
 \subsection{Running the program}
-There are several possibilities for running the game from the command line. In addition to various combinations of the options listed above, the user has the choice of running an experiment with or without the graphical interface. If they opt for the first possibility, the window will open and the game will be played at its normal speed. On the other hand, if the experiment is run without graphics, it will be over 200 times faster and the output will only be displayed in the terminal. This is achieved by a few things, mainly hiding the CSG geometry in every node. The computational power required to perform union, intersection, etc. on the CSG shapes is quite high and thus by not performing those calculations a game can run much faster. Of course, these shapes are not necessary for the experiments run without graphics, since the collision shapes are the ones that play a role in determining what happened in the game\footnote{The collision shapes refer to the shapes that are used to define the physical bounds of an object for the purpose of collision detection.}.
+There are several possibilities for running the game from the command line. In addition to various combinations of the options listed above, the user has the choice of running an experiment with or without the graphical interface. If they opt for the first possibility, the window will open and the game will be played at its normal speed. On the other hand, if the experiment is run without graphics, it will be over 200 times faster and the output will only be displayed in the terminal. The program achieves this speedup by hiding the CSG geometry in every node and performing a few other tricks. The computational power required to perform union, intersection, etc. on the CSG shapes is quite high and thus by not performing those calculations a game can run much faster. Of course, these shapes are not necessary for the experiments run without graphics, since the collision shapes are the ones that play a role in determining what happened in the game\footnote{The collision shapes refer to the shapes that are used to define the physical bounds of an object for the purpose of collision detection.}.
+
 It is important to acknowledge that the experiments conducted in this study are entirely reproducible owing to the predetermined seed values for all the random variables. However, it should be noted that the values produced by a seed can differ across different versions of the Godot Engine. In order to obtain identical results to the experiments detailed in Chapter \ref{experiments_chapter}, it is recommended to use Godot Engine v3.2.3.stable.
 
-To run the program in the command line, the user may benefit from adding the Godot executable to the PATH environment variable. This will allow them to start the application from the command line simply by entering the command \texttt{godot} while inside the same directory as the \texttt{project.godot} file.
+To run the program in the command line, the user should add the directory containing the Godot executable to the PATH environment variable. This will allow them to start the application from the command line simply by entering the command \texttt{godot} while inside the same directory as the \texttt{project.godot} file.
 
 By default, running the program in this manner will launch a normal game with the graphical interface and the \texttt{Keyboard} agent. However, the user can customize their experiment by using a combination of the options listed above. For example:
 
-\begin{algorithm}
-\begin{algorithmic}
-\State godot database=write agent=SARSA:initOptVal=100.0,eps=0.3 env=HexO n=10 dists=1 rots=8
-\end{algorithmic}
-\end{algorithm}
+\begin{center}
+\hrulefill
+\begin{lstlisting}
+$godot database=write agent=SARSA:initOptVal=100.0,eps=0.3 env=HexO n=10 dists=1 rots=8
+\end{lstlisting}
+\hrulefill
+\end{center}
 
 Alternatively, the user may choose to train the agent faster by disabling the graphical interface and increasing the speed of the program. This can be achieved by modifying the previous command as follows:
 
-\begin{algorithm}
-\begin{algorithmic}
-\State godot --no-window --fixed-fps 1 --disable-render-loop database=write agent=SARSA:initOptVal=100.0,eps=0.3 env=HexO n=10 dists=1 rots=8
-\end{algorithmic}
-\end{algorithm}
+\begin{center}
+\hrulefill
+\begin{lstlisting}
+$godot --no-window --fixed-fps 1 --disable-render-loop database=write agent=SARSA:initOptVal=100.0,eps=0.3 env=HexO n=10 dists=1 rots=8
+\end{lstlisting}
+\hrulefill
+\end{center}
 
 To view a list of available options, the user can simply enter the command \texttt{godot options}.
 
@@ -169,11 +172,11 @@ The \texttt{Main.tscn} scene is the top level scene in the game and consists of 
 There are several key functions within the \texttt{Main.gd} script that are worth discussing in more detail.
 
 \begin{center}
-\line(1,0){400}
+\hrulefill
 \begin{lstlisting}
 func _ready():
 	var unparsed_args = OS.get_cmdline_args()
-	if unparsed_args.size() == 1 and unparsed_args[0] == "options":
+	if unparsed_args.size() == 1 and unparsed_args[0] == ``options'':
 		display_options()
 		
 	...	# parse args
@@ -184,20 +187,20 @@ func _ready():
     		instance_agent()
     		build_filename()
     		if not agent_inst.init(...):
-        		print("Something went wrong, please try again")
+        		print(``Something went wrong, please try again'')
         		display_options()
     		play_game()
 \end{lstlisting}
-\line(1,0){400}
+\hrulefill
 \end{center}
 
 The \texttt{\_ready()} function is the starting point of the program when run from the command line. It is responsible for parsing all of the arguments and checking their validity. If any issues are encountered, the program will display options and terminate. If the arguments are valid, an agent will be instantiated and initialized. In cases where everything is in order, first game will be played by calling the \texttt{play\_game()} function.
 
 \begin{center}
-\line(1,0){400}
+\hrulefill
 \begin{lstlisting}
 func play_game():
-	if agent == "Keyboard" and VisualServer.render_loop_enabled:
+	if agent == ``Keyboard'' and VisualServer.render_loop_enabled:
 		... # play a regular game
 	elif n > 0:
 		n -= 1
@@ -208,20 +211,20 @@ func play_game():
 		agent_inst.save(write)
 		print_and_write_ending()
 \end{lstlisting}
-\line(1,0){400}
+\hrulefill
 \end{center}
 
-The \texttt{play\_game()} function is called each time a game is played.Firstly, it will check if the agent selected was the \texttt{Keyboard} agent, and if so, the program will start one game session where the user has controls of Hans. Otherwise, one of the remaining agents will take over and play specified number of games (defined by the "n" parameter). If n games have already been played, the program will terminate after performing the last few tasks needed to save all of the knowledge gained form this particular session. Otherwise, a single game will be executed and number of games left decreased.
+The \texttt{play\_game()} function is called each time a game is played. Firstly, it will check if the agent selected was the \texttt{Keyboard} agent, and if so, the program will start one game session where the user has control of Hans. Otherwise, one of the remaining agents will take over and play the specified number of games (defined by the ``n'' parameter). If n games have already been played, the program will terminate after performing the last few tasks needed to save all of the knowledge gained form this particular session. Otherwise, a single game will be executed and number of games left decreased.
 
 \begin{center}
-\line(1,0){400}
+\hrulefill
 \begin{lstlisting}
 func on_game_finished(score, ticks, win, time):
 	print_and_write_score(score, win)
 	agent_inst.end_game(score, time)
 	play_game()
 \end{lstlisting}
-\line(1,0){400}
+\hrulefill
 \end{center}
 
 

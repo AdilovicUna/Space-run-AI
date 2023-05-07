@@ -5,33 +5,34 @@
   \providecommand{\doi}[1]{doi: #1}\else
   \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
 
-\bibitem[tun(2022)]{tunnelrush}
-Tunnel rush, 2022.
+\bibitem[tun(2023)]{tunnelrush}
+Tunnel {R}ush, 2023.
 \newblock URL \url{https://tunnelrush2.com/}.
 
-\bibitem[Adilovic(2022)]{spacerunai}
-Una Adilovic.
-\newblock Space run ai, 2022.
+\bibitem[Adilović(2023)]{spacerunai}
+Una Adilović.
+\newblock Space {R}un {AI}, 2023.
 \newblock URL \url{https://github.com/AdilovicUna/Space-run-AI}.
 
-\bibitem[et~al(2021)]{GodotDocs}
-Juan~Linietsky et~al.
-\newblock Godot engine - documentation, 2021.
+\bibitem[Khronos(2023)]{gltf}
+Khronos.
+\newblock gl{TF} - {R}untime {3D} {A}sset {D}elivery, 2023.
+\newblock URL \url{https://www.khronos.org/gltf/}.
+
+\bibitem[Linietsky(2021)]{GodotDocs}
+Juan Linietsky.
+\newblock Godot {E}ngine - {D}ocumentation, 2021.
 \newblock URL \url{https://docs.godotengine.org/en/stable/index.html}.
 
-\bibitem[et~al(2022)]{blender}
-Ton~Roosendaal et~al.
-\newblock Blender, 2022.
+\bibitem[Roosendaal(2023)]{blender}
+Ton Roosendaal.
+\newblock Blender, 2023.
 \newblock URL \url{https://www.blender.org/}.
-
-\bibitem[Group(2022)]{gltf}
-Khronos Group.
-\newblock gltf - runtime 3d asset delivery, 2022.
-\newblock URL \url{https://www.khronos.org/gltf/}.
 
 \bibitem[Sutton and Barto(2018)]{RLSuttonBarto}
 Richard~S. Sutton and Andrew~G. Barto.
 \newblock \emph{Reinforcement Learning: An Introduction}.
-\newblock MIT Press, London, England, second edition, 2018.
+\newblock MIT Press, Cambridge, Massachusetts / London, England, second
+  edition, 2018.
 
 \end{thebibliography}

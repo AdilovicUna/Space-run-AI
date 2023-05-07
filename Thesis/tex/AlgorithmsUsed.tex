@@ -17,27 +17,27 @@ One variant of on-policy MC learning is first-visit Monte Carlo. This method onl
 
 To ensure exploration during learning, the $\epsilon$-greedy policy is often used in conjunction with MC methods. Additionally, setting an initial optimistic value can encourage the agent to visit more states to learn their true values. While Monte Carlo methods are guaranteed to converge to an optimal policy with an infinite number of samples, convergence can be slow and estimates can be noisy (i.e., have high variance) with a small number of samples.
 
-The pseudocode for the first-visit Monte Carlo can be seen in Algorithm \ref{algo:MC}  \citep{RLSuttonBarto}\footnote{Note that all of the pseudocode in this chapter is derived from here.}.
+The pseudocode for the first-visit Monte Carlo can be seen in Algorithm \ref{algo:MC}  \citep{RLSuttonBarto}\footnote{Note that all of the pseudocode in this chapter is derived from the Sutton/Barto text.}.
 
 To clarify this and future algorithms, here are further explanations to some of the elements that might be encountered:
 \begin{itemize}
 \item $\mathcal{S}$- The set of all possible states.
-\item $\mathcal{A}(s)$ - The set of actions possible in that state.
-\item $S_t$ or $A_t$ - Specific state or action taken at time step t.
-\item $R_{t}$ -  The reward received by the agent at time step t.
-\item $G$ - The actual total return that the agent received from a single episode that started in state s. In other words, it is the sum of all the rewards that the agent received from the start state until the end of the episode.
-\item $Returns(s,a$) - A list that stores the observed returns (i.e., sum of rewards) that are obtained from following the policy and taking action a in state s. These returns are later used to update the action-value function Q(s,a) for the state-action pair (s,a). The list is maintained for each state-action pair to keep track of the returns obtained from that state-action pair across different episodes.
-\item $Q(s, a)$ -  The expected cumulative reward an agent would receive if it takes action a while in state s and follows a certain policy thereafter. It is a function that maps a state-action pair to a scalar value. The value of Q(s, a) is updated iteratively as the agent interacts with the environment and learns from experience.X
-\item  $\pi$ - particular policy the agent is following. Furthermore, $\pi(a|S_t)$ represents the probability of taking action $a$ at state $S_t$ and $\pi(S',a)$ represents the probability of taking action $a$ at state $S'$ under a given policy $\pi$.
+\item $\mathcal{A}(s)$ - The set of actions possible in state \textbf{s}.
+\item $S_t$ or $A_t$ - Specific state or action taken at time step \textit{t}.
+\item $R_{t}$ -  The reward received by the agent at time step \textit{t}.
+\item $G$ - The actual total return that the agent received from a single episode. In other words, it is the sum of all the rewards that the agent received from the start state until the end of the episode.
+\item $Returns(s, a$) - A list that stores the observed returns (i.e., sum of rewards) that are obtained from following the policy and taking action \textit{a} in state \textit{s}. These returns are later used to update the action-value function \textit{Q(s, a)} for the state-action pair \textit{(s, a)}. The list is maintained for each state-action pair to keep track of the returns obtained from that state-action pair across different episodes.
+\item $Q(s, a)$ -  The expected cumulative reward an agent would receive if it takes action \textit{a} while in state \textit{s} and follows a certain policy thereafter. It is a function that maps a state-action pair to a scalar value. The value of \\ \textit{Q(s, a)} is updated iteratively as the agent interacts with the environment and learns from experience.
+\item  $\pi$ - particular policy the agent is following. Furthermore,\textit{$\pi(S_t,a)$} represents the probability of taking action \textit{a} at state \textit{$S_t$} under a given policy \textit{$\pi$}.
 \end{itemize}
 
 \begin{algorithm}
 \caption{On-policy first-visit Monte Carlo}\label{algo:MC}
 \begin{algorithmic}[1]
-\Require small $>0$
-\State Initialize
-\State $Q(s,a) \gets \text{initial optimistic value } \forall s\in \mathcal{S}, a\in \mathcal{A}(s)$
-\State $Returns(s,a) \gets \text{empty list}, \forall s\in S, a\in A(s)$
+\Require small $\epsilon >0$
+\State Initialize:
+\State \hspace{0.5cm} $Q(s,a) \gets \text{initial optimistic value } \forall s\in \mathcal{S}, a\in \mathcal{A}(s)$
+\State \hspace{0.5cm} $Returns(s,a) \gets \text{empty list}, \forall s\in S, a\in A(s)$
 \Repeat
 \State Generate an episode following policy $\pi$: $S_0, A_0, R_1,\dots, S_{T-1}, A_{T-1}, R_T$
 \State $G \gets 0$
@@ -45,15 +45,8 @@ To clarify this and future algorithms, here are further explanations to some of 
 \State $G \gets \gamma G + R_{t+1}$
 \If{$(S_t, A_t)$ does not appear in $S_0, A_0, S_1, A_1, \dots, S_{t-1}, A_{t-1}$}
 \State Append $G$ to $Returns(S_t, A_t)$
-\State $Q(S_t, A_t) \gets$ average($Returns(S_t, A_t)$)
-\State $A^* \gets$ argmax$_a Q(S_t, a)$ \Comment{with ties broken arbitrarily}
-\For{all $a \in A(S_t)$}
-\If{$a = A^*$}
-\State $\pi(a|S_t) \gets 1 - \epsilon + \frac{\epsilon}{|A(S_t)|}$
-\Else
-\State $\pi(a|S_t) \gets \frac{\epsilon}{|A(S_t)|}$
-\EndIf
-\EndFor
+\State $Q(S_t, A_t) \gets$  \text{initial optimistic value} + average($Returns(S_t, A_t)$)
+\State Choose $A'$ from $S'$ using policy derived from $Q$ (e.g., $\epsilon$-greedy)
 \EndIf
 \EndFor
 \Until{convergence}
@@ -74,12 +67,12 @@ One important parameter in TD learning is the \textbf{step size} or \textbf{lear
 In this chapter, we shall introduce four distinct TD learning algorithms, namely SARSA, Q-Learning, Expected SARSA and Double Q-Learning  \citep{RLSuttonBarto}. We shall illustrate that while SARSA and Q-Learning are prominent algorithms for control problems, Expected SARSA and Double Q-Learning are variations that cater to specific limitations of the original algorithms. The objective is to highlight both the commonalities and differences among them.
 
 \subsection{SARSA}
-SARSA stands for State-Action-Reward-State-Action. With this algorithm, the agent learns the value of a state-action pair $Q(S',a)$ by estimating the expected return over all possible actions from state S'. SARSA is an on-policy algorithm, meaning it learns the value of state-action pairs while following the same policy used to select actions. This makes it well-suited for control problems, where the goal is to find an optimal policy.
+SARSA stands for State-Action-Reward-State-Action. With this algorithm, the agent learns the value of a state-action pair \textit{Q(S',a)} by estimating the expected return over all possible actions from state S'. SARSA is an on-policy algorithm, meaning it learns the value of state-action pairs while following the same policy used to select actions. This makes it well-suited for control problems, where the goal is to find an optimal policy.
 \begin{algorithm}
 \caption{SARSA}\label{algo:S}
 \begin{algorithmic}[1]
-\State Initialize 
-\State $Q(s,a) \gets \text{initial optimistic value } \forall s\in \mathcal{S}, a\in \mathcal{A}(s)$
+\State Initialize:
+\State \hspace{0.5cm} $Q(s,a) \gets \text{initial optimistic value } \forall s\in \mathcal{S}, a\in \mathcal{A}(s)$
 \Repeat
 \State Initialize $S$
 \State Choose $A$ from $S$ using policy derived from $Q$ (e.g., $\epsilon$-greedy)
@@ -95,12 +88,12 @@ SARSA stands for State-Action-Reward-State-Action. With this algorithm, the agen
 \end{algorithm}
 
 \subsection{Q-learning}
-Q-learning, unlike SARSA, is an off-policy algorithm that learns the value of a state-action pair Q(s,a) by estimating the maximum expected return over all possible actions from state s. In other words, it learns the value of the best action in each state. Since Q-learning is an off-policy algorithm it learns the optimal action-value function regardless of the current policy being followed. This makes Q-learning more flexible in terms of exploration and can result in faster convergence to the optimal policy. However, Q-learning tends to overestimate the value of actions in environments with high variance, which can lead to suboptimal policies. On the other hand, SARSA is more stable and less prone to overestimating the value of actions. Nevertheless, it can converge to suboptimal policies if the exploration is insufficient, and it can take longer to converge to the optimal policy compared to Q-learning.
+Q-learning, unlike SARSA, is an off-policy algorithm that learns the value of a state-action pair \textit{Q(s,a)} by estimating the maximum expected return over all possible actions from state s. In other words, it learns the value of the best action in each state. Since Q-learning is an off-policy algorithm it learns the optimal action-value function regardless of the current policy being followed. This makes Q-learning more flexible in terms of exploration and can result in faster convergence to the optimal policy. However, Q-learning tends to overestimate the value of actions in environments with high variance, which can lead to suboptimal policies. On the other hand, SARSA is more stable and less prone to overestimating the value of actions. Nevertheless, it can converge to suboptimal policies if the exploration is insufficient, and it can take longer to converge to the optimal policy compared to Q-learning.
 \begin{algorithm}
 \caption{Q-learning}\label{algo:QL}
 \begin{algorithmic}[1]
-\State Initialize 
-\State $Q(s,a) \gets \text{initial optimistic value } \forall s\in \mathcal{S}, a\in \mathcal{A}(s)$
+\State Initialize:
+\State \hspace{0.5cm} $Q(s,a) \gets \text{initial optimistic value } \forall s\in \mathcal{S}, a\in \mathcal{A}(s)$
 \Repeat
 \State Initialize $S$
 \State Choose $A$ from $S$ using policy derived from $Q$ (e.g., $\epsilon$-greedy).
@@ -114,19 +107,18 @@ Q-learning, unlike SARSA, is an off-policy algorithm that learns the value of a 
 \end{algorithm}
 
 \subsection{Expected SARSA}
-Expected SARSA is another off-policy TD algorithm that learns the value of a state-action pair Q(S',a) by estimating the expected return over all possible actions from state S', taking into account the probabilities of selecting each action according to the current policy. Expected SARSA can be seen as a compromise between SARSA and Q-learning, as it considers the value of both the current and the best action in each state. This algorithm considers all possible actions and their expected values, which makes it more robust to noisy or uncertain rewards. 
+Expected SARSA is another off-policy TD algorithm that learns the value of a state-action pair \textit{Q(S',a)} by estimating the expected return over all possible actions from state \textit{S'}, taking into account the probabilities of selecting each action according to the current policy. Expected SARSA can be seen as a compromise between SARSA and Q-learning, as it considers the value of both the current and the best action in each state. This algorithm considers all possible actions and their expected values, which makes it more robust to noisy or uncertain rewards. 
 \begin{algorithm}
 \caption{Expected SARSA}\label{algo:ES}
 \begin{algorithmic}[1]
-\State Initialize 
-\State $Q(s,a) \gets \text{initial optimistic value } \forall s\in \mathcal{S}, a\in \mathcal{A}(s)$
+\State Initialize:
+\State \hspace{0.5cm} $Q(s,a) \gets \text{initial optimistic value } \forall s\in \mathcal{S}, a\in \mathcal{A}(s)$
 \Repeat
 \State Initialize $S$
 \Repeat
 \State Choose $A$ from $S$ using policy derived from $Q$ (e.g., $\epsilon$-greedy)
 \State Take action $A$, observe $R$, $S'$
-\State $\text{expected}Q \gets \sum{}{a} \pi(S',a) Q(S',a)$
-\State $Q(S,A) \gets Q(S,A) + \alpha \cdot [R + \gamma\text{expected}Q - Q(S,A)]$
+\State $Q(S,A) \gets Q(S,A) + \alpha \cdot [R + \gamma\sum_{a}\pi(S', a)Q(S',a) - Q(S,A)]$
 \State $S \gets S'$
 \Until $S$ is terminal
 \Until convergence
@@ -135,16 +127,16 @@ Expected SARSA is another off-policy TD algorithm that learns the value of a sta
 
 
 \subsection{Double Q-learning}
-Double Q-learning is a variant of Q-learning that uses two action-value functions to estimate the value of each action. The two functions are updated independently, and the final action-value estimate is the average of the two estimates. In Q-Learning, a single estimate of the action values is used to update the policy and make decisions. This means that when selecting an action in the next state, we always select the action with the highest estimated value (here we do not take into account using $\epsilon$-greedy policy), even if that estimate is not accurate. This can result in overestimation of the true value of that action, particularly in situations where the policy is still exploring the environment. Double Q-Learning addresses the overestimation issue in Q-Learning which can lead to more accurate value estimates and better performance in some cases. However, it is possible that both estimates may be overestimating or underestimating the true value of an action, which can still lead to biased estimates.
+Double Q-learning is a variant of Q-learning that uses two action-value functions to estimate the value of each action. The two functions are updated independently, and the final action-value estimate is the average of the two estimates. In Q-Learning, a single estimate of the action values is used to update the policy and make decisions. This means that when selecting an action in the next state, we always select the action with the highest estimated value (here we do not take into account using $\epsilon$-greedy policy), even if that estimate is not accurate. This can result in overestimation of the true value of that action, particularly in situations where the policy is still exploring the environment. Double Q-Learning addresses the overestimation issue in Q-Learning which can lead to more accurate value estimates and better performance in some cases.
 \begin{algorithm}
 \caption{Double Q-learning}\label{algo:DQL}
 \begin{algorithmic}[1]
-\State Initialize 
-\State $Q(s,a) \gets \text{initial optimistic value } \forall s\in \mathcal{S}, a\in \mathcal{A}(s)$
+\State Initialize:
+\State \hspace{0.5cm} $Q(s,a) \gets \text{initial optimistic value } \forall s\in \mathcal{S}, a\in \mathcal{A}(s)$
 \Repeat
 \State Initialize $S$
 \Repeat
-\State Choose $A$ from $S$ using policy derived from $Q_1+Q_2$ (e.g., epsilon-greedy)
+\State Choose $A$ from $S$ using policy derived from $Q_1+Q_2$ (e.g., $\epsilon$-greedy)
 \State Take action $A$, observe $R$, $S'$
 \If {rand() $<$ 0.5}
 \State $A' \gets \text{argmax}_a Q_1(S',a)$
