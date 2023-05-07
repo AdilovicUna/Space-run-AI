@@ -241,7 +241,7 @@ def option1(window):
     f.write('----------------------------' + '\n')
     f.close()
 
-def plotOption2(window, scores, agent, filename, winning_score):
+def plotOption2(window, scores, agent, env, filename, winning_score):
     avg_score = [sum(scores) / len(scores)] * len(scores)
     scores = [np.mean(scores[i:i + window]) if i <= len(scores) -
               window else np.mean(scores[i:]) for i in range(len(scores))]
@@ -263,7 +263,8 @@ def plotOption2(window, scores, agent, filename, winning_score):
     finalEps = agentSpecParam[1].split('=')[1]
     gam = agentSpecParam[2].split('=')[1]
     initOptVal = agentSpecParam[3].split('=')[1][:-1]
-    plt.figtext(x=0.02, y=0.91, s='ε: ' + eps + spaces + 'Final-ε: ' + finalEps + spaces + 'γ: ' + gam + spaces + 'Initial optimistic value: ' + initOptVal)
+    plt.figtext(x=0.02, y=0.91, s='ε: ' + eps + spaces + 'Final-ε: ' + finalEps + spaces + 'γ: ' + gam +
+                 spaces + 'Initial optimistic value: ' + initOptVal + spaces + 'Env: ' + env)
 
     plt.xlabel('Episodes')
     plt.ylabel('Scores')
@@ -279,7 +280,7 @@ def option2(window):
         filename = filename[:-4]
         f.write('----------------------------' + '\n')
         f.write('filename: ' + filename + '\n')
-        commonParam = ''
+        common_param = ''
         try:
             split_filename = filename.split('_')
             filename = split_filename[0]
@@ -296,27 +297,36 @@ def option2(window):
             env = 'all' if '=all' in env else env[5:env.find(']')]
             if env == 'Bugs,Tokens,Traps,Viruses':
                 env = 'all'
+            filename_fragments = filename.split(',')
 
-            filenameFragments = filename.split(',')
+            common_param = str(filename_fragments[0:9])
+            if not common_param in groups.keys():
+                groups[common_param] = Group(common_param, scores, env, filename)
 
-            commonParam = str(filenameFragments[0:9])
-            if not commonParam in groups.keys():
-                groups[commonParam] = Group(commonParam, scores, env, filename)
+            if (len(groups[common_param].data) > len(scores)):
+                win_sc = scores[-1]
+                for _ in range(len(groups[common_param].data) - len(scores)):
+                    scores.append(win_sc)
 
-            groups[commonParam].data = [x + y for x, y in zip(scores, groups[commonParam].data)]
-            groups[commonParam].count += 1
-            if groups[commonParam].win_score == -1:
-                groups[commonParam].win_score = [float(co_data[-4].split()[1])] * len(scores) if co_data[-4].split()[1] != 'unknown' else -1
+            if (len(groups[common_param].data) < len(scores)):
+                f.write('WARNING: check files for the group: ' + str(common_param) + '\n')
+                continue
+
+            groups[common_param].data = [x + y for x, y in zip(scores, groups[common_param].data)]
+            groups[common_param].count += 1
+
+            if groups[common_param].win_score == -1:
+                groups[common_param].win_score = [float(co_data[-4].split()[1])] * len(scores) if co_data[-4].split()[1] != 'unknown' else -1
                 
         except Exception:
-            f.write('FILE ERROR: remove or replace incorrect files for the group: ' + str(commonParam) + '\n')
+            f.write('FILE ERROR: remove or replace incorrect files for the group: ' + str(common_param) + '\n')
             continue
 
     for key in groups.keys():
         groups[key].data = [x / groups[key].count for x in groups[key].data]
         agent = groups[key].filename.split(',')[0].split('=')[1]
         
-        plotOption2(window, groups[key].data, agent, groups[key].filename, groups[key].win_score)
+        plotOption2(window, groups[key].data, agent, groups[key].env, groups[key].filename, groups[key].win_score)
 
         # create path so that we can sort out the plots nicely
         path = 'Plots/option2/' + groups[key].env + '/win=' + str(window) + '/' + agent + '/'
@@ -326,7 +336,7 @@ def option2(window):
     
     f.close()
 
-def plotOption3(window, MC, S, QL, ES, DQL, filename):
+def plotOption3(window, MC, S, QL, ES, DQL, env, filename):
     MC = [np.mean(MC[i:i + window]) if i <= len(MC) -
               window else np.mean(MC[i:]) for i in range(len(MC))]
     S = [np.mean(S[i:i + window]) if i <= len(S) -
@@ -355,7 +365,8 @@ def plotOption3(window, MC, S, QL, ES, DQL, filename):
     finalEps = agentSpecParam[1].split('=')[1]
     gam = agentSpecParam[2].split('=')[1]
     initOptVal = agentSpecParam[3].split('=')[1][:-1]
-    plt.figtext(x=0.02, y=0.91, s='ε: ' + eps + spaces + 'Final-ε: ' + finalEps + spaces + 'γ: ' + gam + spaces + 'Initial optimistic value: ' + initOptVal)
+    plt.figtext(x=0.02, y=0.91, s='ε: ' + eps + spaces + 'Final-ε: ' + finalEps + spaces + 'γ: ' + gam +
+                 spaces + 'Initial optimistic value: ' + initOptVal + spaces + 'Env: ' + env)
 
     plt.xlabel('Episodes')
     plt.ylabel('Scores')
@@ -371,7 +382,7 @@ def option3(window):
         filename = filename[:-4]
         f.write('----------------------------' + '\n')
         f.write('filename: ' + filename + '\n')
-        commonParam = ''
+        common_param = ''
         try:
             split_filename = filename.split('_')
             filename = split_filename[0]
@@ -388,45 +399,100 @@ def option3(window):
             if env == 'Bugs,Tokens,Traps,Viruses':
                 env = 'all'
 
-            filenameFragments = filename.split(',')
-            agent = filenameFragments[0].split('=')[1]
+            filename_fragments = filename.split(',')
+            agent = filename_fragments[0].split('=')[1]
 
-            commonParam = str(filenameFragments[1:9])
-            if not commonParam in groups.keys():
-                groups[commonParam] = AgentGroup(commonParam, scores, env, filename)
+            common_param = str(filename_fragments[1:9])
+            if not common_param in groups.keys():
+                groups[common_param] = AgentGroup(common_param, scores, env, filename)
 
             match(agent):
                 case 'MonteCarlo':
-                    groups[commonParam].MC.data = [x + y for x, y in zip(scores, groups[commonParam].MC.data)]
-                    groups[commonParam].MC.count += 1
+                    groups[common_param].MC.data = [x + y for x, y in zip(scores, groups[common_param].MC.data)]
+                    groups[common_param].MC.count += 1
+
+                    if (len(groups[common_param].MC.data) > len(scores)):
+                        win_sc = scores[-1]
+                        for _ in range(len(groups[common_param].MC.data) - len(scores)):
+                            scores.append(win_sc)
+
+                    if (len(groups[common_param].MC.data) < len(scores)):
+                        f.write('WARNING: check files for the group: ' + str(common_param) + '\n')
+                        continue
+
                 case 'SARSA':
-                    groups[commonParam].S.data = [x + y for x, y in zip(scores, groups[commonParam].S.data)]
-                    groups[commonParam].S.count += 1
+                    groups[common_param].S.data = [x + y for x, y in zip(scores, groups[common_param].S.data)]
+                    groups[common_param].S.count += 1
+
+                    if (len(groups[common_param].S.data) > len(scores)):
+                        win_sc = scores[-1]
+                        for _ in range(len(groups[common_param].S.data) - len(scores)):
+                            scores.append(win_sc)
+
+                    if (len(groups[common_param].S.data) < len(scores)):
+                        f.write('WARNING: check files for the group: ' + str(common_param) + '\n')
+                        continue
+
                 case 'QLearning':
-                    groups[commonParam].QL.data = [x + y for x, y in zip(scores, groups[commonParam].QL.data)]
-                    groups[commonParam].QL.count += 1
+                    groups[common_param].QL.data = [x + y for x, y in zip(scores, groups[common_param].QL.data)]
+                    groups[common_param].QL.count += 1
+
+                    if (len(groups[common_param].QL.data) > len(scores)):
+                        win_sc = scores[-1]
+                        for _ in range(len(groups[common_param].QL.data) - len(scores)):
+                            scores.append(win_sc)
+
+                    if (len(groups[common_param].QL.data) < len(scores)):
+                        f.write('WARNING: check files for the group: ' + str(common_param) + '\n')
+                        continue
+
                 case 'ExpectedSARSA':
-                    groups[commonParam].ES.data = [x + y for x, y in zip(scores, groups[commonParam].ES.data)]
-                    groups[commonParam].ES.count += 1
+                    groups[common_param].ES.data = [x + y for x, y in zip(scores, groups[common_param].ES.data)]
+                    groups[common_param].ES.count += 1
+
+                    if (len(groups[common_param].ES.data) > len(scores)):
+                        win_sc = scores[-1]
+                        for _ in range(len(groups[common_param].ES.data) - len(scores)):
+                            scores.append(win_sc)
+
+                    if (len(groups[common_param].ES.data) < len(scores)):
+                        f.write('WARNING: check files for the group: ' + str(common_param) + '\n')
+                        continue
+
                 case 'DoubleQLearning':
-                    groups[commonParam].DQL.data = [x + y for x, y in zip(scores, groups[commonParam].DQL.data)]
-                    groups[commonParam].DQL.count += 1
+                    groups[common_param].DQL.data = [x + y for x, y in zip(scores, groups[common_param].DQL.data)]
+                    groups[common_param].DQL.count += 1
+
+                    if (len(groups[common_param].DQL.data) > len(scores)):
+                        win_sc = scores[-1]
+                        for _ in range(len(groups[common_param].DQL.data) - len(scores)):
+                            scores.append(win_sc)
+
+                    if (len(groups[common_param].DQL.data) < len(scores)):
+                        f.write('WARNING: check files for the group: ' + str(common_param) + '\n')
+                        continue
+
                 case _:
                     raise Exception
                 
         except Exception:
-            f.write('FILE ERROR: remove or replace incorrect files for the group: ' + str(commonParam) + '\n')
+            f.write('FILE ERROR: remove or replace incorrect files for the group: ' + str(common_param) + '\n')
             continue
         
     for key in groups.keys():
-        groups[key].MC.data = [x / groups[key].MC.count for x in groups[key].MC.data]
-        groups[key].S.data = [x / groups[key].S.count for x in groups[key].S.data]
-        groups[key].QL.data = [x / groups[key].QL.count for x in groups[key].QL.data]
-        groups[key].ES.data = [x / groups[key].ES.count for x in groups[key].ES.data]
-        groups[key].DQL.data = [x / groups[key].DQL.count for x in groups[key].DQL.data]
+        if (groups[key].MC.count > 0):
+            groups[key].MC.data = [x / groups[key].MC.count for x in groups[key].MC.data]
+        if (groups[key].S.count > 0):
+            groups[key].S.data = [x / groups[key].S.count for x in groups[key].S.data]
+        if (groups[key].QL.count > 0):
+            groups[key].QL.data = [x / groups[key].QL.count for x in groups[key].QL.data]
+        if (groups[key].ES.count > 0):
+            groups[key].ES.data = [x / groups[key].ES.count for x in groups[key].ES.data]
+        if (groups[key].DQL.count > 0):
+            groups[key].DQL.data = [x / groups[key].DQL.count for x in groups[key].DQL.data]
         
         plotOption3(window, groups[key].MC.data, groups[key].S.data, groups[key].QL.data,
-                     groups[key].ES.data, groups[key].DQL.data, groups[key].filename)
+                     groups[key].ES.data, groups[key].DQL.data, groups[key].env, groups[key].filename)
         
         # create path so that we can sort out the plots nicely
         path = 'Plots/option3/' + groups[key].env + '/win=' + str(window) + '/'

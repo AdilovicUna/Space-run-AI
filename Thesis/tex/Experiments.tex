@@ -45,6 +45,38 @@ It should be emphasized that parameters such as the number of seeds in the avera
 
 \section{Interesting behaviours}
 \label{intbeh}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{discountingExample}
+    \caption{Discounting example}
+    \label{fig:discounting_eg}
+\end{figure}
+
+In this chapter, we aim to discuss certain unexpected findings that surfaced during our experimentation. One of the immediate observations can be seen in Figure \ref{fig:discounting_eg}\footnote{No smoothing was applied to any of the plots in this subsection}. We conducted experiments on two distinct environments, \texttt{env=[I]} and \texttt{env=[X]}, and for each environment, we carried out experiments with \\ \texttt{gam=0.85} and \texttt{gam=1.0} for all agents. As evident from the plots, the lower gamma value exhibited considerably poorer performance than when no discounting (\texttt{gam=1.0}) was applied. This trend is not limited to these specific environments and testing conditions but rather observed consistently across all our experimentation. This result is counter-intuitive since it seems logical that penalizing the last action more than previous ones would result in a better policy.
+
+\label{intbeh}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{discountingExplanation}
+    \caption{Discounting explanation}
+    \label{fig:discounting_expl}
+\end{figure}
+
+Upon further investigation, we discovered that in some cases, a lost game for the agent does not result from the last action directly but rather from a chain reaction initiated by a previous ``bad decision''. As seen in Figure \ref{fig:discounting_expl}, the agent's last action of going right at rotation \texttt{360} to reach a safe one, \texttt{60}, is not a poor decision in itself but rather the best possible action in that state\footnote{As confirmed by a human player, rotation 60 is safe for trap type I}. However, analysing the last four actions taken by the agent, it becomes clear that it attempted to reach rotation \texttt{60} by going left from the rotation \texttt{180}. With a high score of \texttt{451.7} (Figure \ref{fig:discounting_eg}), the agent was undeniably fast, and while this policy may have been effective in the early game before the agent attained its current speed\footnote{It should recalled that after every 3 levels the agents speed increases}, there is simply not enough time for the agent to rotate at this point in the game. In this case, one could argue that the fourth action from the last was responsible for the agent's loss. For cases like this, we believe that the agent performs better when all actions are penalized equally.
+
+
+\label{intbeh}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{trianglesExample}
+    \caption{Triangles example}
+    \label{fig:triangles_eg}
+\end{figure}
+
+Another intriguing behaviour emerged as a result of an unforeseen coincidence. As previously noted, we chose to have the agent not take a new action every time its \texttt{move()} function is called, but rather return the same action until the state changes. This resulted in a substantial reduction in the number of different actions taken by the agent, given that the move function is invoked every game tick, while state changes occur less frequently. This approach led to a behaviour that could not have been predicted at the outset. Figure \ref{fig:triangles_eg} provides an illustration of this behaviour (with some sentiment \texttt{env=[Triangles]} was chosen as this was the first environment on which the behaviour was noticed).
+
+Ordinarily, \texttt{env=[Triangles]} does not offer any safe rotations unless \texttt{rots=7} or more. As shown in the plot, the agent will certainly learn with this rotation value. However, if the agent is given only \texttt{6} rotation values to choose from, it will develop a policy that rapidly oscillates between two rotations, keeping the player character, Hans, on the edge of those rotations, allowing him to safely pass through the trap. This behaviour is not confined to situations where the agent is ``forced'' to make such a decision. During training, in many instances, the agent will learn to stay on the edge rather than advance into a completely safe rotation. There does not appear to be a preference for one or the other; rather, the policy the agent discovers first is determined by other experimental factors. It can be concluded that this behaviour arose solely because the agent did not alter its action until the state changed. In my opinion, this discovery is one of the most exciting outcomes of this project.
+
 \section{Individual traps environment}
 \section{Traps environment}
 \section{Tokens environment}

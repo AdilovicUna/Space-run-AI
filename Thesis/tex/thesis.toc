@@ -36,16 +36,16 @@
 \contentsline {section}{\numberline {6.1}Conducting the experiments}{32}{section.6.1}%
 \contentsline {section}{\numberline {6.2}Plotting}{33}{section.6.2}%
 \contentsline {section}{\numberline {6.3}Interesting behaviours}{35}{section.6.3}%
-\contentsline {section}{\numberline {6.4}Individual traps environment}{35}{section.6.4}%
-\contentsline {section}{\numberline {6.5}Traps environment}{35}{section.6.5}%
-\contentsline {section}{\numberline {6.6}Tokens environment}{35}{section.6.6}%
-\contentsline {section}{\numberline {6.7}Bugs environment}{35}{section.6.7}%
-\contentsline {section}{\numberline {6.8}Viruses environment}{35}{section.6.8}%
-\contentsline {section}{\numberline {6.9}Full game environment}{35}{section.6.9}%
-\contentsline {chapter}{Conclusion}{36}{chapter*.28}%
-\contentsline {chapter}{Bibliography}{37}{chapter*.29}%
-\contentsline {chapter}{List of Figures}{38}{chapter*.30}%
-\contentsline {chapter}{List of Tables}{39}{chapter*.31}%
-\contentsline {chapter}{List of Abbreviations}{40}{chapter*.32}%
-\contentsline {chapter}{\numberline {A}Attachments}{41}{appendix.A}%
-\contentsline {section}{\numberline {A.1}First Attachment}{41}{section.A.1}%
+\contentsline {section}{\numberline {6.4}Individual traps environment}{37}{section.6.4}%
+\contentsline {section}{\numberline {6.5}Traps environment}{37}{section.6.5}%
+\contentsline {section}{\numberline {6.6}Tokens environment}{37}{section.6.6}%
+\contentsline {section}{\numberline {6.7}Bugs environment}{37}{section.6.7}%
+\contentsline {section}{\numberline {6.8}Viruses environment}{37}{section.6.8}%
+\contentsline {section}{\numberline {6.9}Full game environment}{37}{section.6.9}%
+\contentsline {chapter}{Conclusion}{38}{chapter*.31}%
+\contentsline {chapter}{Bibliography}{39}{chapter*.32}%
+\contentsline {chapter}{List of Figures}{40}{chapter*.33}%
+\contentsline {chapter}{List of Tables}{41}{chapter*.34}%
+\contentsline {chapter}{List of Abbreviations}{42}{chapter*.35}%
+\contentsline {chapter}{\numberline {A}Attachments}{43}{appendix.A}%
+\contentsline {section}{\numberline {A.1}First Attachment}{43}{section.A.1}%

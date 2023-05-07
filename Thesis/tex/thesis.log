@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.12) (preloaded format=pdflatex 2022.12.18)  7 MAY 2023 16:22
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.12) (preloaded format=pdflatex 2022.12.18)  7 MAY 2023 21:03
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -625,8 +625,14 @@ File: l3backend-pdftex.def 2022-10-26 L3 backend support: PDF output (pdfTeX)
 \l__pdf_internal_box=\box61
 ) (thesis.aux (title.aux) (Introduction.aux) (GameDesign.aux)
 (GameImplementation.aux) (StructureOfTheExperimentalSetting.aux)
-(AlgorithmsUsed.aux) (AgentsImplementation.aux) (Experiments.aux)
-(Conclusion.aux) (bibliography.aux))
+(AlgorithmsUsed.aux) (AgentsImplementation.aux) (Experiments.aux
+
+LaTeX Warning: Label `intbeh' multiply defined.
+
+
+LaTeX Warning: Label `intbeh' multiply defined.
+
+) (Conclusion.aux) (bibliography.aux))
 \openout1 = `thesis.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 139.
@@ -955,7 +961,7 @@ mm/m/it/12 new[]gamma\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 R \OT1/lmr/m/n/12 + \OML
 
  (Experiments.tex
 Chapter 6.
-<../img//rot_values.png, id=698, 1200.485pt x 221.82875pt>
+<../img//rot_values.png, id=699, 1200.485pt x 221.82875pt>
 File: ../img//rot_values.png Graphic file (type png)
 <use ../img//rot_values.png>
 Package pdftex.def Info: ../img//rot_values.png  used on input line 11.
@@ -966,7 +972,7 @@ Package pdftex.def Info: ../img//rot_values.png  used on input line 11.
 
 
  <../img//rot_values.png>]
-<../img//examplePlot.png, id=707, 462.97969pt x 494.59781pt>
+<../img//examplePlot.png, id=708, 462.97969pt x 494.59781pt>
 File: ../img//examplePlot.png Graphic file (type png)
 <use ../img//examplePlot.png>
 Package pdftex.def Info: ../img//examplePlot.png  used on input line 27.
@@ -975,10 +981,33 @@ Package pdftex.def Info: ../img//examplePlot.png  used on input line 27.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[33] [34 <../img//examplePlot.png>]) [35]
+[33] [34 <../img//examplePlot.png>]
+<../img//discountingExample.pdf, id=722, 915.42pt x 719.68875pt>
+File: ../img//discountingExample.pdf Graphic file (type pdf)
+<use ../img//discountingExample.pdf>
+Package pdftex.def Info: ../img//discountingExample.pdf  used on input line 50.
+
+(pdftex.def)             Requested size: 412.56496pt x 324.35112pt.
+<../img//discountingExplanation.png, id=725, 726.46407pt x 121.20282pt>
+File: ../img//discountingExplanation.png Graphic file (type png)
+<use ../img//discountingExplanation.png>
+Package pdftex.def Info: ../img//discountingExplanation.png  used on input line
+ 60.
+(pdftex.def)             Requested size: 412.56496pt x 68.83295pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[35 <../img//discountingExample.pdf>]
+<../img//trianglesExample.pdf, id=740, 969.6225pt x 494.59781pt>
+File: ../img//trianglesExample.pdf Graphic file (type pdf)
+<use ../img//trianglesExample.pdf>
+Package pdftex.def Info: ../img//trianglesExample.pdf  used on input line 71.
+(pdftex.def)             Requested size: 412.56496pt x 210.44655pt.
+ [36 <../img//discountingExplanation.png> <../img//trianglesExample.pdf>]) [37]
 \openout2 = `Conclusion.aux'.
 
- (Conclusion.tex) [36
+ (Conclusion.tex) [38
 
 
 
@@ -986,8 +1015,8 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 ]
 \openout2 = `bibliography.aux'.
 
-
-(bibliography.tex (thesis.bbl)) [37
+ (bibliography.tex
+(thesis.bbl)) [39
 
 
 
@@ -996,7 +1025,7 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 \tf@lof=\write7
 \openout7 = `thesis.lof'.
 
- [38
+ [40
 
 
 
@@ -1004,27 +1033,29 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 \tf@lot=\write8
 \openout8 = `thesis.lot'.
 
- [39
+ [41
 
-]
-[40
+] [42
 
 ]
 Appendix A.
-[41
+[43
 
 ] (thesis.aux (title.aux) (Introduction.aux) (GameDesign.aux)
 (GameImplementation.aux) (StructureOfTheExperimentalSetting.aux)
 (AlgorithmsUsed.aux) (AgentsImplementation.aux) (Experiments.aux)
 (Conclusion.aux) (bibliography.aux))
+
+LaTeX Warning: There were multiply-defined labels.
+
 Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 285BE7E5D31284267E14B295392F7CB3;6928.
+(rerunfilecheck)             Checksum: 6C0D610AF5DA8B3B1399E9E5CE95A705;6928.
  ) 
 Here is how much of TeX's memory you used:
- 19605 strings out of 475281
- 313103 string characters out of 2775008
+ 19653 strings out of 475281
+ 314499 string characters out of 2775008
  886512 words of memory out of 3000000
- 40417 multiletter control sequences out of 15000+600000
+ 40457 multiletter control sequences out of 15000+600000
  561265 words of font info for 96 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  89i,9n,93p,1927b,3637s stack positions out of 10000i,1000n,20000p,200000b,80000s
@@ -1053,9 +1084,9 @@ ic/lm/lmsy10.pfb><C:/Users/Una/AppData/Local/Programs/MiKTeX/fonts/type1/public
 /lm/lmsy8.pfb><C:/Users/Una/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm
 /lmtk10.pfb><C:/Users/Una/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/l
 mtt12.pfb>
-Output written on thesis.pdf (45 pages, 2416806 bytes).
+Output written on thesis.pdf (47 pages, 2764223 bytes).
 PDF statistics:
- 911 PDF objects out of 1000 (max. 8388607)
- 251 named destinations out of 1000 (max. 500000)
- 486 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 949 PDF objects out of 1000 (max. 8388607)
+ 259 named destinations out of 1000 (max. 500000)
+ 501 words of extra memory for PDF output out of 10000 (max. 10000000)
 
