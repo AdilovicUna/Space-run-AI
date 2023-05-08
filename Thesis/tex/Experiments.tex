@@ -69,7 +69,7 @@ Upon further investigation, we discovered that in some cases, a lost game for th
 \begin{figure}[h]
     \centering
     \includegraphics[width=\textwidth]{trianglesExample}
-    \caption{Triangles example}
+    \caption{\texttt{Triangles} example}
     \label{fig:triangles_eg}
 \end{figure}
 
@@ -83,14 +83,14 @@ This section discusses the performance of agents in an environment containing on
 \begin{figure}[h]
     \centering
     \includegraphics[width=\textwidth]{balls}
-    \caption{Balls trap examples}
+    \caption{\texttt{Balls} trap examples}
     \label{fig:balls_eg}
 \end{figure}
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=\textwidth]{hexo}
-    \caption{HexO trap examples}
+    \caption{\texttt{HexO} trap examples}
     \label{fig:hexo_eg}
 \end{figure}
 
@@ -101,14 +101,14 @@ Nevertheless, in some cases we have not managed to find the right combination of
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.7\textwidth]{hex}
-    \caption{Hex trap example}
+    \caption{\texttt{Hex} trap example}
     \label{fig:hex_eg}
 \end{figure}
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=\textwidth]{hex_dql_mc}
-    \caption{Hex trap with DoubleQLearning and MonteCarlo agents}
+    \caption{\texttt{Hex} trap with \texttt{DoubleQLearning} and \texttt{MonteCarlo} agents}
     \label{fig:hex_diff_eg}
 \end{figure}
 
@@ -117,14 +117,14 @@ However, Figure \ref{fig:hex_diff_eg} presents the results of an experiment cond
 \begin{figure}[h]
     \centering
     \includegraphics[width=\textwidth]{i}
-    \caption{I trap example}
+    \caption{\texttt{I} trap examples}
     \label{fig:i_eg}
 \end{figure}
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=\textwidth]{movingi}
-    \caption{MovingI trap example}
+    \caption{\texttt{MovingI} trap examples}
     \label{fig:movingi_eg}
 \end{figure}
 
@@ -136,14 +136,14 @@ As can be observed from some of the previous graphs, agents often exhibit signif
 \begin{figure}[h]
     \centering
     \includegraphics[width=\textwidth]{triangles}
-    \caption{Triangles trap example}
+    \caption{\texttt{Triangles} trap examples}
     \label{fig:triangles_eg}
 \end{figure}
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=\textwidth]{halfhex_o_walls_x}
-    \caption{HalfHex, X, O and Walls trap examples}
+    \caption{\texttt{HalfHex, X, O} and \texttt{Walls} traps examples}
     \label{fig:halfhex_o_walls_x_eg}
 \end{figure}
 
@@ -152,6 +152,33 @@ Figure \ref{fig:halfhex_o_walls_x_eg} showcases the performance of the agents on
 Although performing these experiments with a larger number of seeds would ideally yield even more accurate results, we hope that the picture we presented provides a reasonable representation of the agents' performance.
 
 \section{Traps environment}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{allTraps}
+    \caption{All traps examples}
+    \label{fig:alltraps_eg}
+\end{figure}
+
+This section delves into the exploration of a highly intricate environment, possibly the most complex one barring the full game. As depicted in Figure \ref{fig:alltraps_eg}, the majority of agents were unable to perform optimally in this environment. \texttt{ExpectedSARSA} was the only agent able to learn an optimal policy in any occurrence, as evidenced by its score nearing 500 in the right plot, which was the approximate winning score value in all experiments. Moreover, \texttt{ES} not only managed to learn the optimal policy once but did so with different hyper parameters and seed values on multiple occasions, leading to winning streaks of 30 games and early termination of the experiment. This outcome is the most favourable for any environment. The figure displays the averaged value of 9 seeds for all agents under the specified parameters. 
+
+The experiments conducted for this environment were systematic and involved matching commonly used \texttt{eps} and \texttt{initOptVal} to test if the agents could learn. In these experiments, the difference in learning between the \texttt{ES} agent and the others is even more pronounced. However, on the left plot visible in the Figure \ref{fig:alltraps_eg}, and one instance, where \texttt{eps=0.4} and \texttt{initOptVal=20}, the \texttt{MC} agent performed reasonably well, attaining an average score of approximately 100, which is substantially superior to the other agents, except for ES.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{allTraps_table}
+    \caption{All traps with \texttt{ExpectedSARSA}, \texttt{MonteCarlo} and \texttt{DoubleQLearning} agents}
+    \label{fig:traps_table_eg}
+\end{figure}
+
+
+The table in Figure \ref{fig:traps_table_eg} provides a comparison of policies from three different experiments, each with only one seed value that yielded a satisfactory result. The purpose is to see how far off the agents were from an optimal policy. The blue rows represent the \texttt{ExpectedSARSA} agent, which performed with \texttt{eps=0.2} and \texttt{initOptVal=100}. The agent stopped an experiment early, after 437 games with initial number of games (\texttt{n}) being 2500. Considering it won 30 games in a row, each one lasting 15 levels, we can assume, with high probability, each state action pair value is an optimal solution for this environment. The red rows represent the \texttt{MC} agent, which performed reasonably well with \texttt{eps=0.2} and \texttt{initOptVal=20}, winning 282/2500 games, but the experiment did not terminate early, suggesting a suboptimal policy. The pink rows represents the \texttt{QLearning(QL)} agent, which won 142/2500 games with \texttt{eps=0.4} and \texttt{initOptVal=20}. It should be noted that the best occurrences were picked for the \texttt{MC} and \texttt{QL} agents, and in other cases, they won fewer or no games under this environment. Lastly it should be noted that, \texttt{SARSA(S)} and \texttt{DoubleQLearning(DQL)}  performed very bad, with average scores in all experiments under all hyper parameter combinations, being not more than 20.
+
+On the table it is visible that the number of \texttt{rots} needed for this environment is 22, due to traps \texttt{Hex} and \texttt{Walls} requiring a minimum of 22 different rotation values. This means that the number of states increased significantly, considering we have 10 different trap types, there are 220 of them in total. For that reason we picked \texttt{n=2500} for all of the experiments in this section. To clarify, we wanted to give each state, a little over 10 games to train. Of course, it cannot be influenced by which states will be picked, since each game is generated randomly, but this was an estimation we used quite often during the experimentations. As a result of this many \texttt{rots} values, with some simpler traps, there can be a lot of safe  rotations that the agent can choose from, thus going forward multiple adjacent states could be viable, if that particular trap requires for example \texttt{rots=6} when trained individually.
+
+Furthermore, multiple instances in the data show the phenomenon discussed in Section \ref{intbeh} of this chapter. For instance, upon closer examination of rotation values 54 and 71 in the rows pertaining to the Balls trap, it becomes evident that the \texttt{ES} agent opted to alternate between those two rotation types, whereas the other two agents, \texttt{Monte Carlo(MC)} and \texttt{QLearning(QL)}, chose to proceed using only one or both of the rotations. This trend can be observed in several other cases within the data, and it is highly probable that, with so many rotation options available, any of the three methods would lead to the agent safely passing the trap. Nevertheless, it is a fact that \texttt{ES} learned a better policy than \texttt{MC} and \texttt{QL}. However, for certain traps, all or at least two of the agents had satisfactory policies (such as the \texttt{Hex} trap), whereas for others, \texttt{MC} and/or \texttt{QL} were observed taking actions that could not be deemed optimal when compared to \texttt{ES} agent. An example of such an instance can be found in rotation values 275 and 292 with trap \texttt{X}, where the \texttt{QL} agent attempted to switch between the two rotations to pass, while both \texttt{ES} and \texttt{MC} avoided it, suggesting that remaining in that rotation was not safe and that the agent should try to move to another rotation in a timely manner.
+
+Since a picture paints a thousand words, the reader is urged to look upon this table more closely. By doing so, they may find additional examples of the behaviours discussed in the preceding text. 
+
 \section{Tokens environment}
 \section{Bugs environment}
 \section{Viruses environment}

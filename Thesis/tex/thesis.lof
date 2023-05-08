@@ -18,13 +18,15 @@
 \contentsline {figure}{\numberline {6.2}{\ignorespaces Plot example\relax }}{34}{figure.caption.27}%
 \contentsline {figure}{\numberline {6.3}{\ignorespaces Discounting example\relax }}{35}{figure.caption.28}%
 \contentsline {figure}{\numberline {6.4}{\ignorespaces Discounting explanation\relax }}{36}{figure.caption.29}%
-\contentsline {figure}{\numberline {6.5}{\ignorespaces Triangles example\relax }}{36}{figure.caption.30}%
-\contentsline {figure}{\numberline {6.6}{\ignorespaces Balls trap examples\relax }}{37}{figure.caption.31}%
-\contentsline {figure}{\numberline {6.7}{\ignorespaces HexO trap examples\relax }}{38}{figure.caption.32}%
-\contentsline {figure}{\numberline {6.8}{\ignorespaces Hex trap example\relax }}{38}{figure.caption.33}%
-\contentsline {figure}{\numberline {6.9}{\ignorespaces Hex trap with DoubleQLearning and MonteCarlo agents\relax }}{39}{figure.caption.34}%
-\contentsline {figure}{\numberline {6.10}{\ignorespaces I trap example\relax }}{39}{figure.caption.35}%
-\contentsline {figure}{\numberline {6.11}{\ignorespaces MovingI trap example\relax }}{40}{figure.caption.36}%
-\contentsline {figure}{\numberline {6.12}{\ignorespaces Triangles trap example\relax }}{40}{figure.caption.37}%
-\contentsline {figure}{\numberline {6.13}{\ignorespaces HalfHex, X, O and Walls trap examples\relax }}{41}{figure.caption.38}%
+\contentsline {figure}{\numberline {6.5}{\ignorespaces \texttt {Triangles} example\relax }}{36}{figure.caption.30}%
+\contentsline {figure}{\numberline {6.6}{\ignorespaces \texttt {Balls} trap examples\relax }}{37}{figure.caption.31}%
+\contentsline {figure}{\numberline {6.7}{\ignorespaces \texttt {HexO} trap examples\relax }}{38}{figure.caption.32}%
+\contentsline {figure}{\numberline {6.8}{\ignorespaces \texttt {Hex} trap example\relax }}{38}{figure.caption.33}%
+\contentsline {figure}{\numberline {6.9}{\ignorespaces \texttt {Hex} trap with \texttt {DoubleQLearning} and \texttt {MonteCarlo} agents\relax }}{39}{figure.caption.34}%
+\contentsline {figure}{\numberline {6.10}{\ignorespaces \texttt {I} trap examples\relax }}{39}{figure.caption.35}%
+\contentsline {figure}{\numberline {6.11}{\ignorespaces \texttt {MovingI} trap examples\relax }}{40}{figure.caption.36}%
+\contentsline {figure}{\numberline {6.12}{\ignorespaces \texttt {Triangles} trap examples\relax }}{40}{figure.caption.37}%
+\contentsline {figure}{\numberline {6.13}{\ignorespaces \texttt {HalfHex, X, O} and \texttt {Walls} traps examples\relax }}{41}{figure.caption.38}%
+\contentsline {figure}{\numberline {6.14}{\ignorespaces All traps examples\relax }}{42}{figure.caption.39}%
+\contentsline {figure}{\numberline {6.15}{\ignorespaces All traps with \texttt {ExpectedSARSA}, \texttt {MonteCarlo} and \texttt {DoubleQLearning} agents\relax }}{43}{figure.caption.40}%
 \addvspace {10\p@ }
