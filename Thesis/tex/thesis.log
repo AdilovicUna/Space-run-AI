@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.12) (preloaded format=pdflatex 2022.12.18)  8 MAY 2023 23:02
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.12) (preloaded format=pdflatex 2022.12.18)  8 MAY 2023 23:40
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1093,8 +1093,17 @@ Package pdftex.def Info: ../img//allTraps_table.jpg  used on input line 168.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[41 <../img//halfhex_o_walls_x.pdf>] [42 <../img//allTraps.pdf>]) [43 <../img//
-allTraps_table.jpg>] [44]
+[41 <../img//halfhex_o_walls_x.pdf>] [42 <../img//allTraps.pdf>]
+<../img//tokensEnv.png, id=841, 435.7881pt x 345.4506pt>
+File: ../img//tokensEnv.png Graphic file (type png)
+<use ../img//tokensEnv.png>
+Package pdftex.def Info: ../img//tokensEnv.png  used on input line 184.
+(pdftex.def)             Requested size: 288.7942pt x 228.93109pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[43 <../img//allTraps_table.jpg>]) [44 <../img//tokensEnv.png>]
 \openout2 = `Conclusion.aux'.
 
  (Conclusion.tex) [45
@@ -1122,7 +1131,8 @@ allTraps_table.jpg>] [44]
 \tf@lot=\write8
 \openout8 = `thesis.lot'.
 
- [48
+
+[48
 
 ] [49
 
@@ -1138,13 +1148,13 @@ Appendix A.
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: E07EF66C9A072C6B08907F1D635836FD;6928.
+(rerunfilecheck)             Checksum: F9B5D17D79DB0DDE627402199DF92640;6928.
  ) 
 Here is how much of TeX's memory you used:
- 19803 strings out of 475281
- 317697 string characters out of 2775008
+ 19816 strings out of 475281
+ 317980 string characters out of 2775008
  886512 words of memory out of 3000000
- 40589 multiletter control sequences out of 15000+600000
+ 40601 multiletter control sequences out of 15000+600000
  561265 words of font info for 96 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  89i,9n,93p,1927b,3637s stack positions out of 10000i,1000n,20000p,200000b,80000s
@@ -1173,9 +1183,9 @@ ic/lm/lmsy10.pfb><C:/Users/Una/AppData/Local/Programs/MiKTeX/fonts/type1/public
 /lm/lmsy8.pfb><C:/Users/Una/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm
 /lmtk10.pfb><C:/Users/Una/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/l
 mtt12.pfb>
-Output written on thesis.pdf (54 pages, 3730225 bytes).
+Output written on thesis.pdf (54 pages, 3777534 bytes).
 PDF statistics:
- 1054 PDF objects out of 1200 (max. 8388607)
- 276 named destinations out of 1000 (max. 500000)
- 551 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1060 PDF objects out of 1200 (max. 8388607)
+ 277 named destinations out of 1000 (max. 500000)
+ 556 words of extra memory for PDF output out of 10000 (max. 10000000)
 
