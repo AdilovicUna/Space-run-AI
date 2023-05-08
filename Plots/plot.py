@@ -11,7 +11,7 @@ MOVES_MAP = {
     '[-1,1]': '←*', '[0,1]': '↑*', '[1,1]': '→*'
 }
 
-command_outputs_path = '../Game/Command_outputs/'
+command_outputs_path = '../Game/Command_outputsTT/'
 
 class Group:
     def __init__(self, name, scores, env, filename):
@@ -32,6 +32,19 @@ class AgentGroup:
         self.QL = Group('QL.' + name, scores, env, filename)
         self.ES = Group('ES.' + name, scores, env, filename)
         self.DQL = Group('DQL.' + name, scores, env, filename)
+
+def even_data_len(arr1, arr2):
+    if (len(arr1) > len(arr2)):
+        win_sc = arr2[-1]
+        for _ in range(len(arr1) - len(arr2)):
+            arr2.append(win_sc)
+
+    if (len(arr1) < len(arr2)):
+        win_sc = arr1[-1]
+        for _ in range(len(arr2) - len(arr1)):
+            arr1.append(win_sc)
+    
+    return [arr1, arr2]
 
 def parse_state(state):
     state = state.split(',')
@@ -142,7 +155,7 @@ def get_table(ad_data, agent):
 
     return (cell_text, row_labels, col_labels)
 
-def plotOption1(window, co_data, ad_data, agent, filename):
+def plot_option1(window, co_data, ad_data, agent, filename):
     scores = [float(i) for i in co_data[:-4]]
     scores = [np.mean(scores[i:i + window]) if i <= len(scores) -
               window else np.mean(scores[i:]) for i in range(len(scores))]
@@ -182,7 +195,7 @@ def plotOption1(window, co_data, ad_data, agent, filename):
                 loc='bottom',
                 bbox=[0, -0.5 - (len(ad_data[1]) + 1) * 0.025, 1, 0.3 + (len(ad_data[1]) + 1) * 0.025])
 
-def option1(window):
+def option_1(window):
     f = open('Plots_log/option1.txt', 'w')
     total_plots = 0
     new_plots = 0
@@ -225,7 +238,7 @@ def option1(window):
                 f.write('EXISTING PLOT' + '\n')
                 continue
             
-            plotOption1(window, co_data, ad_data, agent, filename)
+            plot_option1(window, co_data, ad_data, agent, filename)
 
             plt.savefig(full_plot_filename, bbox_inches='tight', pad_inches=0.2, dpi=100)
             new_plots += 1
@@ -241,12 +254,13 @@ def option1(window):
     f.write('----------------------------' + '\n')
     f.close()
 
-def plotOption2(window, scores, agent, env, filename, winning_score):
+def plot_option2(window, scores, agent, env, filename, winning_score):
     avg_score = [sum(scores) / len(scores)] * len(scores)
     scores = [np.mean(scores[i:i + window]) if i <= len(scores) -
               window else np.mean(scores[i:]) for i in range(len(scores))]
     episodes = [i for i in range(1, len(scores)+1)]
-
+    winning_score = [float(winning_score)] * len(scores) 
+    
     _, ax = plt.subplots()
 
     ax.plot(episodes, scores, '-c', label='Data')
@@ -269,7 +283,7 @@ def plotOption2(window, scores, agent, env, filename, winning_score):
     plt.xlabel('Episodes')
     plt.ylabel('Scores')
 
-def option2(window):
+def option_2(window):
     f = open('Plots_log/option2.txt', 'w')
     groups = {}
     # files have the same names in both folders
@@ -303,20 +317,12 @@ def option2(window):
             if not common_param in groups.keys():
                 groups[common_param] = Group(common_param, scores, env, filename)
 
-            if (len(groups[common_param].data) > len(scores)):
-                win_sc = scores[-1]
-                for _ in range(len(groups[common_param].data) - len(scores)):
-                    scores.append(win_sc)
-
-            if (len(groups[common_param].data) < len(scores)):
-                f.write('WARNING: check files for the group: ' + str(common_param) + '\n')
-                continue
-
+            groups[common_param].data, scores = even_data_len(groups[common_param].data, scores)
             groups[common_param].data = [x + y for x, y in zip(scores, groups[common_param].data)]
             groups[common_param].count += 1
 
             if groups[common_param].win_score == -1:
-                groups[common_param].win_score = [float(co_data[-4].split()[1])] * len(scores) if co_data[-4].split()[1] != 'unknown' else -1
+                groups[common_param].win_score = co_data[-4].split()[1] if co_data[-4].split()[1] != 'unknown' else -1
                 
         except Exception:
             f.write('FILE ERROR: remove or replace incorrect files for the group: ' + str(common_param) + '\n')
@@ -326,7 +332,7 @@ def option2(window):
         groups[key].data = [x / groups[key].count for x in groups[key].data]
         agent = groups[key].filename.split(',')[0].split('=')[1]
         
-        plotOption2(window, groups[key].data, agent, groups[key].env, groups[key].filename, groups[key].win_score)
+        plot_option2(window, groups[key].data, agent, groups[key].env, groups[key].filename, groups[key].win_score)
 
         # create path so that we can sort out the plots nicely
         path = 'Plots/option2/' + groups[key].env + '/win=' + str(window) + '/' + agent + '/'
@@ -336,7 +342,7 @@ def option2(window):
     
     f.close()
 
-def plotOption3(window, MC, S, QL, ES, DQL, env, filename):
+def plot_option3(window, MC, S, QL, ES, DQL, env, filename):
     MC = [np.mean(MC[i:i + window]) if i <= len(MC) -
               window else np.mean(MC[i:]) for i in range(len(MC))]
     S = [np.mean(S[i:i + window]) if i <= len(S) -
@@ -371,7 +377,7 @@ def plotOption3(window, MC, S, QL, ES, DQL, env, filename):
     plt.xlabel('Episodes')
     plt.ylabel('Scores')
 
-def option3(window):
+def option_3(window):
     f = open('Plots_log/option3.txt', 'w')
     groups = {}
     # files have the same names in both folders
@@ -408,70 +414,29 @@ def option3(window):
 
             match(agent):
                 case 'MonteCarlo':
+                    groups[common_param].MC.data, scores = even_data_len(groups[common_param].MC.data, scores)
                     groups[common_param].MC.data = [x + y for x, y in zip(scores, groups[common_param].MC.data)]
                     groups[common_param].MC.count += 1
 
-                    if (len(groups[common_param].MC.data) > len(scores)):
-                        win_sc = scores[-1]
-                        for _ in range(len(groups[common_param].MC.data) - len(scores)):
-                            scores.append(win_sc)
-
-                    if (len(groups[common_param].MC.data) < len(scores)):
-                        f.write('WARNING: check files for the group: ' + str(common_param) + '\n')
-                        continue
-
                 case 'SARSA':
+                    groups[common_param].S.data, scores = even_data_len(groups[common_param].S.data, scores)
                     groups[common_param].S.data = [x + y for x, y in zip(scores, groups[common_param].S.data)]
                     groups[common_param].S.count += 1
 
-                    if (len(groups[common_param].S.data) > len(scores)):
-                        win_sc = scores[-1]
-                        for _ in range(len(groups[common_param].S.data) - len(scores)):
-                            scores.append(win_sc)
-
-                    if (len(groups[common_param].S.data) < len(scores)):
-                        f.write('WARNING: check files for the group: ' + str(common_param) + '\n')
-                        continue
-
                 case 'QLearning':
+                    groups[common_param].QL.data, scores = even_data_len(groups[common_param].QL.data, scores)
                     groups[common_param].QL.data = [x + y for x, y in zip(scores, groups[common_param].QL.data)]
                     groups[common_param].QL.count += 1
 
-                    if (len(groups[common_param].QL.data) > len(scores)):
-                        win_sc = scores[-1]
-                        for _ in range(len(groups[common_param].QL.data) - len(scores)):
-                            scores.append(win_sc)
-
-                    if (len(groups[common_param].QL.data) < len(scores)):
-                        f.write('WARNING: check files for the group: ' + str(common_param) + '\n')
-                        continue
-
                 case 'ExpectedSARSA':
+                    groups[common_param].ES.data, scores = even_data_len(groups[common_param].ES.data, scores)
                     groups[common_param].ES.data = [x + y for x, y in zip(scores, groups[common_param].ES.data)]
                     groups[common_param].ES.count += 1
 
-                    if (len(groups[common_param].ES.data) > len(scores)):
-                        win_sc = scores[-1]
-                        for _ in range(len(groups[common_param].ES.data) - len(scores)):
-                            scores.append(win_sc)
-
-                    if (len(groups[common_param].ES.data) < len(scores)):
-                        f.write('WARNING: check files for the group: ' + str(common_param) + '\n')
-                        continue
-
                 case 'DoubleQLearning':
+                    groups[common_param].DQL.data, scores = even_data_len(groups[common_param].DQL.data, scores)
                     groups[common_param].DQL.data = [x + y for x, y in zip(scores, groups[common_param].DQL.data)]
                     groups[common_param].DQL.count += 1
-
-                    if (len(groups[common_param].DQL.data) > len(scores)):
-                        win_sc = scores[-1]
-                        for _ in range(len(groups[common_param].DQL.data) - len(scores)):
-                            scores.append(win_sc)
-
-                    if (len(groups[common_param].DQL.data) < len(scores)):
-                        f.write('WARNING: check files for the group: ' + str(common_param) + '\n')
-                        continue
-
                 case _:
                     raise Exception
                 
@@ -491,7 +456,7 @@ def option3(window):
         if (groups[key].DQL.count > 0):
             groups[key].DQL.data = [x / groups[key].DQL.count for x in groups[key].DQL.data]
         
-        plotOption3(window, groups[key].MC.data, groups[key].S.data, groups[key].QL.data,
+        plot_option3(window, groups[key].MC.data, groups[key].S.data, groups[key].QL.data,
                      groups[key].ES.data, groups[key].DQL.data, groups[key].env, groups[key].filename)
         
         # create path so that we can sort out the plots nicely
@@ -513,11 +478,11 @@ def main(option, window):
 
     match (option):
         case 1:
-            option1(window)
+            option_1(window)
         case 2:
-            option2(window)
+            option_2(window)
         case 3:
-            option3(window)
+            option_3(window)
         case _:
             print('Invalid arguments')
             return

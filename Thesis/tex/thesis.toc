@@ -37,15 +37,15 @@
 \contentsline {section}{\numberline {6.2}Plotting}{33}{section.6.2}%
 \contentsline {section}{\numberline {6.3}Interesting behaviours}{35}{section.6.3}%
 \contentsline {section}{\numberline {6.4}Individual traps environment}{37}{section.6.4}%
-\contentsline {section}{\numberline {6.5}Traps environment}{37}{section.6.5}%
-\contentsline {section}{\numberline {6.6}Tokens environment}{37}{section.6.6}%
-\contentsline {section}{\numberline {6.7}Bugs environment}{37}{section.6.7}%
-\contentsline {section}{\numberline {6.8}Viruses environment}{37}{section.6.8}%
-\contentsline {section}{\numberline {6.9}Full game environment}{37}{section.6.9}%
-\contentsline {chapter}{Conclusion}{38}{chapter*.31}%
-\contentsline {chapter}{Bibliography}{39}{chapter*.32}%
-\contentsline {chapter}{List of Figures}{40}{chapter*.33}%
-\contentsline {chapter}{List of Tables}{41}{chapter*.34}%
-\contentsline {chapter}{List of Abbreviations}{42}{chapter*.35}%
-\contentsline {chapter}{\numberline {A}Attachments}{43}{appendix.A}%
-\contentsline {section}{\numberline {A.1}First Attachment}{43}{section.A.1}%
+\contentsline {section}{\numberline {6.5}Traps environment}{41}{section.6.5}%
+\contentsline {section}{\numberline {6.6}Tokens environment}{41}{section.6.6}%
+\contentsline {section}{\numberline {6.7}Bugs environment}{41}{section.6.7}%
+\contentsline {section}{\numberline {6.8}Viruses environment}{41}{section.6.8}%
+\contentsline {section}{\numberline {6.9}Full game environment}{41}{section.6.9}%
+\contentsline {chapter}{Conclusion}{42}{chapter*.39}%
+\contentsline {chapter}{Bibliography}{43}{chapter*.40}%
+\contentsline {chapter}{List of Figures}{44}{chapter*.41}%
+\contentsline {chapter}{List of Tables}{45}{chapter*.42}%
+\contentsline {chapter}{List of Abbreviations}{46}{chapter*.43}%
+\contentsline {chapter}{\numberline {A}Attachments}{47}{appendix.A}%
+\contentsline {section}{\numberline {A.1}First Attachment}{47}{section.A.1}%

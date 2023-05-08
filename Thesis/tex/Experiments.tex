@@ -35,7 +35,7 @@ The top part of the figure displays all the necessary information that was used 
 
 Moving further down, there is a plot with three lines and a legend in the top right corner. The data line, as indicated on the figure, represents the score that the agent achieved on a particular episode. However, some plots may show the average value of the agent's score for that episode over several different seeds used for the random action. Additionally, there may be multiple data lines on the plot, each representing a different agent. In these cases, each line is averaged between many seeds. Each agent is labelled with their respective color inside the legend.
 
-The mean line represents the average score value for the entire experiment, while the winning score represents the winning threshold. It should be noted that if the agent did not win any games, the winning score line will be omitted. Furthermore, the data line is averaged to appear smoother. This is why even though the winning rate is 62/150, the data line doesn't touch the winning score threshold at any point.
+The mean line represents the average score value for the entire experiment, while the winning score represents the winning threshold. It should be noted that if the agent did not win any games, or the plot is displaying multiple agents, the winning score line will be omitted. Furthermore, the data line is averaged to appear smoother. This is why even though the winning rate is 62/150, the data line doesn't touch the winning score threshold at any point.
 
 As mentioned in the Section \ref{commOpt}, it is possible to perform continuous evaluation on experiments, meaning one learning game is played with random actions, followed immediately by an evaluation game using only the current policy that the agent is performing. In all experiments conducted, the data line only represents the evaluation games.
 
@@ -78,6 +78,79 @@ Another intriguing behaviour emerged as a result of an unforeseen coincidence. A
 Ordinarily, \texttt{env=[Triangles]} does not offer any safe rotations unless \texttt{rots=7} or more. As shown in the plot, the agent will certainly learn with this rotation value. However, if the agent is given only \texttt{6} rotation values to choose from, it will develop a policy that rapidly oscillates between two rotations, keeping the player character, Hans, on the edge of those rotations, allowing him to safely pass through the trap. This behaviour is not confined to situations where the agent is ``forced'' to make such a decision. During training, in many instances, the agent will learn to stay on the edge rather than advance into a completely safe rotation. There does not appear to be a preference for one or the other; rather, the policy the agent discovers first is determined by other experimental factors. It can be concluded that this behaviour arose solely because the agent did not alter its action until the state changed. In my opinion, this discovery is one of the most exciting outcomes of this project.
 
 \section{Individual traps environment}
+This section discusses the performance of agents in an environment containing only one trap at a time.  Considering the number of traps and agents, for each trap, we have picked a plot that showed the best performances of the agents overall. Some specific cases will, of course, be highlighted. It should be noted that all plots within these examples have had smoothing applied with \texttt{window=10}. Thus certain spikes will not be visible. Additionally, unless otherwise suggested, you can assume the values that were produced are an average of 5 different seeds. The aim was to show a realistic picture on how the agent would perform, and not only highlight the occurrences in which the outcome was satisfactory but rather account for the failures in reproducing the perfect policy as well.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{balls}
+    \caption{Balls trap examples}
+    \label{fig:balls_eg}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{hexo}
+    \caption{HexO trap examples}
+    \label{fig:hexo_eg}
+\end{figure}
+
+Another very important factor were the choices of the hyper parameters. As mentioned before, most commonly used one will be \texttt{eps=0.2} or \texttt{ep=0.4} and \texttt{initOptVal=20.0} or \texttt{initOptVal=100.0}. Perhaps best visible in Figures \ref{fig:balls_eg} and \ref{fig:hexo_eg}, is how much hyper parameters can influence the outcome. Both the \texttt{Balls} and \texttt{HexO} traps varied significantly based on the initial optimistic value used, with the other agents' performances also varying to a lesser extent. These findings underscore the importance of carefully selecting hyper parameters when training reinforcement learning.
+
+Nevertheless, in some cases we have not managed to find the right combination of the hyper parameters. The Hex trap is a prime example of such a challenge, requiring no less than 22 rotations to be navigated successfully. As shown in Figure \ref{fig:hex_eg}, the agents' overall performance on this trap has been moderate at best.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{hex}
+    \caption{Hex trap example}
+    \label{fig:hex_eg}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{hex_dql_mc}
+    \caption{Hex trap with DoubleQLearning and MonteCarlo agents}
+    \label{fig:hex_diff_eg}
+\end{figure}
+
+However, Figure \ref{fig:hex_diff_eg} presents the results of an experiment conducted on the \texttt{MonteCarlo(MC)} agent, which was produced by a single seed value. The choice of seed or hyper parameter values is not critical, as all the values for the Hex trap for this particular agent appear the same. By examining the policy that the \texttt{MC} agent learned in this experiment and comparing it to the left-hand plot, which depicts the \texttt{DoubleQLearning(DQL)} agent learning an arguably perfect policy right from the start, we can see that the \texttt{MC} agent completely overlooks the safe rotations and instead chooses to move forward in areas that lead to either certain death, or half-safe rotations which let the agent pass based on pure chance. It is worth noting that the performance of the \texttt{DQL} agent varies depending on the seed value (on the plot we can see that the average performance is even lower than with other agents), and this example was included only to illustrate what an optimal policy for this type of trap might look like.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{i}
+    \caption{I trap example}
+    \label{fig:i_eg}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{movingi}
+    \caption{MovingI trap example}
+    \label{fig:movingi_eg}
+\end{figure}
+
+
+It is worth noting that there exist cases where the aforementioned variations in hyper parameter selection lead to highly desirable outcomes. This is exemplified by the results presented in Figures \ref{fig:i_eg} and \ref{fig:movingi_eg}, which demonstrate the efficacy of the \texttt{ExpectedSARSA(ES)} agent. Notably, on the right hand side of the both plots, the \texttt{ES} agent was able to achieve optimal performance early on in the game with all seed values. \texttt{ES} agent, in a very large number of experiments, has outperformed its counterparts, sometimes by a significant amount. This is particularly evident when considering its performance in simpler environments such as traps \texttt{I} and \texttt{MovingI}, where it is apparent that the agent is capable of learning extremely well. While other agents have performed well on these specific traps as well, their success may not be immediately apparent from the averaged results depicted in the plots.
+
+As can be observed from some of the previous graphs, agents often exhibit significant changes in behaviour with different hyper parameters. However, as depicted in Figure \ref{fig:triangles_eg} for the \texttt{Triangles} trap, increasing the \texttt{initOptVal} resulted in the agents maintaining the same ratio between each other, despite three of them increasing their average score significantly.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{triangles}
+    \caption{Triangles trap example}
+    \label{fig:triangles_eg}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{halfhex_o_walls_x}
+    \caption{HalfHex, X, O and Walls trap examples}
+    \label{fig:halfhex_o_walls_x_eg}
+\end{figure}
+
+Figure \ref{fig:halfhex_o_walls_x_eg} showcases the performance of the agents on the remaining traps that have not been mentioned before in this section. It is worth noting that the agents' overall behaviour on these traps is satisfactory, with some agents performing exceedingly well. This, once again, reinforces the idea that the choice of hyper parameters can have a significant impact on the agent's performance, and that a careful selection of these parameters is crucial for achieving optimal results.
+
+Although performing these experiments with a larger number of seeds would ideally yield even more accurate results, we hope that the picture we presented provides a reasonable representation of the agents' performance.
+
 \section{Traps environment}
 \section{Tokens environment}
 \section{Bugs environment}
