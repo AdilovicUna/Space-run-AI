@@ -304,7 +304,9 @@ func set_param(param):
             actions = actions.slice(3,5)    
         # we don't need actions that have shooting if it was specified in the command line
         # or it is not necessary (there is nothing in the env to shoot)
-        elif not shooting or (not env.empty() and not "Bugs" in env and not "Viruses" in env):
+        elif not shooting or (not env.empty() and not "Bugs" in env and not "Viruses" in env
+                                and not "Worm" in env and not "LadybugFlying" in env and not "LadybugWalking" in env 
+                                and not "Bacteriophage" in env and not "Rotavirus" in env):
             actions = actions.slice(0,2)
             
         # create necessary directories

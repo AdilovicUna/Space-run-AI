@@ -10,6 +10,7 @@ data_*/
 
 Game/Agent_databases
 Game/Command_outputs 
+Game/Command_outputsTT
 Testing/Tests_output
 Plots/Plots
 Plots/Plots_log

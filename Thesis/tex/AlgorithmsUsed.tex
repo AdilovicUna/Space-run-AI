@@ -2,7 +2,7 @@
 \label{applied_algo_chapter}
 In this chapter, we will discuss the algorithms employed to create agents for the game, which broadly fall into the categories of Monte Carlo methods and Temporal Difference (TD) Learning. In essence, the agents aim to maximize their reward by selecting actions that yield the greatest possible benefit. To comprehend the functioning of these algorithms, it is necessary to introduce several fundamental concepts. 
 
-A \textbf{state} represents the current status of the environment, while an \textbf{action} denotes a decision made by the agent in response to the current state. A \textbf{reward} is a scalar value that reflects the immediate feedback received by the agent for its action in a given state. The \textbf{discount factor}, usually denoted as $\bm{\gamma}$, is a value between 0 and 1 that represents how much the agent values future rewards compared to immediate rewards. An \textbf{episode} refers to a sequence of states, actions, and rewards that begins with an initial state and ends when a terminal state is reached. It represents one run or iteration of the agent interacting with the environment. The length of an episode can vary depending on the problem and the algorithm being used (e.g. in a game, an episode may correspond to a single game). A \textbf{policy} is a mapping from states to actions that determines the actions an agent takes in each state. An \textbf{$\bm{\epsilon}$-greedy policy} is a policy in which the agent selects the action that maximizes the expected reward with a probability of (1 - $\epsilon$), while taking a random action with a probability of $\epsilon$. Two types of value functions exist, namely \textbf{state-value} functions and \textbf{action-value} functions. The former predict the expected long-term reward of being in a particular state, while the latter predict the expected long-term reward of taking a specific action in a particular state and always following the optimal policy thereafter. Action-value and state-value functions evaluate evaluate the relative effectiveness of different actions or states, serving as a measure to determine the optimal action in a particular state. The \textbf{value of a state} varies between algorithms, and it is used to select the best action to be taken in that state. 
+A \textbf{state} represents the current status of the environment, while an \textbf{action} denotes a decision made by the agent in response to the current state. A \textbf{reward} is a scalar value that reflects the immediate feedback received by the agent for its action in a given state. The \textbf{discount factor}, usually denoted as $\bm{\gamma}$, is a value between 0 and 1 that represents how much the agent values future rewards compared to immediate rewards. An \textbf{episode} refers to a sequence of states, actions, and rewards that begins with an initial state and ends when a terminal state is reached. It represents one run or iteration of the agent interacting with the environment. The length of an episode can vary depending on the problem and the algorithm being used (e.g. in a game, an episode may correspond to a single game). A \textbf{policy} is a mapping from states to actions that determines the actions an agent takes in each state. An \textbf{$\bm{\epsilon}$-greedy policy} is a policy in which the agent selects the action that maximizes the expected reward with a probability of (1 - $\epsilon$), while taking a random action with a probability of $\epsilon$. Two types of value functions exist, namely \textbf{state-value} functions and \textbf{action-value} functions. The former predict the expected long-term reward of being in a particular state, while the latter predict the expected long-term reward of taking a specific action in a particular state and always following the optimal policy thereafter. Action-value and state-value functions evaluate the relative effectiveness of different actions or states, serving as a measure to determine the optimal action in a particular state.
 
 Before looking into individual algorithms, there is one more key concept to introduce: \textbf{exploration vs exploitation}. In the field of reinforcement learning, the exploration-exploitation trade-off refers to the balancing act between discovering new information or strategies and utilizing existing knowledge to maximize reward. Exploration involves trying out different actions or strategies in order to gather more information about the environment and its rewards, while exploitation involves utilizing the information gathered to maximize reward. Finding the right balance between exploration and exploitation is crucial in reinforcement learning, as excessive use of either can result in suboptimal results. To balance out these two concepts within these algorithms two methods are used: the formerly mentioned \textbf{$\bm{\epsilon}$-greedy policy} as well as the \textbf{optimistic initial values} which is a technique which sets the initial value of all state action pairs to a high number, encouraging the agent to visit as many states as possible in order to learn their true value \citep{RLSuttonBarto}.
 
@@ -22,13 +22,13 @@ The pseudocode for the first-visit Monte Carlo can be seen in Algorithm \ref{alg
 To clarify this and future algorithms, here are further explanations to some of the elements that might be encountered:
 \begin{itemize}
 \item $\mathcal{S}$- The set of all possible states.
-\item $\mathcal{A}(s)$ - The set of actions possible in state \textbf{s}.
+\item $\mathcal{A}(s)$ - The set of actions possible in state \textit{s}.
 \item $S_t$ or $A_t$ - Specific state or action taken at time step \textit{t}.
 \item $R_{t}$ -  The reward received by the agent at time step \textit{t}.
 \item $G$ - The actual total return that the agent received from a single episode. In other words, it is the sum of all the rewards that the agent received from the start state until the end of the episode.
 \item $Returns(s, a$) - A list that stores the observed returns (i.e., sum of rewards) that are obtained from following the policy and taking action \textit{a} in state \textit{s}. These returns are later used to update the action-value function \textit{Q(s, a)} for the state-action pair \textit{(s, a)}. The list is maintained for each state-action pair to keep track of the returns obtained from that state-action pair across different episodes.
 \item $Q(s, a)$ -  The expected cumulative reward an agent would receive if it takes action \textit{a} while in state \textit{s} and follows a certain policy thereafter. It is a function that maps a state-action pair to a scalar value. The value of \\ \textit{Q(s, a)} is updated iteratively as the agent interacts with the environment and learns from experience.
-\item  $\pi$ - particular policy the agent is following. Furthermore,\textit{$\pi(S_t,a)$} represents the probability of taking action \textit{a} at state \textit{$S_t$} under a given policy \textit{$\pi$}.
+\item  $\pi$ - particular policy the agent is following. Furthermore, \textit{$\pi(S_t,a)$} represents the probability of taking action \textit{a} at state \textit{$S_t$} under a given policy \textit{$\pi$}.
 \end{itemize}
 
 \begin{algorithm}
@@ -37,7 +37,7 @@ To clarify this and future algorithms, here are further explanations to some of 
 \Require small $\epsilon >0$
 \State Initialize:
 \State \hspace{0.5cm} $Q(s,a) \gets \text{initial optimistic value } \forall s\in \mathcal{S}, a\in \mathcal{A}(s)$
-\State \hspace{0.5cm} $Returns(s,a) \gets \text{empty list}, \forall s\in S, a\in A(s)$
+\State \hspace{0.5cm} $Returns(s,a) \gets \text{initial optimistic value }, \forall s\in \mathcal{S}, a\in \mathcal{A}{s}$
 \Repeat
 \State Generate an episode following policy $\pi$: $S_0, A_0, R_1,\dots, S_{T-1}, A_{T-1}, R_T$
 \State $G \gets 0$
@@ -45,8 +45,7 @@ To clarify this and future algorithms, here are further explanations to some of 
 \State $G \gets \gamma G + R_{t+1}$
 \If{$(S_t, A_t)$ does not appear in $S_0, A_0, S_1, A_1, \dots, S_{t-1}, A_{t-1}$}
 \State Append $G$ to $Returns(S_t, A_t)$
-\State $Q(S_t, A_t) \gets$  \text{initial optimistic value} + average($Returns(S_t, A_t)$)
-\State Choose $A'$ from $S'$ using policy derived from $Q$ (e.g., $\epsilon$-greedy)
+\State $Q(S_t, A_t) \gets$ average($Returns(S_t, A_t)$)
 \EndIf
 \EndFor
 \Until{convergence}
@@ -67,7 +66,7 @@ One important parameter in TD learning is the \textbf{step size} or \textbf{lear
 In this chapter, we shall introduce four distinct TD learning algorithms, namely SARSA, Q-Learning, Expected SARSA and Double Q-Learning  \citep{RLSuttonBarto}. We shall illustrate that while SARSA and Q-Learning are prominent algorithms for control problems, Expected SARSA and Double Q-Learning are variations that cater to specific limitations of the original algorithms. The objective is to highlight both the commonalities and differences among them.
 
 \subsection{SARSA}
-SARSA stands for State-Action-Reward-State-Action. With this algorithm, the agent learns the value of a state-action pair \textit{Q(S',a)} by estimating the expected return over all possible actions from state S'. SARSA is an on-policy algorithm, meaning it learns the value of state-action pairs while following the same policy used to select actions. This makes it well-suited for control problems, where the goal is to find an optimal policy.
+SARSA stands for State-Action-Reward-State-Action. With this algorithm, the agent learns the value of a state-action pair \textit{Q(S',a)} by estimating the expected return over all possible actions from state \textit{S'}. SARSA is an on-policy algorithm, meaning it learns the value of state-action pairs while following the same policy used to select actions. This makes it well-suited for control problems, where the goal is to find an optimal policy.
 \begin{algorithm}
 \caption{SARSA}\label{algo:S}
 \begin{algorithmic}[1]
@@ -125,9 +124,8 @@ Expected SARSA is another off-policy TD algorithm that learns the value of a sta
 \end{algorithmic}
 \end{algorithm}
 
-
 \subsection{Double Q-learning}
-Double Q-learning is a variant of Q-learning that uses two action-value functions to estimate the value of each action. The two functions are updated independently, and the final action-value estimate is the average of the two estimates. In Q-Learning, a single estimate of the action values is used to update the policy and make decisions. This means that when selecting an action in the next state, we always select the action with the highest estimated value (here we do not take into account using $\epsilon$-greedy policy), even if that estimate is not accurate. This can result in overestimation of the true value of that action, particularly in situations where the policy is still exploring the environment. Double Q-Learning addresses the overestimation issue in Q-Learning which can lead to more accurate value estimates and better performance in some cases.
+Double Q-learning is a variant of Q-learning that uses two action-value functions to estimate the value of each action. The two functions are updated independently, and the final action-value estimate is the average of the two estimates. In Q-Learning, a single estimate of the action values is used to update the policy and make decisions. This means that when selecting an action in the next state, we always select the action with the highest estimated value (here we do not take into account using an $\epsilon$-greedy policy), even if that estimate is not accurate. This can result in overestimation of the true value of that action, particularly in situations where the policy is still exploring the environment. Double Q-Learning addresses the overestimation issue in Q-Learning which can lead to more accurate value estimates and better performance in some cases.
 \begin{algorithm}
 \caption{Double Q-learning}\label{algo:DQL}
 \begin{algorithmic}[1]
