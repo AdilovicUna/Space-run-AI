@@ -16,24 +16,19 @@
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {6.1}{\ignorespaces \texttt {rots} values used for each obstacle type\relax }}{32}{figure.caption.26}%
 \contentsline {figure}{\numberline {6.2}{\ignorespaces Plot example\relax }}{34}{figure.caption.27}%
-\contentsline {figure}{\numberline {6.3}{\ignorespaces Discounting example\relax }}{35}{figure.caption.28}%
-\contentsline {figure}{\numberline {6.4}{\ignorespaces Discounting explanation\relax }}{36}{figure.caption.29}%
-\contentsline {figure}{\numberline {6.5}{\ignorespaces \texttt {Triangles} example\relax }}{36}{figure.caption.30}%
-\contentsline {figure}{\numberline {6.6}{\ignorespaces \texttt {Balls} trap examples\relax }}{38}{figure.caption.31}%
-\contentsline {figure}{\numberline {6.7}{\ignorespaces \texttt {HexO} trap examples\relax }}{38}{figure.caption.32}%
-\contentsline {figure}{\numberline {6.8}{\ignorespaces \texttt {Hex} trap example\relax }}{39}{figure.caption.33}%
-\contentsline {figure}{\numberline {6.9}{\ignorespaces \texttt {Hex} trap with \texttt {DoubleQLearning} and \texttt {MonteCarlo} agents\relax }}{40}{figure.caption.34}%
-\contentsline {figure}{\numberline {6.10}{\ignorespaces \texttt {I} trap examples\relax }}{40}{figure.caption.35}%
-\contentsline {figure}{\numberline {6.11}{\ignorespaces \texttt {MovingI} trap examples\relax }}{41}{figure.caption.36}%
-\contentsline {figure}{\numberline {6.12}{\ignorespaces \texttt {Triangles} trap examples\relax }}{41}{figure.caption.37}%
-\contentsline {figure}{\numberline {6.13}{\ignorespaces \texttt {HalfHex, X, O} and \texttt {Walls} traps examples\relax }}{42}{figure.caption.38}%
-\contentsline {figure}{\numberline {6.14}{\ignorespaces All traps examples\relax }}{43}{figure.caption.39}%
-\contentsline {figure}{\numberline {6.15}{\ignorespaces All traps with \texttt {ExpectedSARSA}, \texttt {MonteCarlo} and \texttt {DoubleQLearning} agents\relax }}{44}{figure.caption.40}%
-\contentsline {figure}{\numberline {6.16}{\ignorespaces \texttt {Tokens} example\relax }}{44}{figure.caption.41}%
-\contentsline {figure}{\numberline {6.17}{\ignorespaces \texttt {Bugs} and \texttt {Viruses} environments examples\relax }}{45}{figure.caption.42}%
-\contentsline {figure}{\numberline {6.18}{\ignorespaces \texttt {Bugs},\texttt {Viruses} and their combination with \texttt {Tokens} examples\relax }}{45}{figure.caption.43}%
-\contentsline {figure}{\numberline {6.19}{\ignorespaces \texttt {Bugs} with more games example\relax }}{46}{figure.caption.44}%
-\contentsline {figure}{\numberline {6.20}{\ignorespaces \texttt {Bugs} with and without shooting comparison\relax }}{46}{figure.caption.45}%
-\contentsline {figure}{\numberline {6.21}{\ignorespaces \texttt {Viruses} with and without shooting comparison\relax }}{47}{figure.caption.46}%
-\contentsline {figure}{\numberline {6.22}{\ignorespaces Peculiar \texttt {Viruses} example\relax }}{47}{figure.caption.47}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {7.1}{\ignorespaces Individual traps examples\relax }}{36}{figure.caption.28}%
+\contentsline {figure}{\numberline {7.2}{\ignorespaces \texttt {Balls} trap examples\relax }}{37}{figure.caption.29}%
+\contentsline {figure}{\numberline {7.3}{\ignorespaces \texttt {I} trap examples\relax }}{38}{figure.caption.30}%
+\contentsline {figure}{\numberline {7.4}{\ignorespaces \texttt {MovingI} trap examples\relax }}{38}{figure.caption.31}%
+\contentsline {figure}{\numberline {7.5}{\ignorespaces All traps examples\relax }}{39}{figure.caption.32}%
+\contentsline {figure}{\numberline {7.6}{\ignorespaces All traps with \texttt {ExpectedSARSA}, \texttt {MonteCarlo} and \texttt {DoubleQLearning} agents\relax }}{40}{figure.caption.33}%
+\contentsline {figure}{\numberline {7.7}{\ignorespaces \texttt {Tokens} example\relax }}{41}{figure.caption.34}%
+\contentsline {figure}{\numberline {7.8}{\ignorespaces \texttt {LadybugFlying}, \texttt {LadybugWalking} and \texttt {Worm} environments examples\relax }}{42}{figure.caption.35}%
+\contentsline {figure}{\numberline {7.9}{\ignorespaces \texttt {LadybugWalking} with \texttt {MonteCarlo} agent examples\relax }}{43}{figure.caption.36}%
+\contentsline {figure}{\numberline {7.10}{\ignorespaces \texttt {Bacteriophage} and \texttt {Rotavirus} environments examples\relax }}{43}{figure.caption.37}%
+\contentsline {figure}{\numberline {7.11}{\ignorespaces \texttt {Rotavirus} environment with \texttt {DoubleQLearning} agent examples\relax }}{44}{figure.caption.38}%
+\contentsline {figure}{\numberline {7.12}{\ignorespaces \texttt {Bugs} and \texttt {Viruses} environments examples\relax }}{45}{figure.caption.39}%
+\contentsline {figure}{\numberline {7.13}{\ignorespaces \texttt {Bugs},\texttt {Viruses} and their combination with \texttt {Tokens} examples\relax }}{45}{figure.caption.40}%
+\contentsline {figure}{\numberline {7.14}{\ignorespaces \texttt {Bugs} and \texttt {Viruses} with and without shooting comparison\relax }}{46}{figure.caption.41}%
 \addvspace {10\p@ }

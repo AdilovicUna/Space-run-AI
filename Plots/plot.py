@@ -11,7 +11,7 @@ MOVES_MAP = {
     '[-1,1]': '←*', '[0,1]': '↑*', '[1,1]': '→*'
 }
 
-command_outputs_path = '../Game/Command_outputsTT/'
+command_outputs_path = '../Game/Command_outputs/'
 
 class Group:
     def __init__(self, name, scores, env, filename):
