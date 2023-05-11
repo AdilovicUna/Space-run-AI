@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.12) (preloaded format=pdflatex 2022.12.18)  11 MAY 2023 06:48
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.12) (preloaded format=pdflatex 2022.12.18)  11 MAY 2023 08:19
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1085,27 +1085,18 @@ fs with page group included in a single page
 File: ../img//full_game.pdf Graphic file (type pdf)
 <use ../img//full_game.pdf>
 Package pdftex.def Info: ../img//full_game.pdf  used on input line 158.
-(pdftex.def)             Requested size: 412.56496pt x 163.52078pt.
-<../img//full_game_cf.pdf, id=915, 907.89188pt x 359.84438pt>
+(pdftex.def)             Requested size: 330.05322pt x 130.81773pt.
+<../img//full_game_cf.pdf, id=916, 907.89188pt x 359.84438pt>
 File: ../img//full_game_cf.pdf Graphic file (type pdf)
 <use ../img//full_game_cf.pdf>
 Package pdftex.def Info: ../img//full_game_cf.pdf  used on input line 167.
-(pdftex.def)             Requested size: 412.56496pt x 163.52078pt.
-<../img//discountingExample.pdf, id=916, 915.42pt x 719.68875pt>
-File: ../img//discountingExample.pdf Graphic file (type pdf)
-<use ../img//discountingExample.pdf>
-Package pdftex.def Info: ../img//discountingExample.pdf  used on input line 173
-.
-(pdftex.def)             Requested size: 412.56496pt x 324.35112pt.
+(pdftex.def)             Requested size: 330.05322pt x 130.81773pt.
+<../img//full_game_es_win.png, id=918, 442.2924pt x 575.2692pt>
+File: ../img//full_game_es_win.png Graphic file (type png)
+<use ../img//full_game_es_win.png>
+Package pdftex.def Info: ../img//full_game_es_win.png  used on input line 176.
+(pdftex.def)             Requested size: 288.7942pt x 375.62346pt.
 
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-File: ../img//discountingExample.pdf Graphic file (type pdf)
-<use ../img//discountingExample.pdf>
-Package pdftex.def Info: ../img//discountingExample.pdf  used on input line 182
-.
-(pdftex.def)             Requested size: 412.56496pt x 324.35112pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
@@ -1114,28 +1105,32 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 pdfTeX warning: pdflatex (file ../img//full_game_cf.pdf): PDF inclusion: multip
 le pdfs with page group included in a single page
 >]
-<../img//discountingExplanation.png, id=932, 726.46407pt x 121.20282pt>
+<../img//discountingExample.pdf, id=933, 915.42pt x 719.68875pt>
+File: ../img//discountingExample.pdf Graphic file (type pdf)
+<use ../img//discountingExample.pdf>
+Package pdftex.def Info: ../img//discountingExample.pdf  used on input line 187
+.
+(pdftex.def)             Requested size: 412.56496pt x 324.35112pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[48 <../img//full_game_es_win.png>]
+<../img//discountingExplanation.png, id=944, 726.46407pt x 121.20282pt>
 File: ../img//discountingExplanation.png Graphic file (type png)
 <use ../img//discountingExplanation.png>
 Package pdftex.def Info: ../img//discountingExplanation.png  used on input line
- 191.
+ 196.
 (pdftex.def)             Requested size: 412.56496pt x 68.83295pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[48 <../img//discountingExample.pdf>]
-<../img//trianglesExample.pdf, id=951, 969.6225pt x 494.59781pt>
+ [49 <../img//discountingExample.pdf> <../img//discountingExplanation.png>]
+<../img//trianglesExample.pdf, id=959, 969.6225pt x 494.59781pt>
 File: ../img//trianglesExample.pdf Graphic file (type pdf)
 <use ../img//trianglesExample.pdf>
-Package pdftex.def Info: ../img//trianglesExample.pdf  used on input line 200.
+Package pdftex.def Info: ../img//trianglesExample.pdf  used on input line 205.
 (pdftex.def)             Requested size: 412.56496pt x 210.44655pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-) [49 <../img//discountingExplanation.png>] [50 <../img//trianglesExample.pdf>]
+) [50 <../img//trianglesExample.pdf>]
 \openout2 = `Conclusion.aux'.
+
 
 (Conclusion.tex) [51
 
@@ -1179,10 +1174,10 @@ Package rerunfilecheck Info: File `thesis.out' has not changed.
 (rerunfilecheck)             Checksum: 70697980ED8AEF5A4C8F235186D5537E;7344.
  ) 
 Here is how much of TeX's memory you used:
- 19995 strings out of 475281
- 322187 string characters out of 2775008
+ 20006 strings out of 475281
+ 322518 string characters out of 2775008
  913512 words of memory out of 3000000
- 40713 multiletter control sequences out of 15000+600000
+ 40724 multiletter control sequences out of 15000+600000
  544890 words of font info for 92 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  89i,9n,93p,1793b,3520s stack positions out of 10000i,1000n,20000p,200000b,80000s
@@ -1210,9 +1205,9 @@ ublic/lm/lmsy8.pfb><C:/Users/Una/AppData/Local/Programs/MiKTeX/fonts/type1/publ
 ic/lm/lmtk10.pfb><C:/Users/Una/AppData/Local/Programs/MiKTeX/fonts/type1/public
 /lm/lmtt10.pfb><C:/Users/Una/AppData/Local/Programs/MiKTeX/fonts/type1/public/l
 m/lmtt12.pfb>
-Output written on thesis.pdf (60 pages, 4775935 bytes).
+Output written on thesis.pdf (60 pages, 4837846 bytes).
 PDF statistics:
- 1190 PDF objects out of 1200 (max. 8388607)
+ 1195 PDF objects out of 1200 (max. 8388607)
  339 named destinations out of 1000 (max. 500000)
- 589 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 594 words of extra memory for PDF output out of 10000 (max. 10000000)
 

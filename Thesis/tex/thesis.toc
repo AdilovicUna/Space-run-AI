@@ -42,7 +42,7 @@
 \contentsline {section}{\numberline {7.4}Individual Bugs and Viruses environments}{41}{section.7.4}%
 \contentsline {section}{\numberline {7.5}Bugs and Viruses environments}{44}{section.7.5}%
 \contentsline {section}{\numberline {7.6}Full game environment}{46}{section.7.6}%
-\contentsline {section}{\numberline {7.7}Interesting behaviours}{47}{section.7.7}%
+\contentsline {section}{\numberline {7.7}Interesting behaviours}{48}{section.7.7}%
 \contentsline {chapter}{Conclusion}{51}{chapter*.48}%
 \contentsline {chapter}{Bibliography}{52}{chapter*.49}%
 \contentsline {chapter}{List of Figures}{53}{chapter*.50}%

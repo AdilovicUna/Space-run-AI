@@ -155,25 +155,30 @@ In this section, we explore the performance of the agents in the most challengin
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=\textwidth]{full_game}
+    \includegraphics[width=0.8\textwidth]{full_game}
     \caption{Full game example}
     \label{fig:full_game_eg}
 \end{figure}
 
-Looking at Figure 1, we can see that in the environment without shooting, ExpectedSARSA performed the best, as expected. The scores of MonteCarlo and QLearning agents were not too bad, considering the complexity of the environment and the fact that QLearning agent underperformed in the Bugs environment. On the right plot, ExpectedSARSA is still in the lead compared to the other agents. However, considering that the agents were allowed to shoot in this case, the scores did not improve significantly.
+Looking at Figure \ref{fig:full_game_eg}, we can see that in the environment without shooting, \texttt{ExpectedSARSA} performed the best, as expected. The scores of \texttt{MonteCarlo} and \texttt{QLearning} agents were not too bad, considering the complexity of the environment and the fact that \texttt{QLearning} agent underperformed in the \texttt{Bugs} environment. On the right plot, \texttt{ExpectedSARSA} is still in the lead compared to the other agents. However, considering that the agents were allowed to shoot in this case, the scores did not improve significantly.
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=\textwidth]{full_game_cf}
+    \includegraphics[width=0.8\textwidth]{full_game_cf}
     \caption{Catastrophic forgetting example}
     \label{fig:full_game_cf_eg}
 \end{figure}
+
+In Figure \ref{fig:full_game_cf_eg} we can observe an occurrence that has not been discussed before but is present throughout our experiments, namely the concept of catastrophic forgetting. As the name suggests, this is the notion that the agent learns a good policy and due to further exploration of the environment, the policy changes to something suboptimal. Ideally, the agent would come back to the previous policy, but more often than not, this is not the case. In the plot on the right, we can see that this is exactly what happened to the \texttt{ExpectedSARSA} agent during this experiment. The policy it learned in the first couple of thousand games was by far optimal, but it achieved a better score than the policies used after the sudden drop at approximately 2500 games.
+
 \begin{figure}[h]
     \centering
-    \includegraphics[width=\textwidth]{discountingExample}
+    \includegraphics[width=0.7\textwidth]{full_game_es_win}
     \caption{Full game with \texttt{ExpectedSARSA} example}
     \label{fig:full_game_es_eg}
 \end{figure}
+
+The highly anticipated encounter detailed in Figure \ref{fig:full_game_es_eg} showcases a noteworthy outcome, as it portrays the \texttt{ExpectedSARSA} agent learning to play a full game by discovering an optimal policy under specific parameter settings and only one seed value. As part of the figure we can see the policy the agent acquired. This example serves as an illustration of how reinforcement learning agents are capable of learning to play this game when given the right conditions. However, it is important to note that this was a singular occurrence, and no similar outcomes were observed when shooting actions were introduced to the experiments. It is reasonable to conclude that while it may not be impossible for the agent to learn such a policy again, it may necessitate obtaining a fortuitous seed value.
 
 \section{Interesting behaviours}
 \label{intbeh}
