@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.12) (preloaded format=pdflatex 2022.12.18)  11 MAY 2023 22:52
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.12) (preloaded format=pdflatex 2022.12.18)  11 MAY 2023 23:41
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -943,13 +943,6 @@ File: ../img//all_traps.png Graphic file (type png)
 <use ../img//all_traps.png>
 Package pdftex.def Info: ../img//all_traps.png  used on input line 10.
 (pdftex.def)             Requested size: 371.30594pt x 392.4355pt.
-
-Overfull \hbox (25.72226pt too wide) in paragraph at lines 15--16
-[]\OT1/lmr/m/n/12 In Fig-ure []7.1[], for each type of trap, there is a plot wi
-th \OT1/lmtt/m/n/12 eps=0.2 \OT1/lmr/m/n/12 and \OT1/lmtt/m/n/12 initOptVal=20|
-
- []
-
 [38
 
 
@@ -1122,11 +1115,11 @@ File: ../img//trianglesExample.pdf Graphic file (type pdf)
 <use ../img//trianglesExample.pdf>
 Package pdftex.def Info: ../img//trianglesExample.pdf  used on input line 205.
 (pdftex.def)             Requested size: 412.56496pt x 210.44655pt.
-) [52 <../img//trianglesExample.pdf>]
+) [52 <../img//trianglesExample.pdf>] [53]
 \openout2 = `Conclusion.aux'.
 
 
-(Conclusion.tex) [53
+(Conclusion.tex) [54
 
 
 
@@ -1134,7 +1127,7 @@ Package pdftex.def Info: ../img//trianglesExample.pdf  used on input line 205.
 ]
 \openout2 = `bibliography.aux'.
 
- (bibliography.tex (thesis.bbl)) [54
+ (bibliography.tex (thesis.bbl)) [55
 
 
 
@@ -1144,7 +1137,7 @@ Package pdftex.def Info: ../img//trianglesExample.pdf  used on input line 205.
 \openout7 = `thesis.lof'.
 
 
-[55
+[56
 
 
 
@@ -1152,13 +1145,13 @@ Package pdftex.def Info: ../img//trianglesExample.pdf  used on input line 205.
 \tf@lot=\write8
 \openout8 = `thesis.lot'.
 
- [56
+ [57
 
-] [57
+] [58
 
 ]
 Appendix A.
-[58
+[59
 
 ] (thesis.aux (title.aux) (Introduction.aux) (GameDesign.aux)
 (GameImplementation.aux) (StructureOfTheExperimentalSetting.aux)
@@ -1169,9 +1162,9 @@ Package rerunfilecheck Info: File `thesis.out' has not changed.
  ) 
 Here is how much of TeX's memory you used:
  20043 strings out of 475281
- 323133 string characters out of 2775008
+ 323122 string characters out of 2775008
  904514 words of memory out of 3000000
- 40735 multiletter control sequences out of 15000+600000
+ 40734 multiletter control sequences out of 15000+600000
  544889 words of font info for 92 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  89i,9n,93p,1793b,3550s stack positions out of 10000i,1000n,20000p,200000b,80000s
@@ -1199,9 +1192,9 @@ ublic/lm/lmsy8.pfb><C:/Users/Una/AppData/Local/Programs/MiKTeX/fonts/type1/publ
 ic/lm/lmtk10.pfb><C:/Users/Una/AppData/Local/Programs/MiKTeX/fonts/type1/public
 /lm/lmtt10.pfb><C:/Users/Una/AppData/Local/Programs/MiKTeX/fonts/type1/public/l
 m/lmtt12.pfb>
-Output written on thesis.pdf (62 pages, 4529311 bytes).
+Output written on thesis.pdf (63 pages, 4530417 bytes).
 PDF statistics:
- 1246 PDF objects out of 1440 (max. 8388607)
- 365 named destinations out of 1000 (max. 500000)
+ 1251 PDF objects out of 1440 (max. 8388607)
+ 366 named destinations out of 1000 (max. 500000)
  618 words of extra memory for PDF output out of 10000 (max. 10000000)
 

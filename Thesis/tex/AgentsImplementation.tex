@@ -31,7 +31,7 @@ func choose_action(action):
     if not is_eval_game: # Used for continuous evaluation
         epsilon_action = rand.randf_range(0,1) < EPSILON
         if epsilon_action:
-            action = ACTIONS[rand.randi_range(0,len(ACTIONS) - 1)]  
+           action = ACTIONS[rand.randi_range(0,len(ACTIONS) - 1)]  
     return action
 \end{lstlisting}
 \hrulefill

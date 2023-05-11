@@ -12,7 +12,7 @@ This section discusses the performance of agents in environments containing only
     \label{fig:all_traps}
 \end{figure}
 
-In Figure \ref{fig:all_traps}, for each type of trap, there is a plot with \texttt{eps=0.2} and \texttt{initOptVal=20} and how each agent performed in an environment containing only that trap type\footnote{For the purpose of having all of these plots in one figure, they were manually modified. However, the calculations are still the same as described in the previous chapter.}. These values were picked because with most traps the agents performed well under these conditions.
+In Figure \ref{fig:all_traps}, for each type of trap, there is a plot with \texttt{eps=0.2} and \\	 \texttt{initOptVal=20} and how each agent performed in an environment containing only that trap type\footnote{For the purpose of having all of these plots in one figure, they were manually modified. However, the calculations are still the same as described in the previous chapter.}. These values were picked because with most traps the agents performed well under these conditions.
 
 It should be noted that all plots within this section have smoothing applied with \texttt{window=10}. Thus certain spikes may not be visible. Additionally, unless otherwise suggested, you can assume that the values that were produced are an average of 5 different seeds. The aim is to show a realistic picture on how the agent would perform, and not show the occurrences in which the outcome was satisfactory but rather account for the failures in reproducing the perfect policy as well.
 
@@ -25,7 +25,7 @@ In some cases, of course, the hyperparameters used in the experiments in Figure 
     \label{fig:balls_eg}
 \end{figure}
 
-Choices of the hyperparameters are a very important factor. Most experiments described in this section used the hyperparameter values \texttt{eps=0.2} and \texttt{initOptVal=20.0}\\ or \texttt{initOptVal=100.0}. A good example of how much hyperparameters can influence the outcome is visible in Figure \ref{fig:balls_eg}. Performance in the \texttt{Balls} trap environment varies significantly based on the initial optimistic value used. This plot underscores the importance of carefully selecting hyperparameters for reinforcement learning.
+Choices of the hyperparameters are a very important factor. Most experiments described in this section used the hyperparameter values \texttt{eps=0.2} and \texttt{initOptVal=20.0} or \texttt{initOptVal=100.0}. A good example of how much hyperparameters can influence the outcome is visible in Figure \ref{fig:balls_eg}. Performance in the \texttt{Balls} trap environment varies significantly based on the initial optimistic value used. This plot underscores the importance of carefully selecting hyperparameters for reinforcement learning.
 
 \begin{figure}[h]
     \centering
@@ -49,7 +49,7 @@ Although performing these experiments with a larger number of seeds would ideall
 \begin{figure}[h]
     \centering
     \includegraphics[width=\textwidth]{allTraps}
-    \caption{All traps examples}
+    \caption{All traps experiments}
     \label{fig:alltraps_eg}
 \end{figure}
 
@@ -74,7 +74,7 @@ Multiple instances in the data show the phenomenon discussed in Section \ref{int
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.6\textwidth]{tokensEnv}
-    \caption{\texttt{Tokens} example}
+    \caption{\texttt{Tokens} experiment}
     \label{fig:tokens}
 \end{figure}
 
@@ -84,7 +84,7 @@ The \texttt{Tokens} environment is characterized by its simplicity, as it lacks 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.9\textwidth]{bugs_ind}
-    \caption{\texttt{LadybugFlying}, \texttt{LadybugWalking} and \texttt{Worm} environments examples}
+    \caption{\texttt{LadybugFlying}, \texttt{LadybugWalking} and \texttt{Worm} environments experiments}
     \label{fig:bugs_ind_eg}
 \end{figure}
 
@@ -95,7 +95,7 @@ We begin by showcasing the performance of all agents in environments containing 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.8\textwidth]{bugs_ind_mc}
-    \caption{\texttt{LadybugWalking} with \texttt{MonteCarlo} agent examples}
+    \caption{\texttt{LadybugWalking} with \texttt{MonteCarlo} agent experiments}
     \label{fig:bugs_ind_mc_eg}
 \end{figure}
 
@@ -104,7 +104,7 @@ The category of obstacles referred to as bugs in the game environment behaves di
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.8\textwidth]{viruses_ind}
-    \caption{\texttt{Bacteriophage} and \texttt{Rotavirus} environments examples}
+    \caption{\texttt{Bacteriophage} and \texttt{Rotavirus} environments experiments}
     \label{fig:viruses_ind_eg}
 \end{figure}
 
@@ -113,7 +113,7 @@ Figure \ref{fig:viruses_ind_eg} displays the performance of the agents for each 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.8\textwidth]{viruses_ind_dql}
-    \caption{\texttt{Rotavirus} environment with \texttt{DoubleQLearning} agent examples}
+    \caption{\texttt{Rotavirus} environment with \texttt{DoubleQLearning} agent experiments}
     \label{fig:viruses_ind_dql_eg}
 \end{figure}
 
@@ -123,7 +123,7 @@ To diverge a little from the performance of the agents all together, let's take 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.9\textwidth]{BV800ns}
-    \caption{\texttt{Bugs} and \texttt{Viruses} environments examples}
+    \caption{\texttt{Bugs} and \texttt{Viruses} environments experiments}
     \label{fig:bv800ns_eg}
 \end{figure}
 
@@ -132,7 +132,7 @@ The current section compares the performance of agents in the full \texttt{Bugs}
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.8\textwidth]{bbt_vvt}
-    \caption{\texttt{Bugs}, \texttt{Viruses} and their combination with \texttt{Tokens} examples}
+    \caption{\texttt{Bugs}, \texttt{Viruses} and their combination with \texttt{Tokens} experiments}
     \label{fig:bbt_vvt_eg}
 \end{figure}
 
@@ -156,7 +156,7 @@ In this section, we explore the performance of the agents in the most challengin
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.8\textwidth]{full_game}
-    \caption{Full game example}
+    \caption{Full game experiment}
     \label{fig:full_game_eg}
 \end{figure}
 
@@ -165,7 +165,7 @@ Looking at Figure \ref{fig:full_game_eg}, we can see that in the environment wit
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.8\textwidth]{full_game_cf}
-    \caption{Catastrophic forgetting example}
+    \caption{Catastrophic forgetting experiment}
     \label{fig:full_game_cf_eg}
 \end{figure}
 
@@ -174,7 +174,7 @@ In Figure \ref{fig:full_game_cf_eg} we can observe an occurrence that has not be
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.7\textwidth]{full_game_es_win}
-    \caption{Full game with \texttt{ExpectedSARSA} example}
+    \caption{Full game with \texttt{ExpectedSARSA} experiment}
     \label{fig:full_game_es_eg}
 \end{figure}
 

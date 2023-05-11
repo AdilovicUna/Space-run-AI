@@ -21,19 +21,19 @@
 \contentsline {figure}{\numberline {7.2}{\ignorespaces \texttt {Balls} trap experiments\relax }}{39}{figure.caption.29}%
 \contentsline {figure}{\numberline {7.3}{\ignorespaces \texttt {I} trap experiments\relax }}{40}{figure.caption.30}%
 \contentsline {figure}{\numberline {7.4}{\ignorespaces \texttt {MovingI} trap experiments\relax }}{40}{figure.caption.31}%
-\contentsline {figure}{\numberline {7.5}{\ignorespaces All traps examples\relax }}{41}{figure.caption.32}%
+\contentsline {figure}{\numberline {7.5}{\ignorespaces All traps experiments\relax }}{41}{figure.caption.32}%
 \contentsline {figure}{\numberline {7.6}{\ignorespaces All traps with \texttt {ExpectedSARSA}, \texttt {MonteCarlo} and \texttt {QLearning} agents\relax }}{42}{figure.caption.33}%
-\contentsline {figure}{\numberline {7.7}{\ignorespaces \texttt {Tokens} example\relax }}{43}{figure.caption.34}%
-\contentsline {figure}{\numberline {7.8}{\ignorespaces \texttt {LadybugFlying}, \texttt {LadybugWalking} and \texttt {Worm} environments examples\relax }}{44}{figure.caption.35}%
-\contentsline {figure}{\numberline {7.9}{\ignorespaces \texttt {LadybugWalking} with \texttt {MonteCarlo} agent examples\relax }}{45}{figure.caption.36}%
-\contentsline {figure}{\numberline {7.10}{\ignorespaces \texttt {Bacteriophage} and \texttt {Rotavirus} environments examples\relax }}{45}{figure.caption.37}%
-\contentsline {figure}{\numberline {7.11}{\ignorespaces \texttt {Rotavirus} environment with \texttt {DoubleQLearning} agent examples\relax }}{46}{figure.caption.38}%
-\contentsline {figure}{\numberline {7.12}{\ignorespaces \texttt {Bugs} and \texttt {Viruses} environments examples\relax }}{47}{figure.caption.39}%
-\contentsline {figure}{\numberline {7.13}{\ignorespaces \texttt {Bugs}, \texttt {Viruses} and their combination with \texttt {Tokens} examples\relax }}{47}{figure.caption.40}%
+\contentsline {figure}{\numberline {7.7}{\ignorespaces \texttt {Tokens} experiment\relax }}{43}{figure.caption.34}%
+\contentsline {figure}{\numberline {7.8}{\ignorespaces \texttt {LadybugFlying}, \texttt {LadybugWalking} and \texttt {Worm} environments experiments\relax }}{44}{figure.caption.35}%
+\contentsline {figure}{\numberline {7.9}{\ignorespaces \texttt {LadybugWalking} with \texttt {MonteCarlo} agent experiments\relax }}{45}{figure.caption.36}%
+\contentsline {figure}{\numberline {7.10}{\ignorespaces \texttt {Bacteriophage} and \texttt {Rotavirus} environments experiments\relax }}{45}{figure.caption.37}%
+\contentsline {figure}{\numberline {7.11}{\ignorespaces \texttt {Rotavirus} environment with \texttt {DoubleQLearning} agent experiments\relax }}{46}{figure.caption.38}%
+\contentsline {figure}{\numberline {7.12}{\ignorespaces \texttt {Bugs} and \texttt {Viruses} environments experiments\relax }}{47}{figure.caption.39}%
+\contentsline {figure}{\numberline {7.13}{\ignorespaces \texttt {Bugs}, \texttt {Viruses} and their combination with \texttt {Tokens} experiments\relax }}{47}{figure.caption.40}%
 \contentsline {figure}{\numberline {7.14}{\ignorespaces \texttt {Bugs} and \texttt {Viruses} with and without shooting comparison\relax }}{48}{figure.caption.41}%
-\contentsline {figure}{\numberline {7.15}{\ignorespaces Full game example\relax }}{49}{figure.caption.42}%
-\contentsline {figure}{\numberline {7.16}{\ignorespaces Catastrophic forgetting example\relax }}{49}{figure.caption.43}%
-\contentsline {figure}{\numberline {7.17}{\ignorespaces Full game with \texttt {ExpectedSARSA} example\relax }}{50}{figure.caption.44}%
+\contentsline {figure}{\numberline {7.15}{\ignorespaces Full game experiment\relax }}{49}{figure.caption.42}%
+\contentsline {figure}{\numberline {7.16}{\ignorespaces Catastrophic forgetting experiment\relax }}{49}{figure.caption.43}%
+\contentsline {figure}{\numberline {7.17}{\ignorespaces Full game with \texttt {ExpectedSARSA} experiment\relax }}{50}{figure.caption.44}%
 \contentsline {figure}{\numberline {7.18}{\ignorespaces Discounting example\relax }}{51}{figure.caption.45}%
 \contentsline {figure}{\numberline {7.19}{\ignorespaces Discounting explanation\relax }}{51}{figure.caption.46}%
 \contentsline {figure}{\numberline {7.20}{\ignorespaces \texttt {Triangles} example\relax }}{52}{figure.caption.47}%

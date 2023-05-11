@@ -95,10 +95,10 @@ $ python ./test.py --m=[0,4] --n=50 --all_agents --env=[X]
 \hrulefill
 \begin{lstlisting}
 # for 10 different seed values run 800 games for all combinations of:
-# each of the DQL and ES agents,
+# each of the DoubleQLearning and SARSA agents,
 # on the Bugs environment with epsilon value 0.2
 # and each of the initOpt values 20.0 and 100.0
-$ python ./test.py --n=800 --agent=[DoubleQLearning,ExpectedSARSA] --env=[Bugs] --eps=[0.2,0.3,0.1] --initOptVal=[20.0,180.0,80.0]
+$ python ./test.py --n=800 --agent=[DoubleQLearning,SARSA] --env=[Bugs] --eps=[0.2,0.3,0.1] --initOptVal=[20.0,180.0,80.0]
 \end{lstlisting}
 \hrulefill
 \end{center}
