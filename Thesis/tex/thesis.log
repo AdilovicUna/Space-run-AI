@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.12) (preloaded format=pdflatex 2022.12.18)  11 MAY 2023 22:35
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.12) (preloaded format=pdflatex 2022.12.18)  11 MAY 2023 22:52
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1017,12 +1017,6 @@ Package pdftex.def Info: ../img//bugs_ind.pdf  used on input line 86.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-
-Overfull \hbox (16.64853pt too wide) in paragraph at lines 91--92
-\OT1/lmr/m/n/12 in-clude three (\OT1/lmtt/m/n/12 Worm, LadybugWalking, LadybugF
-lying\OT1/lmr/m/n/12 ) and two (\OT1/lmtt/m/n/12 Bacteriophage,|
- []
-
 [43 <../img//tokensEnv.png>]
 <../img//bugs_ind_mc.pdf, id=889, 912.40875pt x 494.59781pt>
 File: ../img//bugs_ind_mc.pdf Graphic file (type pdf)
@@ -1205,7 +1199,7 @@ ublic/lm/lmsy8.pfb><C:/Users/Una/AppData/Local/Programs/MiKTeX/fonts/type1/publ
 ic/lm/lmtk10.pfb><C:/Users/Una/AppData/Local/Programs/MiKTeX/fonts/type1/public
 /lm/lmtt10.pfb><C:/Users/Una/AppData/Local/Programs/MiKTeX/fonts/type1/public/l
 m/lmtt12.pfb>
-Output written on thesis.pdf (62 pages, 4529295 bytes).
+Output written on thesis.pdf (62 pages, 4529311 bytes).
 PDF statistics:
  1246 PDF objects out of 1440 (max. 8388607)
  365 named destinations out of 1000 (max. 500000)
