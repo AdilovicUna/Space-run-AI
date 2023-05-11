@@ -1,4 +1,4 @@
-\begin{thebibliography}{6}
+\begin{thebibliography}{7}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -28,6 +28,11 @@ Juan Linietsky.
 Ton Roosendaal.
 \newblock Blender, 2023.
 \newblock URL \url{https://www.blender.org/}.
+
+\bibitem[Stuart and Peter(2010)]{russell2010artificial}
+Russell Stuart and Norvig Peter.
+\newblock \emph{Artificial Intelligence: A Modern Approach}.
+\newblock Pearson Education, 4 edition, 2010.
 
 \bibitem[Sutton and Barto(2018)]{RLSuttonBarto}
 Richard~S. Sutton and Andrew~G. Barto.

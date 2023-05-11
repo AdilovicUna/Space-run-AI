@@ -38,45 +38,45 @@ Warning--entry type for "gltf" isn't style-file defined
 Warning--entry type for "spacerunai" isn't style-file defined
 --line 50 of file bibliography.bib
 Warning--to sort, need author or key in tunnelrush
-You've used 6 entries,
+You've used 7 entries,
             2773 wiz_defined-function locations,
-            633 strings with 5591 characters,
-and the built_in function-call counts, 1831 in all, are:
-= -- 159
-> -- 61
-< -- 5
-+ -- 24
-- -- 18
-* -- 104
-:= -- 269
-add.period$ -- 17
-call.type$ -- 6
-change.case$ -- 24
-chr.to.int$ -- 6
-cite$ -- 14
-duplicate$ -- 95
-empty$ -- 196
-format.name$ -- 25
-if$ -- 395
+            638 strings with 5706 characters,
+and the built_in function-call counts, 2196 in all, are:
+= -- 189
+> -- 82
+< -- 6
++ -- 31
+- -- 24
+* -- 129
+:= -- 327
+add.period$ -- 20
+call.type$ -- 7
+change.case$ -- 29
+chr.to.int$ -- 7
+cite$ -- 16
+duplicate$ -- 115
+empty$ -- 228
+format.name$ -- 34
+if$ -- 472
 int.to.chr$ -- 1
 int.to.str$ -- 1
-missing$ -- 2
-newline$ -- 37
-num.names$ -- 20
-pop$ -- 72
+missing$ -- 4
+newline$ -- 42
+num.names$ -- 24
+pop$ -- 84
 preamble$ -- 1
-purify$ -- 18
+purify$ -- 22
 quote$ -- 0
-skip$ -- 86
+skip$ -- 101
 stack$ -- 0
-substring$ -- 13
-swap$ -- 6
+substring$ -- 15
+swap$ -- 7
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 61
+type$ -- 67
 warning$ -- 1
-while$ -- 15
+while$ -- 18
 width$ -- 0
-write$ -- 79
+write$ -- 92
 (There were 6 warnings)

@@ -3,6 +3,7 @@
 To train an agent on a specific environment, the user must utilize a command-line interface. There are various options available to cater to the user's needs. This chapter will outline all of the provided options and how they are encoded. However, we will first consider how the game represents discrete states.
 
 \section{State}
+\label{state_descr}
 The majority of the implemented agents in the game utilize the concept of state to facilitate learning. The agent will determine its next action based on the current state in which it finds itself. By dividing the game into discrete states, we are able to utilize discrete learning algorithms to train an agent to play this continuous game. Once one obstacle is passed, the value of the state indicated refers to the next one. Each state is represented by a triplet consisting of distance, rotation, and next obstacle type. 
 
 It is important to note that the game uses meters as the standard unit of distance measurement in Godot. This unit is used to represent the size, position, and movement of objects in the game world. Hans is approximately 12 meters tall and has starting speed of 35 meters per second. Additionally, each tunnel in the game has a width and height of approximately 45 meters and a depth of 2800 meters.
@@ -73,10 +74,10 @@ If the agent manages to win this many consecutive games, the experiment is stopp
 \label{opt:agent}
 Name of the desired agent. \\
 Options: [\texttt{Keyboard}, \texttt{Static}, \texttt{Random}, \texttt{MonteCarlo}, \texttt{SARSA}, \texttt{QLearning}, \\ \texttt{ExpectedSARSA}, \texttt{DoubleQLearning}]\\
-\textbf{Sub-options} (only for the learning agents):\\
+\textbf{sub-options} (only for the learning agents):\\
 $[$\texttt{gam} (range [0,1]), \texttt{eps} (range [0,1]), \texttt{epsFinal} (range [0,1]), \\ \texttt{initOptVal} (range [0,$\infty$))$]$\\
 Example usage: ``\texttt{agent=MonteCarlo:eps=0.1,gam=0.2}''\\
-The meaning of the suboptions is explained in Chapter \ref{applied_algo_chapter}.
+The meaning of the suboptions is explained in Section \ref{com_par_and_beh}.
 
 \subsubsection*{level}
 \label{opt:level}

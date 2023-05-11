@@ -12,9 +12,9 @@ The purpose of most of these functions is self-explanatory. \texttt{init()} and 
     \label{fig:agents_tree}
 \end{figure}
 
-In the current design of the game, there are a total of 8 agents implemented, 5 of which utilize some form of reinforcement learning algorithm. These RL agents share a common superclass called \texttt{LearningAgent}, while 3 of them are further subclassed under the \texttt{TDAgent} class (see Figure \ref{fig:agents_tree}). As previously discussed, the RL algorithms can be broadly divided into two categories: Monte Carlo methods and temporal difference (TD) learning. The TD algorithms differ only in their update function, and so it was deemed appropriate to group them under the same superclass. However, the Double Q-Learning agent, which uses separate policies and requires additional modifications, was implemented as a separate subclass of the \texttt{LearningAgent}. The implementation details of these agents will be further elaborated upon in the subsequent sections. 
+In the current design of the game, there are a total of 8 agents implemented, 5 of which utilize some form of reinforcement learning algorithm. These RL agents share a common superclass called \texttt{LearningAgent}, while 3 of them are further subclasses under the \texttt{TDAgent} class (see Figure \ref{fig:agents_tree}). As previously discussed, the RL algorithms can be broadly divided into two categories: Monte Carlo methods and temporal difference (TD) learning. The TD algorithms differ only in their update function, and so it was deemed appropriate to group them under the same superclass. However, the Double Q-Learning agent, which uses separate policies and requires additional modifications, was implemented as a separate subclass of the \texttt{LearningAgent}. The implementation details of these agents will be further elaborated upon in the subsequent sections. 
 
-As previously mentioned when describing the state in Chapter 3, the agent has the ability to perform movements in various directions, including moving right, forward, or left, and each of these movements can be performed in combination with shooting. Therefore, on each time step, the move function of the agent returns a list of two elements: the first element signifies the movement direction, where a value of -1 represents left, 0 represents forward, and 1 represents right; while the second element determines whether the agent will shoot or not, with a value of 1 indicating yes and 0 indicating no for shooting.
+As previously mentioned when describing the state in Section \ref{state_descr}, the agent has the ability to perform movements in various directions, including moving right, forward, or left, and each of these movements can be performed in combination with shooting. Therefore, on each time step, the move function of the agent returns a list of two elements: the first element signifies the movement direction, where a value of -1 represents left, 0 represents forward, and 1 represents right; while the second element determines whether the agent will shoot or not, with a value of 1 indicating yes and 0 indicating no for shooting.
 
 
 \section{Simple Agents}
@@ -31,13 +31,14 @@ func choose_action(action):
     if not is_eval_game: # Used for continuous evaluation
         epsilon_action = rand.randf_range(0,1) < EPSILON
         if epsilon_action:
-            action = ACTIONS[rand.randi\_range(0,len(ACTIONS) - 1)]  
+            action = ACTIONS[rand.randi_range(0,len(ACTIONS) - 1)]  
     return action
 \end{lstlisting}
 \hrulefill
 \end{center}
 
 \subsection{Common parameters and behaviours}
+\label{com_par_and_beh}
 In regards to the present implementation of the reinforcement learning algorithms for the 3D tunnel game, certain aspects of the game learning step and parameter implementation are unique to this project and merit discussion. For instance, we should look into the learning step in the game. The agent will not request a new move until the state has changed, despite the fact that it may seem more natural for a new decision to be made on every game tick. This has the effect of reducing the number of decisions that the agent must make in a given episode, but also results in intriguing policy behaviours that are elaborated upon in Chapter \ref{experiments_chapter}.
 
 Furthermore, there are several parameters that are common to all learning agents, some of which were briefly discussed in the preceding chapter. In this section, we will examine in more detail how these parameters were integrated into this particular project. The initial optimistic value parameter is the simplest one to explain, as it is implemented in a straightforward manner. In particular, each time a state-action pair is added to the policy, its value is set to a predetermined number. This number (\texttt{initOptVal}), along with the other agent's sub-options parameters mentioned subsequently in this subsection, are specified through the command line (see \ref{commOpt}).
@@ -51,6 +52,8 @@ Finally, it is pertinent to discuss the discounting value $\gamma$ (defined by \
 In many reinforcement learning environments, all learning steps have the same duration, so each reward is discounted by $\gamma^{n}$, where \texttt{n} is the number of steps that elapsed between the time when an action was taken and the time when the reward was received.  And so in a typical implementation that iterates over the steps in an episode, the accumulated discount rate is multiplied by $\gamma$ in each iteration. However, as previously stated, learning steps in this implementation do not occur on every tick, but instead occur when the state changes. As a result, they may vary in size. To avoid uneven discounting, the time (in milliseconds) is calculated for each new decision made by the agent using this formula:  $$(game.num\_of\_ticks * 33) / 1000.0$$
 
 \subsection{Monte Carlo Agent}
+The Monte Carlo method is a type of reinforcement learning algorithm that updates its policy only after an episode is completed. This is done by iterating through the entire episode, going from the last step towards the first, and increasing the number of visits and total return for each state-action pair, if this is their first visit inside this episode. The total return is calculated using the formula shown in the code above, while the number of visits is simply incremented by 1. To determine the optimal action, the agent compares the ratio of total return to number of visits for each possible action at a given state\footnote{The pseudocode in Algorithm \ref{algo:MC} keeps a list of all returns for each state/action pair, while in our implementation a return for a particular state/action pair is calculated with the mentioned ratio.}. This calculation is performed at each state transition during the episode. To clarify, instead of calculating a new move each time the \texttt{move()} function is called, the agents will always choose the same action based on the current state. Only once the state has changed, the new action is chosen based on the accumulated score and the new state. This implementation has resulted in a certain behaviour of the agents which will be more discussed in Section \ref{intbeh}.
+As previously mentioned, the $\gamma$ constant in the equation shown in the code serves as a discount factor, meaning that the last move made, which resulted in termination of the game, will receive the highest penalty. As we move further down the list of moves, their significance decreases. It is important to note that if the value of $\gamma$ is set to 1, all moves are given equal weight. 
 
 \begin{center}
 \hrulefill
@@ -68,9 +71,6 @@ if is_first_occurrence (...):
 \hrulefill
 \end{center}
 
-The Monte Carlo method is a type of reinforcement learning algorithm that updates its policy only after an episode is completed. This is done by iterating through the entire episode, going from the last step towards the first, and increasing the number of visits and total return for each state-action pair, if this is their first visit inside this episode. The total return is calculated using the formula shown in the code above, while the number of visits is simply incremented by 1. To determine the optimal action, the agent compares the ratio of total return to number of visits for each possible action at a given state\footnote{The pseudocode in Algorithm \ref{algo:MC} keeps a list of all returns for each state/action pair, while in our implementation a return for a particular state/action pair is calculated with the mentioned ratio.}. This calculation is performed at each state transition during the episode. To clarify, instead of calculating a new move each time the \texttt{move()} function is called, the agents will always choose the same action based on the current state. Only once the state has changed, the new action is chosen based on the accumulated score and the new state. This implementation has resulted in a certain behaviour of the agents which will be more discussed in Chapter \ref{intbeh}.
-As previously mentioned, the $\gamma$ constant in the equation shown in the code serves as a discount factor, meaning that the last move made, which resulted in termination of the game, will receive the highest penalty. As we move further down the list of moves, their significance decreases. It is important to note that if the value of $\gamma$ is set to 1, all moves are given equal weight. 
-
 \subsection{TD Agent}	
 Unlike the Monte Carlo methods, which update their policies only after the completion of an episode, TD agents update their policies in real time, after each action is taken. To accomplish this, all TD agents have a shared function called \texttt{move()}, which calls the function displayed in the code provided below. 
 
@@ -79,8 +79,8 @@ Unlike the Monte Carlo methods, which update their policies only after the compl
 \begin{lstlisting}
 # TD agents update
 visits[last_state_action] += 1
-var alpha = 1.0 / visits[las\t_state_action]
-var new_stat\e_val = 0 if terminal else new_state_action
+var alpha = 1.0 / visits[last_state_action]
+var new_state_val = 0 if terminal else new_state_action
 var new_gamma = pow(GAMMA,curr_time - prev_time)
 q[last_state_action] += alpha * (new_gamma * (R + new_state_val) - q[last_state_action])
 \end{lstlisting}
@@ -115,6 +115,7 @@ func get_update(state, _new_action, best_action):
 # ExpectedSARSA agent new_state_action variable calculation
 func get_update(state, _new_action, best_action):
     var sum = 0.0 
+    # Calculate and return the expected value 
     for action in ACTIONS:
         var probability = EPSILON / len(ACTIONS)
         if action == best_action:
@@ -126,6 +127,8 @@ func get_update(state, _new_action, best_action):
 \end{center}
 
 In SARSA, the \texttt{new\_state\_val} is calculated based on the value of the next action the agent will take, denoted as \texttt{new\_action}. On the other hand, Q-learning uses the value of the best action possible in the next state, denoted as \texttt{best\_action}. These two variables are equal if a greedy policy is implemented. However if we consider a $\epsilon$-greedy policy, then they might differ based on whether a random action has been chosen. Expected SARSA combines these two approaches by taking the expected value of all possible actions in the next state. 
+
+Similar to the agents in the TD class, the update for the Double Q-Learning agent occurs each time the agent changes its state. The update process is slightly different. In this method, two separate action-value functions, denoted as \texttt{q1} and \texttt{q2}, are used to estimate the maximum action value for a given state. At each update step, one of the Q-values is selected randomly and updated using the other one as a reference. This process helps to reduce the overestimation of action values and leads to more stable learning.
 
 \begin{center}
 \hrulefill
@@ -146,5 +149,3 @@ else:
 \end{lstlisting}
 \hrulefill
 \end{center}
-
-Similar to the agents in the TD class, the update for the Double Q-Learning agent occurs each time the agent changes its state. The update process is slightly different. In this method, two separate action-value functions, denoted as Q1 and Q2, are used to estimate the maximum action value for a given state. At each update step, one of the Q-values is selected randomly and updated using the other Q-value as a reference. This process helps to reduce the overestimation of action values and leads to more stable learning.

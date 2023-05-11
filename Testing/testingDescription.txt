@@ -66,37 +66,6 @@ Top level experiment options:
 note: rots and dists vals for each env are hardcoded and cannot be changed
     
 Example usages:
-    - 'test.py --description': 
-                    writes these options
-    - 'test.py' :   
-                    10 times runs a 100 full games 
-                    with MonteCarlo agent
-                    performs continuous evaluation
-                    and writes the output to the database
-    - 'test.py --m=20 --n=1000 --all_agents --env=[I,O] --ceval=true' :
-                    for each agent
-                    20 times runs 1000 games
-                    with I and O traps
-                    performs continuous evaluation
-                    and writes the output to the database
-    - 'test.py --m=20 --n=1000 --all_agents --env=[I,O] --all_traps --all_bugs' :
-                    for each agent
-                    20 times runs 1000 games
-                    with each trap and bug individually
-                    (shooting is disabled)
-                    and writes the output to the database
-    - 'test.py --n=100 --all_traps --all_bugs --all_shooting --stoppingPoint=20' :
-                    10 times runs 100 games
-                    stop if 20 games in a row are won
-                    with each trap and bug individually
-                    for each env that has a bug, 
-                    experiment is run with and without shooting
-                    and writes the output to the database
-    - 'test.py --m=20 --agent=[DoubleQLearning,SARSA] --env=[I,O] --eps=[0.2,0.5,0.1] --initOptVal=[20.0,100.0,80.0]' :
-                    for each eps value
-                    for each initOptVal value
-                    for DoubleQLearning and SARSA
-                    20 times runs 100 games
-                    with I and O traps
-                    performs continuous evaluation
-                    and writes the output to the database
+    - 'test.py --description'
+    - 'test.py'
+    - 'test.py --m=[0,4] --n=1000 --all_agents --env=[I,O] --ceval=true'

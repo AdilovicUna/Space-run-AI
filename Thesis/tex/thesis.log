@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.12) (preloaded format=pdflatex 2022.12.18)  11 MAY 2023 08:19
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.12) (preloaded format=pdflatex 2022.12.18)  11 MAY 2023 22:35
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -683,7 +683,7 @@ Package caption Info: End \AtBeginDocument code.
 
  (title.tex
 Package hyperref Info: Option `pageanchor' set `false' on input line 6.
-<../img/logo-en.pdf, id=214, 506.4591pt x 156.49065pt>
+<../img/logo-en.pdf, id=226, 506.4591pt x 156.49065pt>
 File: ../img/logo-en.pdf Graphic file (type pdf)
 <use ../img/logo-en.pdf>
 Package pdftex.def Info: ../img/logo-en.pdf  used on input line 9.
@@ -755,18 +755,12 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
  (GameDesign.tex
 Chapter 1.
-
-Overfull \hbox (3.90813pt too wide) in paragraph at lines 2--3
-\OT1/lmr/m/n/12 in-volves at-tempt-ing to ac-cu-mu-late the high-est score pos-
-si-ble by nav-i-gat-ing through|
- []
-
-<../img//second_tunnel.png, id=318, 761.09344pt x 447.17062pt>
+<../img//second_tunnel.png, id=333, 761.09344pt x 447.17062pt>
 File: ../img//second_tunnel.png Graphic file (type png)
 <use ../img//second_tunnel.png>
 Package pdftex.def Info: ../img//second_tunnel.png  used on input line 10.
 (pdftex.def)             Requested size: 412.56496pt x 242.40332pt.
-<../img//hans.jpg, id=321, 106.89937pt x 167.12437pt>
+<../img//hans.jpg, id=336, 106.89937pt x 167.12437pt>
 File: ../img//hans.jpg Graphic file (type jpg)
 <use ../img//hans.jpg>
 Package pdftex.def Info: ../img//hans.jpg  used on input line 18.
@@ -777,27 +771,23 @@ Package pdftex.def Info: ../img//hans.jpg  used on input line 18.
 
 
  <../img//second_tunnel.png>]
-<../img//traps.pdf, id=330, 1150.2975pt x 386.94562pt>
-File: ../img//traps.pdf Graphic file (type pdf)
-<use ../img//traps.pdf>
-Package pdftex.def Info: ../img//traps.pdf  used on input line 30.
-(pdftex.def)             Requested size: 412.56496pt x 138.78073pt.
-<../img//bugs.pdf, id=332, 564.60938pt x 133.24782pt>
+<../img//traps_drawings.png, id=345, 612.78937pt x 401.24907pt>
+File: ../img//traps_drawings.png Graphic file (type png)
+<use ../img//traps_drawings.png>
+Package pdftex.def Info: ../img//traps_drawings.png  used on input line 30.
+(pdftex.def)             Requested size: 412.56496pt x 270.14569pt.
+<../img//bugs.pdf, id=351, 564.60938pt x 133.24782pt>
 File: ../img//bugs.pdf Graphic file (type pdf)
 <use ../img//bugs.pdf>
-Package pdftex.def Info: ../img//bugs.pdf  used on input line 40.
+Package pdftex.def Info: ../img//bugs.pdf  used on input line 41.
 (pdftex.def)             Requested size: 412.56496pt x 97.36768pt.
- [5 <../img//hans.jpg> <../img//traps.pdf> <../img//bugs.pdf
-
-pdfTeX warning: pdflatex (file ../img//bugs.pdf): PDF inclusion: multiple pdfs 
-with page group included in a single page
->]
-<../img//viruses.pdf, id=348, 526.96875pt x 165.61874pt>
+ [5 <../img//hans.jpg> <../img//traps_drawings.png>]
+<../img//viruses.pdf, id=359, 526.96875pt x 165.61874pt>
 File: ../img//viruses.pdf Graphic file (type pdf)
 <use ../img//viruses.pdf>
-Package pdftex.def Info: ../img//viruses.pdf  used on input line 49.
+Package pdftex.def Info: ../img//viruses.pdf  used on input line 51.
 (pdftex.def)             Requested size: 412.56496pt x 129.66983pt.
-<../img//first_tunnel.jpg, id=350, 767.11594pt x 447.92343pt>
+<../img//first_tunnel.jpg, id=360, 767.11594pt x 447.92343pt>
 File: ../img//first_tunnel.jpg Graphic file (type jpg)
 <use ../img//first_tunnel.jpg>
 Package pdftex.def Info: ../img//first_tunnel.jpg  used on input line 60.
@@ -806,19 +796,16 @@ Package pdftex.def Info: ../img//first_tunnel.jpg  used on input line 60.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-) [6 <../img//viruses.pdf>] [7 <../img//first_tunnel.jpg>]
+[6 <../img//bugs.pdf> <../img//viruses.pdf
+
+pdfTeX warning: pdflatex (file ../img//viruses.pdf): PDF inclusion: multiple pd
+fs with page group included in a single page
+>]) [7 <../img//first_tunnel.jpg>]
 \openout2 = `GameImplementation.aux'.
 
-
-(GameImplementation.tex
+ (GameImplementation.tex
 Chapter 2.
-
-Overfull \hbox (5.8826pt too wide) in paragraph at lines 4--5
-\OT1/lmr/m/n/12 ([]Roosendaal[] [[]2023[]]) for cre-at-ing and an-i-mat-ing the
- char-ac-ters in the game. Blender|
- []
-
-<../img//game_tree.png, id=376, 683.55376pt x 332.24126pt>
+<../img//game_tree.png, id=390, 683.55376pt x 332.24126pt>
 File: ../img//game_tree.png Graphic file (type png)
 <use ../img//game_tree.png>
 Package pdftex.def Info: ../img//game_tree.png  used on input line 11.
@@ -846,9 +833,9 @@ LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 2
 (C:\Users\Una\AppData\Local\Programs\MiKTeX\tex/latex/lm\ts1lmr.fd
 File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 ) [9]
-LaTeX Font Info:    Font shape `OT1/lmtt/bx/n' in size <12> not available
+LaTeX Font Info:    Font shape `OT1/lmtt/bx/n' in size <10> not available
 (Font)              Font shape `OT1/lmtt/b/n' tried instead on input line 38.
-<../img//third_tunnel.jpg, id=408, 769.37437pt x 450.18187pt>
+<../img//third_tunnel.jpg, id=421, 769.37437pt x 450.18187pt>
 File: ../img//third_tunnel.jpg Graphic file (type jpg)
 <use ../img//third_tunnel.jpg>
 Package pdftex.def Info: ../img//third_tunnel.jpg  used on input line 61.
@@ -861,16 +848,16 @@ Package pdftex.def Info: ../img//third_tunnel.jpg  used on input line 61.
 (StructureOfTheExperimentalSetting.tex
 Chapter 3.
 LaTeX Font Info:    Trying to load font information for OML+lmr on input line 1
-0.
+1.
 (C:\Users\Una\AppData\Local\Programs\MiKTeX\tex/latex/lm\omllmr.fd
 File: omllmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Font shape `OML/lmr/m/n' in size <12> not available
-(Font)              Font shape `OML/lmm/m/it' tried instead on input line 10.
-<../img//circumference.jpg, id=493, 764.10469pt x 443.40656pt>
+(Font)              Font shape `OML/lmm/m/it' tried instead on input line 11.
+<../img//circumference.jpg, id=507, 764.10469pt x 443.40656pt>
 File: ../img//circumference.jpg Graphic file (type jpg)
 <use ../img//circumference.jpg>
-Package pdftex.def Info: ../img//circumference.jpg  used on input line 16.
+Package pdftex.def Info: ../img//circumference.jpg  used on input line 17.
 (pdftex.def)             Requested size: 412.56496pt x 239.4089pt.
 
 
@@ -882,13 +869,13 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 
 
 ] [14 <../img//circumference.jpg>]
-Underfull \hbox (badness 10000) in paragraph at lines 89--97
+Underfull \hbox (badness 10000) in paragraph at lines 90--98
 
  []
 
 [15] [16]
 LaTeX Font Info:    Trying to load font information for TS1+lmtt on input line 
-156.
+157.
  (C:\Users\Una\AppData\Local\Programs\MiKTeX\tex/latex/lm\ts1lmtt.fd
 File: ts1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
@@ -910,7 +897,7 @@ put line 35.
 
  (AgentsImplementation.tex
 Chapter 5.
-<../img//agents_tree.png, id=646, 783.92876pt x 452.69125pt>
+<../img//agents_tree.png, id=660, 783.92876pt x 452.69125pt>
 File: ../img//agents_tree.png Graphic file (type png)
 <use ../img//agents_tree.png>
 Package pdftex.def Info: ../img//agents_tree.png  used on input line 10.
@@ -926,7 +913,7 @@ Package pdftex.def Info: ../img//agents_tree.png  used on input line 10.
 
 (TestingAndPlotting.tex
 Chapter 6.
-<../img//rot_values.png, id=744, 894.34125pt x 221.82875pt>
+<../img//rot_values.png, id=759, 894.34125pt x 221.82875pt>
 File: ../img//rot_values.png Graphic file (type png)
 <use ../img//rot_values.png>
 Package pdftex.def Info: ../img//rot_values.png  used on input line 9.
@@ -937,37 +924,44 @@ Package pdftex.def Info: ../img//rot_values.png  used on input line 9.
 
 
  <../img//rot_values.png>]
-<../img//examplePlot.png, id=753, 462.97969pt x 494.59781pt>
+<../img//examplePlot.png, id=769, 462.97969pt x 494.59781pt>
 File: ../img//examplePlot.png Graphic file (type png)
 <use ../img//examplePlot.png>
-Package pdftex.def Info: ../img//examplePlot.png  used on input line 25.
-(pdftex.def)             Requested size: 412.56496pt x 440.74913pt.
+Package pdftex.def Info: ../img//examplePlot.png  used on input line 29.
+(pdftex.def)             Requested size: 288.7942pt x 308.5191pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[33] [34 <../img//examplePlot.png>]) [35]
+[33] [34 <../img//examplePlot.png>] [35] [36]) [37]
 \openout2 = `Experiments.aux'.
 
  (Experiments.tex
 Chapter 7.
-<../img//all_traps.pdf, id=771, 1361.83781pt x 1439.3775pt>
-File: ../img//all_traps.pdf Graphic file (type pdf)
-<use ../img//all_traps.pdf>
-Package pdftex.def Info: ../img//all_traps.pdf  used on input line 10.
-(pdftex.def)             Requested size: 412.56496pt x 436.05547pt.
-[36
+<../img//all_traps.png, id=816, 542.77782pt x 573.64313pt>
+File: ../img//all_traps.png Graphic file (type png)
+<use ../img//all_traps.png>
+Package pdftex.def Info: ../img//all_traps.png  used on input line 10.
+(pdftex.def)             Requested size: 371.30594pt x 392.4355pt.
+
+Overfull \hbox (25.72226pt too wide) in paragraph at lines 15--16
+[]\OT1/lmr/m/n/12 In Fig-ure []7.1[], for each type of trap, there is a plot wi
+th \OT1/lmtt/m/n/12 eps=0.2 \OT1/lmr/m/n/12 and \OT1/lmtt/m/n/12 initOptVal=20|
+
+ []
+
+[38
 
 
 
 
- <../img//all_traps.pdf>]
-<../img//balls.pdf, id=783, 907.89188pt x 359.84438pt>
+ <../img//all_traps.png>]
+<../img//balls.pdf, id=827, 907.89188pt x 359.84438pt>
 File: ../img//balls.pdf Graphic file (type pdf)
 <use ../img//balls.pdf>
 Package pdftex.def Info: ../img//balls.pdf  used on input line 23.
 (pdftex.def)             Requested size: 412.56496pt x 163.52078pt.
-<../img//i.pdf, id=785, 907.89188pt x 359.84438pt>
+<../img//i.pdf, id=829, 907.89188pt x 359.84438pt>
 File: ../img//i.pdf Graphic file (type pdf)
 <use ../img//i.pdf>
 Package pdftex.def Info: ../img//i.pdf  used on input line 32.
@@ -976,7 +970,7 @@ Package pdftex.def Info: ../img//i.pdf  used on input line 32.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<../img//movingi.pdf, id=786, 907.89188pt x 359.84438pt>
+<../img//movingi.pdf, id=830, 907.89188pt x 359.84438pt>
 File: ../img//movingi.pdf Graphic file (type pdf)
 <use ../img//movingi.pdf>
 Package pdftex.def Info: ../img//movingi.pdf  used on input line 39.
@@ -984,8 +978,8 @@ Package pdftex.def Info: ../img//movingi.pdf  used on input line 39.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[37 <../img//balls.pdf>]
-<../img//allTraps.pdf, id=800, 907.89188pt x 359.84438pt>
+[39 <../img//balls.pdf>]
+<../img//allTraps.pdf, id=845, 907.89188pt x 359.84438pt>
 File: ../img//allTraps.pdf Graphic file (type pdf)
 <use ../img//allTraps.pdf>
 Package pdftex.def Info: ../img//allTraps.pdf  used on input line 51.
@@ -994,12 +988,12 @@ Package pdftex.def Info: ../img//allTraps.pdf  used on input line 51.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[38 <../img//i.pdf> <../img//movingi.pdf
+[40 <../img//i.pdf> <../img//movingi.pdf
 
 pdfTeX warning: pdflatex (file ../img//movingi.pdf): PDF inclusion: multiple pd
 fs with page group included in a single page
 >]
-<../img//allTraps_table.jpg, id=818, 625.58719pt x 526.21594pt>
+<../img//allTraps_table.jpg, id=861, 625.58719pt x 526.21594pt>
 File: ../img//allTraps_table.jpg Graphic file (type jpg)
 <use ../img//allTraps_table.jpg>
 Package pdftex.def Info: ../img//allTraps_table.jpg  used on input line 62.
@@ -1008,13 +1002,13 @@ Package pdftex.def Info: ../img//allTraps_table.jpg  used on input line 62.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[39 <../img//allTraps.pdf>] [40 <../img//allTraps_table.jpg>]
-<../img//tokensEnv.png, id=835, 435.7881pt x 345.4506pt>
+[41 <../img//allTraps.pdf>] [42 <../img//allTraps_table.jpg>]
+<../img//tokensEnv.png, id=878, 435.7881pt x 345.4506pt>
 File: ../img//tokensEnv.png Graphic file (type png)
 <use ../img//tokensEnv.png>
 Package pdftex.def Info: ../img//tokensEnv.png  used on input line 76.
 (pdftex.def)             Requested size: 247.54149pt x 196.2289pt.
-<../img//bugs_ind.pdf, id=838, 924.45375pt x 1079.53313pt>
+<../img//bugs_ind.pdf, id=881, 924.45375pt x 1079.53313pt>
 File: ../img//bugs_ind.pdf Graphic file (type pdf)
 <use ../img//bugs_ind.pdf>
 Package pdftex.def Info: ../img//bugs_ind.pdf  used on input line 86.
@@ -1023,8 +1017,14 @@ Package pdftex.def Info: ../img//bugs_ind.pdf  used on input line 86.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[41 <../img//tokensEnv.png>]
-<../img//bugs_ind_mc.pdf, id=846, 912.40875pt x 494.59781pt>
+
+Overfull \hbox (16.64853pt too wide) in paragraph at lines 91--92
+\OT1/lmr/m/n/12 in-clude three (\OT1/lmtt/m/n/12 Worm, LadybugWalking, LadybugF
+lying\OT1/lmr/m/n/12 ) and two (\OT1/lmtt/m/n/12 Bacteriophage,|
+ []
+
+[43 <../img//tokensEnv.png>]
+<../img//bugs_ind_mc.pdf, id=889, 912.40875pt x 494.59781pt>
 File: ../img//bugs_ind_mc.pdf Graphic file (type pdf)
 <use ../img//bugs_ind_mc.pdf>
 Package pdftex.def Info: ../img//bugs_ind_mc.pdf  used on input line 97.
@@ -1033,23 +1033,23 @@ Package pdftex.def Info: ../img//bugs_ind_mc.pdf  used on input line 97.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[42 <../img//bugs_ind.pdf>]
-<../img//viruses_ind.pdf, id=858, 907.89188pt x 719.68875pt>
+[44 <../img//bugs_ind.pdf>]
+<../img//viruses_ind.pdf, id=901, 907.89188pt x 719.68875pt>
 File: ../img//viruses_ind.pdf Graphic file (type pdf)
 <use ../img//viruses_ind.pdf>
 Package pdftex.def Info: ../img//viruses_ind.pdf  used on input line 106.
 (pdftex.def)             Requested size: 330.05322pt x 261.63547pt.
- [43 <../img//bugs_ind_mc.pdf> <../img//viruses_ind.pdf
+ [45 <../img//bugs_ind_mc.pdf> <../img//viruses_ind.pdf
 
 pdfTeX warning: pdflatex (file ../img//viruses_ind.pdf): PDF inclusion: multipl
 e pdfs with page group included in a single page
 >]
-<../img//viruses_ind_dql.pdf, id=873, 907.89188pt x 494.59781pt>
+<../img//viruses_ind_dql.pdf, id=917, 907.89188pt x 494.59781pt>
 File: ../img//viruses_ind_dql.pdf Graphic file (type pdf)
 <use ../img//viruses_ind_dql.pdf>
 Package pdftex.def Info: ../img//viruses_ind_dql.pdf  used on input line 115.
 (pdftex.def)             Requested size: 330.05322pt x 179.80595pt.
-<../img//BV800ns.pdf, id=876, 907.89188pt x 359.84438pt>
+<../img//BV800ns.pdf, id=920, 907.89188pt x 359.84438pt>
 File: ../img//BV800ns.pdf Graphic file (type pdf)
 <use ../img//BV800ns.pdf>
 Package pdftex.def Info: ../img//BV800ns.pdf  used on input line 125.
@@ -1058,7 +1058,7 @@ Package pdftex.def Info: ../img//BV800ns.pdf  used on input line 125.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<../img//bbt_vvt.pdf, id=878, 907.89188pt x 719.68875pt>
+<../img//bbt_vvt.pdf, id=922, 907.89188pt x 719.68875pt>
 File: ../img//bbt_vvt.pdf Graphic file (type pdf)
 <use ../img//bbt_vvt.pdf>
 Package pdftex.def Info: ../img//bbt_vvt.pdf  used on input line 134.
@@ -1066,32 +1066,32 @@ Package pdftex.def Info: ../img//bbt_vvt.pdf  used on input line 134.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[44 <../img//viruses_ind_dql.pdf>]
-<../img//BV_02_100_1.pdf, id=891, 912.40875pt x 1009.52156pt>
+[46 <../img//viruses_ind_dql.pdf>]
+<../img//BV_02_100_1.pdf, id=935, 912.40875pt x 1009.52156pt>
 File: ../img//BV_02_100_1.pdf Graphic file (type pdf)
 <use ../img//BV_02_100_1.pdf>
 Package pdftex.def Info: ../img//BV_02_100_1.pdf  used on input line 145.
-(pdftex.def)             Requested size: 412.56496pt x 456.46788pt.
+(pdftex.def)             Requested size: 371.30594pt x 410.82571pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[45 <../img//BV800ns.pdf> <../img//bbt_vvt.pdf
+[47 <../img//BV800ns.pdf> <../img//bbt_vvt.pdf
 
 pdfTeX warning: pdflatex (file ../img//bbt_vvt.pdf): PDF inclusion: multiple pd
 fs with page group included in a single page
->] [46 <../img//BV_02_100_1.pdf>]
-<../img//full_game.pdf, id=914, 907.89188pt x 359.84438pt>
+>] [48 <../img//BV_02_100_1.pdf>]
+<../img//full_game.pdf, id=957, 907.89188pt x 359.84438pt>
 File: ../img//full_game.pdf Graphic file (type pdf)
 <use ../img//full_game.pdf>
 Package pdftex.def Info: ../img//full_game.pdf  used on input line 158.
 (pdftex.def)             Requested size: 330.05322pt x 130.81773pt.
-<../img//full_game_cf.pdf, id=916, 907.89188pt x 359.84438pt>
+<../img//full_game_cf.pdf, id=959, 907.89188pt x 359.84438pt>
 File: ../img//full_game_cf.pdf Graphic file (type pdf)
 <use ../img//full_game_cf.pdf>
 Package pdftex.def Info: ../img//full_game_cf.pdf  used on input line 167.
 (pdftex.def)             Requested size: 330.05322pt x 130.81773pt.
-<../img//full_game_es_win.png, id=918, 442.2924pt x 575.2692pt>
+<../img//full_game_es_win.png, id=963, 442.2924pt x 575.2692pt>
 File: ../img//full_game_es_win.png Graphic file (type png)
 <use ../img//full_game_es_win.png>
 Package pdftex.def Info: ../img//full_game_es_win.png  used on input line 176.
@@ -1100,12 +1100,12 @@ Package pdftex.def Info: ../img//full_game_es_win.png  used on input line 176.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[47 <../img//full_game.pdf> <../img//full_game_cf.pdf
+[49 <../img//full_game.pdf> <../img//full_game_cf.pdf
 
 pdfTeX warning: pdflatex (file ../img//full_game_cf.pdf): PDF inclusion: multip
 le pdfs with page group included in a single page
 >]
-<../img//discountingExample.pdf, id=933, 915.42pt x 719.68875pt>
+<../img//discountingExample.pdf, id=980, 915.42pt x 719.68875pt>
 File: ../img//discountingExample.pdf Graphic file (type pdf)
 <use ../img//discountingExample.pdf>
 Package pdftex.def Info: ../img//discountingExample.pdf  used on input line 187
@@ -1115,24 +1115,24 @@ Package pdftex.def Info: ../img//discountingExample.pdf  used on input line 187
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[48 <../img//full_game_es_win.png>]
-<../img//discountingExplanation.png, id=944, 726.46407pt x 121.20282pt>
+[50 <../img//full_game_es_win.png>]
+<../img//discountingExplanation.png, id=990, 726.46407pt x 121.20282pt>
 File: ../img//discountingExplanation.png Graphic file (type png)
 <use ../img//discountingExplanation.png>
 Package pdftex.def Info: ../img//discountingExplanation.png  used on input line
  196.
 (pdftex.def)             Requested size: 412.56496pt x 68.83295pt.
- [49 <../img//discountingExample.pdf> <../img//discountingExplanation.png>]
-<../img//trianglesExample.pdf, id=959, 969.6225pt x 494.59781pt>
+ [51 <../img//discountingExample.pdf> <../img//discountingExplanation.png>]
+<../img//trianglesExample.pdf, id=1006, 969.6225pt x 494.59781pt>
 File: ../img//trianglesExample.pdf Graphic file (type pdf)
 <use ../img//trianglesExample.pdf>
 Package pdftex.def Info: ../img//trianglesExample.pdf  used on input line 205.
 (pdftex.def)             Requested size: 412.56496pt x 210.44655pt.
-) [50 <../img//trianglesExample.pdf>]
+) [52 <../img//trianglesExample.pdf>]
 \openout2 = `Conclusion.aux'.
 
 
-(Conclusion.tex) [51
+(Conclusion.tex) [53
 
 
 
@@ -1140,7 +1140,7 @@ Package pdftex.def Info: ../img//trianglesExample.pdf  used on input line 205.
 ]
 \openout2 = `bibliography.aux'.
 
- (bibliography.tex (thesis.bbl)) [52
+ (bibliography.tex (thesis.bbl)) [54
 
 
 
@@ -1150,7 +1150,7 @@ Package pdftex.def Info: ../img//trianglesExample.pdf  used on input line 205.
 \openout7 = `thesis.lof'.
 
 
-[53
+[55
 
 
 
@@ -1158,35 +1158,35 @@ Package pdftex.def Info: ../img//trianglesExample.pdf  used on input line 205.
 \tf@lot=\write8
 \openout8 = `thesis.lot'.
 
- [54
+ [56
 
-] [55
+] [57
 
 ]
 Appendix A.
-[56
+[58
 
 ] (thesis.aux (title.aux) (Introduction.aux) (GameDesign.aux)
 (GameImplementation.aux) (StructureOfTheExperimentalSetting.aux)
 (AlgorithmsUsed.aux) (AgentsImplementation.aux) (TestingAndPlotting.aux)
 (Experiments.aux) (Conclusion.aux) (bibliography.aux))
 Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 70697980ED8AEF5A4C8F235186D5537E;7344.
+(rerunfilecheck)             Checksum: A6BF3AD4084A09860E1F7FC85ACFD8D0;7780.
  ) 
 Here is how much of TeX's memory you used:
- 20006 strings out of 475281
- 322518 string characters out of 2775008
- 913512 words of memory out of 3000000
- 40724 multiletter control sequences out of 15000+600000
- 544890 words of font info for 92 fonts, out of 8000000 for 9000
+ 20043 strings out of 475281
+ 323133 string characters out of 2775008
+ 904514 words of memory out of 3000000
+ 40735 multiletter control sequences out of 15000+600000
+ 544889 words of font info for 92 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 89i,9n,93p,1793b,3520s stack positions out of 10000i,1000n,20000p,200000b,80000s
-{C:/Users/Una/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rmtt.enc}{C
-:/Users/Una/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathit.enc}{C:/
-Users/Una/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rm.enc}{C:/Users/
-Una/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathex.enc}{C:/Users/Un
-a/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.enc}{C:/Users/Una/
-AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ts1.enc}<C:/Users/Una/AppDa
+ 89i,9n,93p,1793b,3550s stack positions out of 10000i,1000n,20000p,200000b,80000s
+{C:/Users/Una/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathit.enc}
+{C:/Users/Una/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rm.enc}{C:/Us
+ers/Una/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathex.enc}{C:/User
+s/Una/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.enc}{C:/Users/
+Una/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ts1.enc}{C:/Users/Una/A
+ppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rmtt.enc}<C:/Users/Una/AppDa
 ta/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/Una/AppData
 /Local/Programs/MiKTeX/fonts/type1/public/lm/lmex10.pfb><C:/Users/Una/AppData/L
 ocal/Programs/MiKTeX/fonts/type1/public/lm/lmmi12.pfb><C:/Users/Una/AppData/Loc
@@ -1205,9 +1205,9 @@ ublic/lm/lmsy8.pfb><C:/Users/Una/AppData/Local/Programs/MiKTeX/fonts/type1/publ
 ic/lm/lmtk10.pfb><C:/Users/Una/AppData/Local/Programs/MiKTeX/fonts/type1/public
 /lm/lmtt10.pfb><C:/Users/Una/AppData/Local/Programs/MiKTeX/fonts/type1/public/l
 m/lmtt12.pfb>
-Output written on thesis.pdf (60 pages, 4837846 bytes).
+Output written on thesis.pdf (62 pages, 4529295 bytes).
 PDF statistics:
- 1195 PDF objects out of 1200 (max. 8388607)
- 339 named destinations out of 1000 (max. 500000)
- 594 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1246 PDF objects out of 1440 (max. 8388607)
+ 365 named destinations out of 1000 (max. 500000)
+ 618 words of extra memory for PDF output out of 10000 (max. 10000000)
 
