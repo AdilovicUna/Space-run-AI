@@ -41,10 +41,12 @@
 \contentsline {section}{\numberline {7.3}Tokens environment}{41}{section.7.3}%
 \contentsline {section}{\numberline {7.4}Individual Bugs and Viruses environments}{41}{section.7.4}%
 \contentsline {section}{\numberline {7.5}Bugs and Viruses environments}{44}{section.7.5}%
-\contentsline {chapter}{Conclusion}{47}{chapter*.42}%
-\contentsline {chapter}{Bibliography}{48}{chapter*.43}%
-\contentsline {chapter}{List of Figures}{49}{chapter*.44}%
-\contentsline {chapter}{List of Tables}{50}{chapter*.45}%
-\contentsline {chapter}{List of Abbreviations}{51}{chapter*.46}%
-\contentsline {chapter}{\numberline {A}Attachments}{52}{appendix.A}%
-\contentsline {section}{\numberline {A.1}First Attachment}{52}{section.A.1}%
+\contentsline {section}{\numberline {7.6}Full game environment}{46}{section.7.6}%
+\contentsline {section}{\numberline {7.7}Interesting behaviours}{47}{section.7.7}%
+\contentsline {chapter}{Conclusion}{51}{chapter*.48}%
+\contentsline {chapter}{Bibliography}{52}{chapter*.49}%
+\contentsline {chapter}{List of Figures}{53}{chapter*.50}%
+\contentsline {chapter}{List of Tables}{54}{chapter*.51}%
+\contentsline {chapter}{List of Abbreviations}{55}{chapter*.52}%
+\contentsline {chapter}{\numberline {A}Attachments}{56}{appendix.A}%
+\contentsline {section}{\numberline {A.1}First Attachment}{56}{section.A.1}%

@@ -1,7 +1,9 @@
-- Runs multiple experiments with specified parameters
-- By 1 experiment we take an average of n*m games 
+Runs multiple experiments with specified parameters
+
+By 1 experiment we take an average of n*m games 
     (with n games run with 1 seed m times)
-- Immutable and mutable parameters:
+
+Immutable and mutable parameters:
     immutable - 
         each experiment is runs with the same value
         options:
@@ -54,7 +56,7 @@
             initOptVal - range [0,~) (default: 100.0)  
         they are passed in the form: [min,max(not inclusive),step] (look at example usages below)
 
-- Top level experiment options:
+Top level experiment options:
     all_traps, all_bugs, all_viruses - 
         run experiments for each individual trap, bug or virus respectively
     all_agents - run experiments with each learning agent
@@ -63,7 +65,7 @@
 
 note: rots and dists vals for each env are hardcoded and cannot be changed
     
-example usages:
+Example usages:
     - 'test.py --description': 
                     writes these options
     - 'test.py' :   

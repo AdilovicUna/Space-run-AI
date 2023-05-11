@@ -195,7 +195,7 @@ def plot_option1(window, co_data, ad_data, agent, filename):
                 loc='bottom',
                 bbox=[0, -0.5 - (len(ad_data[1]) + 1) * 0.025, 1, 0.3 + (len(ad_data[1]) + 1) * 0.025])
 
-def option_1(window):
+def option1(window):
     f = open('Plots_log/option1.txt', 'w')
     total_plots = 0
     new_plots = 0
@@ -254,95 +254,7 @@ def option_1(window):
     f.write('----------------------------' + '\n')
     f.close()
 
-def plot_option2(window, scores, agent, env, filename, winning_score):
-    avg_score = [sum(scores) / len(scores)] * len(scores)
-    scores = [np.mean(scores[i:i + window]) if i <= len(scores) -
-              window else np.mean(scores[i:]) for i in range(len(scores))]
-    episodes = [i for i in range(1, len(scores)+1)]
-    winning_score = [float(winning_score)] * len(scores) 
-    
-    _, ax = plt.subplots()
-
-    ax.plot(episodes, scores, '-c', label='Data')
-    ax.plot(episodes, avg_score, '--r', label='Mean')
-    if winning_score != -1:
-        ax.plot(episodes, winning_score, '--b', label='Winning score')
-    ax.legend(loc='upper right')
-
-    # text above the plot
-    spaces = '    '
-    plt.figtext(x=0.02, y=0.95, s='Agent: ' + agent)
-    agentSpecParam ='='.join(','.join(filename.split(',')[1:5]).split('=')[1:]).split(',')
-    eps = agentSpecParam[0].split('=')[1]
-    finalEps = agentSpecParam[1].split('=')[1]
-    gam = agentSpecParam[2].split('=')[1]
-    initOptVal = agentSpecParam[3].split('=')[1][:-1]
-    plt.figtext(x=0.02, y=0.91, s='ε: ' + eps + spaces + 'Final-ε: ' + finalEps + spaces + 'γ: ' + gam +
-                 spaces + 'Initial optimistic value: ' + initOptVal + spaces + 'Env: ' + env)
-
-    plt.xlabel('Episodes')
-    plt.ylabel('Scores')
-
-def option_2(window):
-    f = open('Plots_log/option2.txt', 'w')
-    groups = {}
-    # files have the same names in both folders
-    for filename in os.listdir(command_outputs_path):
-        # filename format: f_c1_c2.txt
-        # c1 = agent_databases counter
-        # c2 = command_outputs counter
-        filename = filename[:-4]
-        f.write('----------------------------' + '\n')
-        f.write('filename: ' + filename + '\n')
-        common_param = ''
-        try:
-            split_filename = filename.split('_')
-            filename = split_filename[0]
-            co_ver = split_filename[1]
-
-            co_f = open(command_outputs_path + filename + '_' + co_ver + '.txt', 'r')
-            co_f = co_f.read().strip().split('\n')
-            index = co_f.index('')
-            co_data = co_f[:index]
-            scores = [float(i) for i in co_data[:-4]]
-
-            # create path so that we can sort out the plots nicely
-            env = filename[filename.find('env'):]
-            env = 'all' if '=all' in env else env[5:env.find(']')]
-            if env == 'Bugs,Tokens,Traps,Viruses':
-                env = 'all'
-            filename_fragments = filename.split(',')
-
-            common_param = str(filename_fragments[0:9])
-            if not common_param in groups.keys():
-                groups[common_param] = Group(common_param, scores, env, filename)
-
-            groups[common_param].data, scores = even_data_len(groups[common_param].data, scores)
-            groups[common_param].data = [x + y for x, y in zip(scores, groups[common_param].data)]
-            groups[common_param].count += 1
-
-            if groups[common_param].win_score == -1:
-                groups[common_param].win_score = co_data[-4].split()[1] if co_data[-4].split()[1] != 'unknown' else -1
-                
-        except Exception:
-            f.write('FILE ERROR: remove or replace incorrect files for the group: ' + str(common_param) + '\n')
-            continue
-
-    for key in groups.keys():
-        groups[key].data = [x / groups[key].count for x in groups[key].data]
-        agent = groups[key].filename.split(',')[0].split('=')[1]
-        
-        plot_option2(window, groups[key].data, agent, groups[key].env, groups[key].filename, groups[key].win_score)
-
-        # create path so that we can sort out the plots nicely
-        path = 'Plots/option2/' + groups[key].env + '/win=' + str(window) + '/' + agent + '/'
-        if not os.path.isdir(path):
-            os.makedirs(path)
-        plt.savefig(path + key + '.png', bbox_inches='tight', pad_inches=0.2, dpi=100)
-    
-    f.close()
-
-def plot_option3(window, MC, S, QL, ES, DQL, env, filename):
+def plot_option2(window, MC, S, QL, ES, DQL, env, filename):
     MC = [np.mean(MC[i:i + window]) if i <= len(MC) -
               window else np.mean(MC[i:]) for i in range(len(MC))]
     S = [np.mean(S[i:i + window]) if i <= len(S) -
@@ -377,8 +289,8 @@ def plot_option3(window, MC, S, QL, ES, DQL, env, filename):
     plt.xlabel('Episodes')
     plt.ylabel('Scores')
 
-def option_3(window):
-    f = open('Plots_log/option3.txt', 'w')
+def option2(window):
+    f = open('Plots_log/option2.txt', 'w')
     groups = {}
     # files have the same names in both folders
     for filename in os.listdir(command_outputs_path):
@@ -409,6 +321,7 @@ def option_3(window):
             agent = filename_fragments[0].split('=')[1]
 
             common_param = str(filename_fragments[1:9])
+
             if not common_param in groups.keys():
                 groups[common_param] = AgentGroup(common_param, scores, env, filename)
 
@@ -456,11 +369,11 @@ def option_3(window):
         if (groups[key].DQL.count > 0):
             groups[key].DQL.data = [x / groups[key].DQL.count for x in groups[key].DQL.data]
         
-        plot_option3(window, groups[key].MC.data, groups[key].S.data, groups[key].QL.data,
+        plot_option2(window, groups[key].MC.data, groups[key].S.data, groups[key].QL.data,
                      groups[key].ES.data, groups[key].DQL.data, groups[key].env, groups[key].filename)
         
         # create path so that we can sort out the plots nicely
-        path = 'Plots/option3/' + groups[key].env + '/win=' + str(window) + '/'
+        path = 'Plots/option2/' + groups[key].env + '/win=' + str(window) + '/'
         if not os.path.isdir(path):
             os.makedirs(path)
         plt.savefig(path + key + '.png', bbox_inches='tight', pad_inches=0.2, dpi=100)
@@ -478,11 +391,9 @@ def main(option, window):
 
     match (option):
         case 1:
-            option_1(window)
+            option1(window)
         case 2:
-            option_2(window)
-        case 3:
-            option_3(window)
+            option2(window)
         case _:
             print('Invalid arguments')
             return
